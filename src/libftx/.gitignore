@@ -1,0 +1,9 @@
+*.o
+*.a
+*.out
+.vscode/c_cpp_properties.json
+.vscode/settings.json
+empty
+*.txt
+README.md
+makefile.srcs
