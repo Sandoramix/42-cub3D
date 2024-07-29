@@ -71,7 +71,6 @@ int **cmtxtoimtx(char **mtx, int col, int row)
 		counterCol = 0;
 		while (counterCol < col)
 		{
-			/*https://www.youtube.com/watch?v=wLg04uu2j2o*/
 			intMtx[counterRow][counterCol] = mtx[counterRow][counterCol] - '0';
 			dbg_printf("intMtx[counterRow][counterCol] == %d\n", intMtx[counterRow][counterCol]);
 			counterCol++;
@@ -191,7 +190,7 @@ void calculate_DDA(t_var *infos)
 {
 	infos->dda_helper = (t_DDA){0};
 	infos->dda_helper.screenSize = infos->intMtxCols * 32;
-	infos->dda_helper.= (int)infos->playerPos->pos_x;	   // quadrato della mappa in cui ci troviamo
+	infos->dda_helper.mapX = (int)infos->playerPos->pos_x;	   // quadrato della mappa in cui ci troviamo
 	infos->dda_helper.mapY = (int)infos->playerPos->pos_y; // quadrato della mappa in cui ci troviamo
 	int pixelPosX = 0;
 	while (pixelPosX < infos->dda_helper.screenSize)
