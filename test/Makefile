@@ -1,4 +1,4 @@
-NAME = cub3D
+NAME = test.cub3D
 
 # -----$(NAME) but uppercase----------------------------------------------------
 
@@ -8,12 +8,12 @@ PNAME = $(shell echo -n ${NAME} | tr 'a-z' 'A-Z')
 
 DEBUG_VALUE=0
 
-ROOTDIR=./src
+ROOTDIR=../src
 LIBFTX_DIR=$(ROOTDIR)/libftx
 MLX_DIR = $(ROOTDIR)/minilibx
 
 CC = cc
-INCLUDES = -Iincludes -I$(LIBFTX_DIR)/includes
+INCLUDES = -I../includes -I$(LIBFTX_DIR)/includes
 MLX_FLAGS = -L$(MLX_DIR) -lmlx_$(shell uname) -lXext -lX11
 CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE)
 
@@ -67,7 +67,7 @@ download:
 
 # ------------------------------------------------------------------------------
 
-.PHONY: all clean fclean re re-debug debug download test
+.PHONY: all clean fclean re re-debug debug download
 .SILENT:
 
 # ----COLORS--------------------------------------------------------------------
