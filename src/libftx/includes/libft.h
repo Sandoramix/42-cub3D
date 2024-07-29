@@ -32,6 +32,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/ioctl.h>
+# include <math.h>
 
 # include <ft_colors.h>
 # include <ft_enums.h>
