@@ -8,7 +8,7 @@
 
 //Player position structure
 
-typedef struct s_playerPos{
+/* typedef struct s_playerPos{
     float x;
     float y;
 } t_playerPos;
@@ -18,7 +18,7 @@ typedef struct s_playerPos{
 struct s_var
 {
    struct s_playerPos *playerPos;
-} t_varr;
+}; */
 
 
 
