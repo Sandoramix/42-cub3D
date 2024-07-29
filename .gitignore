@@ -1,3 +1,7 @@
+cub3D
+*.test
+makefile.srcs
+
 # Prerequisites
 *.d
 
