@@ -22,12 +22,12 @@
 	"C_Cpp.default.compilerPath": "/usr/bin/clang",
 	"c-cpp-flylint.includePaths": [
 		"${workspaceFolder}",
-		"${workspaceFolder}/src/includes",
+		"${workspaceFolder}/includes",
 		"${workspaceFolder}/src/libftx/includes"
 	],
 	"C_Cpp.default.includePath": [
 		"${workspaceFolder}",
-		"${workspaceFolder}/src/includes",
+		"${workspaceFolder}/includes",
 		"${workspaceFolder}/src/libftx/includes"
 	],
 	"C_Cpp.default.intelliSenseMode": "linux-clang-x64",
