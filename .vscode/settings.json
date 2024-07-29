@@ -23,16 +23,19 @@
 	"c-cpp-flylint.includePaths": [
 		"${workspaceFolder}",
 		"${workspaceFolder}/includes",
-		"${workspaceFolder}/src/libftx/includes"
+		"${workspaceFolder}/src/libftx/includes",
+		"${workspaceFolder}/src/mlx"
 	],
 	"C_Cpp.default.includePath": [
 		"${workspaceFolder}",
 		"${workspaceFolder}/includes",
-		"${workspaceFolder}/src/libftx/includes"
+		"${workspaceFolder}/src/libftx/includes",
+		"${workspaceFolder}/src/mlx"
 	],
 	"C_Cpp.default.intelliSenseMode": "linux-clang-x64",
 	"files.associations": {
 		"cub3d.h": "c",
-		"mlx.h": "c"
+		"mlx.h": "c",
+		"libft.h": "c"
 	},
 }
