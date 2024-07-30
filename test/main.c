@@ -12,6 +12,8 @@
 #define FLOOR 0
 #define WALL 1
 
+#define VELOCITY 100
+
 typedef struct s_playerPos
 {
 	double pos_x;
@@ -260,7 +262,22 @@ int main()
 
 	calculate_DDA(&infos);
 	// player position
-	mlx_pixel_put(infos.mlx_ptr, infos.win_ptr, infos.playerPos->pos_x, infos.playerPos->pos_y, 0xFF0000);
+	while(1)
+	{
+		struct timeval t1, t2;
+		double elapsedTime;
+		//start timer
+		gettimeofday(&t1, NULL);
+		gettimeofday(&t2, NULL);
+		//compute
+		elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;
+		elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
+		//convert to seconds
+		double delta = elapsedTime /1000;
+		infos.playerPos->pos_x = infos.playerPos->pos_x + VELOCITY  * delta;
+		infos.playerPos->pos_y = infos.playerPos->pos_y + VELOCITY  * delta;
+		mlx_pixel_put(infos.mlx_ptr, infos.win_ptr, infos.playerPos->pos_x, infos.playerPos->pos_y, 0xFF0000);
+	}
 	mlx_hook(infos.win_ptr, 17, 0, mlx_loop_end, infos.mlx_ptr);
 	mlx_loop(infos.mlx_ptr);
 }
