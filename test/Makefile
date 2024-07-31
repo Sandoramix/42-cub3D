@@ -11,9 +11,10 @@ DEBUG_VALUE=0
 ROOTDIR=../src
 LIBFTX_DIR=$(ROOTDIR)/libftx
 MLX_DIR = $(ROOTDIR)/minilibx
+RAYCAST_DIR = $(ROOTDIR)/raycasting
 
 CC = cc
-INCLUDES = -I../includes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR)
+INCLUDES = -I../includes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR) -I$(RAYCAST_DIR) 
 MLX_FLAGS = -L$(MLX_DIR) -lmlx_$(shell uname) -lXext -lX11
 CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE)
 
@@ -21,19 +22,22 @@ RM = rm -rf
 
 # ----SOURCE-FILES--------------------------------------------------------------
 
-SRC = ./main.c
+SRC =	./main.c \
+		../src/raycasting/DDA_algo.c \
+		../src/raycasting/DDA_helpers.c \
+
 
 # ----RULES---------------------------------------------------------------------
 
 all: $(NAME)
 
 debug:
-	$(MAKE) DEBUG_VALUE=1
+	$(MAKE) DEBUG_VALUE=0
 
 $(NAME): $(SRC)
 	@$(MAKE) -C $(LIBFTX_DIR)
 	@$(MAKE) -sC $(MLX_DIR) 1>/dev/null 2>/dev/null && echo "$(GREEN)[MLX]:\t\tLIBRARY CREATED"
-	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) -L$(LIBFTX_DIR) -lft $(MLX_FLAGS) -lm
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME) -L$(LIBFTX_DIR) -lft $(MLX_FLAGS) -lm 
 	@echo "$(GREEN)[$(PNAME)]:\tPROGRAM CREATED$(R)"
 	[ "$(strip $(DEBUG_VALUE))" = "0" ] || echo "$(RED)[$(PNAME)]:\tDEBUG MODE ENABLED$(R)"
 
