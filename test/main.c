@@ -135,8 +135,9 @@ void draw_minimap_loop(t_var *game)
 
 int game_loop(t_var *game)
 {
- 	 draw_minimap_loop(game); 
-	 draw_player_position(game); 
+ 	/*  draw_minimap_loop(game); 
+	 draw_player_position(game);  */
+
  	 calculate_DDA(game);
 	 return 1;
 }
@@ -144,8 +145,8 @@ int game_loop(t_var *game)
 
 int key_press(int keycode, t_var *game)
 {
-	dbg_printf("key pressed : %d\n");
-	dbg_printf("[BEFORE] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y);
+	/* printf("key pressed : %d\n"); */
+	printf("[BEFORE] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y);
 
 	
 
@@ -158,8 +159,8 @@ int key_press(int keycode, t_var *game)
 	if (keycode == KEY_D)
 		game->playerPos.pos_x += VELOCITY * DELTA_TIME; 
 	
-	game_loop(game);
-    dbg_printf("[AFTER] player position: (%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y);
+	/* game_loop(game); */
+   
 
     return 0;
 }
@@ -172,11 +173,11 @@ char **read_file()
 	int		fd;
 
 	
-	if(!file_exists("../src/maps/mappa.txt"))
+	if(!file_exists("../assets/maps/mappa.txt"))
 	{
 		/*messaggio errore  e clean up*/
 	}
-	fd = open("../src/maps/mappa.txt", O_RDONLY);
+	fd = open("../assets/maps/mappa.txt", O_RDONLY);
 	/*check fd*/
 	mtx = ft_readfile(fd, false);
 	return (mtx);
@@ -200,15 +201,15 @@ int	parsing(t_var *game)
 
 	//get_starting_player_pos(&game->playerPos, game->mapinfo.mtxint, game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
 	
-	game->playerPos.pos_x = 1;
-	game->playerPos.pos_y = 1;
+	game->playerPos.pos_x = 12;
+	game->playerPos.pos_y = 12;
 
 
 	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->playerPos.pos_x, game->playerPos.pos_y);
 	
 	/*gestire direzione il player is facing in base al parsing*/
-	game->playerPos.dir_x = cos(270);
-	game->playerPos.dir_y = sin(270);
+	game->playerPos.dir_x = cos(PLAYER_ANGLE);
+	game->playerPos.dir_y = sin(PLAYER_ANGLE);
 
 	printf("player dir %f, %f\n", game->playerPos.dir_x, game->playerPos.dir_y);
 
@@ -226,13 +227,13 @@ int	parsing(t_var *game)
 
 
 	game->sprite.white_sprite = mlx_xpm_file_to_image(game->mlx_ptr,
-			"../src/sprites/white_sprite.xpm",
+			"../assets/sprites/white_sprite.xpm",
 			&game->sprite.tile_sprite_w, &game->sprite.tile_sprite_h);
 	game->sprite.black_sprite = mlx_xpm_file_to_image(game->mlx_ptr,
-			"../src/sprites/black_sprite.xpm",
+			"../assets/sprites/black_sprite.xpm",
 			&game->sprite.tile_sprite_w, &game->sprite.tile_sprite_h);
 	game->sprite.mini_player = mlx_xpm_file_to_image(game->mlx_ptr,
-		"../src/sprites/player_minimap.xpm",
+		"../assets/sprites/player_minimap.xpm",
 		&game->sprite.mini_player_w, &game->sprite.mini_player_h);
 	return 1;
 }
