@@ -76,7 +76,7 @@ static void DDA_core_logic(t_var *game/* , int x */)
 			game->dda_helper.hit_wall = 1;	
 	}
 	calc_distance_from_wall(game);
-	game->dda_helper.lineHeight = (game->mapinfo.rows_mtx * TEXTURE_SIZE) / game->dda_helper.perpWallDist;
+	game->dda_helper.lineHeight = (game->mapinfo.rows_mtx * TILE_SIZE) / game->dda_helper.perpWallDist;
 	calc_perspective(game);
 
 

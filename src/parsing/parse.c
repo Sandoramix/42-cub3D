@@ -6,9 +6,15 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:46:08 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/31 15:46:18 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:45:22 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
+void	parse(t_var *game, int ac, char **av)
+{
+	(void)game;
+	(void)ac;
+	(void)av;
+}

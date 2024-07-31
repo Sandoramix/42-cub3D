@@ -55,10 +55,10 @@ void calc_distance_from_wall(t_var *game)
 
 void calc_perspective(t_var *game)
 {
-	game->dda_helper.draw_start = (-game->dda_helper.lineHeight / 2.0) + ((game->mapinfo.rows_mtx * TEXTURE_SIZE) / 2.0);
+	game->dda_helper.draw_start = (-game->dda_helper.lineHeight / 2.0) + ((game->mapinfo.rows_mtx * TILE_SIZE) / 2.0);
 	if (game->dda_helper.draw_start < 0)
 		game->dda_helper.draw_start = 0;
-	game->dda_helper.draw_end = (game->dda_helper.lineHeight / 2) + ((game->mapinfo.rows_mtx * TEXTURE_SIZE) / 2);
-	if (game->dda_helper.draw_end >= game->mapinfo.rows_mtx * TEXTURE_SIZE)
-		game->dda_helper.draw_end = game->mapinfo.rows_mtx * TEXTURE_SIZE - 1;
+	game->dda_helper.draw_end = (game->dda_helper.lineHeight / 2) + ((game->mapinfo.rows_mtx * TILE_SIZE) / 2);
+	if (game->dda_helper.draw_end >= game->mapinfo.rows_mtx * TILE_SIZE)
+		game->dda_helper.draw_end = game->mapinfo.rows_mtx * TILE_SIZE - 1;
 }
