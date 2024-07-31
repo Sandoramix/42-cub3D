@@ -57,8 +57,8 @@ void get_starting_player_pos(t_playerPos *pos, int **mtx, int col, int row)
 				pos->dir_x
 				pos->dir_y
 				*/
-				pos->pos_x = scaleUp(counterCol, TEXTURE_SIZE);
-				pos->pos_y = scaleUp(counterRow, TEXTURE_SIZE);
+				pos->pos_x = scaleUp(counterCol, TILE_SIZE);
+				pos->pos_y = scaleUp(counterRow, TILE_SIZE);
 			}
 			counterCol++;
 		}
@@ -151,13 +151,13 @@ int key_press(int keycode, t_var *game)
 	
 
 	if (keycode == KEY_W)
-        game->playerPos.pos_y -= VELOCITY * DELTA_TIME; 
+        game->playerPos.pos_y -= VELOCITY * game->deltatime; 
 	if (keycode == KEY_S)
-        game->playerPos.pos_y += VELOCITY * DELTA_TIME; 
+        game->playerPos.pos_y += VELOCITY * game->deltatime; 
 	if (keycode == KEY_A)
-        game->playerPos.pos_x -= VELOCITY * DELTA_TIME; 
+        game->playerPos.pos_x -= VELOCITY * game->deltatime; 
 	if (keycode == KEY_D)
-		game->playerPos.pos_x += VELOCITY * DELTA_TIME; 
+		game->playerPos.pos_x += VELOCITY * game->deltatime; 
 	
 	/* game_loop(game); */
    
@@ -216,10 +216,10 @@ int	parsing(t_var *game)
 	game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
 	game->plane.y = 0.66; 	// offset di 0.66unita sull asse delle Y
 
-	game->sprite.tile_sprite_w = TEXTURE_SIZE;
-	game->sprite.tile_sprite_h = TEXTURE_SIZE;
-	game->sprite.mini_player_w = SIZE_MINI_PLAYER;
-	game->sprite.mini_player_h = SIZE_MINI_PLAYER;
+	game->sprite.tile_sprite_w = TILE_SIZE;
+	game->sprite.tile_sprite_h = TILE_SIZE;
+	game->sprite.mini_player_w = MINIMAP_TILE_SIZE;
+	game->sprite.mini_player_h = MINIMAP_TILE_SIZE;
 
 	game->mlx_ptr = mlx_init();
 	game->win_ptr = mlx_new_window(game->mlx_ptr, 1600, 900, "UrMom");

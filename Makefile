@@ -21,7 +21,11 @@ RM = rm -rf
 
 # ----SOURCE-FILES--------------------------------------------------------------
 
-SRC = ./main.c
+SRC = ./main.c \
+	./src/parsing/parse.c \
+	./src/raycasting/DDA_algo.c \
+	./src/raycasting/DDA_helpers.c
+
 
 # ----RULES---------------------------------------------------------------------
 
