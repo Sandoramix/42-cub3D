@@ -10,9 +10,9 @@
 			// "launch" OR "attach" (SUDO PERMISSION NEEDED FOR THE LATTER ONE).
 			"request": "launch",
 			// PROGRAM'S ABSOLUTE PATH (LEAVE ${workspaceFolder} FOR SIMPLICITY)
-			"program": "${workspaceFolder}/cub3D",
+			"program": "${workspaceFolder}/test/test.cub3D",
 			// PROGRAM ARGUMENTS SEPARATED BY COMMA
-			"args": ["map.ber"],
+			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			// IF YOU NEED ADD SOME EXTRA `ENV` VARIABLES
