@@ -100,10 +100,9 @@ void draw_player_position(t_var *game)
 	 mlx_put_image_to_window(game->mlx_ptr,\
 	 						game->win_ptr,\
 							game->sprite.mini_player,\
-							scaleDown(game->playerPos.pos_x, TEXTURE_SIZE),\
-							scaleDown(game->playerPos.pos_y, TEXTURE_SIZE));
+							game->playerPos.pos_x,\
+							game->playerPos.pos_y);
 }
-
 
 
 void draw_minimap_loop(t_var *game)
@@ -114,13 +113,13 @@ void draw_minimap_loop(t_var *game)
 	count.x = 0;
 	count.y = 0;
 	
-	while (count.x < game->rows_mtx)
+	while (count.x < game->mapinfo.rows_mtx)
 	{
 		count.y = 0;
-		while (count.y < game->cols_mtx)
+		while (count.y < game->mapinfo.cols_mtx)
 		{
-			color = (void*[2]){game->sprite.white_sprite, game->sprite.black_sprite}[game->mtxint[count.x][count.y] != 1];
-			mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, color, scaleUp(count.y, 16), scaleUp(count.x, 16));
+			color = (void*[2]){game->sprite.white_sprite, game->sprite.black_sprite}[game->mapinfo.mtxint[count.x][count.y] != 1];
+			mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, color, scaleUp(count.y, 64), scaleUp(count.x, 64));
 			count.y++;
 		}
 		count.x++;
@@ -128,19 +127,18 @@ void draw_minimap_loop(t_var *game)
 
 }
 
-void draw_mini_player_rays(t_var *game)
+/* void draw_mini_player_rays(t_var *game)
 {
-	
-}
+	drawline(game, game->playerPos, );
+} */
 
 
 int game_loop(t_var *game)
 {
- 	draw_minimap_loop(game);
-	draw_player_position(game);
-	draw_mini_player_rays(game);
-	/* calculate_DDA(game);  */
-	return 1;
+ 	 draw_minimap_loop(game); 
+	 draw_player_position(game); 
+ 	 calculate_DDA(game);
+	 return 1;
 }
 
 
@@ -200,16 +198,22 @@ int	parsing(t_var *game)
 		/*gestire errore*/
 	}
 
-	get_starting_player_pos(&game->playerPos, game->mapinfo.mtxint, game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
+	//get_starting_player_pos(&game->playerPos, game->mapinfo.mtxint, game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
 	
-	dbg_printf("Player Position[x]: %f\nPlayer Position[y]: %f\n", game->playerPos.pos_x, game->playerPos.pos_y);
+	game->playerPos.pos_x = 1;
+	game->playerPos.pos_y = 1;
+
+
+	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->playerPos.pos_x, game->playerPos.pos_y);
 	
 	/*gestire direzione il player is facing in base al parsing*/
-	game->playerPos.dir_x = 1;
-	game->playerPos.dir_y = 0;
+	game->playerPos.dir_x = cos(270);
+	game->playerPos.dir_y = sin(270);
+
+	printf("player dir %f, %f\n", game->playerPos.dir_x, game->playerPos.dir_y);
 
 	game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
-	game->plane.y = 0.60; // offset di 0.66unita sull asse delle Y
+	game->plane.y = 0.66; 	// offset di 0.66unita sull asse delle Y
 
 	game->sprite.tile_sprite_w = TEXTURE_SIZE;
 	game->sprite.tile_sprite_h = TEXTURE_SIZE;
@@ -217,7 +221,7 @@ int	parsing(t_var *game)
 	game->sprite.mini_player_h = SIZE_MINI_PLAYER;
 
 	game->mlx_ptr = mlx_init();
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->cols_mtx * TEXTURE_SIZE, game->rows_mtx * TEXTURE_SIZE, "UrMom");
+	game->win_ptr = mlx_new_window(game->mlx_ptr, 1600, 900, "UrMom");
 
 
 
