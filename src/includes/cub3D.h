@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/31 16:44:50 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/31 17:20:56 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	increase_raylen(t_var *game);
 void	calc_distance_from_wall(t_var *game);
 void	calc_perspective(t_var *game);
 //------------------------------------------------------------------------------
+
+double	delta_time(t_var *game);
 
 #endif
