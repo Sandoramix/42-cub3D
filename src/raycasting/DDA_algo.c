@@ -1,33 +1,86 @@
 #include <libft.h>
 #include "cub3D.h"
 
-static void DDA_core_logic(t_var *game, int x)
-{
-	int y;
 
+double pi()
+{
+	return (acos(-1.0));
+}
+
+double from_angle_to_radiant(double angle)
+{
+	return (angle * (pi() / 180));
+}
+
+t_dpoint calculate_point(t_dpoint *start, double angle, double distance)
+{
+	t_dpoint end;
+
+	end.x = (start->x + (distance * cos(from_angle_to_radiant(angle))) * 64);
+	end.y = (start->y + (distance * sin(from_angle_to_radiant(angle))) * 64);	
+	
+	return end;
+}
+
+void draw_line(t_var *game, t_dpoint start, t_dpoint end) {
+    t_dpoint delta;
+	t_dpoint increment;
+	t_dpoint next_point;
+	int pixels;
+	int counter;
+	
+	delta = (t_dpoint){end.x - start.x, end.y - start.y};
+	pixels = sqrt((delta.x * delta.x) + (delta.y  * delta.y ));
+	increment = (t_dpoint){delta.x / pixels, delta.y  / pixels};
+	next_point = (t_dpoint){start.x, start.y};
+	counter = 0;
+	while(counter < pixels) {
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, (int)next_point.x, (int)next_point.y, 0x0000FF); // Color white
+		next_point.x += increment.x;
+		next_point.y += increment.y;
+		counter++;
+	}
+
+
+
+
+
+   /*  printf("Drawing line from (%f, %f) to (%f, %f)\n", start.x, start.y, end.x, end.y); */
+}
+
+static void draw_minimap_rays(t_var *game) {
+    t_dpoint start;
+    t_dpoint result;
+    double angle;
+
+	angle = 0;
+    start = (t_dpoint){game->playerPos.pos_x + game->plane.x, game->playerPos.pos_y + game->plane.y };
+	while(angle <= 360)
+	{
+		result = calculate_point(&start, angle, game->dda_helper.perpWallDist);
+		/* printf("result x y : %f %f\n", result.x, result.y - game->plane.y); */
+        draw_line(game, start, result);
+		angle++;
+	}
+    
+        
+}
+
+static void DDA_core_logic(t_var *game/* , int x */)
+{
 	calc_initial_step_intial_raylen(game);
 	while (!game->dda_helper.hit_wall)
 	{
 		increase_raylen(game);
-		if (game->mtxint[game->dda_helper.mapX][game->dda_helper.mapY] > 0)
-			game->dda_helper.hit_wall = 1;
+		if (game->mapinfo.mtxint[game->dda_helper.mapX][game->dda_helper.mapY] > 0)
+			game->dda_helper.hit_wall = 1;	
 	}
 	calc_distance_from_wall(game);
-	game->dda_helper.lineHeight = (game->rows_mtx * TEXTURE_SIZE) / game->dda_helper.perpWallDist;
+	game->dda_helper.lineHeight = (game->mapinfo.rows_mtx * TEXTURE_SIZE) / game->dda_helper.perpWallDist;
 	calc_perspective(game);
-	dbg_printf("x: %d, sideDistX: %f, sideDistY: %f, perpWallDist: %f, lineHeight: %d, draw_start: %d, draw_end: %d\n",
-			   x, game->dda_helper.sideDistX, game->dda_helper.sideDistY, game->dda_helper.perpWallDist, game->dda_helper.lineHeight, game->dda_helper.draw_start, game->dda_helper.draw_end);
-	y = game->dda_helper.draw_start;
 
-	int print_every_tot_line = 6;
-	if (x % print_every_tot_line == 0)
-	{
-		while (y <= game->dda_helper.draw_end)
-		{
-			mlx_pixel_put(game->mlx_ptr, game->win_ptr, x, y, 0xFF0000);
-			y++;
-		}
-	}
+
+	draw_minimap_rays(game);
 }
 
 static void get_multiplication_factor(t_var *game)
@@ -44,8 +97,8 @@ static void get_ray_direction(t_var *game, int pixel_pos_x)
 	// center 0,
 	// left 	-1.
 	game->dda_helper.cameraX = 2 * pixel_pos_x / game->dda_helper.screenSize - 1;
+	
 	// direction of the ray
-
 	game->dda_helper.rayDirX = game->playerPos.dir_x + game->plane.x * game->dda_helper.cameraX;
 	game->dda_helper.rayDirY = game->playerPos.dir_y + game->plane.y * game->dda_helper.cameraX;
 }
@@ -56,14 +109,14 @@ void calculate_DDA(t_var *game)
 	int pixel_pos_x;
 
 	pixel_pos_x = 0;
-	game->dda_helper.screenSize = game->cols_mtx * TEXTURE_SIZE;
-	game->dda_helper.mapX = (int)game->playerPos.pos_x / TEXTURE_SIZE;
-	game->dda_helper.mapY = (int)game->playerPos.pos_y / TEXTURE_SIZE;
+	game->dda_helper.screenSize = SCREEN_WIDTH;
+	game->dda_helper.mapX = (int)game->playerPos.pos_x;
+	game->dda_helper.mapY = (int)game->playerPos.pos_y;
 	while (pixel_pos_x < game->dda_helper.screenSize)
 	{
 		get_ray_direction(game, pixel_pos_x);
 		get_multiplication_factor(game);
-		DDA_core_logic(game, pixel_pos_x);
+		DDA_core_logic(game/*,  pixel_pos_x */);
 		pixel_pos_x++;
 	}
 }
