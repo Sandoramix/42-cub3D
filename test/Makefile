@@ -14,7 +14,7 @@ MLX_DIR = $(ROOTDIR)/minilibx
 RAYCAST_DIR = $(ROOTDIR)/raycasting
 
 CC = cc
-INCLUDES = -I../includes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR) -I$(RAYCAST_DIR) 
+INCLUDES = -I$(ROOTDIR)/includes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR) -I$(RAYCAST_DIR)
 MLX_FLAGS = -L$(MLX_DIR) -lmlx_$(shell uname) -lXext -lX11
 CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE)
 

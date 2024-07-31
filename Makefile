@@ -13,8 +13,8 @@ LIBFTX_DIR=$(ROOTDIR)/libftx
 MLX_DIR = $(ROOTDIR)/minilibx
 
 CC = cc
-INCLUDES = -Iincludes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR)
-MLX_FLAGS = -L$(MLX_DIR) -lmlx_$(shell uname) -lXext -lX11 
+INCLUDES = -I$(ROOTDIR)/includes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR)
+MLX_FLAGS = -L$(MLX_DIR) -lmlx_$(shell uname) -lXext -lX11
 CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE)
 
 RM = rm -rf
