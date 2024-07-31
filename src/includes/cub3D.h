@@ -30,8 +30,10 @@
 #define FLOOR 0
 #define WALL 1
 
-#define VELOCITY 1000
+#define VELOCITY 10
 #define DELTA_TIME 1
+#define FOV 90
+#define PLAYER_ANGLE 45
 
 typedef struct s_playerPos
 {
