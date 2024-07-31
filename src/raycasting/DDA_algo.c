@@ -16,8 +16,10 @@ t_dpoint calculate_point(t_dpoint *start, double angle, double distance)
 {
 	t_dpoint end;
 
+	if (angle < 0)
+		angle = 360 + angle;
 	end.x = (start->x + (distance * cos(from_angle_to_radiant(angle))) * 64);
-	end.y = (start->y + (distance * sin(from_angle_to_radiant(angle))) * 64);	
+	end.y = (start->y + (distance * sin(from_angle_to_radiant(angle))) * 64);
 	
 	return end;
 }
@@ -48,17 +50,16 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end) {
    /*  printf("Drawing line from (%f, %f) to (%f, %f)\n", start.x, start.y, end.x, end.y); */
 }
 
-static void draw_minimap_rays(t_var *game) {
+ void draw_minimap_rays(t_var *game) {
     t_dpoint start;
     t_dpoint result;
     double angle;
 
-	angle = 0;
+	angle = -FOV/2;
     start = (t_dpoint){game->playerPos.pos_x + game->plane.x, game->playerPos.pos_y + game->plane.y };
-	while(angle <= 360)
+	while(angle <= FOV/2)
 	{
 		result = calculate_point(&start, angle, game->dda_helper.perpWallDist);
-		/* printf("result x y : %f %f\n", result.x, result.y - game->plane.y); */
         draw_line(game, start, result);
 		angle++;
 	}
@@ -66,7 +67,7 @@ static void draw_minimap_rays(t_var *game) {
         
 }
 
-static void DDA_core_logic(t_var *game/* , int x */)
+static void DDA_core_logic(t_var *game , int x)
 {
 	calc_initial_step_intial_raylen(game);
 	while (!game->dda_helper.hit_wall)
@@ -79,8 +80,19 @@ static void DDA_core_logic(t_var *game/* , int x */)
 	game->dda_helper.lineHeight = (game->mapinfo.rows_mtx * TEXTURE_SIZE) / game->dda_helper.perpWallDist;
 	calc_perspective(game);
 
+	/* draw_minimap_rays(game); */
+	
+	int y = game->dda_helper.draw_start;
+	int print_every_tot_line = 6;
+	if (x % print_every_tot_line == 0)
+	{
+		while (y <= game->dda_helper.draw_end)
+		{
+			mlx_pixel_put(game->mlx_ptr, game->win_ptr, x, y, 0xFF0000);
+			y++;
+		}
+	}
 
-	draw_minimap_rays(game);
 }
 
 static void get_multiplication_factor(t_var *game)
@@ -89,6 +101,8 @@ static void get_multiplication_factor(t_var *game)
 	// fare il prossimo passo ("StepX/StepY")
 	game->dda_helper.deltaDistX = fabs(1 / game->dda_helper.rayDirX);
 	game->dda_helper.deltaDistY = fabs(1 / game->dda_helper.rayDirY);
+
+	//printf("deltaDistX, deltaDistY %f %f\n",game->dda_helper.deltaDistX, game->dda_helper.deltaDistY);
 }
 
 static void get_ray_direction(t_var *game, int pixel_pos_x)
@@ -109,14 +123,14 @@ void calculate_DDA(t_var *game)
 	int pixel_pos_x;
 
 	pixel_pos_x = 0;
-	game->dda_helper.screenSize = SCREEN_WIDTH;
+	game->dda_helper.screenSize = 1600;
 	game->dda_helper.mapX = (int)game->playerPos.pos_x;
 	game->dda_helper.mapY = (int)game->playerPos.pos_y;
 	while (pixel_pos_x < game->dda_helper.screenSize)
 	{
 		get_ray_direction(game, pixel_pos_x);
 		get_multiplication_factor(game);
-		DDA_core_logic(game/*,  pixel_pos_x */);
+		DDA_core_logic(game,  pixel_pos_x);
 		pixel_pos_x++;
 	}
 }
