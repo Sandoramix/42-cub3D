@@ -6,12 +6,12 @@
 #include <mlx_int.h>
 
 
-#define TEXTURE_SIZE (int)64 
+#define TEXTURE_SIZE 64 
 #define TEXTURE_HALF_SIZE 32
 #define SIZE_MINI_PLAYER 8
 
-#define SCREEN_WIDTH 
-#define SCREEN_HEIGHT
+#define SCREEN_WIDTH 1600
+#define SCREEN_HEIGHT 900
 
 
 #define PLANEX 0.0
