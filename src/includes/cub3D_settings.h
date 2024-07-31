@@ -43,6 +43,12 @@
 # define FLOOR 0
 # define WALL 1
 
+/*HARD CODED VALUES (testing)*/
 # define VELOCITY 1000
+# define FOV 66
+
+
+
+# define PLAYER_ANGLE 0
 
 #endif

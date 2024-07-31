@@ -135,21 +135,19 @@ void draw_minimap_loop(t_var *game)
 
 int game_loop(t_var *game)
 {
+	deltatime(game);
  	/*  draw_minimap_loop(game); 
 	 draw_player_position(game);  */
 
- 	 calculate_DDA(game);
-	 return 1;
+ 	calculate_DDA(game);
+	return 1;
 }
 
 
 int key_press(int keycode, t_var *game)
-{
-	/* printf("key pressed : %d\n"); */
+{	
+	printf("key pressed %d\n", keycode);
 	printf("[BEFORE] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y);
-
-	
-
 	if (keycode == KEY_W)
         game->playerPos.pos_y -= VELOCITY * game->deltatime; 
 	if (keycode == KEY_S)
@@ -157,11 +155,8 @@ int key_press(int keycode, t_var *game)
 	if (keycode == KEY_A)
         game->playerPos.pos_x -= VELOCITY * game->deltatime; 
 	if (keycode == KEY_D)
-		game->playerPos.pos_x += VELOCITY * game->deltatime; 
-	
-	/* game_loop(game); */
-   
-
+		game->playerPos.pos_x += VELOCITY * game->deltatime;
+	printf("[AFTER] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y);
     return 0;
 }
 
@@ -194,7 +189,7 @@ int	parsing(t_var *game)
 	game->mapinfo.rows_mtx = str_mtxlen(tmp_mtx);
 	game->mapinfo.cols_mtx = str_ilen(tmp_mtx[0]);
 	game->mapinfo.mtxint = cmtxtoimtx(tmp_mtx, game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
-	if (!game->mtxint)
+	if (!game->mapinfo.mtxint)
 	{
 		/*gestire errore*/
 	}
@@ -249,8 +244,8 @@ int main()
 		
 		mlx_hook(game.win_ptr, KeyPress, KeyPressMask, &key_press, &game);
 		mlx_hook(game.win_ptr, 17, 0, mlx_loop_end, game.mlx_ptr);
-		// mlx_loop_hook(game.mlx_ptr, game_loop, &game);
-		game_loop(&game);
+		mlx_loop_hook(game.mlx_ptr, game_loop, &game);
+		/* game_loop(&game); */
 		mlx_loop(game.mlx_ptr);
 	}
 
