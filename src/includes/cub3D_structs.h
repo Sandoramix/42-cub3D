@@ -6,12 +6,14 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/31 16:53:37 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/31 17:08:35 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_STRUCTS_H
 # define CUB3D_STRUCTS_H
+
+# include <cub3D.h>
 
 typedef struct s_playerPos
 {
@@ -29,10 +31,9 @@ typedef struct s_dpoint
 
 typedef struct s_sprite
 {
-	void	*black_sprite;
-	void	*white_sprite;
-	void	*mini_player;
-
+	t_img	*black_sprite;
+	t_img	*white_sprite;
+	t_img	*mini_player;
 
 	int		mini_player_w;
 	int		mini_player_h;
