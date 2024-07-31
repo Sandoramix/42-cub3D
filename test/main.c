@@ -1,60 +1,16 @@
 #include <libft.h>
-#include "cub3D.h"
+#include <cub3D.h>
 
-#define TEXTURE_SIZE 32
-#define TEXTURE_HALF_SIZE 16
-
-#define N 78
-#define W 87
-#define E 69
-#define S 83
-
-#define FLOOR 0
-#define WALL 1
-
-#define VELOCITY 100
-
-typedef struct s_playerPos
+int scaleUp(int x, int scale)
 {
-	double pos_x;
-	double pos_y;
-	double dir_x;
-	double dir_y;
-} t_playerPos;
+	return x * scale;
+}
 
-typedef struct s_DDA
+int scaleDown(int x, int scale)
 {
-	double cameraX;
-	double rayDirX;
-	double rayDirY;
-	double screenSize;
+	return x / scale;
+}
 
-	double sideDistX;
-	double sideDistY;
-	double pixelPosX;
-	double deltaDistX;
-	double deltaDistY;
-
-	int stepX;
-	int stepY;
-	int mapX;
-	int mapY;
-
-} t_DDA;
-
-// "GLOBAL" program's structure.
-typedef struct s_var
-{
-	struct s_playerPos *playerPos;
-	struct s_DDA dda_helper;
-	int **mtxint;
-	int intMtxRows;
-	int intMtxCols;
-	double planeX;
-	double planeY;
-	void *mlx_ptr;
-	void *win_ptr;
-} t_var;
 
 int **cmtxtoimtx(char **mtx, int col, int row)
 {
@@ -74,7 +30,6 @@ int **cmtxtoimtx(char **mtx, int col, int row)
 		while (counterCol < col)
 		{
 			intMtx[counterRow][counterCol] = mtx[counterRow][counterCol] - '0';
-			dbg_printf("intMtx[counterRow][counterCol] == %d\n", intMtx[counterRow][counterCol]);
 			counterCol++;
 		}
 		counterRow++;
@@ -82,20 +37,13 @@ int **cmtxtoimtx(char **mtx, int col, int row)
 	return intMtx;
 }
 
-t_playerPos *getPlayerPos(int **mtx, int col, int row)
+void get_starting_player_pos(t_playerPos *pos, int **mtx, int col, int row)
 {
 	int counterRow;
 	int counterCol;
-	t_playerPos *pos;
 
 	counterRow = 0;
 	counterCol = 0;
-	pos = ft_calloc(1, sizeof(t_playerPos));
-	if (!pos)
-	{
-		/*https://www.youtube.com/watch?v=wLg04uu2j2o*/
-		return NULL;
-	}
 	while (counterRow < row)
 	{
 		counterCol = 0;
@@ -109,175 +57,197 @@ t_playerPos *getPlayerPos(int **mtx, int col, int row)
 				pos->dir_x
 				pos->dir_y
 				*/
-				pos->pos_x = (counterCol * TEXTURE_SIZE) + TEXTURE_HALF_SIZE;
-				pos->pos_y = (counterRow * TEXTURE_SIZE) + TEXTURE_HALF_SIZE;
-				return pos;
+				pos->pos_x = scaleUp(counterCol, TEXTURE_SIZE);
+				pos->pos_y = scaleUp(counterRow, TEXTURE_SIZE);
 			}
 			counterCol++;
 		}
 		counterRow++;
 	}
-	return NULL;
+	/**gestione errore se non viene trovato il carattere per il player */
 }
 
-void draw_square(t_var *infos, int y, int x, int color)
+int draw_circle(t_var *game, int radius)
 {
-	int origX = x;
-	int counterRows;
-	int counterCols;
+	int dist = 0 , x = 0 , y = 0;
+    {
+        for (x = 0; x <= radius * 2; x++)
+        {
+            for (y = 0; y <= radius * 2; y++)
+            {
+                dist = sqrt((x - radius) * (x - radius) + (y - radius) * (y - radius));
+                {
+                    if (dist==radius)
+                    {
+                        mlx_pixel_put(game->mlx_ptr, game->win_ptr, x, y, 0xFF0000);
+                    }
+                    else
+                    {
+                     	mlx_pixel_put(game->mlx_ptr, game->win_ptr, x, y, 0xFF1818);
+                    }
+                }
 
-	counterRows = 0;
+			}
 
-	while (counterRows < 32)
+        }
+
+    }
+    return 0;
+}
+
+void draw_player_position(t_var *game)
+{
+	 mlx_put_image_to_window(game->mlx_ptr,\
+	 						game->win_ptr,\
+							game->sprite.mini_player,\
+							scaleDown(game->playerPos.pos_x, TEXTURE_SIZE),\
+							scaleDown(game->playerPos.pos_y, TEXTURE_SIZE));
+}
+
+
+
+void draw_minimap_loop(t_var *game)
+{
+	t_point count;
+	void  *color;
+
+	count.x = 0;
+	count.y = 0;
+	
+	while (count.x < game->rows_mtx)
 	{
-		counterCols = 0;
-		x = origX;
-		while (counterCols < 32)
+		count.y = 0;
+		while (count.y < game->cols_mtx)
 		{
-			mlx_pixel_put(infos->mlx_ptr, infos->win_ptr, x, y, color);
-			x++;
-			counterCols++;
+			color = (void*[2]){game->sprite.white_sprite, game->sprite.black_sprite}[game->mtxint[count.x][count.y] != 1];
+			mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, color, scaleUp(count.y, 16), scaleUp(count.x, 16));
+			count.y++;
 		}
-		y++;
-		counterRows++;
+		count.x++;
 	}
+
 }
 
-void draw_map(t_var *infos)
+void draw_mini_player_rays(t_var *game)
 {
-	int row;
-	int cols;
-	int color;
-
-	row = 0;
-	cols = 0;
-	while (row < infos->intMtxRows)
-	{
-		cols = 0;
-		while (cols < infos->intMtxCols)
-		{
-			color = (int[2]){0xFFFFFF, 0x000000}[infos->mtxint[row][cols] != 1];
-			draw_square(infos, row * TEXTURE_SIZE, cols * TEXTURE_SIZE, color);
-			cols++;
-		}
-		row++;
-	}
+	
 }
 
-void calc_initial_step_intial_raylen(t_var *infos)
+
+int game_loop(t_var *game)
 {
-	if (infos->dda_helper.rayDirX < 0)
-	{
-		infos->dda_helper.stepX = -1;
-		infos->dda_helper.sideDistX = (infos->planeX - infos->dda_helper.mapX) * infos->dda_helper.deltaDistX;
-	}
-	else
-	{
-		infos->dda_helper.stepX = 1;
-		infos->dda_helper.sideDistX = (infos->dda_helper.mapX + 1.0 - infos->planeX) * infos->dda_helper.deltaDistX;
-	}
-	if (infos->dda_helper.rayDirY < 0)
-	{
-		infos->dda_helper.stepY = -1;
-		infos->dda_helper.sideDistY = (infos->planeY - infos->dda_helper.mapY) * infos->dda_helper.deltaDistY;
-	}
-	else
-	{
-		infos->dda_helper.stepY = 1;
-		infos->dda_helper.sideDistY = (infos->dda_helper.mapY + 1.0 - infos->planeY) * infos->dda_helper.deltaDistY;
-	}
+ 	draw_minimap_loop(game);
+	draw_player_position(game);
+	draw_mini_player_rays(game);
+	/* calculate_DDA(game);  */
+	return 1;
 }
 
-void calculate_DDA(t_var *infos)
+
+int key_press(int keycode, t_var *game)
 {
-	infos->dda_helper = (t_DDA){0};
-	infos->dda_helper.screenSize = infos->intMtxCols * 32;
-	infos->dda_helper.mapX = (int)infos->playerPos->pos_x;	   // quadrato della mappa in cui ci troviamo
-	infos->dda_helper.mapY = (int)infos->playerPos->pos_y; // quadrato della mappa in cui ci troviamo
-	int pixelPosX = 0;
-	while (pixelPosX < infos->dda_helper.screenSize)
+	dbg_printf("key pressed : %d\n");
+	dbg_printf("[BEFORE] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y);
+
+	
+
+	if (keycode == KEY_W)
+        game->playerPos.pos_y -= VELOCITY * DELTA_TIME; 
+	if (keycode == KEY_S)
+        game->playerPos.pos_y += VELOCITY * DELTA_TIME; 
+	if (keycode == KEY_A)
+        game->playerPos.pos_x -= VELOCITY * DELTA_TIME; 
+	if (keycode == KEY_D)
+		game->playerPos.pos_x += VELOCITY * DELTA_TIME; 
+	
+	game_loop(game);
+    dbg_printf("[AFTER] player position: (%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y);
+
+    return 0;
+}
+
+
+
+char **read_file()
+{
+	char	**mtx;
+	int		fd;
+
+	
+	if(!file_exists("../src/maps/mappa.txt"))
 	{
-		// cameraX is the x-coordinate on the camera plane that the current x-coordinate of the screen represents, done this way so that
-		// the right side of the screen will get coordinate 1, the center of the screen gets coordinate 0, and the left side of the screen gets coordinate -1.
-		infos->dda_helper.cameraX = 2 * pixelPosX / infos->dda_helper.screenSize - 1;
-		// direction of the ray
-		infos->dda_helper.rayDirX = infos->planeX + infos->planeX * infos->dda_helper.cameraX;
-		infos->dda_helper.rayDirY = infos->planeY + infos->planeY * infos->dda_helper.cameraX;
-
-		// lunghezza da percorrere lungo il per spostarsi di 1 sull asse x e y, poi verranno confrontati per decidere dove
-		// fare il prossimo passo ("StepX/StepY")
-		infos->dda_helper.deltaDistX = (float[2]){1e30, fabs(1 / infos->dda_helper.rayDirX)}[infos->dda_helper.rayDirX == 1];
-		infos->dda_helper.deltaDistY = (float[2]){1e30, fabs(1 / infos->dda_helper.rayDirY)}[infos->dda_helper.rayDirY == 1];
-
-		calc_initial_step_intial_raylen(infos);
-
-		// fino a questo punto ho ottenuto solo la prima length del raggio di mio interesse
-		// adesso deve partire un loop che andra ad aggiungere una certa len al nostro ray.
-		// il loop si ferma quando colpiamo un blocco
-
-		pixelPosX++;
+		/*messaggio errore  e clean up*/
 	}
+	fd = open("../src/maps/mappa.txt", O_RDONLY);
+	/*check fd*/
+	mtx = ft_readfile(fd, false);
+	return (mtx);
+}
+
+int	parsing(t_var *game)
+{
+	char **tmp_mtx;
+
+	tmp_mtx = read_file();
+	if(!tmp_mtx)
+		return 0;
+
+	game->mapinfo.rows_mtx = str_mtxlen(tmp_mtx);
+	game->mapinfo.cols_mtx = str_ilen(tmp_mtx[0]);
+	game->mapinfo.mtxint = cmtxtoimtx(tmp_mtx, game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
+	if (!game->mtxint)
+	{
+		/*gestire errore*/
+	}
+
+	get_starting_player_pos(&game->playerPos, game->mapinfo.mtxint, game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
+	
+	dbg_printf("Player Position[x]: %f\nPlayer Position[y]: %f\n", game->playerPos.pos_x, game->playerPos.pos_y);
+	
+	/*gestire direzione il player is facing in base al parsing*/
+	game->playerPos.dir_x = 1;
+	game->playerPos.dir_y = 0;
+
+	game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
+	game->plane.y = 0.60; // offset di 0.66unita sull asse delle Y
+
+	game->sprite.tile_sprite_w = TEXTURE_SIZE;
+	game->sprite.tile_sprite_h = TEXTURE_SIZE;
+	game->sprite.mini_player_w = SIZE_MINI_PLAYER;
+	game->sprite.mini_player_h = SIZE_MINI_PLAYER;
+
+	game->mlx_ptr = mlx_init();
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->cols_mtx * TEXTURE_SIZE, game->rows_mtx * TEXTURE_SIZE, "UrMom");
+
+
+
+	game->sprite.white_sprite = mlx_xpm_file_to_image(game->mlx_ptr,
+			"../src/sprites/white_sprite.xpm",
+			&game->sprite.tile_sprite_w, &game->sprite.tile_sprite_h);
+	game->sprite.black_sprite = mlx_xpm_file_to_image(game->mlx_ptr,
+			"../src/sprites/black_sprite.xpm",
+			&game->sprite.tile_sprite_w, &game->sprite.tile_sprite_h);
+	game->sprite.mini_player = mlx_xpm_file_to_image(game->mlx_ptr,
+		"../src/sprites/player_minimap.xpm",
+		&game->sprite.mini_player_w, &game->sprite.mini_player_h);
+	return 1;
 }
 
 int main()
 {
-	struct s_var infos;
-	char **mtx;
-	int fd;
+	struct s_var game;
 
-	infos = (struct s_var){0};
-	// apro il file
-	fd = open("../maps/mappa.txt", O_RDONLY);
-	if (fd < 0)
-		perror("Path to map file is incorrect!\n");
-	mtx = ft_readfile(fd, false);
-
-	// prendo n cols & n rows
-	infos.intMtxRows = str_mtxlen(mtx);
-	infos.intMtxCols = str_ilen(mtx[0]);
-	infos.mtxint = cmtxtoimtx(mtx, infos.intMtxCols, infos.intMtxRows);
-
-	// prendo player pos e assegno direz hardcoded
-	infos.playerPos = getPlayerPos(infos.mtxint, infos.intMtxCols, infos.intMtxRows);
-	if (!infos.playerPos)
-		ft_perror("No player found in the map provided!");
-	dbg_printf("Player Position[x]: %f\nPlayer Position[y]: %f\n", infos.playerPos->pos_x, infos.playerPos->pos_y);
-
-	infos.playerPos->dir_x = 0;
-	infos.playerPos->dir_y = 1;
-
-	//					the length of the direction
-	// FOV = ratio of  --------------------------------
-	// 					    the camera plane
-
-	infos.planeX = 0.0;	 // sul piano x non c' e alcun offset
-	infos.planeY = 0.66; // offset di 0.66unita sull asse delle Y
-
-	infos.mlx_ptr = mlx_init();
-	infos.win_ptr = mlx_new_window(infos.mlx_ptr, infos.intMtxCols * 32, infos.intMtxRows * 32, "UrMom");
-	// game loop
-
-	//"minimappa"
-	draw_map(&infos);
-
-	calculate_DDA(&infos);
-	// player position
-	while(1)
+	game = (struct s_var){0};
+	
+	if (parsing(&game))
 	{
-		struct timeval t1, t2;
-		double elapsedTime;
-		//start timer
-		gettimeofday(&t1, NULL);
-		gettimeofday(&t2, NULL);
-		//compute
-		elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;
-		elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
-		//convert to seconds
-		double delta = elapsedTime /1000;
-		infos.playerPos->pos_x = infos.playerPos->pos_x + VELOCITY  * delta;
-		infos.playerPos->pos_y = infos.playerPos->pos_y + VELOCITY  * delta;
-		mlx_pixel_put(infos.mlx_ptr, infos.win_ptr, infos.playerPos->pos_x, infos.playerPos->pos_y, 0xFF0000);
+		
+		mlx_hook(game.win_ptr, KeyPress, KeyPressMask, &key_press, &game);
+		mlx_hook(game.win_ptr, 17, 0, mlx_loop_end, game.mlx_ptr);
+		// mlx_loop_hook(game.mlx_ptr, game_loop, &game);
+		game_loop(&game);
+		mlx_loop(game.mlx_ptr);
 	}
-	mlx_hook(infos.win_ptr, 17, 0, mlx_loop_end, infos.mlx_ptr);
-	mlx_loop(infos.mlx_ptr);
+
+	
 }
