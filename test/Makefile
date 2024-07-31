@@ -25,6 +25,7 @@ RM = rm -rf
 SRC =	./main.c \
 		../src/raycasting/DDA_algo.c \
 		../src/raycasting/DDA_helpers.c \
+		../src/deltatime.c \
 
 
 # ----RULES---------------------------------------------------------------------
