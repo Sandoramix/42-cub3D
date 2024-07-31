@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/31 17:08:35 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/31 17:45:25 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_map_info
 	int		**mtxint;
 	double	rows_mtx;
 	double	cols_mtx;
+
+	char	**file_content;
 }	t_map;
 
 // "GLOBAL" program's structure.
