@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 15:46:08 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/31 17:12:55 by odudniak         ###   ########.fr       */
+/*   Created: 2024/07/31 17:11:29 by odudniak          #+#    #+#             */
+/*   Updated: 2024/07/31 17:13:37 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-void	parse(t_var *game, int ac, char **av)
+int	cleanup(t_var *game, bool should_exit, int statuscode)
 {
 	(void)game;
-	(void)ac;
-	(void)av;
+	if (should_exit)
+		exit(statuscode);
+	return (statuscode);
 }
