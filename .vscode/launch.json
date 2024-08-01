@@ -14,7 +14,7 @@
 			// PROGRAM ARGUMENTS SEPARATED BY COMMA
 			"args": [],
 			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
+			"cwd": "${workspaceFolder}/test"		,
 			// IF YOU NEED ADD SOME EXTRA `ENV` VARIABLES
 			"environment": [
 			],
