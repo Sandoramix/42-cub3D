@@ -70,17 +70,18 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end) {
 static void DDA_core_logic(t_var *game , int x)
 {
 	calc_initial_step_intial_raylen(game);
-	while (!game->dda_helper.hit_wall)
+	game->dda_helper.hit_wall = 0;
+	game->dda_helper.side = 0;
+	while (game->dda_helper.hit_wall == 0)
 	{
 		increase_raylen(game);
 		if (game->mapinfo.mtxint[game->dda_helper.mapX][game->dda_helper.mapY] > 0)
-			game->dda_helper.hit_wall = 1;	
+			game->dda_helper.hit_wall = 1;
 	}
 	calc_distance_from_wall(game);
-	game->dda_helper.lineHeight = (game->mapinfo.rows_mtx * TILE_SIZE) / game->dda_helper.perpWallDist;
+	game->dda_helper.lineHeight = (int)(game->dda_helper.screenSize / game->dda_helper.perpWallDist);
 	calc_perspective(game);
 
-	/* draw_minimap_rays(game); */
 	
 	int y = game->dda_helper.draw_start;
 	int print_every_tot_line = 6;
@@ -97,38 +98,32 @@ static void DDA_core_logic(t_var *game , int x)
 
 static void get_multiplication_factor(t_var *game)
 {
-	// lunghezza da percorrere lungo il per spostarsi di 1 sull asse x e y, poi verranno confrontati per decidere dove
-	// fare il prossimo passo ("StepX/StepY")
-	game->dda_helper.deltaDistX = fabs(1 / game->dda_helper.rayDirX);
-	game->dda_helper.deltaDistY = fabs(1 / game->dda_helper.rayDirY);
+		game->dda_helper.deltaDistX = fabs(1 / game->dda_helper.rayDirX);
+		game->dda_helper.deltaDistY = fabs(1 / game->dda_helper.rayDirY);
 
 	//printf("deltaDistX, deltaDistY %f %f\n",game->dda_helper.deltaDistX, game->dda_helper.deltaDistY);
 }
 
 static void get_ray_direction(t_var *game, int pixel_pos_x)
 {
-	// right side of screen will get coordinate 1,
-	// center 0,
-	// left 	-1.
-	game->dda_helper.cameraX = 2 * pixel_pos_x / game->dda_helper.screenSize - 1;
-	
-	// direction of the ray
+	game->dda_helper.cameraX = (double)(2 * pixel_pos_x) / (double)game->dda_helper.screenSize - 1;
 	game->dda_helper.rayDirX = game->playerPos.dir_x + game->plane.x * game->dda_helper.cameraX;
 	game->dda_helper.rayDirY = game->playerPos.dir_y + game->plane.y * game->dda_helper.cameraX;
+	//printf("Angle of the ray: %f radians\n", atan2(game->dda_helper.rayDirY, game->dda_helper.rayDirX));
 }
 
 void calculate_DDA(t_var *game)
 {
-	game->dda_helper = (t_DDA){0};
 	int pixel_pos_x;
 
+	game->dda_helper = (t_DDA){0};
 	pixel_pos_x = 0;
-	game->dda_helper.screenSize = 1600;
-	game->dda_helper.mapX = (int)game->playerPos.pos_x;
-	game->dda_helper.mapY = (int)game->playerPos.pos_y;
+	game->dda_helper.screenSize = 1600.0;
 	while (pixel_pos_x < game->dda_helper.screenSize)
 	{
 		get_ray_direction(game, pixel_pos_x);
+		game->dda_helper.mapX = (int)game->playerPos.pos_x;
+		game->dda_helper.mapY = (int)game->playerPos.pos_y;
 		get_multiplication_factor(game);
 		DDA_core_logic(game,  pixel_pos_x);
 		pixel_pos_x++;
