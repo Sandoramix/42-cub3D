@@ -37,63 +37,6 @@ int **cmtxtoimtx(char **mtx, int col, int row)
 	return intMtx;
 }
 
-void get_starting_player_pos(t_playerPos *pos, int **mtx, int col, int row)
-{
-	int counterRow;
-	int counterCol;
-
-	counterRow = 0;
-	counterCol = 0;
-	while (counterRow < row)
-	{
-		counterCol = 0;
-		while (counterCol < col)
-		{
-			if (mtx[counterRow][counterCol] != FLOOR && mtx[counterRow][counterCol] != WALL)
-			{
-				/*
-				bisogna controllare quale sia il carattere presente
-				e settare la player direction accordingly
-				pos->dir_x
-				pos->dir_y
-				*/
-				pos->pos_x = scaleUp(counterCol, TILE_SIZE);
-				pos->pos_y = scaleUp(counterRow, TILE_SIZE);
-			}
-			counterCol++;
-		}
-		counterRow++;
-	}
-	/**gestione errore se non viene trovato il carattere per il player */
-}
-
-int draw_circle(t_var *game, int radius)
-{
-	int dist = 0 , x = 0 , y = 0;
-    {
-        for (x = 0; x <= radius * 2; x++)
-        {
-            for (y = 0; y <= radius * 2; y++)
-            {
-                dist = sqrt((x - radius) * (x - radius) + (y - radius) * (y - radius));
-                {
-                    if (dist==radius)
-                    {
-                        mlx_pixel_put(game->mlx_ptr, game->win_ptr, x, y, 0xFF0000);
-                    }
-                    else
-                    {
-                     	mlx_pixel_put(game->mlx_ptr, game->win_ptr, x, y, 0xFF1818);
-                    }
-                }
-
-			}
-
-        }
-
-    }
-    return 0;
-}
 
 void draw_player_position(t_var *game)
 {
@@ -103,8 +46,6 @@ void draw_player_position(t_var *game)
 							game->playerPos.pos_x,\
 							game->playerPos.pos_y);
 }
-
-
 void draw_minimap_loop(t_var *game)
 {
 	t_point count;
@@ -127,36 +68,61 @@ void draw_minimap_loop(t_var *game)
 
 }
 
-/* void draw_mini_player_rays(t_var *game)
-{
-	drawline(game, game->playerPos, );
-} */
-
 
 int game_loop(t_var *game)
 {
-	deltatime(game);
- 	/*  draw_minimap_loop(game); 
+	delta_time(game);
+	
+ 	
+	
+	
+	/*  draw_minimap_loop(game); 
 	 draw_player_position(game);  */
+	/* printf("player pos x y %f %f\n", game->playerPos.pos_x, game->playerPos.pos_y); */
 
- 	calculate_DDA(game);
+	
+	/* printf("[LOOP] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y); */
 	return 1;
 }
 
 
 int key_press(int keycode, t_var *game)
-{	
-	printf("key pressed %d\n", keycode);
-	printf("[BEFORE] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y);
+{
+   /*  printf("key pressed %d\n", keycode);
+    printf("[BEFORE] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y); */
 	if (keycode == KEY_W)
-        game->playerPos.pos_y -= VELOCITY * game->deltatime; 
+        game->move.up = 1;
 	if (keycode == KEY_S)
-        game->playerPos.pos_y += VELOCITY * game->deltatime; 
+        game->move.down = 1;
 	if (keycode == KEY_A)
-        game->playerPos.pos_x -= VELOCITY * game->deltatime; 
+        game->move.left = 1;
 	if (keycode == KEY_D)
-		game->playerPos.pos_x += VELOCITY * game->deltatime;
-	printf("[AFTER] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y);
+        game->move.right = 1;
+
+	if (game->move.up)
+	    game->playerPos.pos_y -= VELOCITY ;
+	if (game->move.down)
+	    game->playerPos.pos_y += VELOCITY ;
+	if (game->move.left)
+	    game->playerPos.pos_x -= VELOCITY ;
+	if (game->move.right)
+        game->playerPos.pos_x += VELOCITY ;
+	calculate_DDA(game);
+	mlx_clear_window(game->mlx_ptr, game->win_ptr);
+   /*  printf("[AFTER] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y); */
+    return 0;
+}
+
+int key_release(int keycode, t_var *game)
+{
+    if (keycode == KEY_W)
+        game->move.up = 0;
+    if (keycode == KEY_S)
+        game->move.down = 0;
+    if (keycode == KEY_A)
+        game->move.left = 0;
+    if (keycode == KEY_D)
+        game->move.right = 0;
     return 0;
 }
 
@@ -196,8 +162,8 @@ int	parsing(t_var *game)
 
 	//get_starting_player_pos(&game->playerPos, game->mapinfo.mtxint, game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
 	
-	game->playerPos.pos_x = 12;
-	game->playerPos.pos_y = 12;
+	game->playerPos.pos_x = 10;
+	game->playerPos.pos_y = 4;
 
 
 	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->playerPos.pos_x, game->playerPos.pos_y);
@@ -243,8 +209,9 @@ int main()
 	{
 		
 		mlx_hook(game.win_ptr, KeyPress, KeyPressMask, &key_press, &game);
+        mlx_hook(game.win_ptr, KeyRelease, KeyReleaseMask, &key_release, &game);
 		mlx_hook(game.win_ptr, 17, 0, mlx_loop_end, game.mlx_ptr);
-		mlx_loop_hook(game.mlx_ptr, game_loop, &game);
+		mlx_loop_hook(game.mlx_ptr, &game_loop, &game);
 		/* game_loop(&game); */
 		mlx_loop(game.mlx_ptr);
 	}
