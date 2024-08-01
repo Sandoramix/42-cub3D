@@ -28,6 +28,10 @@
 # define KEY_A XK_a
 # define KEY_S XK_s
 # define KEY_D XK_d
+
+
+# define KEY_LEFT XK_Left
+# define KEY_RIGHT XK_Right
 //------------------------------------------------------------------------------
 
 # define MAP_WHITELIST "01 NEWS"
@@ -44,11 +48,11 @@
 # define WALL 1
 
 /*HARD CODED VALUES (testing)*/
-# define VELOCITY 0.1
+# define VELOCITY 0.06
 # define FOV 66
 
 
 
-# define PLAYER_ANGLE 0
+# define PLAYER_ANGLE 270
 
 #endif
