@@ -15,13 +15,27 @@
 
 # include <cub3D.h>
 
-typedef struct s_playerPos
+enum e_rotation_dir
 {
-	double	pos_x;
-	double	pos_y;
+	ROTAT_DIR_RIGHT,
+	ROTAT_DIR_LEFT
+};
+
+typedef struct s_player_pos
+{
+	double	x;
+	double	y;
 	double	dir_x;
 	double	dir_y;
-}	t_playerPos;
+
+	double positive_cos_rot_speed;
+	double positive_sin_rot_speed;
+	double neg_cos_rot_speed_pos;
+	double neg_sin_rot_speed_pos;
+
+
+
+}	t_player_pos;
 
 typedef struct s_dpoint
 {
@@ -46,28 +60,28 @@ typedef struct s_sprite
 // TODO NORMINETTE (NAMES: snake case)
 typedef struct s_DDA
 {
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	double	screenSize;
+	double	camera_x;
+	double	dir_rayx;
+	double	dir_rayy;
+	int	screen_size_w_px;
+	int	screen_size_h_px;
 
-	double	sideDistX;
-	double	sideDistY;
-	double	pixelPosX;
-	double	deltaDistX;
-	double	deltaDistY;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
 
-	double	perpWallDist;
-	double	lineHeight;
-	double	draw_start;
-	double	draw_end;
+	double	wall_dist;
+	double	line_h_px;
+	double	draw_start_px;
+	double	draw_end_px;
 
-	int		stepX;
-	int		stepY;
-	int		mapX;
-	int		mapY;
+	int		step_x;
+	int		ste_y;
+	int		map_x;
+	int		map_y;
 
-	int		hit_wall;
+	int		hit;
 	int		side;
 
 }	t_DDA;
@@ -89,6 +103,9 @@ typedef struct s_movement
 	int down;
 	int right;
 	int left;
+
+	int rot_left;
+	int rot_right;
 } t_movement;
 
 // "GLOBAL" program's structure.
@@ -97,9 +114,9 @@ typedef struct s_var
 	void			*mlx_ptr;
 	void			*win_ptr;
 
-	t_playerPos		playerPos;
+	t_player_pos		player_pos;
 	t_movement		move;
-	t_DDA			dda_helper;
+	t_DDA			dda;
 	t_sprite		sprite;
 	t_dpoint		plane;
 	t_map			mapinfo;

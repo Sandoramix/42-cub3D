@@ -43,10 +43,6 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end) {
 		counter++;
 	}
 
-
-
-
-
    /*  printf("Drawing line from (%f, %f) to (%f, %f)\n", start.x, start.y, end.x, end.y); */
 }
 
@@ -56,10 +52,10 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end) {
     double angle;
 
 	angle = -FOV/2;
-    start = (t_dpoint){game->playerPos.pos_x + game->plane.x, game->playerPos.pos_y + game->plane.y };
+    start = (t_dpoint){game->player_pos.x + game->plane.x, game->player_pos.y + game->plane.y };
 	while(angle <= FOV/2)
 	{
-		result = calculate_point(&start, angle, game->dda_helper.perpWallDist);
+		result = calculate_point(&start, angle, game->dda.wall_dist);
         draw_line(game, start, result);
 		angle++;
 	}
@@ -67,65 +63,142 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end) {
         
 }
 
-static void DDA_core_logic(t_var *game , int x)
-{
-	calc_initial_step_intial_raylen(game);
-	game->dda_helper.hit_wall = 0;
-	game->dda_helper.side = 0;
-	while (game->dda_helper.hit_wall == 0)
-	{
-		increase_raylen(game);
-		if (game->mapinfo.mtxint[game->dda_helper.mapX][game->dda_helper.mapY] > 0)
-			game->dda_helper.hit_wall = 1;
-	}
-	calc_distance_from_wall(game);
-	game->dda_helper.lineHeight = (int)(game->dda_helper.screenSize / game->dda_helper.perpWallDist);
-	calc_perspective(game);
-
-	
-	int y = game->dda_helper.draw_start;
-	int print_every_tot_line = 6;
-	if (x % print_every_tot_line == 0)
-	{
-		while (y <= game->dda_helper.draw_end)
-		{
-			mlx_pixel_put(game->mlx_ptr, game->win_ptr, x, y, 0xFF0000);
-			y++;
-		}
-	}
-
-}
-
 static void get_multiplication_factor(t_var *game)
 {
-		game->dda_helper.deltaDistX = fabs(1 / game->dda_helper.rayDirX);
-		game->dda_helper.deltaDistY = fabs(1 / game->dda_helper.rayDirY);
+	game->dda.delta_dist_x = fabs(1 / game->dda.dir_rayx);
+	game->dda.delta_dist_y = fabs(1 / game->dda.dir_rayy);
 
-	//printf("deltaDistX, deltaDistY %f %f\n",game->dda_helper.deltaDistX, game->dda_helper.deltaDistY);
+    // printf("delta_dist_x, delta_dist_y %f %f\n",game->dda.delta_dist_x, game->dda.delta_dist_y);
 }
 
 static void get_ray_direction(t_var *game, int pixel_pos_x)
 {
-	game->dda_helper.cameraX = (double)(2 * pixel_pos_x) / (double)game->dda_helper.screenSize - 1;
-	game->dda_helper.rayDirX = game->playerPos.dir_x + game->plane.x * game->dda_helper.cameraX;
-	game->dda_helper.rayDirY = game->playerPos.dir_y + game->plane.y * game->dda_helper.cameraX;
-	//printf("Angle of the ray: %f radians\n", atan2(game->dda_helper.rayDirY, game->dda_helper.rayDirX));
+	game->dda.camera_x = (double)(2 * pixel_pos_x) / (double)game->dda.screen_size_w_px - 1;
+	game->dda.dir_rayx = game->player_pos.dir_x + game->plane.x * game->dda.camera_x;
+	game->dda.dir_rayy = game->player_pos.dir_y + game->plane.y * game->dda.camera_x;
+	//printf("Angle of the ray: %f radians\n", atan2(game->dda.dir_rayy, game->dda.dir_rayx));
 }
 
-void calculate_DDA(t_var *game)
-{
-	int pixel_pos_x;
 
-	game->dda_helper = (t_DDA){0};
-	pixel_pos_x = 0;
-	game->dda_helper.screenSize = 1600.0;
-	while (pixel_pos_x < game->dda_helper.screenSize)
+void copy_player_pos(t_var *game)
+{
+	game->dda.map_x = (int)game->player_pos.x;
+	game->dda.map_y = (int)game->player_pos.y;
+}
+
+void set_up_dda_vars(t_var *game, int pixel_pos_x)
+{
+	copy_player_pos(game);
+	get_ray_direction(game, pixel_pos_x);
+	get_multiplication_factor(game);
+}
+
+void loop_until_hit_wall(t_var *game)
+{
+	game->dda.hit = 0;
+	game->dda.side = 0;
+	while (game->dda.hit == 0)
 	{
-		get_ray_direction(game, pixel_pos_x);
-		game->dda_helper.mapX = (int)game->playerPos.pos_x;
-		game->dda_helper.mapY = (int)game->playerPos.pos_y;
-		get_multiplication_factor(game);
-		DDA_core_logic(game,  pixel_pos_x);
+		increase_raylen(game);
+		if (game->mapinfo.mtxint[game->dda.map_x][game->dda.map_y] > 0)
+			game->dda.hit = 1;
+	}
+}
+
+void calc_relative_line_height(t_var *game)
+{
+	game->dda.line_h_px = (int)(game->dda.screen_size_w_px / game->dda.wall_dist);
+}
+
+void draw_walls(t_var *game, int pixel_pos_x)
+{
+	int y = game->dda.draw_start_px;
+	int print_every_tot_line = 6;
+	if (pixel_pos_x % print_every_tot_line == 0)
+	{
+		while (y <= game->dda.draw_end_px)
+		{
+			if (game->dda.side == 1)
+				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0xFF0000);
+			else
+				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0x0000FF);
+			y++;
+		}
+	}
+}
+
+void wall_casting(t_var *game, int pixel_pos_x)
+{
+	while (pixel_pos_x < game->dda.screen_size_w_px)
+	{
+		set_up_dda_vars(game, pixel_pos_x);
+		calc_initial_step_intial_raylen(game);
+		loop_until_hit_wall(game);
+		calc_distance_from_wall(game);
+		calc_relative_line_height(game);
+		put_line_h_in_perspective(game);
+		draw_walls(game, pixel_pos_x);
 		pixel_pos_x++;
 	}
+}
+
+
+ void floor_ceiling_casting(t_var *game)
+{
+	int pixel_pos_y;
+	pixel_pos_y = 0;
+	int pixel_pos_x;
+	pixel_pos_x = 0;
+
+	float rayDirX0;
+	float rayDirY0;
+	float rayDirX1;
+	float rayDirY1;
+	float posZ;
+	int p;
+	float rowDistance;
+	float floorStepX;
+    float floorStepY;
+	float floorX;
+    float floorY;
+	int cellX;
+	int cellY;
+	while(pixel_pos_y < game->dda.screen_size_h_px)
+	{
+		pixel_pos_x = 0;
+		rayDirX0 = game->player_pos.x  - game->player_pos.dir_x;
+    	rayDirY0 = game->player_pos.y  - game->player_pos.dir_y;
+    	rayDirX1 = game->player_pos.x  + game->player_pos.dir_x;
+    	rayDirY1 = game->player_pos.y + game->player_pos.dir_y;
+		p = pixel_pos_y -  game->dda.screen_size_h_px / 2;
+		posZ = 0.5 * game->dda.screen_size_h_px;
+		
+		rowDistance = posZ / p;
+		floorStepX = rowDistance * (rayDirX1 - rayDirX0) / game->dda.screen_size_w_px;
+		floorStepY = rowDistance * (rayDirY1 - rayDirY0) / game->dda.screen_size_w_px;
+		floorX = game->player_pos.x + rowDistance * rayDirX0;
+		floorY = game->player_pos.y + rowDistance * rayDirY0;
+		while(pixel_pos_x < game->dda.screen_size_w_px)
+		{	
+			cellX = (int)(floorX);
+        	cellY = (int)(floorY);
+			mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, pixel_pos_y, 0x181818);
+			pixel_pos_x++;
+		}
+		pixel_pos_y++;
+	}
+} 
+
+void raycasting(t_var *game)
+{
+	int pixel_pos_x;
+	pixel_pos_x = 0;
+
+	game->dda = (t_DDA){0};
+	
+	
+	game->dda.screen_size_w_px = 1600.0;
+	game->dda.screen_size_h_px = 1080.0;
+	floor_ceiling_casting(game);
+	wall_casting(game, pixel_pos_x); 
 }

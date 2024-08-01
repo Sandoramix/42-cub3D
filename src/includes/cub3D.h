@@ -25,11 +25,11 @@ void	parse(t_var *game, int ac, char **av);
 //------------------------------------------------------------------------------
 
 // RAYCASTING-------------------------------------------------------------------
-void	calculate_DDA(t_var *game);
+void	raycasting(t_var *game);
 void	calc_initial_step_intial_raylen(t_var *game);
 void	increase_raylen(t_var *game);
 void	calc_distance_from_wall(t_var *game);
-void	calc_perspective(t_var *game);
+void	put_line_h_in_perspective(t_var *game);
 //------------------------------------------------------------------------------
 
 double	delta_time(t_var *game);

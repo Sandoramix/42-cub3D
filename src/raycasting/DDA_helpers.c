@@ -4,61 +4,61 @@
 void calc_initial_step_intial_raylen(t_var *game)
 {
 
-	if (game->dda_helper.rayDirX < 0)
+	if (game->dda.dir_rayx < 0)
 	{
-		game->dda_helper.stepX = -1;
-		game->dda_helper.sideDistX = (game->playerPos.pos_x - game->dda_helper.mapX) * game->dda_helper.deltaDistX;
+		game->dda.step_x = -1;
+		game->dda.side_dist_x = (game->player_pos.x - game->dda.map_x) * game->dda.delta_dist_x;
 	}
 	else
 	{
-		game->dda_helper.stepX = 1;
-		game->dda_helper.sideDistX = (game->dda_helper.mapX + 1.0 - game->playerPos.pos_x) * game->dda_helper.deltaDistX;
+		game->dda.step_x = 1;
+		game->dda.side_dist_x = (game->dda.map_x + 1.0 - game->player_pos.x) * game->dda.delta_dist_x;
 	}
-	if (game->dda_helper.rayDirY < 0)
+	if (game->dda.dir_rayy < 0)
 	{
-		game->dda_helper.stepY = -1;
-		game->dda_helper.sideDistY = (game->playerPos.pos_y - game->dda_helper.mapY) * game->dda_helper.deltaDistY;
+		game->dda.ste_y = -1;
+		game->dda.side_dist_y = (game->player_pos.y - game->dda.map_y) * game->dda.delta_dist_y;
 	}
 	else
 	{
-		game->dda_helper.stepY = 1;
-		game->dda_helper.sideDistY = (game->dda_helper.mapY + 1.0 - game->playerPos.pos_y) * game->dda_helper.deltaDistY;
+		game->dda.ste_y = 1;
+		game->dda.side_dist_y = (game->dda.map_y + 1.0 - game->player_pos.y) * game->dda.delta_dist_y;
 	}
 }
 
 void increase_raylen(t_var *game)
 {
-	if (game->dda_helper.sideDistX < game->dda_helper.sideDistY)
+	if (game->dda.side_dist_x < game->dda.side_dist_y)
 	{
-		game->dda_helper.sideDistX += game->dda_helper.deltaDistX;
-		game->dda_helper.mapX += game->dda_helper.stepX;
-		game->dda_helper.side = 0;
+		game->dda.side_dist_x += game->dda.delta_dist_x;
+		game->dda.map_x += game->dda.step_x;
+		game->dda.side = 0;
 	}
 	else
 	{
-		game->dda_helper.sideDistY += game->dda_helper.deltaDistY;
-		game->dda_helper.mapY += game->dda_helper.stepY;
-		game->dda_helper.side = 1;
+		game->dda.side_dist_y += game->dda.delta_dist_y;
+		game->dda.map_y += game->dda.ste_y;
+		game->dda.side = 1;
 	}
 }
 
 void calc_distance_from_wall(t_var *game)
 {
-	if (game->dda_helper.side == 0)
-		game->dda_helper.perpWallDist = (game->dda_helper.sideDistX - game->dda_helper.deltaDistX);
+	if (game->dda.side == 0)
+		game->dda.wall_dist = (game->dda.side_dist_x - game->dda.delta_dist_x);
 	else
-		game->dda_helper.perpWallDist = (game->dda_helper.sideDistY - game->dda_helper.deltaDistY);
-
-	//printf("perpWallDistance = %f\n", game->dda_helper.perpWallDist);
-	
+		game->dda.wall_dist = (game->dda.side_dist_y - game->dda.delta_dist_y);
+	//printf("wall_distance = %f\n", game->dda.wall_dist);
 }
 
-void calc_perspective(t_var *game)
+void put_line_h_in_perspective(t_var *game)
 {
-	game->dda_helper.draw_start = (-game->dda_helper.lineHeight / 2.0) + ((game->mapinfo.rows_mtx * TILE_SIZE) / 2.0);
-	if (game->dda_helper.draw_start < 0)
-		game->dda_helper.draw_start = 0;
-	game->dda_helper.draw_end = (game->dda_helper.lineHeight / 2) + ((game->mapinfo.rows_mtx * TILE_SIZE) / 2);
-	if (game->dda_helper.draw_end >= game->mapinfo.rows_mtx * TILE_SIZE)
-		game->dda_helper.draw_end = game->mapinfo.rows_mtx * TILE_SIZE - 1;
+	game->dda.draw_start_px = (-game->dda.line_h_px / 2.0) + ((game->mapinfo.rows_mtx * TILE_SIZE) / 2.0);
+	if (game->dda.draw_start_px < 0)
+		game->dda.draw_start_px = 0;
+	game->dda.draw_end_px = (game->dda.line_h_px / 2) + ((game->mapinfo.rows_mtx * TILE_SIZE) / 2);
+	if (game->dda.draw_end_px >= game->mapinfo.rows_mtx * TILE_SIZE)
+		game->dda.draw_end_px = game->mapinfo.rows_mtx * TILE_SIZE - 1;
+
+	//printf("draw start / end %f %f\n", game->dda.draw_start_px ,game->dda.draw_end_px );
 }
