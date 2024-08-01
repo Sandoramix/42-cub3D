@@ -43,8 +43,8 @@ void draw_player_position(t_var *game)
 	 mlx_put_image_to_window(game->mlx_ptr,\
 	 						game->win_ptr,\
 							game->sprite.mini_player,\
-							game->playerPos.pos_x,\
-							game->playerPos.pos_y);
+							game->player_pos.x,\
+							game->player_pos.y);
 }
 void draw_minimap_loop(t_var *game)
 {
@@ -71,25 +71,45 @@ void draw_minimap_loop(t_var *game)
 
 int game_loop(t_var *game)
 {
-	delta_time(game);
-	
- 	
-	
-	
-	/*  draw_minimap_loop(game); 
-	 draw_player_position(game);  */
-	/* printf("player pos x y %f %f\n", game->playerPos.pos_x, game->playerPos.pos_y); */
+	(void)game;
+	return 1;
+}
+
+void rotate_camera(t_var *game, int rotation_dir)
+{
+	double old_dir_x;
+	double old_plane_x;
 
 	
-	/* printf("[LOOP] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y); */
-	return 1;
+	if (rotation_dir == ROTAT_DIR_RIGHT)
+	{
+		old_dir_x = game->player_pos.dir_x;
+		game->player_pos.dir_x = game->player_pos.dir_x * game->player_pos.neg_cos_rot_speed_pos \
+		- game->player_pos.dir_y * game->player_pos.neg_sin_rot_speed_pos; 
+		game->player_pos.dir_y = old_dir_x * game->player_pos.neg_sin_rot_speed_pos + game->player_pos.dir_y * game->player_pos.neg_cos_rot_speed_pos;
+		old_plane_x = game->plane.x;
+		game->plane.x = game->plane.x  * game->player_pos.neg_cos_rot_speed_pos - game->plane.y *  game->player_pos.neg_sin_rot_speed_pos;
+		game->plane.y = old_plane_x *  game->player_pos.neg_sin_rot_speed_pos + game->plane.y * game->player_pos.neg_cos_rot_speed_pos; 
+	}
+	else
+	{
+		old_dir_x = game->player_pos.dir_x;
+		game->player_pos.dir_x = game->player_pos.dir_x * game->player_pos.positive_cos_rot_speed \
+		- game->player_pos.dir_y * game->player_pos.positive_sin_rot_speed; 
+		game->player_pos.dir_y = old_dir_x * game->player_pos.positive_sin_rot_speed + game->player_pos.dir_y * game->player_pos.positive_cos_rot_speed;
+		old_plane_x = game->plane.x;
+		game->plane.x = game->plane.x  * game->player_pos.positive_cos_rot_speed - game->plane.y *  game->player_pos.positive_sin_rot_speed;
+		game->plane.y = old_plane_x *  game->player_pos.positive_sin_rot_speed + game->plane.y * game->player_pos.positive_cos_rot_speed; 
+	}
+
 }
 
 
 int key_press(int keycode, t_var *game)
 {
    /*  printf("key pressed %d\n", keycode);
-    printf("[BEFORE] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y); */
+    printf("[BEFORE] player position(%f, %f)\n", game->player_pos.x, game->player_pos.y); */
+	mlx_clear_window(game->mlx_ptr, game->win_ptr);
 	if (keycode == KEY_W)
         game->move.up = 1;
 	if (keycode == KEY_S)
@@ -98,18 +118,31 @@ int key_press(int keycode, t_var *game)
         game->move.left = 1;
 	if (keycode == KEY_D)
         game->move.right = 1;
-
+	/*check rotazione*/
+	if (keycode == XK_Left)
+        game->move.rot_left = 1;
+	if (keycode == XK_Right)
+        game->move.rot_right = 1;
+	/*movimento */
 	if (game->move.up)
-	    game->playerPos.pos_y -= VELOCITY ;
+	    game->player_pos.y -= VELOCITY /* * game->deltatime  */;
 	if (game->move.down)
-	    game->playerPos.pos_y += VELOCITY ;
+	    game->player_pos.y += VELOCITY /* * game->deltatime  */;
 	if (game->move.left)
-	    game->playerPos.pos_x -= VELOCITY ;
+	    game->player_pos.x -= VELOCITY /* * game->deltatime  */;
 	if (game->move.right)
-        game->playerPos.pos_x += VELOCITY ;
-	calculate_DDA(game);
-	mlx_clear_window(game->mlx_ptr, game->win_ptr);
-   /*  printf("[AFTER] player position(%f, %f)\n", game->playerPos.pos_x, game->playerPos.pos_y); */
+        game->player_pos.x += VELOCITY /* * game->deltatime  */;
+	/**direzione */
+	if (game->move.rot_left)
+		rotate_camera(game , ROTAT_DIR_LEFT);
+	if (game->move.rot_right)
+		rotate_camera(game , ROTAT_DIR_RIGHT);
+
+
+	raycasting(game);
+	 game->move.rot_left = 0;
+	 game->move.rot_right = 0;
+   /*  printf("[AFTER] player position(%f, %f)\n", game->player_pos.x, game->player_pos.y); */
     return 0;
 }
 
@@ -134,11 +167,11 @@ char **read_file()
 	int		fd;
 
 	
-	if(!file_exists("../assets/maps/mappa.txt"))
+	if(!file_exists("../assets/maps/mappa.cub"))
 	{
 		/*messaggio errore  e clean up*/
 	}
-	fd = open("../assets/maps/mappa.txt", O_RDONLY);
+	fd = open("../assets/maps/mappa.cub", O_RDONLY);
 	/*check fd*/
 	mtx = ft_readfile(fd, false);
 	return (mtx);
@@ -160,19 +193,19 @@ int	parsing(t_var *game)
 		/*gestire errore*/
 	}
 
-	//get_starting_player_pos(&game->playerPos, game->mapinfo.mtxint, game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
+	//get_starting_player_pos(&game->player_pos, game->mapinfo.mtxint, game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
 	
-	game->playerPos.pos_x = 10;
-	game->playerPos.pos_y = 4;
+	game->player_pos.x = 10;
+	game->player_pos.y = 4;
 
 
-	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->playerPos.pos_x, game->playerPos.pos_y);
+	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player_pos.x, game->player_pos.y);
 	
 	/*gestire direzione il player is facing in base al parsing*/
-	game->playerPos.dir_x = cos(PLAYER_ANGLE);
-	game->playerPos.dir_y = sin(PLAYER_ANGLE);
+	game->player_pos.dir_x = cos(PLAYER_ANGLE);
+	game->player_pos.dir_y = sin(PLAYER_ANGLE);
 
-	printf("player dir %f, %f\n", game->playerPos.dir_x, game->playerPos.dir_y);
+	printf("player dir %f, %f\n", game->player_pos.dir_x, game->player_pos.dir_y);
 
 	game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
 	game->plane.y = 0.66; 	// offset di 0.66unita sull asse delle Y
@@ -182,8 +215,15 @@ int	parsing(t_var *game)
 	game->sprite.mini_player_w = MINIMAP_TILE_SIZE;
 	game->sprite.mini_player_h = MINIMAP_TILE_SIZE;
 
+    double rotSpeed = delta_time(game) + 0.05; //the constant value is in radians/second
+	printf("rotation speed %f\n", rotSpeed);
+	game->player_pos.positive_cos_rot_speed = cos(rotSpeed);
+	game->player_pos.positive_sin_rot_speed = sin(rotSpeed);
+	game->player_pos.neg_cos_rot_speed_pos = cos(-rotSpeed);
+	game->player_pos.neg_sin_rot_speed_pos = sin(-rotSpeed);;
+
 	game->mlx_ptr = mlx_init();
-	game->win_ptr = mlx_new_window(game->mlx_ptr, 1600, 900, "UrMom");
+	game->win_ptr = mlx_new_window(game->mlx_ptr, 1600, 1080, "UrMom");
 
 
 
@@ -205,16 +245,16 @@ int main()
 
 	game = (struct s_var){0};
 	
-	if (parsing(&game))
-	{
-		
+	parsing(&game);
+	
+		raycasting(&game);
 		mlx_hook(game.win_ptr, KeyPress, KeyPressMask, &key_press, &game);
         mlx_hook(game.win_ptr, KeyRelease, KeyReleaseMask, &key_release, &game);
 		mlx_hook(game.win_ptr, 17, 0, mlx_loop_end, game.mlx_ptr);
 		mlx_loop_hook(game.mlx_ptr, &game_loop, &game);
 		/* game_loop(&game); */
 		mlx_loop(game.mlx_ptr);
-	}
+
 
 	
 }
