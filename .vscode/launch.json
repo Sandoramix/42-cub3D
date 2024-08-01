@@ -12,7 +12,7 @@
 			// PROGRAM'S ABSOLUTE PATH (LEAVE ${workspaceFolder} FOR SIMPLICITY)
 			"program": "${workspaceFolder}/test/test.cub3D",
 			// PROGRAM ARGUMENTS SEPARATED BY COMMA
-			"args": [],
+			"args": ["./maps/mappa.cub"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}/test"		,
 			// IF YOU NEED ADD SOME EXTRA `ENV` VARIABLES

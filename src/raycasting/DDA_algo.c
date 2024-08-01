@@ -113,15 +113,15 @@ void calc_relative_line_height(t_var *game)
 void draw_walls(t_var *game, int pixel_pos_x)
 {
 	int y = game->dda.draw_start_px;
-	int print_every_tot_line = 6;
+	int print_every_tot_line = 2;
 	if (pixel_pos_x % print_every_tot_line == 0)
 	{
 		while (y <= game->dda.draw_end_px)
 		{
 			if (game->dda.side == 1)
-				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0xFF0000);
+				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0XFF0000);
 			else
-				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0x0000FF);
+				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0X0000FF);
 			y++;
 		}
 	}
@@ -150,7 +150,7 @@ void wall_casting(t_var *game, int pixel_pos_x)
 	int pixel_pos_x;
 	pixel_pos_x = 0;
 
-	float rayDirX0;
+/* 	float rayDirX0;
 	float rayDirY0;
 	float rayDirX1;
 	float rayDirY1;
@@ -160,13 +160,13 @@ void wall_casting(t_var *game, int pixel_pos_x)
 	float floorStepX;
     float floorStepY;
 	float floorX;
-    float floorY;
-	int cellX;
-	int cellY;
+    float floorY; */
+/* 	int cellX;
+	int cellY; */
 	while(pixel_pos_y < game->dda.screen_size_h_px)
 	{
 		pixel_pos_x = 0;
-		rayDirX0 = game->player_pos.x  - game->player_pos.dir_x;
+/* 		rayDirX0 = game->player_pos.x  - game->player_pos.dir_x;
     	rayDirY0 = game->player_pos.y  - game->player_pos.dir_y;
     	rayDirX1 = game->player_pos.x  + game->player_pos.dir_x;
     	rayDirY1 = game->player_pos.y + game->player_pos.dir_y;
@@ -177,12 +177,12 @@ void wall_casting(t_var *game, int pixel_pos_x)
 		floorStepX = rowDistance * (rayDirX1 - rayDirX0) / game->dda.screen_size_w_px;
 		floorStepY = rowDistance * (rayDirY1 - rayDirY0) / game->dda.screen_size_w_px;
 		floorX = game->player_pos.x + rowDistance * rayDirX0;
-		floorY = game->player_pos.y + rowDistance * rayDirY0;
+		floorY = game->player_pos.y + rowDistance * rayDirY0; */
 		while(pixel_pos_x < game->dda.screen_size_w_px)
 		{	
-			cellX = (int)(floorX);
-        	cellY = (int)(floorY);
-			mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, pixel_pos_y, 0x181818);
+/* 			cellX = (int)(floorX);
+        	cellY = (int)(floorY); */
+			mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, pixel_pos_y, 0xa1a1a1);
 			pixel_pos_x++;
 		}
 		pixel_pos_y++;
@@ -192,13 +192,7 @@ void wall_casting(t_var *game, int pixel_pos_x)
 void raycasting(t_var *game)
 {
 	int pixel_pos_x;
-	pixel_pos_x = 0;
-
-	game->dda = (t_DDA){0};
-	
-	
-	game->dda.screen_size_w_px = 1600.0;
-	game->dda.screen_size_h_px = 1080.0;
+	pixel_pos_x = 0;	
 	floor_ceiling_casting(game);
 	wall_casting(game, pixel_pos_x); 
 }

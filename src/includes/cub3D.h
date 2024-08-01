@@ -34,7 +34,19 @@ void	put_line_h_in_perspective(t_var *game);
 
 double	delta_time(t_var *game);
 
-// MAIN LOGIC ------------------------------------------------------------------
-void    game_start(t_var *game);
+// MLX CONFIGURATION -----------------------------------------------------------
+void    mlx_configuration(t_var *game);
+//------------------------------------------------------------------------------
+
+// EVENTS HANDLING--------------------------------------------------------------
+int game_loop(t_var *game);
+void rotate_camera(t_var *game, int rotation_dir);
+int key_press(int keycode, t_var *game);
+int key_release(int keycode, t_var *game);
+
+
+
+
+//--------------------------------------------------------------------------------
 
 #endif

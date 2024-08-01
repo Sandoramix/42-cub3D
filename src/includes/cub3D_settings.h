@@ -48,7 +48,7 @@
 # define WALL 1
 
 /*HARD CODED VALUES (testing)*/
-# define VELOCITY 0.06
+# define VELOCITY 0.2
 # define FOV 66
 
 
