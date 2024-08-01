@@ -44,16 +44,22 @@ static	t_state parse_content(t_var *game)
 	return (OK);
 }
 
-t_state	parse(t_var *game, int ac, char **av)
+
+
+void	parse(t_var *game, int ac, char **av)
 {
 	int		file_fd;
 
 	file_fd = validate_path(game, ac, av);
 	game->mapinfo.file_content = ft_readfile(file_fd, false);
 	close(file_fd);
+	// c erano dei conflicting types con il .h (void/t_state) 
 	if (!game->mapinfo.file_content)
-		return (ft_perror("Error: file is empty\n", av[1]),
-			cleanup(game, true, 1), KO);
+	{
+		ft_perror("Error: file is empty\n", av[1]),
+		cleanup(game, true, 1);
+		//return (KO)
+	}
 	parse_content(game);
-	return (OK);
+	//return (OK);
 }
