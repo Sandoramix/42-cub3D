@@ -34,4 +34,7 @@ void	calc_perspective(t_var *game);
 
 double	delta_time(t_var *game);
 
+// MAIN LOGIC ------------------------------------------------------------------
+void    game_start(t_var *game);
+
 #endif

@@ -18,5 +18,13 @@ int	main(int ac, char **av)
 
 	game = (t_var){0};
 	parse(&game, ac, av);
+	/**
+	 * mlx inizializzazione (finestra, sprite, hook)
+	 * 
+	 * init_game(first world renderization(DDA))
+	 * game_starts()
+	 */
+	game_start(&game);
+
 	return (0);
 }
