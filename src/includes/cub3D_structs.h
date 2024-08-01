@@ -83,6 +83,14 @@ typedef struct s_map_info
 	char	**file_content;
 }	t_map;
 
+typedef struct s_movement
+{
+	int up;
+	int down;
+	int right;
+	int left;
+} t_movement;
+
 // "GLOBAL" program's structure.
 typedef struct s_var
 {
@@ -90,6 +98,7 @@ typedef struct s_var
 	void			*win_ptr;
 
 	t_playerPos		playerPos;
+	t_movement		move;
 	t_DDA			dda_helper;
 	t_sprite		sprite;
 	t_dpoint		plane;

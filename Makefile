@@ -22,11 +22,12 @@ RM = rm -rf
 # ----SOURCE-FILES--------------------------------------------------------------
 
 SRC = ./main.c \
-	./src/cleanup.c \
-	./src/deltatime.c \
-	./src/parsing/parse.c \
-	./src/raycasting/DDA_algo.c \
-	./src/raycasting/DDA_helpers.c
+        ./src/cleanup.c \
+        ./src/deltatime.c \
+        ./src/game_start.c \
+        ./src/parsing/parse.c \
+        ./src/raycasting/DDA_algo.c \
+        ./src/raycasting/DDA_helpers.c
 
 
 # ----RULES---------------------------------------------------------------------
