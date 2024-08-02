@@ -6,7 +6,7 @@ PNAME = $(shell echo -n ${NAME} | tr 'a-z' 'A-Z')
 
 # -----VARIABLES-DECLARATIONS-+-OVVERRIDES--------------------------------------
 
-DEBUG_VALUE=1
+DEBUG_VALUE=0
 
 ROOTDIR=./src
 LIBFTX_DIR=$(ROOTDIR)/libftx
@@ -14,7 +14,8 @@ MLX_DIR = $(ROOTDIR)/minilibx
 
 CC = cc
 INCLUDES = -I$(ROOTDIR)/includes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR)
-MLX_FLAGS = -L$(MLX_DIR) -lmlx_$(shell uname) -lXext -lX11
+MLX_NAME = mlx_$(shell uname)
+MLX_FLAGS = -L$(MLX_DIR) -l$(MLX_NAME) -lXext -lX11
 CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE)
 
 RM = rm -rf
@@ -40,6 +41,7 @@ debug:
 
 $(NAME): $(SRC)
 	@$(MAKE) -C $(LIBFTX_DIR)
+	if [ ! -f $(MLX_DIR)/lib$(MLX_NAME).a ] && [ ! -d $(MLX_DIR) ] ; then $(MAKE) download; fi
 	@$(MAKE) -sC $(MLX_DIR) 1>/dev/null 2>/dev/null && echo "$(GREEN)[MLX]:\t\tLIBRARY CREATED"
 	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) -L$(LIBFTX_DIR) -lft $(MLX_FLAGS) -lm
 	@echo "$(GREEN)[$(PNAME)]:\tPROGRAM CREATED$(R)"
@@ -52,13 +54,16 @@ clean:
 fclean: clean
 	@$(MAKE) -C $(LIBFTX_DIR) fclean
 	@$(RM) $(NAME)
-	@$(RM) $(MLX_DIR)
 	@echo "$(BLUE)[$(PNAME)]:\tPROGRAM DELETED$(R)"
 
-re: fclean download all
+re: fclean all
 re-debug: fclean debug
 
+re-force: fclean delete-mlx download all
+
 # ----UTILS---------------------------------------------------------------------
+delete-mlx:
+	@$(RM) $(MLX_DIR)
 
 VALGRIND=@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --tool=memcheck --keep-debuginfo=yes
 # FOR FD 		TRACKING: --track-fds=yes
@@ -68,14 +73,14 @@ valgrind: debug
 	$(VALGRIND) ./$(NAME)
 
 download:
-	@wget https://cdn.intra.42.fr/document/document/25837/minilibx-linux.tgz
-	@tar -xf minilibx-linux.tgz
-	@mv minilibx-linux $(ROOTDIR)/minilibx
-	@$(RM) minilibx-linux.tgz*
+	wget https://cdn.intra.42.fr/document/document/25837/minilibx-linux.tgz || (echo "$(RED)SOMETHING WENT WRONG WITH MLX LINK. PLEASE UPDATE IT$(R)"; exit 1)
+	tar -xf minilibx-linux.tgz
+	mv minilibx-linux $(ROOTDIR)/minilibx
+	$(RM) minilibx-linux.tgz*
 
 # ------------------------------------------------------------------------------
 
-.PHONY: all clean fclean re re-debug debug download test
+.PHONY: all clean fclean re re-debug debug download test re-force delete-mlx
 .SILENT:
 
 # ----COLORS--------------------------------------------------------------------
