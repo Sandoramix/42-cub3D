@@ -24,13 +24,13 @@
 		"${workspaceFolder}",
 		"${workspaceFolder}/src/includes",
 		"${workspaceFolder}/src/libs/libftx/includes",
-		"${workspaceFolder}/src/libs/mlx"
+		"${workspaceFolder}/src/libs/minilibx"
 	],
 	"C_Cpp.default.includePath": [
 		"${workspaceFolder}",
 		"${workspaceFolder}/src/includes",
 		"${workspaceFolder}/src/libs/libftx/includes",
-		"${workspaceFolder}/src/libs/mlx"
+		"${workspaceFolder}/src/libs/minilibx"
 	],
 	"C_Cpp.default.intelliSenseMode": "linux-clang-x64",
 }

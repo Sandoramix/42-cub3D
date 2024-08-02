@@ -30,10 +30,10 @@ SRC = ./main.c \
 	./src/events/mlx_config.c \
 	./src/messages/parse_error_msg.c \
 	./src/parsing/parse.c \
+	./src/parsing/parse_configurations.c \
+	./src/parsing/parse_utils.c \
 	./src/raycasting/DDA_algo.c \
 	./src/raycasting/DDA_helpers.c
-
-
 
 # ----RULES---------------------------------------------------------------------
 

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:46:08 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 19:35:46 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:51:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,60 +36,12 @@ static int	validate_map_filepath(t_var *game, int ac, char **av)
 	return (fd);
 }
 
-t_cnf	parse_identify_cnf(char *line)
-{
-	if (str_startswith(line, STR_FLOOR" "))
-		return (CNF_FLOOR);
-	if (str_startswith(line, STR_CEILING" "))
-		return (CNF_CEILING);
-	if (str_startswith(line, STR_WALL_NORD" "))
-		return (CNF_WALL_NORD);
-	if (str_startswith(line, STR_WALL_EAST" "))
-		return (CNF_WALL_EAST);
-	if (str_startswith(line, STR_WALL_WEST" "))
-		return (CNF_WALL_WEST);
-	if (str_startswith(line, STR_WALL_SOUTH" "))
-		return (CNF_WALL_SOUTH);
-	return (CNF_UNKNOWN);
-}
-
-static t_state	validate_config_line(t_var *game, char *line)
-{
-	(void)game;
-	(void)line;
-	return (OK);
-}
-
-static t_state	parse_configs(t_var *game)
-{
-	char	**filedata;
-	int		i;
-
-	i = -1;
-	filedata = game->mapinfo.file_content;
-	while (filedata[++i])
-	{
-		if (str_isblank(filedata[i]))
-			continue ;
-		if (!is_config_missing(game))
-		{
-			if (i > 0 && str_ilen(filedata[i - 1]) == 0)
-				return (OK);
-		}
-		else if (parse_identify_cnf(filedata[i]) == CNF_UNKNOWN)
-			return (ft_perror("Error: '%s': unknown configuration\n",
-					filedata[i]), cleanup(game, true, 1), KO);
-		validate_config_line(game, filedata[i]);
-	}
-	return (OK);
-}
-
 static t_state	parse_content(t_var *game)
 {
+	// TODO: configuration parsing (WIP)
 	parse_configs(game);
 	if (is_config_missing(game))
 		return (print_missing_config(game), cleanup(game, true, 1), KO);
-	// TODO: configuration parsing
 	// TODO: then map parsing
 	(void)game;
 	return (OK);

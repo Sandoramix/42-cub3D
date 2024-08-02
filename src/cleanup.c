@@ -6,11 +6,13 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:11:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/31 17:53:35 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:49:23 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
+
+// TODO: SHALL YOU FREE THE WORLD (and every malloc i've done)
 
 int	cleanup(t_var *game, bool should_exit, int statuscode)
 {

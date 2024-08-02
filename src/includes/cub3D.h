@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 19:34:59 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:39:38 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,19 @@
 
 // PARSING----------------------------------------------------------------------
 t_state	parse(t_var *game, int ac, char **av);
+t_state	parse_configs(t_var *game);
+// PARSING UTILS
+char	**get_config_pointed_str(t_var *game, t_cnf type);
+/**
+ * @brief Get a pointer of given type's configuration, it can be either
+ * `t_img *` or `t_rgb *`
+ */
+void	*get_config_pointed_data(t_var *game, t_cnf type);
+
+t_cnf	parse_identify_cnf(char *line);
+bool	parse_config_val_is_path(t_cnf type);
 //------------------------------------------------------------------------------
-//UTILS
+//GENERIC UTILS
 
 void	print_missing_config(t_var *game);
 bool	is_config_missing(t_var *game);
