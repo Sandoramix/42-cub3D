@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/31 17:20:56 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:53:03 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <cub3D_structs.h>
 
 // PARSING----------------------------------------------------------------------
-void	parse(t_var *game, int ac, char **av);
+t_state	parse(t_var *game, int ac, char **av);
 //------------------------------------------------------------------------------
 
 // RAYCASTING-------------------------------------------------------------------
@@ -35,18 +35,15 @@ void	put_line_h_in_perspective(t_var *game);
 double	delta_time(t_var *game);
 
 // MLX CONFIGURATION -----------------------------------------------------------
-void    mlx_configuration(t_var *game);
+void	mlx_configuration(t_var *game);
 //------------------------------------------------------------------------------
 
 // EVENTS HANDLING--------------------------------------------------------------
-int game_loop(t_var *game);
-void rotate_camera(t_var *game, int rotation_dir);
-int key_press(int keycode, t_var *game);
-int key_release(int keycode, t_var *game);
+int		game_loop(t_var *game);
+void	rotate_camera(t_var *game, int rotation_dir);
+int		key_press(int keycode, t_var *game);
+int		key_release(int keycode, t_var *game);
 
-
-
-
-//--------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 #endif

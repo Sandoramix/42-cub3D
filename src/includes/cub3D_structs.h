@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/31 17:45:25 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:33:37 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,12 @@ typedef struct s_player_pos
 	double	dir_x;
 	double	dir_y;
 
-	double positive_cos_rot_speed;
-	double positive_sin_rot_speed;
-	double neg_cos_rot_speed_pos;
-	double neg_sin_rot_speed_pos;
+	double	positive_cos_rot_speed;
+	double	positive_sin_rot_speed;
+	double	neg_cos_rot_speed_pos;
+	double	neg_sin_rot_speed_pos;
 
-
-
-}	t_player_pos;
+}	t_player;
 
 typedef struct s_dpoint
 {
@@ -56,15 +54,14 @@ typedef struct s_sprite
 	int		tile_sprite_h;
 }	t_sprite;
 
-
 // TODO NORMINETTE (NAMES: snake case)
 typedef struct s_DDA
 {
 	double	camera_x;
 	double	dir_rayx;
 	double	dir_rayy;
-	int	screen_size_w_px;
-	int	screen_size_h_px;
+	int		screen_size_w_px;
+	int		screen_size_h_px;
 
 	double	side_dist_x;
 	double	side_dist_y;
@@ -99,14 +96,51 @@ typedef struct s_map_info
 
 typedef struct s_movement
 {
-	int up;
-	int down;
-	int right;
-	int left;
+	int		up;
+	int		down;
+	int		right;
+	int		left;
 
-	int rot_left;
-	int rot_right;
-} t_movement;
+	int		rot_left;
+	int		rot_right;
+}	t_movement;
+
+//------------------------------------------------------------------------------
+typedef struct s_color
+{
+	t_uchar	red;
+	t_uchar	green;
+	t_uchar	blue;
+}	t_color;
+
+typedef union u_rgb
+{
+	t_color	color;
+	int		hex;
+}	t_rgb;
+
+typedef struct s_config
+{
+//SPRITES------------------------------
+	t_img	wall_nord;
+	char	*wall_nord_path;
+
+	t_img	wall_east;
+	char	*wall_east_path;
+
+	t_img	wall_west;
+	char	*wall_west_path;
+
+	t_img	wall_south;
+	char	*wall_south_path;
+//-------------------------------------
+
+	t_rgb	ceiling;
+	char	*ceiling_raw;
+
+	t_rgb	floor;
+	char	*floor_raw;
+}	t_config;
 
 // "GLOBAL" program's structure.
 typedef struct s_var
@@ -114,14 +148,16 @@ typedef struct s_var
 	void			*mlx_ptr;
 	void			*win_ptr;
 
-	t_player_pos		player_pos;
+	t_player		player_pos;
 	t_movement		move;
 	t_DDA			dda;
 	t_sprite		sprite;
 	t_dpoint		plane;
 	t_map			mapinfo;
 
+	t_config		config;
 
+	// OTHER
 	double			deltatime;
 }	t_var;
 
