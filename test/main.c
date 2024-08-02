@@ -136,7 +136,8 @@ char **read_file()
 void mlx_handling(t_var *game)
 {
 	game->mlx_ptr = mlx_init();
-	game->win_ptr = mlx_new_window(game->mlx_ptr, 1600, 1080, "UrMom");
+	 mlx_get_screen_size(game->mlx_ptr, &game->dda.screen_size_w_px, &game->dda.screen_size_h_px);
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->dda.screen_size_w_px, game->dda.screen_size_h_px, "UrMom");
 
 
 
@@ -185,8 +186,7 @@ void init_hardcoded_value(t_var *game)
 	game->player_pos.positive_sin_rot_speed = sin(rotSpeed);
 	game->player_pos.neg_cos_rot_speed_pos = cos(-rotSpeed);
 	game->player_pos.neg_sin_rot_speed_pos = sin(-rotSpeed);
-	game->dda.screen_size_w_px = 1600.0;
-	game->dda.screen_size_h_px = 1080.0;
+
 }
 
 void parsing(t_var *game)
@@ -214,9 +214,10 @@ int main(/* int ac, char **av */)
 	mlx_handling(&game);
 	init_hardcoded_value(&game); 
 	raycasting(&game);
+
 	mlx_hook(game.win_ptr, KeyPress, KeyPressMask, &key_press, &game);
     mlx_hook(game.win_ptr, KeyRelease, KeyReleaseMask, &key_release, &game);
 	mlx_hook(game.win_ptr, 17, 0, mlx_loop_end, game.mlx_ptr);
-	mlx_loop_hook(game.mlx_ptr, &game_loop, &game);
+	/* mlx_loop_hook(game.mlx_ptr, &game_loop, &game); */
 	mlx_loop(game.mlx_ptr);
 }
