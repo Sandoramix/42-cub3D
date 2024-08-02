@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 14:53:03 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:18:45 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@
 # include <cub3D_settings.h>
 # include <cub3D_structs.h>
 
+// TODO split each category in separate file if (it will) needed.
+
 // PARSING----------------------------------------------------------------------
 t_state	parse(t_var *game, int ac, char **av);
 //------------------------------------------------------------------------------
+//UTILS
 
+void	print_missing_config(t_var *game);
+bool	is_config_missing(t_var *game);
+//------------------------------------------------------------------------------
 // RAYCASTING-------------------------------------------------------------------
 void	raycasting(t_var *game);
 void	calc_initial_step_intial_raylen(t_var *game);

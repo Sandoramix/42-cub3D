@@ -9,8 +9,8 @@ PNAME = $(shell echo -n ${NAME} | tr 'a-z' 'A-Z')
 DEBUG_VALUE=0
 
 ROOTDIR=./src
-LIBFTX_DIR=$(ROOTDIR)/libftx
-MLX_DIR = $(ROOTDIR)/minilibx
+LIBFTX_DIR=$(ROOTDIR)/libs/libftx
+MLX_DIR = $(ROOTDIR)/libs/minilibx
 
 CC = cc
 INCLUDES = -I$(ROOTDIR)/includes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR)
@@ -23,13 +23,16 @@ RM = rm -rf
 # ----SOURCE-FILES--------------------------------------------------------------
 
 SRC = ./main.c \
-        ./src/cleanup.c \
-        ./src/deltatime.c \
-        ./src/events/events.c \
-        ./src/events/mlx_config.c \
-        ./src/parsing/parse.c \
-        ./src/raycasting/DDA_algo.c \
-        ./src/raycasting/DDA_helpers.c
+	./src/cleanup.c \
+	./src/conditionals.c \
+	./src/deltatime.c \
+	./src/events/events.c \
+	./src/events/mlx_config.c \
+	./src/messages/parse_error_msg.c \
+	./src/parsing/parse.c \
+	./src/raycasting/DDA_algo.c \
+	./src/raycasting/DDA_helpers.c
+
 
 
 # ----RULES---------------------------------------------------------------------
@@ -41,8 +44,8 @@ debug:
 
 $(NAME): $(SRC)
 	@$(MAKE) -C $(LIBFTX_DIR)
-	if [ ! -f $(MLX_DIR)/lib$(MLX_NAME).a ] && [ ! -d $(MLX_DIR) ] ; then $(MAKE) download; fi
-	@$(MAKE) -sC $(MLX_DIR) 1>/dev/null 2>/dev/null && echo "$(GREEN)[MLX]:\t\tLIBRARY CREATED"
+	if [ ! -f $(MLX_DIR)/lib$(MLX_NAME).a ] && [ ! -d $(MLX_DIR) ] ; then $(MAKE) download-mlx; fi
+	@$(MAKE) -sC $(MLX_DIR) 1>/dev/null 2>/dev/null && echo "$(GREEN)[MLX]:\t\tLIBRARY RE/CREATED"
 	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) -L$(LIBFTX_DIR) -lft $(MLX_FLAGS) -lm
 	@echo "$(GREEN)[$(PNAME)]:\tPROGRAM CREATED$(R)"
 	[ "$(strip $(DEBUG_VALUE))" = "0" ] || echo "$(RED)[$(PNAME)]:\tDEBUG MODE ENABLED$(R)"
@@ -59,12 +62,9 @@ fclean: clean
 re: fclean all
 re-debug: fclean debug
 
-re-force: fclean delete-mlx download all
+re-force: fclean delete-mlx download-mlx all
 
 # ----UTILS---------------------------------------------------------------------
-delete-mlx:
-	@$(RM) $(MLX_DIR)
-
 VALGRIND=@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --tool=memcheck --keep-debuginfo=yes
 # FOR FD 		TRACKING: --track-fds=yes
 # FOR CHILDREN	TRACKING: --trace-children=yes
@@ -72,15 +72,17 @@ valgrind: debug
 	clear
 	$(VALGRIND) ./$(NAME)
 
-download:
+download-mlx:
+	echo "$(BLUE) Downloading MLX...$(R)";
 	wget https://cdn.intra.42.fr/document/document/25837/minilibx-linux.tgz || (echo "$(RED)SOMETHING WENT WRONG WITH MLX LINK. PLEASE UPDATE IT$(R)"; exit 1)
 	tar -xf minilibx-linux.tgz
-	mv minilibx-linux $(ROOTDIR)/minilibx
+	mv minilibx-linux $(MLX_DIR)
 	$(RM) minilibx-linux.tgz*
-
+delete-mlx:
+	@$(RM) $(MLX_DIR)
 # ------------------------------------------------------------------------------
 
-.PHONY: all clean fclean re re-debug debug download test re-force delete-mlx
+.PHONY: all clean fclean re re-debug debug download-mlx test re-force delete-mlx
 .SILENT:
 
 # ----COLORS--------------------------------------------------------------------
