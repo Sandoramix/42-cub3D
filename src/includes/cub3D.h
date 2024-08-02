@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 18:18:45 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:36:15 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // TODO split each category in separate file if (it will) needed.
 
 // PARSING----------------------------------------------------------------------
-t_state	parse(t_var *game, int ac, char **av);
+t_state	parse(t_var *game, int ac, char **av, bool exit_on_error);
 //------------------------------------------------------------------------------
 //UTILS
 

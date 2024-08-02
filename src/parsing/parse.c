@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:46:08 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 18:17:34 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:35:57 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ static t_state	parse_configs(t_var *game)
 	return (OK);
 }
 
-static t_state	parse_content(t_var *game)
+static t_state	parse_content(t_var *game, bool exit_on_err)
 {
 	parse_configs(game);
 	if (is_config_missing(game))
-		return (print_missing_config(game), cleanup(game, true, 1), KO);
+		return (print_missing_config(game), cleanup(game, exit_on_err, 1), KO);
 	// TODO: configuration parsing
 	// TODO: then map parsing
 	(void)game;
 	return (OK);
 }
 
-t_state	parse(t_var *game, int ac, char **av)
+t_state	parse(t_var *game, int ac, char **av, bool exit_on_err)
 {
 	int		file_fd;
 
@@ -90,9 +90,9 @@ t_state	parse(t_var *game, int ac, char **av)
 	if (!game->mapinfo.file_content)
 	{
 		ft_perror("Error: file is empty\n", av[1]),
-		cleanup(game, true, 1);
+		cleanup(game, exit_on_err, 1);
 		return (KO);
 	}
-	parse_content(game);
+	parse_content(game, exit_on_err);
 	return (OK);
 }
