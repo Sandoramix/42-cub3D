@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:46:08 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 17:34:59 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:52:46 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,33 @@ t_cnf	parse_identify_cnf(char *line)
 	return (CNF_UNKNOWN);
 }
 
-//bool	is_config_missing(t_var *game)
-//{
-//	return (!game->sprites.wall_nord.xpm_path
-//		|| !game->sprites.wall_east.xpm_path
-//		|| !game->sprites.wall_west.xpm_path
-//		|| !game->sprites.wall_sud.xpm_path
-//		);
-//}
+bool	is_config_missing(t_var *game)
+{
+	return (!game->config.wall_nord_path
+		|| !game->config.wall_east_path
+		|| !game->config.wall_west_path
+		|| !game->config.wall_south_path
+		|| !game->config.ceiling_raw
+		|| !game->config.floor_raw);
+}
+
+void	print_missing_config(t_var *game)
+{
+	if (is_config_missing(game))
+		ft_perror("Error: missing configurations:\n");
+	if (!game->config.floor_raw)
+		ft_perror("- "STR_FLOOR" <color>\n");
+	if (!game->config.ceiling_raw)
+		ft_perror("- "STR_CEILING" <color>\n");
+	if (!game->config.wall_nord_path)
+		ft_perror("- "STR_WALL_NORD" <path>\n");
+	if (!game->config.wall_east_path)
+		ft_perror("- "STR_WALL_EAST" <path>\n");
+	if (!game->config.wall_west_path)
+		ft_perror("- "STR_WALL_WEST" <path>\n");
+	if (!game->config.wall_south_path)
+		ft_perror("- "STR_WALL_SOUTH" <path>\n");
+}
 
 static t_state	parse_configs(t_var *game)
 {
@@ -81,6 +100,8 @@ static t_state	parse_configs(t_var *game)
 static t_state	parse_content(t_var *game)
 {
 	parse_configs(game);
+	if (is_config_missing(game))
+		return (print_missing_config(game), cleanup(game, true, 1), KO);
 	// TODO: configuration parsing
 	// TODO: then map parsing
 	(void)game;
