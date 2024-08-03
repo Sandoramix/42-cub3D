@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:43:47 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:33:08 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:39:27 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	main(int ac, char **av)
 	init_hardcoded_value(&game); // TODO: WE CAN DO BETTER THAN THIS
 	mlx_configuration(&game);
 	//draw first frame
-	raycasting(&game);
+	rendering(&game);
 	mlx_loop(game.mlx);
 	return (0);
 }

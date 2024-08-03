@@ -49,8 +49,8 @@ bool	is_config_missing(t_var *game);
 t_state	load_xpm_image(t_var *game, t_img **img, char *path);
 //------------------------------------------------------------------------------
 // RAYCASTING-------------------------------------------------------------------
-void	raycasting(t_var *game);
-void 	init_raycasting(t_var *game, int pixel_pos_x);
+void	rendering(t_var *game);
+void 	init_rendering(t_var *game, int pixel_pos_x);
 void	increase_raylen(t_var *game);
 void	calc_distance_from_wall(t_var *game);
 void	put_line_h_in_perspective(t_var *game);
@@ -62,9 +62,8 @@ void 	loop_until_hit_wall(t_var *game);
 void 	draw_walls(t_var *game, int pixel_pos_x);
 void 	draw_rectangle(t_var *game, t_point start, t_point end, int color);
 void 	draw_line(t_var *game, t_dpoint start, t_dpoint end);
-void 	drw_img_buff(t_var *game, int x, int y, int color);
+void 	fill_img_buffer(t_var *game, int x, int y, int color);
 //------------------------------------------------------------------------------
-
 
 double	delta_time(t_var *game);
 
@@ -72,13 +71,20 @@ double	delta_time(t_var *game);
 void	mlx_configuration(t_var *game);
 //------------------------------------------------------------------------------
 
-// EVENTS HANDLING--------------------------------------------------------------
+// EVENTS ----------------------------------------------------------------------
 int		game_loop(t_var *game);
-void	rotate_camera(t_var *game, int rotation_dir);
 int		key_press(int keycode, t_var *game);
 int		key_release(int keycode, t_var *game);
+//------------------------------------------------------------------------------
+
+// EVENTS HANDLER --------------------------------------------------------------
+void 	handle_player_movement(t_var *game, int keycode);
+void	handle_player_rotation(t_var *game, int keycode);
+void	handle_camera_rotation(t_var *game, int rotation_dir);
+int 	handle_wll_collision(t_var *game, int x, int y);
 
 //------------------------------------------------------------------------------
+
 
 // MATH FUNCTIONS --------------------------------------------------------------
 t_dpoint	calculate_point(t_dpoint *start, double angle, double distance);

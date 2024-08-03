@@ -21,7 +21,7 @@ enum e_rotation_dir
 	ROTAT_DIR_LEFT
 };
 
-typedef struct s_player_pos
+typedef struct s_player
 {
 	double	x;
 	double	y;
@@ -69,9 +69,9 @@ typedef struct s_DDA
 	double	delta_dist_y;
 
 	double	wall_dist;
-	double	line_h_px;
-	double	draw_start_px;
-	double	draw_end_px;
+	double	wall_line_h_px;
+	double	wall_start_px;
+	double	wall_end_px;
 
 	int		step_x;
 	int		ste_y;
@@ -155,7 +155,7 @@ typedef struct s_var
 	int				bpp;
 	int				endian;
 	int				line_bytes;
-	t_player		player_pos;
+	t_player		player;
 	t_movement		move;
 	t_DDA			dda;
 	t_sprite		sprite;
