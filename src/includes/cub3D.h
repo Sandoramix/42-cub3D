@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 13:37:56 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 15:44:55 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,55 +26,55 @@
 // TODO split each category in separate file if (it will) needed.
 
 // PARSING----------------------------------------------------------------------
-t_state	parse(t_var *game, int ac, char **av);
-t_state	parse_configs(t_var *game);
+t_state		parse(t_var *game, int ac, char **av);
+t_state		parse_configs(t_var *game);
 // PARSING UTILS
-char	**get_config_pointed_str(t_var *game, t_cnf type);
+char		**get_config_pointed_str(t_var *game, t_cnf type);
 /**
  * @brief Get a pointer of given type's configuration, it can be either
  * `t_img *` or `t_rgb *`
  */
-void	*get_config_pointed_data(t_var *game, t_cnf type);
+void		*get_config_pointed_data(t_var *game, t_cnf type);
 
-t_cnf	parse_identify_cnf(char *line);
-bool	parse_config_val_is_path(t_cnf type);
-bool	is_filepath_valid(char *line, int line_n, char *path);
+t_cnf		parse_identify_cnf(char *line);
+bool		parse_config_val_is_path(t_cnf type);
+bool		is_filepath_valid(char *line, int line_n, char *path);
 //------------------------------------------------------------------------------
 //GENERIC UTILS
 
-void	print_missing_config(t_var *game);
-bool	is_config_missing(t_var *game);
+void		print_missing_config(t_var *game);
+bool		is_config_missing(t_var *game);
 
 //MLX UTILS
-t_state	load_xpm_image(t_var *game, t_img **img, char *path);
+t_state		load_xpm_image(t_var *game, t_img **img, char *path);
 //------------------------------------------------------------------------------
 // RAYCASTING-------------------------------------------------------------------
-void	rendering(t_var *game);
-void 	init_rendering(t_var *game, int pixel_pos_x);
-void	increase_raylen(t_var *game);
-void	calc_distance_from_wall(t_var *game);
-void	put_line_h_in_perspective(t_var *game);
-void	calc_relative_line_height(t_var *game);
-void 	loop_until_hit_wall(t_var *game);
+void		rendering(t_var *game);
+void		init_rendering(t_var *game, int pixel_pos_x);
+void		increase_raylen(t_var *game);
+void		calc_distance_from_wall(t_var *game);
+void		put_line_h_in_perspective(t_var *game);
+void		calc_relative_line_height(t_var *game);
+void		loop_until_hit_wall(t_var *game);
 //------------------------------------------------------------------------------
 
 // DRAWING----------------------------------------------------------------------
-void 	draw_walls(t_var *game, int pixel_pos_x);
-void 	draw_rectangle(t_var *game, t_point start, t_point end, int color);
-void 	draw_line(t_var *game, t_dpoint start, t_dpoint end);
-void 	fill_img_buffer(t_var *game, int x, int y, int color);
+void		draw_walls(t_var *game, int pixel_pos_x);
+void		draw_rectangle(t_var *game, t_point start, t_point end, int color);
+void		draw_line(t_var *game, t_dpoint start, t_dpoint end);
+void		fill_img_buffer(t_var *game, int x, int y, int color);
 //------------------------------------------------------------------------------
 
-double	delta_time(t_var *game);
+double		delta_time(t_var *game);
 
 // MLX CONFIGURATION -----------------------------------------------------------
-void	mlx_configuration(t_var *game);
+void		mlx_configuration(t_var *game);
 //------------------------------------------------------------------------------
 
 // EVENTS ----------------------------------------------------------------------
-int		game_loop(t_var *game);
-int		key_press(int keycode, t_var *game);
-int		key_release(int keycode, t_var *game);
+int			game_loop(t_var *game);
+int			key_press(int keycode, t_var *game);
+int			key_release(int keycode, t_var *game);
 //------------------------------------------------------------------------------
 
 // EVENTS HANDLER --------------------------------------------------------------
@@ -89,6 +89,6 @@ int 	handle_wll_collision(t_var *game, double x, double y);
 // MATH FUNCTIONS --------------------------------------------------------------
 t_dpoint	calculate_point(t_dpoint *start, double angle, double distance);
 double		from_angle_to_radiant(double angle);
-double		pi();
+double		pi(void);
 //------------------------------------------------------------------------------
 #endif
