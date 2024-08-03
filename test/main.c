@@ -78,13 +78,7 @@ void init_hardcoded_value(t_var *game)
 	game->sprite.mini_player_w = MINIMAP_TILE_SIZE;
 	game->sprite.mini_player_h = MINIMAP_TILE_SIZE;
 
-    double rotSpeed = delta_time(game) + 0.05; //the constant value is in radians/second
 	/* printf("rotation speed %f\n", rotSpeed); */
-	game->player.positive_cos_rot_speed = cos(rotSpeed);
-	game->player.positive_sin_rot_speed = sin(rotSpeed);
-	game->player.neg_cos_rot_speed_pos = cos(-rotSpeed);
-	game->player.neg_sin_rot_speed_pos = sin(-rotSpeed);
-
 }
 
 void parsing(t_var *game)

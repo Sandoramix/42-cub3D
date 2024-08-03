@@ -28,11 +28,6 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 
-	double	positive_cos_rot_speed;
-	double	positive_sin_rot_speed;
-	double	neg_cos_rot_speed_pos;
-	double	neg_sin_rot_speed_pos;
-
 }	t_player;
 
 typedef struct s_dpoint

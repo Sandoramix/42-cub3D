@@ -16,8 +16,6 @@ int key_press(int keycode, t_var *game)
     handle_player_rotation(game, keycode);
     
 	rendering(game);
-    game->move.rot_left = 0;
-    game->move.rot_right = 0;
     return 0;
 }
 
