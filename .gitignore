@@ -2,7 +2,7 @@ test.cub3D
 cub3D
 *.test
 makefile.srcs
-src/minilibx
+src/libs/minilibx
 
 # Prerequisites
 *.d
