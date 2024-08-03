@@ -38,6 +38,7 @@
 #    define KEY_D kVK_ANSI_D
 #    define KEY_LEFT kVK_LeftArrow
 #    define KEY_RIGHT kVK_RightArrow
+#    define ESC_KEY kVK_Escape
 
 // Cocoa headers
 #   elif defined(__COCOA__)
@@ -48,6 +49,7 @@
 #    define KEY_D 'd'
 #    define KEY_LEFT NSLeftArrowFunctionKey
 #    define KEY_RIGHT NSRightArrowFunctionKey
+#	 define ESC_KEY kVK_Escape
 
 // IOKit headers
 #   elif defined(__IOKIT__)
@@ -58,6 +60,7 @@
 #    define KEY_D kHIDUsage_KeyboardD
 #    define KEY_LEFT kHIDUsage_KeyboardLeftArrow
 #    define KEY_RIGHT kHIDUsage_KeyboardRightArrow
+#    define ESC_KEY kHIDUsage_KeyboardEscape
 
 #   else
 #    error "No supported keyboard handling library found for macOS."
@@ -74,6 +77,7 @@
 #  define KEY_D XK_d
 #  define KEY_LEFT XK_Left
 #  define KEY_RIGHT XK_Right
+#  define ESC_KEY XK_Escape 
 
 # endif // __linux__
 

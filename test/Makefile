@@ -25,7 +25,7 @@ RM = rm -rf
 
 # ----SOURCE-FILES--------------------------------------------------------------
 
-SRC = ../main.c \
+SRC = ./main.c \
         ../src/cleanup.c \
         ../src/conditionals.c \
         ../src/deltatime.c \

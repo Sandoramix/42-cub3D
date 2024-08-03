@@ -37,6 +37,10 @@ void rotate_camera(t_var *game, int rotation_dir)
 
 int key_press(int keycode, t_var *game)
 {
+	if (keycode == ESC_KEY) { 
+		cleanup(game, true, 1);
+		return (OK);
+    }
 	if (keycode == KEY_W)
         game->move.up = 1;
 	if (keycode == KEY_S)
@@ -67,7 +71,6 @@ int key_press(int keycode, t_var *game)
 
 
 	raycasting(game);
-	
 	game->move.rot_left = 0;
 	game->move.rot_right = 0;
     return 0;
