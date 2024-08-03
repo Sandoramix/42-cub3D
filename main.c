@@ -20,6 +20,6 @@ int	main(int ac, char **av)
 	parse(&game, ac, av);
 	mlx_configuration(&game);
 	//draw first frame
-	raycasting(&game);
+	rendering(&game);
 	return (0);
 }

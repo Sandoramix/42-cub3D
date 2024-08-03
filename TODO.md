@@ -1,4 +1,4 @@
-- [ ] raycasting
+- [ ] rendering
   - [x] dda
   - [ ] minimappa
     - [x] mappa
