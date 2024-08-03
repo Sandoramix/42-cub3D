@@ -26,94 +26,6 @@ int **cmtxtoimtx(char **mtx, int col, int row)
 	return intMtx;
 }
 
-// int game_loop(t_var *game)
-// {
-// 	(void)game;
-// 	return 1;
-// }
-
-// void rotate_camera(t_var *game, int rotation_dir)
-// {
-// 	double old_dir_x;
-// 	double old_plane_x;
-
-// 	if (rotation_dir == ROTAT_DIR_RIGHT)
-// 	{
-// 		old_dir_x = game->player_pos.dir_x;
-// 		game->player_pos.dir_x = game->player_pos.dir_x * game->player_pos.neg_cos_rot_speed_pos
-// 		- game->player_pos.dir_y * game->player_pos.neg_sin_rot_speed_pos; 
-// 		game->player_pos.dir_y = old_dir_x * game->player_pos.neg_sin_rot_speed_pos + game->player_pos.dir_y * game->player_pos.neg_cos_rot_speed_pos;
-// 		old_plane_x = game->plane.x;
-// 		game->plane.x = game->plane.x  * game->player_pos.neg_cos_rot_speed_pos - game->plane.y *  game->player_pos.neg_sin_rot_speed_pos;
-// 		game->plane.y = old_plane_x *  game->player_pos.neg_sin_rot_speed_pos + game->plane.y * game->player_pos.neg_cos_rot_speed_pos; 
-// 	}
-// 	else
-// 	{
-// 		old_dir_x = game->player_pos.dir_x;
-// 		game->player_pos.dir_x = game->player_pos.dir_x * game->player_pos.positive_cos_rot_speed 
-// 		- game->player_pos.dir_y * game->player_pos.positive_sin_rot_speed; 
-// 		game->player_pos.dir_y = old_dir_x * game->player_pos.positive_sin_rot_speed + game->player_pos.dir_y * game->player_pos.positive_cos_rot_speed;
-// 		old_plane_x = game->plane.x;
-// 		game->plane.x = game->plane.x  * game->player_pos.positive_cos_rot_speed - game->plane.y *  game->player_pos.positive_sin_rot_speed;
-// 		game->plane.y = old_plane_x *  game->player_pos.positive_sin_rot_speed + game->plane.y * game->player_pos.positive_cos_rot_speed; 
-// 	}
-
-// }
-
-
-// int key_press(int keycode, t_var *game)
-// {
-//    /*  printf("key pressed %d\n", keycode);
-//     printf("[BEFORE] player position(%f, %f)\n", game->player_pos.x, game->player_pos.y); */
-// 	if (keycode == KEY_W)
-//         game->move.up = 1;
-// 	if (keycode == KEY_S)
-//         game->move.down = 1;
-// 	if (keycode == KEY_A)
-//         game->move.left = 1;
-// 	if (keycode == KEY_D)
-//         game->move.right = 1;
-// 	/*check rotazione*/
-// 	if (keycode == XK_Left)
-//         game->move.rot_left = 1;
-// 	if (keycode == XK_Right)
-//         game->move.rot_right = 1;
-// 	/*movimento */
-// 	if (game->move.up)
-// 	    game->player_pos.y -= VELOCITY /* * game->deltatime  */;
-// 	if (game->move.down)
-// 	    game->player_pos.y += VELOCITY /* * game->deltatime  */;
-// 	if (game->move.left)
-// 	    game->player_pos.x -= VELOCITY /* * game->deltatime  */;
-// 	if (game->move.right)
-//         game->player_pos.x += VELOCITY /* * game->deltatime  */;
-// 	/**direzione */
-// 	if (game->move.rot_left)
-// 		rotate_camera(game , ROTAT_DIR_LEFT);
-// 	if (game->move.rot_right)
-// 		rotate_camera(game , ROTAT_DIR_RIGHT);
-
-
-// 	raycasting(game);
-// 	 game->move.rot_left = 0;
-// 	 game->move.rot_right = 0;
-//    /*  printf("[AFTER] player position(%f, %f)\n", game->player_pos.x, game->player_pos.y); */
-//     return 0;
-// }
-
-// int key_release(int keycode, t_var *game)
-// {
-//     if (keycode == KEY_W)
-//         game->move.up = 0;
-//     if (keycode == KEY_S)
-//         game->move.down = 0;
-//     if (keycode == KEY_A)
-//         game->move.left = 0;
-//     if (keycode == KEY_D)
-//         game->move.right = 0;
-//     return 0;
-// }
-
 
 
 char **read_file()
@@ -139,19 +51,8 @@ void mlx_handling(t_var *game)
 	mlx_get_screen_size(game->mlx, &game->dda.screen_size_w_px, &game->dda.screen_size_h_px);
 	game->mlx_win = mlx_new_window(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px, "UrMom");
 
-	/* game->sprite.white_sprite = mlx_xpm_file_to_image(game->mlx,
-			"../assets/sprites/white_sprite.xpm",
-			&game->sprite.tile_sprite_w, &game->sprite.tile_sprite_h);
-	game->sprite.black_sprite = mlx_xpm_file_to_image(game->mlx,
-			"../assets/sprites/black_sprite.xpm",
-			&game->sprite.tile_sprite_w, &game->sprite.tile_sprite_h);
-	game->sprite.mini_player = mlx_xpm_file_to_image(game->mlx,
-		"../assets/sprites/player_minimap.xpm",
-			&game->sprite.mini_player_w, &game->sprite.mini_player_h); */
-
 	game->img = mlx_new_image(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px);
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp, &game->line_bytes, &game->endian);
-	/* ft_printf("bpp %i\n line bytes %i endian %i \n", game->bpp, game->line_bytes, game->endian); */
 }
 
 void init_hardcoded_value(t_var *game)
