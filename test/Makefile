@@ -25,16 +25,21 @@ RM = rm -rf
 
 # ----SOURCE-FILES--------------------------------------------------------------
 
-SRC = ./main.c \
-	../src/cleanup.c \
-	../src/conditionals.c \
-	../src/deltatime.c \
-	../src/events/events.c \
-	../src/events/mlx_config.c \
-	../src/messages/parse_error_msg.c \
-	../src/parsing/parse.c \
-	../src/raycasting/DDA_algo.c \
-	../src/raycasting/DDA_helpers.c
+SRC = ../main.c \
+        ../src/cleanup.c \
+        ../src/conditionals.c \
+        ../src/deltatime.c \
+        ../src/events/events.c \
+        ../src/events/mlx_config.c \
+        ../src/messages/parse_error_msg.c \
+        ../src/parsing/parse.c \
+        ../src/parsing/parse_configurations.c \
+        ../src/parsing/parse_utils.c \
+        ../src/raycasting/drawing_helpers.c \
+        ../src/raycasting/math_helpers.c \
+        ../src/raycasting/raycasting_helpers.c \
+        ../src/raycasting/raycasting_init.c \
+        ../src/raycasting/raycasting_logic.c
 
 # ----RULES---------------------------------------------------------------------
 

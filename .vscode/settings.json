@@ -33,4 +33,7 @@
 		"${workspaceFolder}/src/libs/minilibx"
 	],
 	"C_Cpp.default.intelliSenseMode": "linux-clang-x64",
+	"files.associations": {
+		"cub3d.h": "c"
+	},
 }

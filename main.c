@@ -19,14 +19,7 @@ int	main(int ac, char **av)
 	ft_bzero(&game, sizeof(t_var));
 	parse(&game, ac, av);
 	mlx_configuration(&game);
-
-
-	/**
-	 * mlx inizializzazione (finestra, sprite, hook)
-	 * 
-	 * init_game(first world renderization(DDA))
-	 * game_starts()
-	 */
-	//game_start(&game);
+	//draw first frame
+	raycasting(&game);
 	return (0);
 }
