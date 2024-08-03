@@ -111,10 +111,14 @@ typedef struct s_movement
 // "GLOBAL" program's structure.
 typedef struct s_var
 {
-	void			*mlx_ptr;
+	void			*mlx;
 	void			*win_ptr;
-
-	t_player_pos		player_pos;
+	void			*img;
+	char			*buffer;
+	int				bpp;
+	int				endian;
+	int				line_bytes;
+	t_player_pos	player_pos;
 	t_movement		move;
 	t_DDA			dda;
 	t_sprite		sprite;

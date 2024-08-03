@@ -17,12 +17,12 @@ int	cleanup(t_var *game, bool should_exit, int statuscode)
 	str_freemtx(game->mapinfo.file_content);
 	str_freemtx(game->mapinfo.map);
 
-	if (game->mlx_ptr)
+	if (game->mlx)
 	{
-		mlx_clear_window(game->mlx_ptr, game->win_ptr);
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-		mlx_destroy_display(game->mlx_ptr);
-		free(game->mlx_ptr);
+		mlx_clear_window(game->mlx, game->win_ptr);
+		mlx_destroy_window(game->mlx, game->win_ptr);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
 	}
 	if (should_exit)
 		exit(statuscode);

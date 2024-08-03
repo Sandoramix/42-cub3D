@@ -28,6 +28,16 @@ t_dpoint calculate_point(t_dpoint *start, double angle, double distance)
 	return end;
 }
 
+static void write_into_buffer(t_var *game, int x, int y, int color)
+{
+	int pixel = (y * game->line_bytes) + (x * sizeof(int)	);
+	game->buffer[pixel + 0] = (color >> 24);
+    game->buffer[pixel + 1] = (color >> 16) & 0xFF;
+    game->buffer[pixel + 2] = (color >> 8) & 0xFF;
+    game->buffer[pixel + 3] = (color) & 0xFF;
+}
+
+
 void draw_line(t_var *game, t_dpoint start, t_dpoint end)
 {
 	t_dpoint delta;
@@ -43,7 +53,8 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end)
 	counter = 0;
 	while (counter < pixels)
 	{
-		mlx_pixel_put(game->mlx_ptr, game->win_ptr, (int)next_point.x, (int)next_point.y, 0x0000FF); // Color white
+		write_into_buffer(game, (int)next_point.x, (int)next_point.y, mlx_get_color_value(game->mlx, 0x0000FF));
+		// mlx_pixel_put(game->mlx, game->win_ptr, (int)next_point.x, (int)next_point.y, 0x0000FF); // Color white
 		next_point.x += increment.x;
 		next_point.y += increment.y;
 		counter++;
@@ -113,6 +124,15 @@ void calc_relative_line_height(t_var *game)
 {
 	game->dda.line_h_px = (int)(game->dda.screen_size_w_px / game->dda.wall_dist);
 }
+void write_into_buffe(t_var *game, int x, int y, int color)
+{
+	int pixel = (y * game->line_bytes) + (x * sizeof(int)	);
+	game->buffer[pixel + 0] = (color >> 24);
+    game->buffer[pixel + 1] = (color >> 16) & 0xFF;
+    game->buffer[pixel + 2] = (color >> 8) & 0xFF;
+    game->buffer[pixel + 3] = (color) & 0xFF;
+}
+
 
 void draw_walls(t_var *game, int pixel_pos_x)
 {
@@ -123,9 +143,12 @@ void draw_walls(t_var *game, int pixel_pos_x)
 		while (y <= game->dda.draw_end_px)
 		{
 			if (game->dda.side == 1)
-				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0XFF0000);
+				write_into_buffe(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x0));
+				// mlx_pixel_put(game->mlx, game->win_ptr, pixel_pos_x, y, 0XFF0000);
 			else
-				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0X0000FF);
+				write_into_buffe(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0xFFFFFF));
+
+				// mlx_pixel_put(game->mlx, game->win_ptr, pixel_pos_x, y, 0X0000FF);
 			y++;
 		}
 	}
@@ -148,6 +171,15 @@ void wall_casting(t_var *game)
 		pixel_pos_x++;
 	}
 }
+void rite_into_buffe(t_var *game, int x, int y, int color)
+{
+	int pixel = (y * game->line_bytes) + (x * sizeof(int)	);
+	game->buffer[pixel + 0] = (color >> 24);
+    game->buffer[pixel + 1] = (color >> 16) & 0xFF;
+    game->buffer[pixel + 2] = (color >> 8) & 0xFF;
+    game->buffer[pixel + 3] = (color) & 0xFF;
+}
+
 
 void print_rectangle(t_var *game, t_point start, t_point end, int color)
 {
@@ -161,7 +193,8 @@ void print_rectangle(t_var *game, t_point start, t_point end, int color)
 		start.x = 0;
 		while (start.x < end.x)
 		{
-			mlx_pixel_put(game->mlx_ptr, game->win_ptr, start.x, start.y, color);
+			rite_into_buffe(game,  start.x,  start.y, mlx_get_color_value(game->mlx, color));
+			// mlx_pixel_put(game->mlx, game->win_ptr, start.x, start.y, color);
 			start.x++;
 		}
 		start.y++;
@@ -179,8 +212,8 @@ void floor_ceiling_casting(t_var *game)
 	ceiling_end = (t_point){game->dda.screen_size_w_px, game->dda.screen_size_h_px / 2};
 	floor_start = (t_point){0, game->dda.screen_size_h_px / 2};
 	floor_end = (t_point){game->dda.screen_size_w_px, game->dda.screen_size_h_px};
-	print_rectangle(game, ceiling_start, ceiling_end, 0xFFFF00);
-	print_rectangle(game, floor_start, floor_end, 0xFFFFa0);
+	print_rectangle(game, ceiling_start, ceiling_end, 0x00FF00);
+	print_rectangle(game, floor_start, floor_end, 0xFF0000);
 }
 
 void raycasting(t_var *game)

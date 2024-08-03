@@ -135,27 +135,23 @@ char **read_file()
 
 void mlx_handling(t_var *game)
 {
-	game->mlx_ptr = mlx_init();
-	 mlx_get_screen_size(game->mlx_ptr, &game->dda.screen_size_w_px, &game->dda.screen_size_h_px);
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->dda.screen_size_w_px, game->dda.screen_size_h_px, "UrMom");
+	game->mlx = mlx_init();
+	mlx_get_screen_size(game->mlx, &game->dda.screen_size_w_px, &game->dda.screen_size_h_px);
+	game->win_ptr = mlx_new_window(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px, "UrMom");
 
-
-
-	/* game->sprite.white_sprite = mlx_xpm_file_to_image(game->mlx_ptr,
+	/* game->sprite.white_sprite = mlx_xpm_file_to_image(game->mlx,
 			"../assets/sprites/white_sprite.xpm",
 			&game->sprite.tile_sprite_w, &game->sprite.tile_sprite_h);
-	game->sprite.black_sprite = mlx_xpm_file_to_image(game->mlx_ptr,
+	game->sprite.black_sprite = mlx_xpm_file_to_image(game->mlx,
 			"../assets/sprites/black_sprite.xpm",
 			&game->sprite.tile_sprite_w, &game->sprite.tile_sprite_h);
-	game->sprite.mini_player = mlx_xpm_file_to_image(game->mlx_ptr,
+	game->sprite.mini_player = mlx_xpm_file_to_image(game->mlx,
 		"../assets/sprites/player_minimap.xpm",
 			&game->sprite.mini_player_w, &game->sprite.mini_player_h); */
 
-
-
-	
-	
-
+	game->img = mlx_new_image(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px);
+	game->buffer = mlx_get_data_addr(game->img, &game->bpp, &game->line_bytes, &game->endian);
+	/* ft_printf("bpp %i\n line bytes %i endian %i \n", game->bpp, game->line_bytes, game->endian); */
 }
 
 void init_hardcoded_value(t_var *game)
@@ -204,6 +200,8 @@ void parsing(t_var *game)
 		cleanup(game, true, KO);
 }
 
+
+
 int main(/* int ac, char **av */)
 {
 	struct s_var game;
@@ -214,10 +212,10 @@ int main(/* int ac, char **av */)
 	mlx_handling(&game);
 	init_hardcoded_value(&game); 
 	raycasting(&game);
-
+	
 	mlx_hook(game.win_ptr, KeyPress, KeyPressMask, &key_press, &game);
     mlx_hook(game.win_ptr, KeyRelease, KeyReleaseMask, &key_release, &game);
-	mlx_hook(game.win_ptr, 17, 0, mlx_loop_end, game.mlx_ptr);
-	/* mlx_loop_hook(game.mlx_ptr, &game_loop, &game); */
-	mlx_loop(game.mlx_ptr);
+	mlx_hook(game.win_ptr, 17, 0, mlx_loop_end, game.mlx);
+	/* mlx_loop_hook(game.mlx, &game_loop, &game); */
+	mlx_loop(game.mlx);
 }
