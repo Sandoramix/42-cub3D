@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 20:39:38 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 08:06:52 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 # include <libft.h>
 # include <mlx.h>
-# include <mlx_int.h>
+
+# ifdef __linux__
+#  include <mlx_int.h>
+# endif
 
 # include <cub3D_settings.h>
 # include <cub3D_structs.h>

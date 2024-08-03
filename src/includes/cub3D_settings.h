@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 14:53:35 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 08:17:00 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,62 @@
 # define PLANEY 0.66
 
 // KEYBINDINGS------------------------------------------------------------------
-# define KEY_W XK_w
-# define KEY_A XK_a
-# define KEY_S XK_s
-# define KEY_D XK_d
 
-# define KEY_LEFT XK_Left
-# define KEY_RIGHT XK_Right
+# ifdef __APPLE__
+#  include <TargetConditionals.h>
+#  if TARGET_OS_MAC
+
+#   ifdef __CARBON__
+// Carbon headers
+#    include <Carbon/Carbon.h>
+#    define KEY_W kVK_ANSI_W
+#    define KEY_A kVK_ANSI_A
+#    define KEY_S kVK_ANSI_S
+#    define KEY_D kVK_ANSI_D
+#    define KEY_LEFT kVK_LeftArrow
+#    define KEY_RIGHT kVK_RightArrow
+
+// Cocoa headers
+#   elif defined(__COCOA__)
+#    include <Cocoa/Cocoa.h>
+#    define KEY_W 'w'
+#    define KEY_A 'a'
+#    define KEY_S 's'
+#    define KEY_D 'd'
+#    define KEY_LEFT NSLeftArrowFunctionKey
+#    define KEY_RIGHT NSRightArrowFunctionKey
+
+// IOKit headers
+#   elif defined(__IOKIT__)
+#    include <IOKit/hidsystem/IOLLEvent.h>
+#    define KEY_W kHIDUsage_KeyboardW
+#    define KEY_A kHIDUsage_KeyboardA
+#    define KEY_S kHIDUsage_KeyboardS
+#    define KEY_D kHIDUsage_KeyboardD
+#    define KEY_LEFT kHIDUsage_KeyboardLeftArrow
+#    define KEY_RIGHT kHIDUsage_KeyboardRightArrow
+
+#   else
+#    error "No supported keyboard handling library found for macOS."
+#   endif
+
+#  endif // TARGET_OS_MAC
+# endif // __APPLE__
+
+# ifdef __linux__
+#  include <X11/keysym.h>
+#  define KEY_W XK_w
+#  define KEY_A XK_a
+#  define KEY_S XK_s
+#  define KEY_D XK_d
+#  define KEY_LEFT XK_Left
+#  define KEY_RIGHT XK_Right
+
+# endif // __linux__
+
+# ifndef KEY_W
+#  error "Unsupported platform or no key definitions available."
+# endif
 //------------------------------------------------------------------------------
 
 // FILE-MAP-DEFINITIONS---------------------------------------------------------

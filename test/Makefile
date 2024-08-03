@@ -14,8 +14,11 @@ MLX_DIR = $(ROOTDIR)/libs/minilibx
 
 CC = cc
 INCLUDES = -I$(ROOTDIR)/includes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR)
+
 MLX_NAME = mlx_$(shell uname)
+MLX_LIBNAME = lib$(MLX_NAME).a
 MLX_FLAGS = -L$(MLX_DIR) -l$(MLX_NAME) -lXext -lX11
+
 CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE)
 
 RM = rm -rf
@@ -42,7 +45,7 @@ debug:
 
 $(NAME): $(SRC)
 	@$(MAKE) -C $(LIBFTX_DIR)
-	if [ ! -f $(MLX_DIR)/lib$(MLX_NAME).a ] && [ ! -d $(MLX_DIR) ] ; then $(MAKE) download-mlx; fi
+	if [ ! -f $(MLX_DIR)/$(MLX_LIBNAME) ] && [ ! -d $(MLX_DIR) ] ; then $(MAKE) download-mlx; fi
 	@$(MAKE) -sC $(MLX_DIR) 1>/dev/null 2>/dev/null && echo "$(GREEN)[MLX]:\t\tLIBRARY RE/CREATED"
 	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) -L$(LIBFTX_DIR) -lft $(MLX_FLAGS) -lm
 	@echo "$(GREEN)[$(PNAME)]:\tPROGRAM CREATED$(R)"
@@ -64,11 +67,12 @@ re-force: fclean delete-mlx download-mlx all
 
 # ----UTILS---------------------------------------------------------------------
 VALGRIND=@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --tool=memcheck --keep-debuginfo=yes
+ARGS="../assets/maps/mappa.cub"
 # FOR FD 		TRACKING: --track-fds=yes
 # FOR CHILDREN	TRACKING: --trace-children=yes
 valgrind: debug
 	clear
-	$(VALGRIND) ./$(NAME)
+	$(VALGRIND) ./$(NAME) "$(ARGS)"
 
 download-mlx:
 	echo "$(BLUE) Downloading MLX...$(R)";
