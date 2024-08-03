@@ -67,7 +67,7 @@ int key_press(int keycode, t_var *game)
 
 
 	raycasting(game);
-	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	game->move.rot_left = 0;
 	game->move.rot_right = 0;
     return 0;
