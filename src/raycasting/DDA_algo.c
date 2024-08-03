@@ -37,7 +37,7 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end) {
 	next_point = (t_dpoint){start.x, start.y};
 	counter = 0;
 	while(counter < pixels) {
-		mlx_pixel_put(game->mlx_ptr, game->win_ptr, (int)next_point.x, (int)next_point.y, 0x0000FF); // Color white
+		mlx_pixel_put(game->mlx, game->mlx_win, (int)next_point.x, (int)next_point.y, 0x0000FF); // Color white
 		next_point.x += increment.x;
 		next_point.y += increment.y;
 		counter++;
@@ -119,9 +119,9 @@ void draw_walls(t_var *game, int pixel_pos_x)
 		while (y <= game->dda.draw_end_px)
 		{
 			if (game->dda.side == 1)
-				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0XFF0000);
+				mlx_pixel_put(game->mlx, game->mlx_win, pixel_pos_x, y, 0XFF0000);
 			else
-				mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, y, 0X0000FF);
+				mlx_pixel_put(game->mlx, game->mlx_win, pixel_pos_x, y, 0X0000FF);
 			y++;
 		}
 	}
@@ -182,7 +182,7 @@ void wall_casting(t_var *game, int pixel_pos_x)
 		{	
 /* 			cellX = (int)(floorX);
         	cellY = (int)(floorY); */
-			mlx_pixel_put(game->mlx_ptr, game->win_ptr, pixel_pos_x, pixel_pos_y, 0xa1a1a1);
+			mlx_pixel_put(game->mlx, game->mlx_win, pixel_pos_x, pixel_pos_y, 0xa1a1a1);
 			pixel_pos_x++;
 		}
 		pixel_pos_y++;

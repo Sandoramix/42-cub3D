@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 17:33:37 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 08:29:32 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,8 @@ typedef struct s_config
 // "GLOBAL" program's structure.
 typedef struct s_var
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
+	void			*mlx;
+	void			*mlx_win;
 
 	t_player		player_pos;
 	t_movement		move;

@@ -38,7 +38,7 @@ void rotate_camera(t_var *game, int rotation_dir)
 int key_press(int keycode, t_var *game)
 {
    printf("key pressed %d\n", keycode);
-   mlx_clear_window(game->mlx_ptr, game->win_ptr);
+   mlx_clear_window(game->mlx, game->mlx_win);
     printf("[BEFORE] player position(%f, %f)\n", game->player_pos.x, game->player_pos.y); 
 	if (keycode == KEY_W)
         game->move.up = 1;
