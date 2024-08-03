@@ -105,7 +105,10 @@ void handle_player_rotation(t_var *game, int keycode)
     {
         value = game->player.offset  * 0.9f;
         game->player.offset  = (float[2]){0, value}[-0.1f > value];
-    } 
+    }
+    //pos z per il momento e' sempre zero 
+    // serve a gestire la posizione del player sull asse z
+    //devo solo implementare il keyhook a questo punto
     if(game->player.pos_z  > 0)
     {
         value = game->player.pos_z  - 50 * VELOCITY;
