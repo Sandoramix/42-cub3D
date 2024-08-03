@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 09:52:59 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 13:11:48 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,16 +117,16 @@ typedef union u_rgb
 typedef struct s_config
 {
 //SPRITES------------------------------
-	t_img	wall_nord;
+	t_img	*wall_nord;
 	char	*wall_nord_path;
 
-	t_img	wall_east;
+	t_img	*wall_east;
 	char	*wall_east_path;
 
-	t_img	wall_west;
+	t_img	*wall_west;
 	char	*wall_west_path;
 
-	t_img	wall_south;
+	t_img	*wall_south;
 	char	*wall_south_path;
 //-------------------------------------
 
@@ -135,6 +135,9 @@ typedef struct s_config
 
 	t_rgb	floor;
 	char	*floor_raw;
+
+	int		_w;
+	int		_h;
 }	t_config;
 
 // "GLOBAL" program's structure.

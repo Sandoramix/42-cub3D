@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 08:06:52 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 13:37:56 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ void	*get_config_pointed_data(t_var *game, t_cnf type);
 
 t_cnf	parse_identify_cnf(char *line);
 bool	parse_config_val_is_path(t_cnf type);
+bool	is_filepath_valid(char *line, int line_n, char *path);
 //------------------------------------------------------------------------------
 //GENERIC UTILS
 
 void	print_missing_config(t_var *game);
 bool	is_config_missing(t_var *game);
+
+//MLX UTILS
+t_state	load_xpm_image(t_var *game, t_img **img, char *path);
 //------------------------------------------------------------------------------
 // RAYCASTING-------------------------------------------------------------------
 void	rendering(t_var *game);

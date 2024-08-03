@@ -23,21 +23,22 @@ RM = rm -rf
 # ----SOURCE-FILES--------------------------------------------------------------
 
 SRC = ./main.c \
-        ./src/cleanup.c \
-        ./src/conditionals.c \
-        ./src/deltatime.c \
-        ./src/events/events.c \
-        ./src/events/events_handler.c \
-        ./src/events/mlx_config.c \
-        ./src/messages/parse_error_msg.c \
-        ./src/parsing/parse.c \
-        ./src/parsing/parse_configurations.c \
-        ./src/parsing/parse_utils.c \
-        ./src/rendering/drawing_helpers.c \
-        ./src/rendering/math_helpers.c \
-        ./src/rendering/rendering_helpers.c \
-        ./src/rendering/rendering_init.c \
-        ./src/rendering/rendering_logic.c
+	./src/cleanup.c \
+	./src/conditionals.c \
+	./src/deltatime.c \
+	./src/events/events.c \
+	./src/events/events_handler.c \
+	./src/events/mlx_config.c \
+	./src/messages/parse_error_msg.c \
+	./src/mlx_utils.c \
+	./src/parsing/parse.c \
+	./src/parsing/parse_configurations.c \
+	./src/parsing/parse_utils.c \
+	./src/rendering/drawing_helpers.c \
+	./src/rendering/math_helpers.c \
+	./src/rendering/rendering_helpers.c \
+	./src/rendering/rendering_init.c \
+	./src/rendering/rendering_logic.c
 # ----RULES---------------------------------------------------------------------
 
 all: $(NAME)

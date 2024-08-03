@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:07:56 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 20:51:02 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 13:33:32 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,19 @@ t_cnf	parse_identify_cnf(char *line)
 bool	parse_config_val_is_path(t_cnf type)
 {
 	return (type != CNF_CEILING && type != CNF_FLOOR);
+}
+
+bool	is_filepath_valid(char *line, int line_n, char *path)
+{
+	int	fd;
+
+	if (file_isdir(path))
+		return (ft_perror("Error on line %d: '%s':\n\t%s is a directory\n",
+				line_n, line, path), false);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (ft_perror("Error on line %d: '%s':\n\t%s : permission denied\n",
+				line_n, line, path), false);
+	close(fd);
+	return (true);
 }

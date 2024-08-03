@@ -6,26 +6,11 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:21:15 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/02 20:50:59 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:06:56 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
-
-static bool	is_filepath_valid(char *line, int line_n, char *path)
-{
-	int	fd;
-
-	if (file_isdir(path))
-		return (ft_perror("Error on line %d: '%s':\n\t%s is a directory\n",
-				line_n, line, path), false);
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (ft_perror("Error on line %d: '%s':\n\t%s : permission denied\n",
-				line_n, line, path), false);
-	close(fd);
-	return (true);
-}
 
 /**
  * @brief Validate the configuration by checking if there's already set up the
@@ -56,20 +41,54 @@ static char	*validate_config_line(t_var *game, char *line, int line_n)
 	return (str_freemtx(splitted), *existing_val);
 }
 
+int	validate_color_val(t_var *game, char **split, char *val, int line_num)
+{
+	int	*atoi;
+	int	parsed_num;
+
+	atoi = strict_atoi(val);
+	if (!atoi)
+		return (ft_perror("Error: line %d: cannot parse '%s' as a number\n",
+				line_num, val),
+			str_freemtx(split), cleanup(game, true, 1), INT_MIN);
+	parsed_num = *atoi;
+	free(atoi);
+	if (parsed_num < 0 || parsed_num > 255)
+		return (ft_perror("Error: line %d: color must be in range [0;255]. \
+		Number passed instead: %d\n", line_num, val, parsed_num),
+			str_freemtx(split), cleanup(game, true, 1), INT_MIN);
+	return (parsed_num);
+}
+
+t_state	load_color(t_var *game, t_rgb *rgb, char *value, int line_num)
+{
+	char	**split;
+
+	split = str_split(value, ',');
+	if (!split)
+		return (pf_errcode(E_MALLOC), cleanup(game, true, 1), KO);
+	if (str_mtxlen(split) != 3)
+		return (ft_perror("Error: line %d: invalid color value (%s)\n",
+				line_num, value), str_freemtx(split),
+			cleanup(game, true, 1), KO);
+	rgb->color.red = validate_color_val(game, split, split[0], line_num);
+	rgb->color.green = validate_color_val(game, split, split[1], line_num);
+	rgb->color.blue = validate_color_val(game, split, split[2], line_num);
+	return (OK);
+}
+
 static t_state	parse_config_line(t_var *game, char *line, int line_num)
 {
 	const t_cnf	type = parse_identify_cnf(line);
 	char		*value;
+	void		*parsed_data;
 
 	value = validate_config_line(game, line, line_num);
+	parsed_data = get_config_pointed_data(game, type);
 	if (parse_config_val_is_path(type))
-	{
-		// TODO create image from path (value)
-	}
+		load_xpm_image(game, parsed_data, value);
 	else
-	{
-		// TODO parse color from value
-	}
+		load_color(game, parsed_data, value, line_num);
 	return (OK);
 }
 

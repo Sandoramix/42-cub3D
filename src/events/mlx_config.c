@@ -7,10 +7,10 @@ void load_sprites(t_var *game);
 
 void config_event_handling(t_var *game)
 {
-    mlx_hook(game->mlx_win, KeyPress, KeyPressMask, &key_press, &game);
-    mlx_hook(game->mlx_win, KeyRelease, KeyReleaseMask, &key_release, &game);
+    mlx_hook(game->mlx_win, KeyPress, KeyPressMask, &key_press, game);
+    mlx_hook(game->mlx_win, KeyRelease, KeyReleaseMask, &key_release, game);
 	mlx_hook(game->mlx_win, 17, 0, mlx_loop_end, game->mlx);
-	mlx_loop_hook(game->mlx, &game_loop, &game);
+	mlx_loop_hook(game->mlx, &game_loop, game);
 }
 
 

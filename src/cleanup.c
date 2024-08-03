@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:11:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 09:56:03 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:04:16 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 // TODO: SHALL YOU FREE THE WORLD (and every malloc i've done)
 
+static void	safe_destroy_img(void *mlx, t_img *img)
+{
+	if (!mlx)
+		return ;
+	if (img)
+		mlx_destroy_image(mlx, img);
+}
+
 static void	free_config(t_var *game)
 {
 	if (game->mlx)
 	{
-		mlx_destroy_image(game->mlx, game->config.wall_nord.image);
-		mlx_destroy_image(game->mlx, game->config.wall_east.image);
-		mlx_destroy_image(game->mlx, game->config.wall_west.image);
-		mlx_destroy_image(game->mlx, game->config.wall_south.image);
+		safe_destroy_img(game->mlx, game->config.wall_nord);
+		safe_destroy_img(game->mlx, game->config.wall_east);
+		safe_destroy_img(game->mlx, game->config.wall_west);
+		safe_destroy_img(game->mlx, game->config.wall_south);
 	}
 	str_freemtx(game->mapinfo.file_content);
 	str_freemtx(game->mapinfo.map);
@@ -38,8 +46,11 @@ int	cleanup(t_var *game, bool should_exit, int statuscode)
 	free_config(game);
 	if (game->mlx)
 	{
-		mlx_clear_window(game->mlx, game->mlx_win);
-		mlx_destroy_window(game->mlx, game->mlx_win);
+		if (game->mlx_win)
+		{
+			mlx_clear_window(game->mlx, game->mlx_win);
+			mlx_destroy_window(game->mlx, game->mlx_win);
+		}
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}

@@ -6,11 +6,18 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 08:23:24 by odudniak          #+#    #+#             */
-/*   Updated: 2024/06/15 14:41:19 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 13:05:04 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
+
+static int	errswitch2(t_errorcode code)
+{
+	if (code == E_MLX)
+		return (ft_perror("Failed minilibx connection."));
+	return (ft_perror("."));
+}
 
 static int	errswitch(t_errorcode code)
 {
@@ -37,7 +44,7 @@ static int	errswitch(t_errorcode code)
 		return (ft_perror("Execve failure."));
 	if (code == E_SYNTAX)
 		return (ft_perror("Syntax error."));
-	return (ft_perror("."));
+	return (errswitch2(code));
 }
 
 int	pf_errcode(t_errorcode code)
