@@ -81,7 +81,7 @@ int		key_release(int keycode, t_var *game);
 void 	handle_player_movement(t_var *game, int keycode);
 void	handle_player_rotation(t_var *game, int keycode);
 void	handle_camera_rotation(t_var *game, int rotation_dir);
-int 	handle_wll_collision(t_var *game, int x, int y);
+int 	handle_wll_collision(t_var *game, double x, double y);
 
 //------------------------------------------------------------------------------
 
