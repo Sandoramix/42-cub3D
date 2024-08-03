@@ -30,6 +30,7 @@ SRC = ./main.c \
         ../src/conditionals.c \
         ../src/deltatime.c \
         ../src/events/events.c \
+        ../src/events/events_handler.c \
         ../src/events/mlx_config.c \
         ../src/messages/parse_error_msg.c \
         ../src/parsing/parse.c \
