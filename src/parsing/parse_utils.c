@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:07:56 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 13:33:32 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:09:54 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ bool	is_filepath_valid(char *line, int line_n, char *path)
 				line_n, line, path), false);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (ft_perror("Error on line %d: '%s':\n\t%s : permission denied\n",
+		return (ft_perror("Error on line %d: '%s':\n\t%s : "
+				"unknown file or not enough permissions\n",
 				line_n, line, path), false);
 	close(fd);
 	return (true);

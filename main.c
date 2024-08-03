@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:43:47 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:43:52 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:19:15 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void init_hardcoded_value(t_var *game)
 	game->mapinfo.mtxint = cmtxtoimtx(game->mapinfo.map,
 			game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
 
-	game->player.x = 7;
-	game->player.y = 7;
+	game->player.x = 10;
+	game->player.y = 10;
 
 
 	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x, game->player.y);

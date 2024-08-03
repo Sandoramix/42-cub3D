@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:21:15 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:06:56 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:15:52 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*validate_config_line(t_var *game, char *line, int line_n)
 	char		**existing_val;
 
 	existing_val = get_config_pointed_str(game, type);
-	if (*existing_val)
+	if (existing_val && *existing_val)
 		return (ft_perror("Error on line %d: '%s': duplicate config\n",
 				line_n, line), cleanup(game, true, 1), NULL);
 	splitted = str_split_first(line, ' ');
@@ -36,6 +36,7 @@ static char	*validate_config_line(t_var *game, char *line, int line_n)
 	if (parse_config_val_is_path(type)
 		&& !is_filepath_valid(line, line_n, splitted[1]))
 		return (str_freemtx(splitted), cleanup(game, true, 1), NULL);
+	// TODO ADD TRIM TO EXISTING_VAL
 	*existing_val = splitted[1];
 	splitted[1] = NULL;
 	return (str_freemtx(splitted), *existing_val);
@@ -108,7 +109,7 @@ t_state	parse_configs(t_var *game)
 			if (i > 0 && str_ilen(filedata[i - 1]) == 0)
 				return (OK);
 		}
-		else if (parse_identify_cnf(filedata[i]) == CNF_UNKNOWN)
+		if (parse_identify_cnf(filedata[i]) == CNF_UNKNOWN)
 			return (ft_perror("Error on line %d: '%s':\n\t? configuration\n",
 					i + 1, filedata[i]), cleanup(game, true, 1), KO);
 		parse_config_line(game, filedata[i], i + 1);

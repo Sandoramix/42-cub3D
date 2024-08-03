@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:45:29 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:18:55 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef enum e_cnf
 //------------------------------------------------------------------------------
 
 /*HARD CODED VALUES (maybe)*/
-# define VELOCITY 1
+# define VELOCITY .35
 # define FOV 66
 # define SAFETY_WALL_DIST 0.1
 
