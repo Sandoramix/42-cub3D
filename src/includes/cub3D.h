@@ -61,20 +61,26 @@ void 	draw_line(t_var *game, t_dpoint start, t_dpoint end);
 void 	fill_img_buffer(t_var *game, int x, int y, int color);
 //------------------------------------------------------------------------------
 
-
 double	delta_time(t_var *game);
 
 // MLX CONFIGURATION -----------------------------------------------------------
 void	mlx_configuration(t_var *game);
 //------------------------------------------------------------------------------
 
-// EVENTS HANDLING--------------------------------------------------------------
+// EVENTS ----------------------------------------------------------------------
 int		game_loop(t_var *game);
-void	rotate_camera(t_var *game, int rotation_dir);
 int		key_press(int keycode, t_var *game);
 int		key_release(int keycode, t_var *game);
+//------------------------------------------------------------------------------
+
+// EVENTS HANDLER --------------------------------------------------------------
+void 	handle_player_movement(t_var *game, int keycode);
+void	handle_player_rotation(t_var *game, int keycode);
+void	handle_camera_rotation(t_var *game, int rotation_dir);
+int 	handle_wll_collision(t_var *game, int x, int y);
 
 //------------------------------------------------------------------------------
+
 
 // MATH FUNCTIONS --------------------------------------------------------------
 t_dpoint	calculate_point(t_dpoint *start, double angle, double distance);
