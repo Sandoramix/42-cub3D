@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 08:17:00 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:05:37 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef enum e_cnf
 # define STR_WALL_NORD "NO"
 # define STR_WALL_EAST "EA"
 # define STR_WALL_WEST "WE"
-# define STR_WALL_SOUTH "EA"
+# define STR_WALL_SOUTH "SO"
 # define STR_FLOOR "F"
 # define STR_CEILING "C"
 //------------------------------------------------------------------------------

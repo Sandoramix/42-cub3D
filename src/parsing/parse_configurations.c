@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:21:15 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 13:37:13 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:06:56 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static t_state	parse_config_line(t_var *game, char *line, int line_num)
 	if (parse_config_val_is_path(type))
 		load_xpm_image(game, parsed_data, value);
 	else
-		load_color(game, parsed_data, line, line_num);
+		load_color(game, parsed_data, value, line_num);
 	return (OK);
 }
 
