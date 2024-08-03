@@ -14,23 +14,23 @@ void rotate_camera(t_var *game, int rotation_dir)
 
 	if (rotation_dir == ROTAT_DIR_RIGHT)
 	{
-		old_dir_x = game->player_pos.dir_x;
-		game->player_pos.dir_x = game->player_pos.dir_x * game->player_pos.neg_cos_rot_speed_pos \
-		- game->player_pos.dir_y * game->player_pos.neg_sin_rot_speed_pos; 
-		game->player_pos.dir_y = old_dir_x * game->player_pos.neg_sin_rot_speed_pos + game->player_pos.dir_y * game->player_pos.neg_cos_rot_speed_pos;
+		old_dir_x = game->player.dir_x;
+		game->player.dir_x = game->player.dir_x * game->player.neg_cos_rot_speed_pos \
+		- game->player.dir_y * game->player.neg_sin_rot_speed_pos; 
+		game->player.dir_y = old_dir_x * game->player.neg_sin_rot_speed_pos + game->player.dir_y * game->player.neg_cos_rot_speed_pos;
 		old_plane_x = game->plane.x;
-		game->plane.x = game->plane.x  * game->player_pos.neg_cos_rot_speed_pos - game->plane.y *  game->player_pos.neg_sin_rot_speed_pos;
-		game->plane.y = old_plane_x *  game->player_pos.neg_sin_rot_speed_pos + game->plane.y * game->player_pos.neg_cos_rot_speed_pos; 
+		game->plane.x = game->plane.x  * game->player.neg_cos_rot_speed_pos - game->plane.y *  game->player.neg_sin_rot_speed_pos;
+		game->plane.y = old_plane_x *  game->player.neg_sin_rot_speed_pos + game->plane.y * game->player.neg_cos_rot_speed_pos; 
 	}
 	else
 	{
-		old_dir_x = game->player_pos.dir_x;
-		game->player_pos.dir_x = game->player_pos.dir_x * game->player_pos.positive_cos_rot_speed \
-		- game->player_pos.dir_y * game->player_pos.positive_sin_rot_speed; 
-		game->player_pos.dir_y = old_dir_x * game->player_pos.positive_sin_rot_speed + game->player_pos.dir_y * game->player_pos.positive_cos_rot_speed;
+		old_dir_x = game->player.dir_x;
+		game->player.dir_x = game->player.dir_x * game->player.positive_cos_rot_speed \
+		- game->player.dir_y * game->player.positive_sin_rot_speed; 
+		game->player.dir_y = old_dir_x * game->player.positive_sin_rot_speed + game->player.dir_y * game->player.positive_cos_rot_speed;
 		old_plane_x = game->plane.x;
-		game->plane.x = game->plane.x  * game->player_pos.positive_cos_rot_speed - game->plane.y *  game->player_pos.positive_sin_rot_speed;
-		game->plane.y = old_plane_x *  game->player_pos.positive_sin_rot_speed + game->plane.y * game->player_pos.positive_cos_rot_speed; 
+		game->plane.x = game->plane.x  * game->player.positive_cos_rot_speed - game->plane.y *  game->player.positive_sin_rot_speed;
+		game->plane.y = old_plane_x *  game->player.positive_sin_rot_speed + game->plane.y * game->player.positive_cos_rot_speed; 
 	}
 
 }
@@ -56,13 +56,13 @@ int key_press(int keycode, t_var *game)
         game->move.rot_right = 1;
 	/*movimento */
 	if (game->move.up)
-	    game->player_pos.y -= VELOCITY /* * game->deltatime  */;
+	    game->player.y -= VELOCITY /* * game->deltatime  */;
 	if (game->move.down)
-	    game->player_pos.y += VELOCITY /* * game->deltatime  */;
+	    game->player.y += VELOCITY /* * game->deltatime  */;
 	if (game->move.left)
-	    game->player_pos.x -= VELOCITY /* * game->deltatime  */;
+	    game->player.x -= VELOCITY /* * game->deltatime  */;
 	if (game->move.right)
-        game->player_pos.x += VELOCITY /* * game->deltatime  */;
+        game->player.x += VELOCITY /* * game->deltatime  */;
 	/**direzione */
 	if (game->move.rot_left)
 		rotate_camera(game , ROTAT_DIR_LEFT);
@@ -70,7 +70,7 @@ int key_press(int keycode, t_var *game)
 		rotate_camera(game , ROTAT_DIR_RIGHT);
 
 
-	raycasting(game);
+	rendering(game);
 	game->move.rot_left = 0;
 	game->move.rot_right = 0;
     return 0;

@@ -3,6 +3,8 @@
 
 void load_sprites(t_var *game);
 
+
+
 void config_event_handling(t_var *game)
 {
     mlx_hook(game->mlx_win, KeyPress, KeyPressMask, &key_press, &game);
@@ -15,14 +17,11 @@ void config_event_handling(t_var *game)
 void mlx_configuration(t_var *game)
 {
     game->mlx = mlx_init();
-    mlx_get_screen_size(game->mlx, &game->dda.screen_size_w_px, &game->dda.screen_size_h_px);
-    dbg_printf("screen size, x y: %d %d\n",game->dda.screen_size_w_px, game->dda.screen_size_h_px );
-	game->mlx_win = mlx_new_window(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px, "UrMom");
-    
-    game->img = mlx_new_image(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px);
+	game->mlx_win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
+    game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp, &game->line_bytes, &game->endian);
     
     //load_sprites();
-    raycasting(game);
+    rendering(game);
     config_event_handling(game);
 }

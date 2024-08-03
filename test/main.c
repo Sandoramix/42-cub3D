@@ -49,7 +49,8 @@ void mlx_handling(t_var *game)
 {
 	game->mlx = mlx_init();
 	mlx_get_screen_size(game->mlx, &game->dda.screen_size_w_px, &game->dda.screen_size_h_px);
-	game->mlx_win = mlx_new_window(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px, "UrMom");
+	printf("w h%d, %d", game->dda.screen_size_w_px, game->dda.screen_size_h_px);
+	game->mlx_win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 
 	game->img = mlx_new_image(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px);
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp, &game->line_bytes, &game->endian);
@@ -57,17 +58,17 @@ void mlx_handling(t_var *game)
 
 void init_hardcoded_value(t_var *game)
 {
-	game->player_pos.x = 3;
-	game->player_pos.y = 2;
+	game->player.x = 3;
+	game->player.y = 2;
 
 
-	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player_pos.x, game->player_pos.y);
+	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x, game->player.y);
 	
 	/*gestire direzione il player is facing in base al parsing*/
-	game->player_pos.dir_x = cos(PLAYER_ANGLE);
-	game->player_pos.dir_y = sin(PLAYER_ANGLE);
+	game->player.dir_x = cos(PLAYER_ANGLE);
+	game->player.dir_y = sin(PLAYER_ANGLE);
 
-	/* printf("player dir %f, %f\n", game->player_pos.dir_x, game->player_pos.dir_y); */
+	/* printf("player dir %f, %f\n", game->player.dir_x, game->player.dir_y); */
 
 	game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
 	game->plane.y = 0.66; 	// offset di 0.66unita sull asse delle Y
@@ -79,10 +80,10 @@ void init_hardcoded_value(t_var *game)
 
     double rotSpeed = delta_time(game) + 0.05; //the constant value is in radians/second
 	/* printf("rotation speed %f\n", rotSpeed); */
-	game->player_pos.positive_cos_rot_speed = cos(rotSpeed);
-	game->player_pos.positive_sin_rot_speed = sin(rotSpeed);
-	game->player_pos.neg_cos_rot_speed_pos = cos(-rotSpeed);
-	game->player_pos.neg_sin_rot_speed_pos = sin(-rotSpeed);
+	game->player.positive_cos_rot_speed = cos(rotSpeed);
+	game->player.positive_sin_rot_speed = sin(rotSpeed);
+	game->player.neg_cos_rot_speed_pos = cos(-rotSpeed);
+	game->player.neg_sin_rot_speed_pos = sin(-rotSpeed);
 
 }
 
@@ -112,7 +113,7 @@ int main(/* int ac, char **av */)
 	parsing(&game);
 	mlx_handling(&game);
 	init_hardcoded_value(&game); 
-	raycasting(&game);
+	rendering(&game);
 	mlx_hook(game.mlx_win, KeyPress, KeyPressMask, &key_press, &game);
     mlx_hook(game.mlx_win, KeyRelease, KeyReleaseMask, &key_release, &game);
 	mlx_hook(game.mlx_win, 17, 0, mlx_loop_end, game.mlx);

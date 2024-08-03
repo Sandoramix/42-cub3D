@@ -35,11 +35,11 @@ SRC = ./main.c \
         ../src/parsing/parse.c \
         ../src/parsing/parse_configurations.c \
         ../src/parsing/parse_utils.c \
-        ../src/raycasting/drawing_helpers.c \
-        ../src/raycasting/math_helpers.c \
-        ../src/raycasting/raycasting_helpers.c \
-        ../src/raycasting/raycasting_init.c \
-        ../src/raycasting/raycasting_logic.c
+        ../src/rendering/drawing_helpers.c \
+        ../src/rendering/math_helpers.c \
+        ../src/rendering/rendering_helpers.c \
+        ../src/rendering/rendering_init.c \
+        ../src/rendering/rendering_logic.c
 
 # ----RULES---------------------------------------------------------------------
 
