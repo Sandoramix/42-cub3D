@@ -133,9 +133,9 @@ typedef enum e_cnf
 //------------------------------------------------------------------------------
 
 /*HARD CODED VALUES (maybe)*/
-# define VELOCITY 1
+# define VELOCITY 0.6666
 # define FOV 66
-# define SAFETY_WALL_DIST 0.1
+# define SAFETY_WALL_DIST 0.25
 
 # define PLAYER_ANGLE 270
 

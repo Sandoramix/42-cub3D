@@ -38,7 +38,7 @@ SRC = ./main.c \
 	./src/rendering/math_helpers.c \
 	./src/rendering/rendering_helpers.c \
 	./src/rendering/rendering_init.c \
-	./src/rendering/rendering_logic.c
+	./src/rendering/rendering.c
 # ----RULES---------------------------------------------------------------------
 
 all: $(NAME)

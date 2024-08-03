@@ -28,6 +28,9 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 
+	double offset;
+	double pos_z;
+
 }	t_player;
 
 typedef struct s_dpoint
