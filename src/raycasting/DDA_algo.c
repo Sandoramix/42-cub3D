@@ -1,6 +1,10 @@
 #include <libft.h>
 #include "cub3D.h"
 
+int create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
 double pi()
 {
@@ -20,47 +24,59 @@ t_dpoint calculate_point(t_dpoint *start, double angle, double distance)
 		angle = 360 + angle;
 	end.x = (start->x + (distance * cos(from_angle_to_radiant(angle))) * 64);
 	end.y = (start->y + (distance * sin(from_angle_to_radiant(angle))) * 64);
-	
+
 	return end;
 }
 
-void draw_line(t_var *game, t_dpoint start, t_dpoint end) {
-    t_dpoint delta;
+static void write_into_buffer(t_var *game, int x, int y, int color)
+{
+	int pixel = (y * game->line_bytes) + (x * sizeof(int)	);
+	game->buffer[pixel + 0] = (color >> 24);
+    game->buffer[pixel + 1] = (color >> 16) & 0xFF;
+    game->buffer[pixel + 2] = (color >> 8) & 0xFF;
+    game->buffer[pixel + 3] = (color) & 0xFF;
+}
+
+
+void draw_line(t_var *game, t_dpoint start, t_dpoint end)
+{
+	t_dpoint delta;
 	t_dpoint increment;
 	t_dpoint next_point;
 	int pixels;
 	int counter;
-	
+
 	delta = (t_dpoint){end.x - start.x, end.y - start.y};
-	pixels = sqrt((delta.x * delta.x) + (delta.y  * delta.y ));
-	increment = (t_dpoint){delta.x / pixels, delta.y  / pixels};
+	pixels = sqrt((delta.x * delta.x) + (delta.y * delta.y));
+	increment = (t_dpoint){delta.x / pixels, delta.y / pixels};
 	next_point = (t_dpoint){start.x, start.y};
 	counter = 0;
-	while(counter < pixels) {
-		mlx_pixel_put(game->mlx, game->mlx_win, (int)next_point.x, (int)next_point.y, 0x0000FF); // Color white
+	while (counter < pixels)
+	{
+		write_into_buffer(game, (int)next_point.x, (int)next_point.y, mlx_get_color_value(game->mlx, 0x0000FF));
+		// mlx_pixel_put(game->mlx, game->win_ptr, (int)next_point.x, (int)next_point.y, 0x0000FF); // Color white
 		next_point.x += increment.x;
 		next_point.y += increment.y;
 		counter++;
 	}
 
-   /*  printf("Drawing line from (%f, %f) to (%f, %f)\n", start.x, start.y, end.x, end.y); */
+	/*  printf("Drawing line from (%f, %f) to (%f, %f)\n", start.x, start.y, end.x, end.y); */
 }
 
- void draw_minimap_rays(t_var *game) {
-    t_dpoint start;
-    t_dpoint result;
-    double angle;
+void draw_minimap_rays(t_var *game)
+{
+	t_dpoint start;
+	t_dpoint result;
+	double angle;
 
-	angle = -FOV/2;
-    start = (t_dpoint){game->player_pos.x + game->plane.x, game->player_pos.y + game->plane.y };
-	while(angle <= FOV/2)
+	angle = -FOV / 2;
+	start = (t_dpoint){game->player_pos.x + game->plane.x, game->player_pos.y + game->plane.y};
+	while (angle <= FOV / 2)
 	{
 		result = calculate_point(&start, angle, game->dda.wall_dist);
-        draw_line(game, start, result);
+		draw_line(game, start, result);
 		angle++;
 	}
-    
-        
 }
 
 static void get_multiplication_factor(t_var *game)
@@ -68,7 +84,7 @@ static void get_multiplication_factor(t_var *game)
 	game->dda.delta_dist_x = fabs(1 / game->dda.dir_rayx);
 	game->dda.delta_dist_y = fabs(1 / game->dda.dir_rayy);
 
-    // printf("delta_dist_x, delta_dist_y %f %f\n",game->dda.delta_dist_x, game->dda.delta_dist_y);
+	// printf("delta_dist_x, delta_dist_y %f %f\n",game->dda.delta_dist_x, game->dda.delta_dist_y);
 }
 
 static void get_ray_direction(t_var *game, int pixel_pos_x)
@@ -76,9 +92,8 @@ static void get_ray_direction(t_var *game, int pixel_pos_x)
 	game->dda.camera_x = (double)(2 * pixel_pos_x) / (double)game->dda.screen_size_w_px - 1;
 	game->dda.dir_rayx = game->player_pos.dir_x + game->plane.x * game->dda.camera_x;
 	game->dda.dir_rayy = game->player_pos.dir_y + game->plane.y * game->dda.camera_x;
-	//printf("Angle of the ray: %f radians\n", atan2(game->dda.dir_rayy, game->dda.dir_rayx));
+	// printf("Angle of the ray: %f radians\n", atan2(game->dda.dir_rayy, game->dda.dir_rayx));
 }
-
 
 void copy_player_pos(t_var *game)
 {
@@ -109,26 +124,41 @@ void calc_relative_line_height(t_var *game)
 {
 	game->dda.line_h_px = (int)(game->dda.screen_size_w_px / game->dda.wall_dist);
 }
+void write_into_buffe(t_var *game, int x, int y, int color)
+{
+	int pixel = (y * game->line_bytes) + (x * sizeof(int)	);
+	game->buffer[pixel + 0] = (color >> 24);
+    game->buffer[pixel + 1] = (color >> 16) & 0xFF;
+    game->buffer[pixel + 2] = (color >> 8) & 0xFF;
+    game->buffer[pixel + 3] = (color) & 0xFF;
+}
+
 
 void draw_walls(t_var *game, int pixel_pos_x)
 {
 	int y = game->dda.draw_start_px;
-	int print_every_tot_line = 2;
+	int print_every_tot_line = 1;
 	if (pixel_pos_x % print_every_tot_line == 0)
 	{
 		while (y <= game->dda.draw_end_px)
 		{
 			if (game->dda.side == 1)
-				mlx_pixel_put(game->mlx, game->mlx_win, pixel_pos_x, y, 0XFF0000);
+				write_into_buffe(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x0));
+				// mlx_pixel_put(game->mlx, game->win_ptr, pixel_pos_x, y, 0XFF0000);
 			else
-				mlx_pixel_put(game->mlx, game->mlx_win, pixel_pos_x, y, 0X0000FF);
+				write_into_buffe(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0xFFFFFF));
+
+				// mlx_pixel_put(game->mlx, game->win_ptr, pixel_pos_x, y, 0X0000FF);
 			y++;
 		}
 	}
 }
 
-void wall_casting(t_var *game, int pixel_pos_x)
+void wall_casting(t_var *game)
 {
+	int pixel_pos_x;
+
+	pixel_pos_x = 0;
 	while (pixel_pos_x < game->dda.screen_size_w_px)
 	{
 		set_up_dda_vars(game, pixel_pos_x);
@@ -141,58 +171,53 @@ void wall_casting(t_var *game, int pixel_pos_x)
 		pixel_pos_x++;
 	}
 }
-
-
- void floor_ceiling_casting(t_var *game)
+void rite_into_buffe(t_var *game, int x, int y, int color)
 {
-	int pixel_pos_y;
-	pixel_pos_y = 0;
-	int pixel_pos_x;
-	pixel_pos_x = 0;
+	int pixel = (y * game->line_bytes) + (x * sizeof(int)	);
+	game->buffer[pixel + 0] = (color >> 24);
+    game->buffer[pixel + 1] = (color >> 16) & 0xFF;
+    game->buffer[pixel + 2] = (color >> 8) & 0xFF;
+    game->buffer[pixel + 3] = (color) & 0xFF;
+}
 
-/* 	float rayDirX0;
-	float rayDirY0;
-	float rayDirX1;
-	float rayDirY1;
-	float posZ;
-	int p;
-	float rowDistance;
-	float floorStepX;
-    float floorStepY;
-	float floorX;
-    float floorY; */
-/* 	int cellX;
-	int cellY; */
-	while(pixel_pos_y < game->dda.screen_size_h_px)
+
+void print_rectangle(t_var *game, t_point start, t_point end, int color)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (start.y < end.y)
 	{
-		pixel_pos_x = 0;
-/* 		rayDirX0 = game->player_pos.x  - game->player_pos.dir_x;
-    	rayDirY0 = game->player_pos.y  - game->player_pos.dir_y;
-    	rayDirX1 = game->player_pos.x  + game->player_pos.dir_x;
-    	rayDirY1 = game->player_pos.y + game->player_pos.dir_y;
-		p = pixel_pos_y -  game->dda.screen_size_h_px / 2;
-		posZ = 0.5 * game->dda.screen_size_h_px;
-		
-		rowDistance = posZ / p;
-		floorStepX = rowDistance * (rayDirX1 - rayDirX0) / game->dda.screen_size_w_px;
-		floorStepY = rowDistance * (rayDirY1 - rayDirY0) / game->dda.screen_size_w_px;
-		floorX = game->player_pos.x + rowDistance * rayDirX0;
-		floorY = game->player_pos.y + rowDistance * rayDirY0; */
-		while(pixel_pos_x < game->dda.screen_size_w_px)
-		{	
-/* 			cellX = (int)(floorX);
-        	cellY = (int)(floorY); */
-			mlx_pixel_put(game->mlx, game->mlx_win, pixel_pos_x, pixel_pos_y, 0xa1a1a1);
-			pixel_pos_x++;
+		start.x = 0;
+		while (start.x < end.x)
+		{
+			rite_into_buffe(game,  start.x,  start.y, mlx_get_color_value(game->mlx, color));
+			// mlx_pixel_put(game->mlx, game->win_ptr, start.x, start.y, color);
+			start.x++;
 		}
-		pixel_pos_y++;
+		start.y++;
 	}
-} 
+}
+
+void floor_ceiling_casting(t_var *game)
+{
+	t_point ceiling_start;
+	t_point ceiling_end;
+	t_point floor_start;
+	t_point floor_end;
+
+	ceiling_start = (t_point){0, 0};
+	ceiling_end = (t_point){game->dda.screen_size_w_px, game->dda.screen_size_h_px / 2};
+	floor_start = (t_point){0, game->dda.screen_size_h_px / 2};
+	floor_end = (t_point){game->dda.screen_size_w_px, game->dda.screen_size_h_px};
+	print_rectangle(game, ceiling_start, ceiling_end, 0x00FF00);
+	print_rectangle(game, floor_start, floor_end, 0xFF0000);
+}
 
 void raycasting(t_var *game)
 {
-	int pixel_pos_x;
-	pixel_pos_x = 0;	
 	floor_ceiling_casting(game);
-	wall_casting(game, pixel_pos_x); 
+	wall_casting(game);
 }

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 08:29:32 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 09:52:59 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,11 @@ typedef struct s_var
 {
 	void			*mlx;
 	void			*mlx_win;
-
+	void			*img;
+	char			*buffer;
+	int				bpp;
+	int				endian;
+	int				line_bytes;
 	t_player		player_pos;
 	t_movement		move;
 	t_DDA			dda;

@@ -136,9 +136,8 @@ char **read_file()
 void mlx_handling(t_var *game)
 {
 	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, 1600, 1080, "UrMom");
-
-
+	mlx_get_screen_size(game->mlx, &game->dda.screen_size_w_px, &game->dda.screen_size_h_px);
+	game->mlx_win = mlx_new_window(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px, "UrMom");
 
 	/* game->sprite.white_sprite = mlx_xpm_file_to_image(game->mlx,
 			"../assets/sprites/white_sprite.xpm",
@@ -150,11 +149,9 @@ void mlx_handling(t_var *game)
 		"../assets/sprites/player_minimap.xpm",
 			&game->sprite.mini_player_w, &game->sprite.mini_player_h); */
 
-
-
-	
-	
-
+	game->img = mlx_new_image(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px);
+	game->buffer = mlx_get_data_addr(game->img, &game->bpp, &game->line_bytes, &game->endian);
+	/* ft_printf("bpp %i\n line bytes %i endian %i \n", game->bpp, game->line_bytes, game->endian); */
 }
 
 void init_hardcoded_value(t_var *game)
@@ -185,8 +182,7 @@ void init_hardcoded_value(t_var *game)
 	game->player_pos.positive_sin_rot_speed = sin(rotSpeed);
 	game->player_pos.neg_cos_rot_speed_pos = cos(-rotSpeed);
 	game->player_pos.neg_sin_rot_speed_pos = sin(-rotSpeed);
-	game->dda.screen_size_w_px = 1600.0;
-	game->dda.screen_size_h_px = 1080.0;
+
 }
 
 void parsing(t_var *game)
@@ -204,6 +200,8 @@ void parsing(t_var *game)
 		cleanup(game, true, KO);
 }
 
+
+
 int main(/* int ac, char **av */)
 {
 	struct s_var game;
@@ -217,6 +215,6 @@ int main(/* int ac, char **av */)
 	mlx_hook(game.mlx_win, KeyPress, KeyPressMask, &key_press, &game);
     mlx_hook(game.mlx_win, KeyRelease, KeyReleaseMask, &key_release, &game);
 	mlx_hook(game.mlx_win, 17, 0, mlx_loop_end, game.mlx);
-	mlx_loop_hook(game.mlx, &game_loop, &game);
+	//mlx_loop_hook(game.mlx, &game_loop, &game);
 	mlx_loop(game.mlx);
 }

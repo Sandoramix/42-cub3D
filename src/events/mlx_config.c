@@ -15,9 +15,11 @@ void config_event_handling(t_var *game)
 void mlx_configuration(t_var *game)
 {
     game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, 1600, 1080, "UrMom");
+    mlx_get_screen_size(game->mlx, &game->dda.screen_size_w_px, &game->dda.screen_size_h_px);
+    dbg_printf("screen size, x y: %d %d\n",game->dda.screen_size_w_px, game->dda.screen_size_h_px );
+	game->mlx_win = mlx_new_window(game->mlx, game->dda.screen_size_w_px, game->dda.screen_size_h_px, "UrMom");
 
     //load_sprites();
-    
+    raycasting(game);
     config_event_handling(game);
 }
