@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:43:47 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:39:27 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:43:52 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ void init_hardcoded_value(t_var *game)
 	game->mapinfo.mtxint = cmtxtoimtx(game->mapinfo.map,
 			game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
 
-	game->player_pos.x = 3;
-	game->player_pos.y = 2;
+	game->player.x = 3;
+	game->player.y = 2;
 
 
-	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player_pos.x, game->player_pos.y);
+	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x, game->player.y);
 	/*gestire direzione il player is facing in base al parsing*/
-	game->player_pos.dir_x = cos(PLAYER_ANGLE);
-	game->player_pos.dir_y = sin(PLAYER_ANGLE);
+	game->player.dir_x = cos(PLAYER_ANGLE);
+	game->player.dir_y = sin(PLAYER_ANGLE);
 
-	/* printf("player dir %f, %f\n", game->player_pos.dir_x, game->player_pos.dir_y); */
+	/* printf("player dir %f, %f\n", game->player.dir_x, game->player.dir_y); */
 
 	game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
 	game->plane.y = 0.66; 	// offset di 0.66unita sull asse delle Y
@@ -84,10 +84,14 @@ void init_hardcoded_value(t_var *game)
 
     double rotSpeed = delta_time(game) + 0.05; //the constant value is in radians/second
 	/* printf("rotation speed %f\n", rotSpeed); */
-	game->player_pos.positive_cos_rot_speed = cos(rotSpeed);
-	game->player_pos.positive_sin_rot_speed = sin(rotSpeed);
-	game->player_pos.neg_cos_rot_speed_pos = cos(-rotSpeed);
-	game->player_pos.neg_sin_rot_speed_pos = sin(-rotSpeed);
+	game->player.positive_cos_rot_speed = cos(rotSpeed);
+	game->player.positive_sin_rot_speed = sin(rotSpeed);
+	game->player.neg_cos_rot_speed_pos = cos(-rotSpeed);
+	game->player.neg_sin_rot_speed_pos = sin(-rotSpeed);
+
+	// TODO dynamic
+	game->dda.screen_size_w_px = WINDOW_WIDTH;
+	game->dda.screen_size_h_px = WINDOW_HEIGHT;
 
 }
 

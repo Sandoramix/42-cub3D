@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:05:37 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 14:45:29 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,8 @@ typedef enum e_cnf
 
 # define PLAYER_ANGLE 270
 
-#define WINDOW_WIDTH 1920
-#define WINDOW_HEIGHT 1080
-#define WINDOW_NAME "UrMom!"	
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
+# define WINDOW_NAME "UrMom!"
 
 #endif
