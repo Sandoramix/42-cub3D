@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:11:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 09:56:03 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/03 13:36:11 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	free_config(t_var *game)
 {
 	if (game->mlx)
 	{
-		mlx_destroy_image(game->mlx, game->config.wall_nord.image);
-		mlx_destroy_image(game->mlx, game->config.wall_east.image);
-		mlx_destroy_image(game->mlx, game->config.wall_west.image);
-		mlx_destroy_image(game->mlx, game->config.wall_south.image);
+		mlx_destroy_image(game->mlx, game->config.wall_nord);
+		mlx_destroy_image(game->mlx, game->config.wall_east);
+		mlx_destroy_image(game->mlx, game->config.wall_west);
+		mlx_destroy_image(game->mlx, game->config.wall_south);
 	}
 	str_freemtx(game->mapinfo.file_content);
 	str_freemtx(game->mapinfo.map);

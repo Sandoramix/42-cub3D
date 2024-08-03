@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 12:43:47 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 13:05:25 by odudniak         ###   ########.fr       */
+/*   Created: 2024/08/03 13:35:13 by odudniak          #+#    #+#             */
+/*   Updated: 2024/08/03 13:35:59 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-int	main(int ac, char **av)
+t_state	load_xpm_image(t_var *game, t_img **img, char *path)
 {
-	t_var	game;
+	void	*res;
 
-	ft_bzero(&game, sizeof(t_var));
-	game.mlx = mlx_init();
-	if (!game.mlx)
-		return (pf_errcode(E_MLX), cleanup(&game, true, 1), 1);
-	parse(&game, ac, av);
-	mlx_configuration(&game);
-	//draw first frame
-	raycasting(&game);
-	return (0);
+	res = mlx_xpm_file_to_image(game->mlx, path,
+			&game->config._w, &game->config._h);
+	if (!res)
+		return (ft_perror("Error: cannot load sprite from '%s'. \
+		Check if it is a valid xpm image\n", path),
+			cleanup(game, true, 1), KO);
+	*img = res;
+	return (OK);
 }
