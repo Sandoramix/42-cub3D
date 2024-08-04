@@ -1,5 +1,20 @@
 #include "cub3D.h"
 
+t_dpoint calc_texture_px_hit(t_var * game)
+{
+	t_dpoint end;
+	t_dpoint start;
+	double angle;
+
+
+	start = (t_dpoint){game->player.x , game->player.y};
+	angle = atan2(game->player.dir_x, game->player.dir_y);
+	angle *= 180 / pi(); 
+	end = calculate_point(start, angle, game->dda.wall_dist);
+
+	return end;
+}
+
 void wall_casting(t_var *game)
 {
 	int pixel_pos_x;
@@ -12,6 +27,11 @@ void wall_casting(t_var *game)
 		calc_distance_from_wall(game);
 		calc_relative_line_height(game);
 		put_line_h_in_perspective(game);
+
+
+		// t_dpoint endpx = calc_texture_px_hit(game);
+		// printf("x y %f %f\n", endpx.x, endpx.y);
+		
 		draw_walls(game, pixel_pos_x);
 		pixel_pos_x++;
 	}
