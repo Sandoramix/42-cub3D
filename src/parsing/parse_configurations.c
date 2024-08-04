@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:21:15 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 17:15:52 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 10:17:26 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static char	*validate_config_line(t_var *game, char *line, int line_n)
 	splitted = str_split_first(line, ' ');
 	if (!splitted)
 		return (pf_errcode(E_MALLOC), cleanup(game, true, 1), NULL);
+	*existing_val = str_trim(splitted[1], " \t\r\v\n\f");
+	if (!*existing_val)
+		return (pf_errcode(E_MALLOC), cleanup(game, true, 1), NULL);
 	if (parse_config_val_is_path(type)
-		&& !is_filepath_valid(line, line_n, splitted[1]))
+		&& !is_filepath_valid(line, line_n, *existing_val))
 		return (str_freemtx(splitted), cleanup(game, true, 1), NULL);
-	// TODO ADD TRIM TO EXISTING_VAL
-	*existing_val = splitted[1];
-	splitted[1] = NULL;
 	return (str_freemtx(splitted), *existing_val);
 }
 
@@ -75,6 +75,7 @@ t_state	load_color(t_var *game, t_rgb *rgb, char *value, int line_num)
 	rgb->color.red = validate_color_val(game, split, split[0], line_num);
 	rgb->color.green = validate_color_val(game, split, split[1], line_num);
 	rgb->color.blue = validate_color_val(game, split, split[2], line_num);
+	str_freemtx(split);
 	return (OK);
 }
 
