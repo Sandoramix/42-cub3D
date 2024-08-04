@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:47:27 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:51:57 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 # include <cub3D_structs.h>
 
 // TODO : split each category in separate file if (it will) needed.
+// TODO : split each category in separate file if (it will) needed.
 
+//-PARSING----------------------------------------------------------------------
 //-PARSING----------------------------------------------------------------------
 t_state		parse(t_var *game, int ac, char **av);
 //------------------------------------------------------------------------------
@@ -35,6 +37,7 @@ double		chr_player_to_angle(char player_c);
 //GENERIC UTILS
 void		print_missing_config(t_var *game);
 bool		is_config_missing(t_var *game);
+bool		chr_is_player(char c);
 bool		chr_is_player(char c);
 
 //MLX UTILS

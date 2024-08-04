@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:45:29 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 10:45:40 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@
 #  define KEY_D XK_d
 #  define KEY_LEFT XK_Left
 #  define KEY_RIGHT XK_Right
+
 #  define ESC_KEY XK_Escape 
+#  define ESC_KEY XK_Escape
 
 # endif // __linux__
 
@@ -133,9 +135,16 @@ typedef enum e_cnf
 //------------------------------------------------------------------------------
 
 /*HARD CODED VALUES (maybe)*/
-# define VELOCITY 1
+# define VELOCITY 100
 # define FOV 66
-# define SAFETY_WALL_DIST 0.1
+
+
+# define SAFETY_WALL_DIST 1
+# define Z_ACCELLERATION 200
+# define CAMERA_HIGH_LIMIT 100
+# define CAMERA_LOW_LIMIT -100
+# define JUMP_LIMIT 400
+# define CROUCH_HEIGHT 200
 
 # define PLAYER_ANGLE 270
 
