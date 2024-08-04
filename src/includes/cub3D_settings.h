@@ -77,6 +77,7 @@
 #  define KEY_D XK_d
 #  define KEY_LEFT XK_Left
 #  define KEY_RIGHT XK_Right
+
 #  define ESC_KEY XK_Escape 
 
 # endif // __linux__
@@ -136,6 +137,7 @@ typedef enum e_cnf
 # define VELOCITY .35
 # define FOV 66
 # define SAFETY_WALL_DIST 0.25
+# define Z_ACCELLERATION 200
 
 # define PLAYER_ANGLE 270
 
