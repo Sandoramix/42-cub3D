@@ -86,8 +86,8 @@ typedef struct s_map_info
 	char	**map;
 
 	int		**mtxint;
-	double	rows_mtx;
-	double	cols_mtx;
+	int	rows_mtx;
+	int	cols_mtx;
 
 	char	**file_content;
 }	t_map;
