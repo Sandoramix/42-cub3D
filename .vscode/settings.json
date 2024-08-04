@@ -34,7 +34,10 @@
 	],
 	"C_Cpp.default.intelliSenseMode": "linux-clang-x64",
 	"files.associations": {
-		"cub3d.h": "c"
+		"cub3d.h": "c",
+		"cub3d_structs.h": "c",
+		"cub3d_settings.h": "c",
+		"mlx_int.h": "c"
 	},
 	"files.exclude": {
 		"**/.git": true,

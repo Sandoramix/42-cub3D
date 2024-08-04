@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 15:44:55 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 11:12:01 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,15 @@
 # include <cub3D_settings.h>
 # include <cub3D_structs.h>
 
-// TODO split each category in separate file if (it will) needed.
+// TODO : split each category in separate file if (it will) needed.
 
-// PARSING----------------------------------------------------------------------
+//-PARSING----------------------------------------------------------------------
 t_state		parse(t_var *game, int ac, char **av);
 t_state		parse_configs(t_var *game);
+
+t_state		parse_map(t_var *game);
+//------------------------------------------------------------------------------
+
 // PARSING UTILS
 char		**get_config_pointed_str(t_var *game, t_cnf type);
 /**
@@ -42,8 +46,11 @@ bool		is_filepath_valid(char *line, int line_n, char *path);
 //------------------------------------------------------------------------------
 //GENERIC UTILS
 
+void	update_player(t_var *game, int x, int y, double angle);
+
 void		print_missing_config(t_var *game);
 bool		is_config_missing(t_var *game);
+bool		chr_is_player(char c);
 
 //MLX UTILS
 t_state		load_xpm_image(t_var *game, t_img **img, char *path);
@@ -78,10 +85,10 @@ int			key_release(int keycode, t_var *game);
 //------------------------------------------------------------------------------
 
 // EVENTS HANDLER --------------------------------------------------------------
-void 	handle_player_movement(t_var *game, int keycode);
-void	handle_player_rotation(t_var *game, int keycode);
-void	handle_camera_rotation(t_var *game, int rotation_dir);
-int 	handle_wll_collision(t_var *game, double x, double y);
+void		handle_player_movement(t_var *game, int keycode);
+void		handle_player_rotation(t_var *game, int keycode);
+void		handle_camera_rotation(t_var *game, int rotation_dir);
+int			handle_wll_collision(t_var *game, double x, double y);
 
 //------------------------------------------------------------------------------
 

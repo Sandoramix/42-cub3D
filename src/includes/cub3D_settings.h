@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 17:18:55 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 10:45:40 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@
 #  define KEY_D XK_d
 #  define KEY_LEFT XK_Left
 #  define KEY_RIGHT XK_Right
-#  define ESC_KEY XK_Escape 
+#  define ESC_KEY XK_Escape
 
 # endif // __linux__
 

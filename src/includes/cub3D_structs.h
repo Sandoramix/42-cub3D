@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 13:11:48 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 11:04:24 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 
-	double offset;
-	double pos_z;
+	double	offset;
+	double	pos_z;
 
+	double	angle;
 }	t_player;
 
 typedef struct s_dpoint
