@@ -32,11 +32,6 @@ void draw_walls(t_var *game, int pixel_pos_x)
 
 void draw_rectangle(t_var *game, t_point start, t_point end, int color)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
 	while (start.y < end.y)
 	{
 		start.x = 0;

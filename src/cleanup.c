@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:11:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:04:16 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:43:36 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static void	free_config(t_var *game)
 	free(game->config.wall_east_path);
 	free(game->config.wall_west_path);
 	free(game->config.wall_south_path);
+	//TODO: REMOVE ME
+	ft_freemtx(game->mapinfo.mtxint, game->mapinfo.rows_mtx);
+	safe_destroy_img(game->mlx, game->img);
 }
 
 int	cleanup(t_var *game, bool should_exit, int statuscode)

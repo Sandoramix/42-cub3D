@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_configurations.c                             :+:      :+:    :+:   */
+/*   parse_configs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:21:15 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:06:56 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:42:31 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3D.h>
+#include <cub3D_parse.h>
 
 /**
  * @brief Validate the configuration by checking if there's already set up the
@@ -26,15 +26,15 @@ static char	*validate_config_line(t_var *game, char *line, int line_n)
 	char		**splitted;
 	char		**existing_val;
 
-	existing_val = get_config_pointed_str(game, type);
-	if (*existing_val)
+	existing_val = parse_get_config_pointed_str(game, type);
+	if (existing_val && *existing_val)
 		return (ft_perror("Error on line %d: '%s': duplicate config\n",
 				line_n, line), cleanup(game, true, 1), NULL);
 	splitted = str_split_first(line, ' ');
 	if (!splitted)
 		return (pf_errcode(E_MALLOC), cleanup(game, true, 1), NULL);
 	if (parse_config_val_is_path(type)
-		&& !is_filepath_valid(line, line_n, splitted[1]))
+		&& !parse_is_filepath_valid(line, line_n, *existing_val))
 		return (str_freemtx(splitted), cleanup(game, true, 1), NULL);
 	*existing_val = splitted[1];
 	splitted[1] = NULL;
@@ -84,7 +84,7 @@ static t_state	parse_config_line(t_var *game, char *line, int line_num)
 	void		*parsed_data;
 
 	value = validate_config_line(game, line, line_num);
-	parsed_data = get_config_pointed_data(game, type);
+	parsed_data = parse_get_config_pointed_data(game, type);
 	if (parse_config_val_is_path(type))
 		load_xpm_image(game, parsed_data, value);
 	else

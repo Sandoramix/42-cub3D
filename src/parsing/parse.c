@@ -6,37 +6,13 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:46:08 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:17:35 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:43:28 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3D.h>
+#include <cub3D_parse.h>
 
-static int	validate_map_filepath(t_var *game, int ac, char **av)
-{
-	char	*file;
-	int		fd;
-
-	if (ac != 2)
-		return (pf_errcode(E_INVALID_ARGC), cleanup(game, true, 1), -1);
-	file = av[1];
-	if (!str_endswith(file, ".cub"))
-		return (ft_perror("Error: invalid suffix (.cub) of file %s\n", file),
-			cleanup(game, true, 1), -1);
-	if (file_isdir(file))
-		return (ft_perror("Error: %s is a directory\n", file),
-			cleanup(game, true, 1), -1);
-	if (!file_exists(file))
-		return (ft_perror("Error: file %s does not exist\n", file),
-			cleanup(game, true, 1), -1);
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (ft_perror("Error: file %s doesn't have +r permissions\n", file),
-			cleanup(game, true, 1), -1);
-	return (fd);
-}
-
-t_state	parse_map(t_var *game)
+static t_state	load_map(t_var *game)
 {
 	char	**file_content;
 	int		i;
@@ -44,7 +20,7 @@ t_state	parse_map(t_var *game)
 	file_content = game->mapinfo.file_content;
 	i = str_mtxlen(file_content) - 1;
 	if (i <= 0)
-		return (pf_errcode(E_DEFAULT), cleanup(game, true, 1), KO); // SHOULDN'T HAPPEN
+		return (pf_errcode(E_DEFAULT), cleanup(game, true, 1), KO);
 	while (i >= 0)
 	{
 		if (parse_identify_cnf(file_content[i]) != CNF_UNKNOWN)
@@ -62,21 +38,27 @@ t_state	parse_map(t_var *game)
 	return (OK);
 }
 
-static t_state	parse_content(t_var *game)
+static void	calc_map_size(t_var *game)
 {
-	parse_configs(game);
-	if (is_config_missing(game))
-		return (print_missing_config(game), cleanup(game, true, 1), KO);
-	// TODO: map parsing
-	parse_map(game);
-	return (OK);
+	int		i;
+
+	game->mapinfo.rows_mtx = str_mtxlen(game->mapinfo.map);
+	if (game->mapinfo.rows_mtx == 0)
+		return ;
+	game->mapinfo.cols_mtx = str_ilen(game->mapinfo.map[0]);
+	i = -1;
+	while (game->mapinfo.map[++i])
+	{
+		if (game->mapinfo.cols_mtx < str_ilen(game->mapinfo.map[i]))
+			game->mapinfo.cols_mtx = str_ilen(game->mapinfo.map[i]);
+	}
 }
 
 t_state	parse(t_var *game, int ac, char **av)
 {
 	int		file_fd;
 
-	file_fd = validate_map_filepath(game, ac, av);
+	file_fd = parse_validate_map_filepath(game, ac, av);
 	game->mapinfo.file_content = ft_readfile(file_fd, false);
 	close(file_fd);
 	if (!game->mapinfo.file_content)
@@ -85,6 +67,11 @@ t_state	parse(t_var *game, int ac, char **av)
 		cleanup(game, true, 1);
 		return (KO);
 	}
-	parse_content(game);
+	parse_configs(game);
+	if (is_config_missing(game))
+		return (print_missing_config(game), cleanup(game, true, 1), KO);
+	load_map(game);
+	calc_map_size(game);
+	parse_map(game);
 	return (OK);
 }

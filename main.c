@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:43:47 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:43:52 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:46:42 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,13 @@ static int **cmtxtoimtx(char **mtx, int col, int row)
 //TODO purge me
 void init_hardcoded_value(t_var *game)
 {
-
 	if (ft_isdebug())
 	{
 		dbg_printf("LOADED MAP:\n");
 		ft_putstrmtx(game->mapinfo.map);
 	}
 
-	game->mapinfo.rows_mtx = str_mtxlen(game->mapinfo.map);
-	game->mapinfo.cols_mtx = str_ilen(game->mapinfo.map[0]);
-	for (int i = 0; game->mapinfo.map[i]; i++){
-		if (game->mapinfo.cols_mtx < str_ilen(game->mapinfo.map[i]))
-			game->mapinfo.cols_mtx = str_ilen(game->mapinfo.map[i]);
-	}
-
-	printf("Map sizes:\trows[%f]\tcols[%f]\n", game->mapinfo.rows_mtx,
+	printf("Map sizes:\trows[%i]\tcols[%i]\n", game->mapinfo.rows_mtx,
 		game->mapinfo.cols_mtx);
 
 
@@ -67,7 +59,7 @@ void init_hardcoded_value(t_var *game)
 	game->player.y = 7;
 
 
-	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x, game->player.y);
+	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x_px, game->player.y_px);
 	/*gestire direzione il player is facing in base al parsing*/
 	game->player.dir_x = cos(PLAYER_ANGLE);
 	game->player.dir_y = sin(PLAYER_ANGLE);

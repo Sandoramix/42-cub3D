@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 13:11:48 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:46:18 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@ enum e_rotation_dir
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
+	double	x_px;
+	double	y_px;
+	int		x;
+	int		y;
 	double	dir_x;
 	double	dir_y;
 
+	double offset;
+	double pos_z;
+	double head_pos_z;
+
+	double	angle;
 }	t_player;
 
 typedef struct s_dpoint
@@ -83,21 +90,29 @@ typedef struct s_map_info
 	char	**map;
 
 	int		**mtxint;
-	double	rows_mtx;
-	double	cols_mtx;
+	int		rows_mtx;
+	int		cols_mtx;
 
 	char	**file_content;
 }	t_map;
 
 typedef struct s_movement
 {
-	int		up;
-	int		down;
-	int		right;
-	int		left;
+	bool		up;
+	bool		down;
+	bool		right;
+	bool		left;
 
-	int		rot_left;
-	int		rot_right;
+	bool		rot_left;
+	bool		rot_right;
+	bool		rot_up;
+	bool		rot_down;
+
+	bool		jump;
+	bool		crouch;
+	bool		has_crouched;
+
+	int			jump_mult;
 }	t_movement;
 
 //------------------------------------------------------------------------------
