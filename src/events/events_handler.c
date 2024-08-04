@@ -8,18 +8,18 @@ void handle_camera_rotation(t_var *game, int rotation_dir)
 
     if (rotation_dir == ROTAT_DIR_RIGHT)
     {
-        old_dir_x = game->player.dir_x;
-        game->player.dir_x = game->player.dir_x * cos(-rotSpeed) - game->player.dir_y * sin(-rotSpeed);
-        game->player.dir_y = old_dir_x * sin(-rotSpeed) + game->player.dir_y * cos(-rotSpeed);
+        old_dir_x = game->player.dir_y;
+        game->player.dir_y = game->player.dir_y * cos(-rotSpeed) - game->player.dir_x * sin(-rotSpeed);
+        game->player.dir_x = old_dir_x * sin(-rotSpeed) + game->player.dir_x * cos(-rotSpeed);
         old_plane_x = game->plane.x;
         game->plane.x = game->plane.x * cos(-rotSpeed) - game->plane.y * sin(-rotSpeed);
         game->plane.y = old_plane_x * sin(-rotSpeed) + game->plane.y * cos(-rotSpeed);
     }
     else
     {
-        old_dir_x = game->player.dir_x;
-        game->player.dir_x = game->player.dir_x * cos(rotSpeed) - game->player.dir_y * sin(rotSpeed);
-        game->player.dir_y = old_dir_x * sin(rotSpeed) + game->player.dir_y * cos(rotSpeed);
+        old_dir_x = game->player.dir_y;
+        game->player.dir_y = game->player.dir_y * cos(rotSpeed) - game->player.dir_x * sin(rotSpeed);
+        game->player.dir_x = old_dir_x * sin(rotSpeed) + game->player.dir_x * cos(rotSpeed);
         old_plane_x = game->plane.x;
         game->plane.x = game->plane.x * cos(rotSpeed) - game->plane.y * sin(rotSpeed);
         game->plane.y = old_plane_x * sin(rotSpeed) + game->plane.y * cos(rotSpeed);
@@ -29,10 +29,10 @@ void handle_camera_rotation(t_var *game, int rotation_dir)
 int handle_wll_collision(t_var *game, double x, double y)
 {
     if (x < TILE_SIZE || x >= WINDOW_WIDTH - TILE_SIZE || y < TILE_SIZE ||
-        y >= WINDOW_HEIGHT - TILE_SIZE || game->mapinfo.mtxint[(int)(x / 64)][(int)(y / 64)] == 1)
+        y >= WINDOW_HEIGHT - TILE_SIZE || parse_map_chr_at(game,(y / TILE_SIZE) ,(x / TILE_SIZE)) == MAP_WALL)
         return (OK);
 
-    printf("Can t move, the player position will be :%f %f\n", x * 64, y * 64);
+    dbg_printf("Can t move, the player position will be :%d %d\n", x * TILE_SIZE, y * TILE_SIZE);
     return (KO);
 }
 
@@ -47,14 +47,12 @@ void handle_player_movement(t_var *game)
     {
         new_y = game->player.y_px - VELOCITY * game->deltatime;
         if (!handle_wll_collision(game, game->player.x_px, (new_y) - SAFETY_WALL_DIST))
-        printf("player position  x y : %f %f\n", game->player.x_px, new_y);
             game->player.y_px = new_y;
     }
     if (game->move.down)
     {
         new_y = game->player.y_px + VELOCITY * game->deltatime;
         if (!handle_wll_collision(game, game->player.x_px, (new_y) + SAFETY_WALL_DIST))
-        printf("player position  x y : %f %f\n", game->player.x_px, new_y);
             game->player.y_px = new_y;
     }
     if (game->move.left)

@@ -34,8 +34,8 @@ static void calc_multiplication_factor(t_var *game)
 static void calc_ray_direction(t_var *game, int pixel_pos_x)
 {
 	game->dda.camera_x = (double)(2 * pixel_pos_x) / (double)game->dda.screen_size_w_px - 1;
-	game->dda.dir_rayx = game->player.dir_x + game->plane.x * game->dda.camera_x;
-	game->dda.dir_rayy = game->player.dir_y + game->plane.y * game->dda.camera_x;
+	game->dda.dir_rayx = game->player.dir_y + game->plane.x * game->dda.camera_x;
+	game->dda.dir_rayy = game->player.dir_x + game->plane.y * game->dda.camera_x;
 }
 
 static void copy_player_pos(t_var *game)

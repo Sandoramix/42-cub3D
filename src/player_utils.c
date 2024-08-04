@@ -18,24 +18,26 @@ void	update_player(t_var *game, int x, int y, double angle)
 		return ;
 	game->player.x = x;
 	game->player.y = y;
+	game->player.x_px = x * TILE_SIZE;
+	game->player.y_px = y * TILE_SIZE;
 	game->player.angle = angle;
 }
 
 double	chr_player_to_angle(char player_c)
 {
 	if (player_c == MAP_PLAYER_NORD)
-		return (360.0 - 90.0);
-	if (player_c == MAP_PLAYER_EAST)
 		return (0.0);
-	if (player_c == MAP_PLAYER_WEST)
-		return (180.0);
-	if (player_c == MAP_PLAYER_SOUTH)
+	if (player_c == MAP_PLAYER_EAST)
 		return (90.0);
+	if (player_c == MAP_PLAYER_WEST)
+		return (360.0 - 90.0);
+	if (player_c == MAP_PLAYER_SOUTH)
+		return (180.0);
 	return (0.0);
 }
 
 bool	chr_is_player(char c)
 {
 	return (c == MAP_PLAYER_NORD || c == MAP_PLAYER_EAST
-		|| c == MAP_PLAYER_WEST || c == MAP_PLAYER_WEST);
+		|| c == MAP_PLAYER_WEST || c == MAP_PLAYER_SOUTH);
 }

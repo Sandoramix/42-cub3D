@@ -38,6 +38,8 @@ double		chr_player_to_angle(char player_c);
 void		print_missing_config(t_var *game);
 bool		is_config_missing(t_var *game);
 bool		chr_is_player(char c);
+char	parse_map_chr_at(t_var *game, int row_idx, int col_idx);
+
 
 //MLX UTILS
 t_state		load_xpm_image(t_var *game, t_img **img, char *path);
@@ -81,7 +83,7 @@ int			handle_wll_collision(t_var *game, double x, double y);
 
 
 // MATH FUNCTIONS --------------------------------------------------------------
-t_dpoint	calculate_point(t_dpoint *start, double angle, double distance);
+t_dpoint	calculate_point(t_dpoint start, double angle, double distance);
 double		from_angle_to_radiant(double angle);
 double		pi(void);
 //------------------------------------------------------------------------------

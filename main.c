@@ -14,12 +14,12 @@
 
 
 // TODO REMOVE ME
-static int **cmtxtoimtx(char **mtx, int col, int row)
+static int **cmtxtoimtx(t_var *game, char **mtx, int col, int row)
 {
 	int **intMtx;
 	int counterRow;
 	int counterCol;
-
+	(void)mtx;
 	intMtx = ft_calloc(row, sizeof(int *));
 	if (!intMtx)
 		return NULL;
@@ -31,7 +31,7 @@ static int **cmtxtoimtx(char **mtx, int col, int row)
 		counterCol = 0;
 		while (counterCol < col)
 		{
-			intMtx[counterRow][counterCol] = mtx[counterRow][counterCol] - '0';
+			intMtx[counterRow][counterCol] = parse_map_chr_at(game, counterRow, counterCol) - '0';
 			counterCol++;
 		}
 		counterRow++;
@@ -47,27 +47,46 @@ void init_hardcoded_value(t_var *game)
 		dbg_printf("LOADED MAP:\n");
 		ft_putstrmtx(game->mapinfo.map);
 	}
+	ft_putstrmtx(game->mapinfo.map);
 
 	printf("Map sizes:\trows[%i]\tcols[%i]\n", game->mapinfo.rows_mtx,
 		game->mapinfo.cols_mtx);
 
 
-	game->mapinfo.mtxint = cmtxtoimtx(game->mapinfo.map,
+	game->mapinfo.mtxint = cmtxtoimtx(game, game->mapinfo.map,
 			game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
 
-	game->player.x_px = 10 * 64;
-	game->player.y_px = 10 * 64;
 
 
 	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x_px, game->player.y_px);
+	printf("Player Map Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x_px /  64, game->player.y_px /  64);
 	/*gestire direzione il player is facing in base al parsing*/
-	game->player.dir_x = cos(PLAYER_ANGLE);
-	game->player.dir_y = sin(PLAYER_ANGLE);
+	game->player.dir_y = cos(game->player.angle);
+	game->player.dir_x = sin(game->player.angle);
 
-	/* printf("player dir %f, %f\n", game->player.dir_x, game->player.dir_y); */
+	/* printf("player dir %f, %f\n", game->player.dir_y, game->player.dir_x); */
+	if (game->player.angle == 0.)
+	{
+		game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
+		game->plane.y = 1; 	// offset di 1unita sull asse delle Y
+	}
+	if (game->player.angle == 90.)
+	{
+		game->plane.x = 1;	 // sul piano x non c' e alcun offset
+		game->plane.y = 0.0; 	// offset di 1unita sull asse delle Y
+	}
+	if (game->player.angle == 180.)
+	{
+		game->plane.x = -1;	 // sul piano x non c' e alcun offset
+		game->plane.y = 0.0; 	// offset di 1unita sull asse delle Y
+	}
+	if (game->player.angle == 270.)
+	{
+		game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
+		game->plane.y = -1; 	// offset di 0.66unita sull asse delle Y
+	}
 
-	game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
-	game->plane.y = 0.66; 	// offset di 0.66unita sull asse delle Y
+
 
 	game->sprite.tile_sprite_w = TILE_SIZE;
 	game->sprite.tile_sprite_h = TILE_SIZE;

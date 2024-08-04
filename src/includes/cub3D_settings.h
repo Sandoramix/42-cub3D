@@ -146,7 +146,7 @@ typedef enum e_cnf
 # define JUMP_LIMIT 400
 # define CROUCH_HEIGHT 200
 
-# define PLAYER_ANGLE 270
+# define PLAYER_ANGLE 0
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
