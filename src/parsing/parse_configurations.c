@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:21:15 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 10:17:26 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 10:31:27 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	validate_color_val(t_var *game, char **split, char *val, int line_num)
 	free(atoi);
 	if (parsed_num < 0 || parsed_num > 255)
 		return (ft_perror("Error: line %d: color must be in range [0;255]. \
-		Number passed instead: %d\n", line_num, val, parsed_num),
+		Number passed instead: %d\n", line_num, parsed_num),
 			str_freemtx(split), cleanup(game, true, 1), INT_MIN);
 	return (parsed_num);
 }
@@ -103,9 +103,11 @@ t_state	parse_configs(t_var *game)
 	filedata = game->mapinfo.file_content;
 	while (filedata[++i])
 	{
-		if (str_isblank(filedata[i]))
+		if (str_ilen(filedata[i]) == 0)
 			continue ;
-		if (!is_config_missing(game))
+		if (parse_identify_cnf(filedata[i]) != CNF_UNKNOWN)
+			parse_config_line(game, filedata[i], i + 1);
+		else if (!is_config_missing(game))
 		{
 			if (i > 0 && str_ilen(filedata[i - 1]) == 0)
 				return (OK);
@@ -113,7 +115,6 @@ t_state	parse_configs(t_var *game)
 		if (parse_identify_cnf(filedata[i]) == CNF_UNKNOWN)
 			return (ft_perror("Error on line %d: '%s':\n\t? configuration\n",
 					i + 1, filedata[i]), cleanup(game, true, 1), KO);
-		parse_config_line(game, filedata[i], i + 1);
 	}
 	return (OK);
 }
