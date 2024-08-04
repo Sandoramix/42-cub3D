@@ -77,6 +77,7 @@
 #  define KEY_D XK_d
 #  define KEY_LEFT XK_Left
 #  define KEY_RIGHT XK_Right
+
 #  define ESC_KEY XK_Escape 
 
 # endif // __linux__
@@ -133,9 +134,16 @@ typedef enum e_cnf
 //------------------------------------------------------------------------------
 
 /*HARD CODED VALUES (maybe)*/
-# define VELOCITY .35
+# define VELOCITY 100
 # define FOV 66
-# define SAFETY_WALL_DIST 0.25
+
+
+# define SAFETY_WALL_DIST 1
+# define Z_ACCELLERATION 200
+# define CAMERA_HIGH_LIMIT 100
+# define CAMERA_LOW_LIMIT -100
+# define JUMP_LIMIT 400
+# define CROUCH_HEIGHT 200
 
 # define PLAYER_ANGLE 270
 

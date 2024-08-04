@@ -23,7 +23,7 @@ void loop_until_hit_wall(t_var *game)
 	while (game->dda.hit == 0)
 	{
 		increase_raylen(game);
-		if (game->mapinfo.mtxint[game->dda.map_x][game->dda.map_y] > 0)
+		if (game->mapinfo.mtxint[game->dda.map_x][game->dda.map_y ] > 0)
 			game->dda.hit = 1;
 	}
 }

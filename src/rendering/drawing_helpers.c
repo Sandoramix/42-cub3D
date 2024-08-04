@@ -78,7 +78,7 @@ void draw_minimap_rays(t_var *game)
 	double angle;
 
 	angle = -FOV / 2;
-	start_px = (t_dpoint){game->player.x + game->plane.x, game->player.y + game->plane.y};
+	start_px = (t_dpoint){game->player.x_px + game->plane.x, game->player.y_px + game->plane.y};
 	while (angle <= FOV / 2)
 	{
 		end_px = calculate_point(&start_px, angle, game->dda.wall_dist);
