@@ -63,11 +63,11 @@ void init_hardcoded_value(t_var *game)
 	game->mapinfo.mtxint = cmtxtoimtx(game->mapinfo.map,
 			game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
 
-	game->player.x = 10;
-	game->player.y = 10;
+	game->player.x_px = 10 * 64;
+	game->player.y_px = 10 * 64;
 
 
-	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x, game->player.y);
+	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x_px, game->player.y_px);
 	/*gestire direzione il player is facing in base al parsing*/
 	game->player.dir_x = cos(PLAYER_ANGLE);
 	game->player.dir_y = sin(PLAYER_ANGLE);
