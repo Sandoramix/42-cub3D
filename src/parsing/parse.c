@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:46:08 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 14:17:35 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 12:04:42 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,38 +36,11 @@ static int	validate_map_filepath(t_var *game, int ac, char **av)
 	return (fd);
 }
 
-t_state	parse_map(t_var *game)
-{
-	char	**file_content;
-	int		i;
-
-	file_content = game->mapinfo.file_content;
-	i = str_mtxlen(file_content) - 1;
-	if (i <= 0)
-		return (pf_errcode(E_DEFAULT), cleanup(game, true, 1), KO); // SHOULDN'T HAPPEN
-	while (i >= 0)
-	{
-		if (parse_identify_cnf(file_content[i]) != CNF_UNKNOWN)
-		{
-			i++;
-			break ;
-		}
-		i--;
-	}
-	while (file_content[i] && str_ilen(file_content[i]) == 0)
-		i++;
-	game->mapinfo.map = str_mtxdup(&file_content[i]);
-	if (!game->mapinfo.map)
-		return (pf_errcode(E_MALLOC), cleanup(game, true, 1), KO);
-	return (OK);
-}
-
 static t_state	parse_content(t_var *game)
 {
 	parse_configs(game);
 	if (is_config_missing(game))
 		return (print_missing_config(game), cleanup(game, true, 1), KO);
-	// TODO: map parsing
 	parse_map(game);
 	return (OK);
 }
