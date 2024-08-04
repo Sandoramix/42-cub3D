@@ -43,20 +43,24 @@ void calc_distance_from_wall(t_var *game)
 
 void calc_wall_starting_px(t_var *game)
 {
-	game->dda.wall_start_px = -game->dda.wall_line_h_px / 2.0 + game->dda.screen_size_h_px / 2.0;
+	game->dda.wall_start_px = -game->dda.wall_line_h_px / 2.0 + game->dda.screen_size_h_px / 2.0 \
+		+ game->player.offset + (game->player.pos_z / game->dda.wall_dist);
 	if (game->dda.wall_start_px < 0)
 		game->dda.wall_start_px = 0;
 }
 
 void calc_wall_ending_px(t_var *game)
 {
-	game->dda.wall_end_px = game->dda.wall_line_h_px / 2 + game->dda.screen_size_h_px / 2;
+	game->dda.wall_end_px = game->dda.wall_line_h_px / 2 + game->dda.screen_size_h_px / 2 \
+		+ game->player.offset + (game->player.pos_z / game->dda.wall_dist);
 	if (game->dda.wall_end_px >= game->dda.screen_size_h_px)
 		game->dda.wall_end_px = game->dda.screen_size_h_px - 1;
 }
 
 void put_line_h_in_perspective(t_var *game)
 {
+	//TODO quando il draw start e/o draw end(wall height)superano l altezza dello schermo devo smetterla di renderizzare 
+	//il cielo(possibili problemi dovuti al poter alzare lo sguardo -.- shit!)
 	calc_wall_starting_px(game);
 	calc_wall_ending_px(game);
 }

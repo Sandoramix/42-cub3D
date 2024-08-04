@@ -28,6 +28,9 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 
+	double offset;
+	double pos_z;
+
 }	t_player;
 
 typedef struct s_dpoint
@@ -83,8 +86,8 @@ typedef struct s_map_info
 	char	**map;
 
 	int		**mtxint;
-	double	rows_mtx;
-	double	cols_mtx;
+	int	rows_mtx;
+	int	cols_mtx;
 
 	char	**file_content;
 }	t_map;
