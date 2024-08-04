@@ -13,9 +13,10 @@ int	key_press(int keycode, t_var *game)
 		cleanup(game, true, 1);
 		return (OK);
 	}
+	
 	handle_player_movement(game, keycode);
 	handle_player_rotation(game, keycode);
-
+	
 	rendering(game);
 	return (0);
 }

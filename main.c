@@ -39,7 +39,7 @@ static int **cmtxtoimtx(char **mtx, int col, int row)
 	return intMtx;
 }
 
-//TODO purge me
+//TODO purge me hahahahah lol
 void init_hardcoded_value(t_var *game)
 {
 
@@ -56,7 +56,7 @@ void init_hardcoded_value(t_var *game)
 			game->mapinfo.cols_mtx = str_ilen(game->mapinfo.map[i]);
 	}
 
-	printf("Map sizes:\trows[%f]\tcols[%f]\n", game->mapinfo.rows_mtx,
+	printf("Map sizes:\trows[%i]\tcols[%i]\n", game->mapinfo.rows_mtx,
 		game->mapinfo.cols_mtx);
 
 
