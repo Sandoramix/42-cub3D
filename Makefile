@@ -21,6 +21,7 @@ CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE)
 RM = rm -rf
 
 # ----SOURCE-FILES--------------------------------------------------------------
+
 SRC = ./main.c \
 	./src/cleanup.c \
 	./src/conditionals.c \
@@ -32,7 +33,6 @@ SRC = ./main.c \
 	./src/messages/parse_error_msg.c \
 	./src/mlx_utils.c \
 	./src/parsing/parse.c \
-	./src/parsing/parse_conditionals.c \
 	./src/parsing/parse_configs.c \
 	./src/parsing/parse_map.c \
 	./src/parsing/parse_path_utils.c \
@@ -42,8 +42,7 @@ SRC = ./main.c \
 	./src/rendering/math_helpers.c \
 	./src/rendering/rendering.c \
 	./src/rendering/rendering_helpers.c \
-	./src/rendering/rendering_init.c \
-	./src/setters.c
+	./src/rendering/rendering_init.c
 
 # ----RULES---------------------------------------------------------------------
 

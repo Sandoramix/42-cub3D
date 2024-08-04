@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:51:57 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:55:05 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ double		chr_player_to_angle(char player_c);
 //GENERIC UTILS
 void		print_missing_config(t_var *game);
 bool		is_config_missing(t_var *game);
-bool		chr_is_player(char c);
 bool		chr_is_player(char c);
 
 //MLX UTILS
@@ -73,8 +72,8 @@ int			key_release(int keycode, t_var *game);
 //------------------------------------------------------------------------------
 
 // EVENTS HANDLER --------------------------------------------------------------
-void		handle_player_movement(t_var *game, int keycode);
-void		handle_player_rotation(t_var *game, int keycode);
+void		handle_player_movement(t_var *game);
+void		handle_player_rotation(t_var *game);
 void		handle_camera_rotation(t_var *game, int rotation_dir);
 int			handle_wll_collision(t_var *game, double x, double y);
 
