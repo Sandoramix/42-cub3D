@@ -23,8 +23,10 @@ enum e_rotation_dir
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
+	double	x_px;
+	double	y_px;
+	int		x;
+	int		y;
 	double	dir_x;
 	double	dir_y;
 
