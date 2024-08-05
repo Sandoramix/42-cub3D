@@ -3,7 +3,7 @@
 int	game_loop(t_var *game)
 {
 	delta_time(game);
-	printf("planex : %f, planey %f\n", game->plane.x, game->plane.y);
+	//printf("planex : %f, planey %f\n", game->plane.x, game->plane.y);
 	handle_player_movement(game);
 	handle_player_rotation(game);
 

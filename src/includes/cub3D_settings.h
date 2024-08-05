@@ -135,15 +135,16 @@ typedef enum e_cnf
 //------------------------------------------------------------------------------
 
 /*HARD CODED VALUES (maybe)*/
-# define VELOCITY 100
+# define VELOCITY 50
 # define FOV 66
 
+# define ROTATION_SPEED .05
 
 # define SAFETY_WALL_DIST 1
-# define Z_ACCELLERATION 200
+# define Z_ACCELLERATION 333
 # define CAMERA_HIGH_LIMIT 100
 # define CAMERA_LOW_LIMIT -100
-# define JUMP_LIMIT 400
+# define JUMP_LIMIT 500
 # define CROUCH_HEIGHT 200
 
 # define PLAYER_ANGLE 0

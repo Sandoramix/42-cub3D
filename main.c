@@ -64,29 +64,10 @@ void init_hardcoded_value(t_var *game)
 	game->player.dir_y = cos(game->player.angle);
 	game->player.dir_x = sin(game->player.angle);
 
-	/* printf("player dir %f, %f\n", game->player.dir_y, game->player.dir_x); */
-	if (game->player.angle == 0.)
-	{
-		game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
-		game->plane.y = 1; 	// offset di 1unita sull asse delle Y
-	}
-	if (game->player.angle == 90.)
-	{
-		game->plane.x = 1;	 // sul piano x non c' e alcun offset
-		game->plane.y = 0.0; 	// offset di 1unita sull asse delle Y
-	}
-	if (game->player.angle == 180.)
-	{
-		game->plane.x = -1;	 // sul piano x non c' e alcun offset
-		game->plane.y = 0.0; 	// offset di 1unita sull asse delle Y
-	}
-	if (game->player.angle == 270.)
-	{
-		game->plane.x = 0.0;	 // sul piano x non c' e alcun offset
-		game->plane.y = -1; 	// offset di 0.66unita sull asse delle Y
-	}
+	const double plane_limit = 1.0;
 
-
+	game->plane.y = plane_limit * cos(game->player.angle);
+	game->plane.x = plane_limit * sin(game->player.angle);
 
 	game->sprite.tile_sprite_w = TILE_SIZE;
 	game->sprite.tile_sprite_h = TILE_SIZE;
