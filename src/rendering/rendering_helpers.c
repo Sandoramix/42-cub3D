@@ -24,45 +24,28 @@ void loop_until_hit_wall(t_var *game)
 	{
 		increase_raylen(game);
 		if(parse_map_chr_at(game,game->dda.map_y,  game->dda.map_x) == 0 ||
-		parse_map_chr_at(game, game->dda.map_y,  game->dda.map_x) == MAP_WALL)		
-		// if (game->mapinfo.mtxint[game->dda.map_y ][game->dda.map_x ] > 0)
-			game->dda.hit = 1;
+			parse_map_chr_at(game, game->dda.map_y,  game->dda.map_x) == MAP_WALL)		
+				game->dda.hit = 1;
 	}
 }
 
-void calc_relative_line_height(t_var *game)
-{
-	game->dda.wall_line_h_px = (int)(game->dda.screen_size_w_px / game->dda.wall_dist);
-}
 
-void calc_distance_from_wall(t_var *game)
+void get_wall_coords(t_var *game)
 {
+	const int  wall_height = (int)(WINDOW_WIDTH / game->dda.wall_dist);
+
 	if (game->dda.side == 0)
 		game->dda.wall_dist = (game->dda.side_dist_x - game->dda.delta_dist_x);
 	else
 		game->dda.wall_dist = (game->dda.side_dist_y - game->dda.delta_dist_y);
-}
 
-void calc_wall_starting_px(t_var *game)
-{
-	game->dda.wall_start_px = -game->dda.wall_line_h_px / 2.0 + game->dda.screen_size_h_px / 2.0 \
+	game->dda.wall_start_px = -wall_height / 2.0 + WINDOW_HEIGHT / 2.0 \
 		+ game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->dda.wall_dist);
+	game->dda.wall_end_px = wall_height / 2 + WINDOW_HEIGHT / 2 \
+		+ game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->dda.wall_dist);
+	
 	if (game->dda.wall_start_px < 0)
 		game->dda.wall_start_px = 0;
-}
-
-void calc_wall_ending_px(t_var *game)
-{
-	game->dda.wall_end_px = game->dda.wall_line_h_px / 2 + game->dda.screen_size_h_px / 2 \
-		+ game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->dda.wall_dist);
-	if (game->dda.wall_end_px >= game->dda.screen_size_h_px)
-		game->dda.wall_end_px = game->dda.screen_size_h_px - 1;
-}
-
-void put_line_h_in_perspective(t_var *game)
-{
-	//TODO quando il draw start e/o draw end(wall height)superano l altezza dello schermo devo smetterla di renderizzare 
-	//il cielo(possibili problemi dovuti al poter alzare lo sguardo -.- shit!)
-	calc_wall_starting_px(game);
-	calc_wall_ending_px(game);
+	if (game->dda.wall_end_px >= WINDOW_HEIGHT)
+		game->dda.wall_end_px = WINDOW_HEIGHT - 1;
 }
