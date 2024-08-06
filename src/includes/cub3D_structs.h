@@ -34,6 +34,8 @@ typedef struct s_player
 	double pos_z;
 	double head_pos_z;
 
+	double travel_count;
+
 	double	angle;
 }	t_player;
 

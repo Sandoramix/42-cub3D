@@ -2,17 +2,18 @@
 
 void handle_camera_rotation(t_var *game, int dir)
 {
-	//const double	multiplier = (int [2]){-1.0, 1.0}[rotation_dir == ROTAT_DIR_RIGHT];
+	const double rotSpeed = ROTATION_SPEED;
+	const double cosRes =  cos(dir * rotSpeed);
+	const double sinRes =  sin(dir * rotSpeed);
 	double old_dir_y;
 	double old_plane_x;
-	double rotSpeed = ROTATION_SPEED;
 
 	old_dir_y = game->player.dir_y;
-	game->player.dir_y = game->player.dir_y * cos(dir * rotSpeed) - game->player.dir_x * sin(dir * rotSpeed);
-	game->player.dir_x = old_dir_y * sin(dir * rotSpeed) + game->player.dir_x * cos(dir * rotSpeed);
+	game->player.dir_y = old_dir_y * cosRes - game->player.dir_x * sinRes;
+	game->player.dir_x = old_dir_y * sinRes + game->player.dir_x * cosRes;
 	old_plane_x = game->plane.x;
-	game->plane.x = game->plane.x * cos(dir * rotSpeed) - game->plane.y * sin(dir * rotSpeed);
-	game->plane.y = old_plane_x * sin(dir * rotSpeed) + game->plane.y * cos(dir * rotSpeed);
+	game->plane.x = game->plane.x * cosRes - game->plane.y * sinRes;
+	game->plane.y = old_plane_x * sinRes + game->plane.y * cosRes;
 }
 
 int handle_wll_collision(t_var *game, double x, double y)
@@ -52,7 +53,16 @@ void handle_player_movement(t_var *game)
 		game->player.x_px = new_x;
 		game->player.y_px = new_y;
 	}
-	printf("x[%.1f]y[%.1f]\tdirx[%.1f]diry[%.1f]planex[%.1f]planey[%.1f]\t\n", game->player.x_px, game->player.y_px, game->player.dir_x, game->player.dir_y, game->plane.x, game->plane.y);
+	//! TODO MOVEMENT OSCILLATION
+	// Do we like it? Yes. Is it a priority? No
+	//if (game->move.up || game->move.down || game->move.left || game->move.right)
+	//{
+	//	game->player.travel_count += .35;
+	//	if (game->player.travel_count < 0.0)
+	//		game->player.travel_count = 0.0;
+	//	game->player.head_pos_z = ((sin(game->player.travel_count) + 1.0) / 2) * 169;
+	//}
+
 }
 
 void handle_player_rotation(t_var *game)
@@ -111,12 +121,12 @@ void handle_player_rotation(t_var *game)
 	}
 	if (game->move.crouch && !game->move.has_crouched)
 	{
-		game->player.pos_z -= CROUCH_HEIGHT;
+		game->player.head_pos_z = -CROUCH_HEIGHT;
 		game->move.has_crouched = true;
 	}
 	if (!game->move.crouch && game->move.has_crouched)
 	{
-		game->player.pos_z += CROUCH_HEIGHT;
+		game->player.head_pos_z = 0;
 		game->move.has_crouched = false;
 	}
 }

@@ -64,7 +64,7 @@ void init_hardcoded_value(t_var *game)
 	game->player.dir_y = cos(game->player.angle);
 	game->player.dir_x = sin(game->player.angle);
 
-	const double plane_limit = 1.0;
+	const double plane_limit = .7;
 
 	game->plane.y = plane_limit * cos(game->player.angle);
 	game->plane.x = plane_limit * sin(game->player.angle);

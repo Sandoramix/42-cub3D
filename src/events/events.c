@@ -74,6 +74,10 @@ int	key_release(int keycode, t_var *game)
 	if (keycode == XK_Shift_L)
 		game->move.crouch = false;
 
+	// TODO MOVEMENT OSCILLATION
+	//if (!game->move.up && !game->move.down &&
+	//	!game->move.left && !game->move.right)
+	//	game->player.travel_count = 0;
 		
 	return (0);
 }
