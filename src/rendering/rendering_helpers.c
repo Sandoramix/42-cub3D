@@ -5,13 +5,13 @@ void increase_raylen(t_var *game)
 	if (game->dda.ray.x < game->dda.ray.y)
 	{	
 		game->dda.ray.x += game->dda.delta_dist.x;
-		game->dda.map.x += game->dda.step_x;
+		game->dda.map_coords.x += game->dda.step_x;
 		game->dda.side = 0;
 	}
 	else
 	{
 		game->dda.ray.y += game->dda.delta_dist.y;
-		game->dda.map.y += game->dda.step_y;
+		game->dda.map_coords.y += game->dda.step_y;
 		game->dda.side = 1;
 	}
 }
@@ -23,8 +23,8 @@ void loop_until_hit_wall(t_var *game)
 	while (game->dda.hit == 0)
 	{
 		increase_raylen(game);
-		if(parse_map_chr_at(game,game->dda.map.y,  game->dda.map.x) == 0 ||
-			parse_map_chr_at(game, game->dda.map.y,  game->dda.map.x) == MAP_WALL)		
+		if(parse_map_chr_at(game,game->dda.map_coords.y,  game->dda.map_coords.x) == 0 ||
+			parse_map_chr_at(game, game->dda.map_coords.y,  game->dda.map_coords.x) == MAP_WALL)		
 				game->dda.hit = 1;
 	}
 }
