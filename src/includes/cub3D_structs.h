@@ -64,6 +64,7 @@ typedef struct s_DDA
 	double	camera_x;
 	double	dir_rayx;
 	double	dir_rayy;
+	
 	int		screen_size_w_px;
 	int		screen_size_h_px;
 
@@ -73,7 +74,6 @@ typedef struct s_DDA
 	double	delta_dist_y;
 
 	double	wall_dist;
-	double	wall_line_h_px;
 	double	wall_start_px;
 	double	wall_end_px;
 

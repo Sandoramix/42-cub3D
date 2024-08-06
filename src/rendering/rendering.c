@@ -24,11 +24,7 @@ void wall_casting(t_var *game)
 	{
 		init_rendering(game, pixel_pos_x);
 		loop_until_hit_wall(game);
-		calc_distance_from_wall(game);
-		calc_relative_line_height(game);
-		put_line_h_in_perspective(game);
-
-
+		get_wall_coords(game);
 		// t_dpoint endpx = calc_texture_px_hit(game);
 		// printf("x y %f %f\n", endpx.x, endpx.y);
 		

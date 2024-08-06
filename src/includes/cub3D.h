@@ -49,7 +49,7 @@ void		rendering(t_var *game);
 void		init_rendering(t_var *game, int pixel_pos_x);
 void		increase_raylen(t_var *game);
 void		calc_distance_from_wall(t_var *game);
-void		put_line_h_in_perspective(t_var *game);
+void		get_wall_coords(t_var *game);
 void		calc_relative_line_height(t_var *game);
 void		loop_until_hit_wall(t_var *game);
 //------------------------------------------------------------------------------
