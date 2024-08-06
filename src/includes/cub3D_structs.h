@@ -62,22 +62,18 @@ typedef struct s_sprite
 typedef struct s_DDA
 {
 	double	camera_x;
-	t_dpoint dir;
-
-	
 	int		screen_size_w_px;
 	int		screen_size_h_px;
+	t_dpoint dir;
 	t_dpoint ray;
 	t_dpoint delta_dist;
+	t_point map_coords;
 
 	double	wall_dist;
 	double	wall_start_px;
 	double	wall_end_px;
-
 	int		step_x;
 	int		step_y;
-	t_point map;
-
 	int		hit;
 	int		side;
 
