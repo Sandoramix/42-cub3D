@@ -24,11 +24,7 @@ void wall_casting(t_var *game)
 	{
 		init_rendering(game, pixel_pos_x);
 		loop_until_hit_wall(game);
-		calc_distance_from_wall(game);
-		calc_relative_line_height(game);
-		put_line_h_in_perspective(game);
-
-
+		get_wall_coords(game);
 		// t_dpoint endpx = calc_texture_px_hit(game);
 		// printf("x y %f %f\n", endpx.x, endpx.y);
 		
@@ -39,15 +35,11 @@ void wall_casting(t_var *game)
 
 void floor_ceiling_casting(t_var *game)
 {
-	t_point ceiling_start;
-	t_point ceiling_end;
-	t_point floor_start;
-	t_point floor_end;
+	const t_point ceiling_start = (t_point){0, 0};
+	const t_point ceiling_end = (t_point){WINDOW_WIDTH, WINDOW_HEIGHT / 2 + game->player.offset};
+	const t_point floor_start = (t_point){0, WINDOW_HEIGHT / 2 + game->player.offset};
+	const t_point floor_end = (t_point){WINDOW_WIDTH, WINDOW_HEIGHT};
 
-	ceiling_start = (t_point){0, 0};
-	ceiling_end = (t_point){game->dda.screen_size_w_px, game->dda.screen_size_h_px / 2 + game->player.offset};
-	floor_start = (t_point){0, game->dda.screen_size_h_px / 2 + game->player.offset};
-	floor_end = (t_point){game->dda.screen_size_w_px, game->dda.screen_size_h_px };
 	draw_rectangle(game, ceiling_start, ceiling_end, 0x00FF00);
 	draw_rectangle(game, floor_start, floor_end, 0xFF0F00 / 10);
 }
