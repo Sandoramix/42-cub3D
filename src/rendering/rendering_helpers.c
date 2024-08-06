@@ -2,18 +2,24 @@
 
 void increase_raylen(t_var *game)
 {
-	if (game->dda.ray.x < game->dda.ray.y)
-	{	
-		game->dda.ray.x += game->dda.delta_dist.x;
-		game->dda.map_coords.x += game->dda.step_x;
-		game->dda.side = 0;
-	}
-	else
-	{
-		game->dda.ray.y += game->dda.delta_dist.y;
-		game->dda.map_coords.y += game->dda.step_y;
-		game->dda.side = 1;
-	}
+		if (game->dda.ray.x < game->dda.ray.y)
+		{	
+			game->dda.ray.x += game->dda.delta_dist.x;
+			game->dda.map_coords.x += game->dda.step_x;
+			if (game->dda.step_x > 0)
+   				game->dda.side = CNF_WALL_EAST;
+			else
+    			game->dda.side = CNF_WALL_WEST;
+		}
+		else
+		{
+			game->dda.ray.y += game->dda.delta_dist.y;
+			game->dda.map_coords.y += game->dda.step_y;
+			if (game->dda.step_y > 0)
+				game->dda.side = CNF_WALL_NORD;
+			else
+				game->dda.side = CNF_WALL_SOUTH;
+		}
 }
 
 void loop_until_hit_wall(t_var *game)
@@ -34,7 +40,7 @@ void get_wall_coords(t_var *game)
 {
 	const int  wall_height = (int)(WINDOW_WIDTH / game->dda.wall_dist);
 
-	if (game->dda.side == 0)
+	if (game->dda.side == CNF_WALL_WEST || game->dda.side == CNF_WALL_EAST)
 		game->dda.wall_dist = (game->dda.ray.x - game->dda.delta_dist.x);
 	else
 		game->dda.wall_dist = (game->dda.ray.y - game->dda.delta_dist.y);

@@ -21,10 +21,14 @@ void draw_walls(t_var *game, int pixel_pos_x)
 	{
 		while (y <= game->dda.wall_end_px)
 		{
-			if (game->dda.side == 1)
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0xFF0F00));
+			if (game->dda.side == CNF_WALL_NORD)
+				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x18000000));
+			else if (game->dda.side == CNF_WALL_SOUTH)
+				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x00FF0000));
+			else if (game->dda.side == CNF_WALL_EAST)
+				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x0000FF00));
 			else
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0xFF0F00 / 5));
+				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0xFFFFFF00));
 			y++;
 		}
 	}
@@ -37,7 +41,7 @@ void draw_rectangle(t_var *game, t_point start, t_point end, int color)
 		start.x = 0;
 		while (start.x < end.x)
 		{
-			fill_img_buffer(game,  start.x, start.y, mlx_get_color_value(game->mlx, color));
+			fill_img_buffer(game,  start.x, start.y, color);
 			start.x++;
 		}
 		start.y++;
@@ -59,7 +63,7 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end)
 	counter = 0;
 	while (counter < pixels)
 	{
-		fill_img_buffer(game, (int)next_point.x, (int)next_point.y, mlx_get_color_value(game->mlx, 0x0000FF));
+		fill_img_buffer(game, (int)next_point.x, (int)next_point.y, 0x0);
 		next_point.x += increment.x;
 		next_point.y += increment.y;
 		counter++;

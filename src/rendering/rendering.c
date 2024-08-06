@@ -40,8 +40,8 @@ void floor_ceiling_casting(t_var *game)
 	const t_point floor_start = (t_point){0, WINDOW_HEIGHT / 2 + game->player.offset};
 	const t_point floor_end = (t_point){WINDOW_WIDTH, WINDOW_HEIGHT};
 
-	draw_rectangle(game, ceiling_start, ceiling_end, 0x00FF00);
-	draw_rectangle(game, floor_start, floor_end, 0xFF0F00 / 10);
+	draw_rectangle(game, ceiling_start, ceiling_end, 0xFF000000);
+	draw_rectangle(game, floor_start, floor_end, 0x0000FF00);
 }
 
 void rendering(t_var *game)
