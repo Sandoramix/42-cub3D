@@ -12,8 +12,9 @@ void	config_event_handling(t_var *game)
 
 void mlx_configuration(t_var *game)
 {
-	game->mlx_win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
-	game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	mlx_get_screen_size(game->mlx, &game->config._w, &game->config._h);
+	game->mlx_win = mlx_new_window(game->mlx, game->config._w, game->config._h, WINDOW_NAME);
+	game->img = mlx_new_image(game->mlx, game->config._w, game->config._h);
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp, &game->line_bytes, &game->endian);
 
     //load_sprites();

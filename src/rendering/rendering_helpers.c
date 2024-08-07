@@ -2,56 +2,56 @@
 
 void increase_raylen(t_var *game)
 {
-		if (game->dda.ray.x < game->dda.ray.y)
+		if (game->raycasting.ray.x < game->raycasting.ray.y)
 		{	
-			game->dda.ray.x += game->dda.delta_dist.x;
-			game->dda.map_coords.x += game->dda.step_x;
-			if (game->dda.step_x > 0)
-   				game->dda.side = CNF_WALL_EAST;
+			game->raycasting.ray.x += game->raycasting.delta_dist.x;
+			game->raycasting.map_coords.x += game->raycasting.step_x;
+			if (game->raycasting.step_x > 0)
+   				game->raycasting.side = CNF_WALL_EAST;
 			else
-    			game->dda.side = CNF_WALL_WEST;
+    			game->raycasting.side = CNF_WALL_WEST;
 		}
 		else
 		{
-			game->dda.ray.y += game->dda.delta_dist.y;
-			game->dda.map_coords.y += game->dda.step_y;
-			if (game->dda.step_y > 0)
-				game->dda.side = CNF_WALL_NORD;
+			game->raycasting.ray.y += game->raycasting.delta_dist.y;
+			game->raycasting.map_coords.y += game->raycasting.step_y;
+			if (game->raycasting.step_y > 0)
+				game->raycasting.side = CNF_WALL_NORD;
 			else
-				game->dda.side = CNF_WALL_SOUTH;
+				game->raycasting.side = CNF_WALL_SOUTH;
 		}
 }
 
 void loop_until_hit_wall(t_var *game)
 {
-	game->dda.hit = 0;
-	game->dda.side = 0;
-	while (game->dda.hit == 0)
+	game->raycasting.hit = 0;
+	game->raycasting.side = 0;
+	while (game->raycasting.hit == 0)
 	{
 		increase_raylen(game);
-		if(parse_map_chr_at(game,game->dda.map_coords.y,  game->dda.map_coords.x) == 0 ||
-			parse_map_chr_at(game, game->dda.map_coords.y,  game->dda.map_coords.x) == MAP_WALL)		
-				game->dda.hit = 1;
+		if(parse_map_chr_at(game,game->raycasting.map_coords.y,  game->raycasting.map_coords.x) == 0 ||
+			parse_map_chr_at(game, game->raycasting.map_coords.y,  game->raycasting.map_coords.x) == MAP_WALL)		
+				game->raycasting.hit = 1;
 	}
 }
 
 
 void get_wall_coords(t_var *game)
 {
-	const int  wall_height = (int)(WINDOW_WIDTH / game->dda.wall_dist);
+	const int  wall_height = (int)(game->config._w / game->raycasting.wall_dist);
 
-	if (game->dda.side == CNF_WALL_WEST || game->dda.side == CNF_WALL_EAST)
-		game->dda.wall_dist = (game->dda.ray.x - game->dda.delta_dist.x);
+	if (game->raycasting.side == CNF_WALL_WEST || game->raycasting.side == CNF_WALL_EAST)
+		game->raycasting.wall_dist = (game->raycasting.ray.x - game->raycasting.delta_dist.x);
 	else
-		game->dda.wall_dist = (game->dda.ray.y - game->dda.delta_dist.y);
+		game->raycasting.wall_dist = (game->raycasting.ray.y - game->raycasting.delta_dist.y);
 
-	game->dda.wall_start_px = -wall_height / 2.0 + WINDOW_HEIGHT / 2.0 \
-		+ game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->dda.wall_dist);
-	game->dda.wall_end_px = wall_height / 2 + WINDOW_HEIGHT / 2 \
-		+ game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->dda.wall_dist);
+	game->raycasting.wall_start_px = -wall_height / 2.0 + game->config._h / 2.0 \
+		+ game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->raycasting.wall_dist);
+	game->raycasting.wall_end_px = wall_height / 2 + game->config._h / 2 \
+		+ game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->raycasting.wall_dist);
 	
-	if (game->dda.wall_start_px < 0)
-		game->dda.wall_start_px = 0;
-	if (game->dda.wall_end_px >= WINDOW_HEIGHT)
-		game->dda.wall_end_px = WINDOW_HEIGHT - 1;
+	if (game->raycasting.wall_start_px < 0)
+		game->raycasting.wall_start_px = 0;
+	if (game->raycasting.wall_end_px >= game->config._h)
+		game->raycasting.wall_end_px = game->config._h - 1;
 }

@@ -19,8 +19,8 @@ void handle_camera_rotation(t_var *game, int dir)
 int handle_wll_collision(t_var *game, double x, double y)
 {
 
-	if (x < TILE_SIZE || x >= WINDOW_WIDTH - TILE_SIZE || y < TILE_SIZE ||
-		y >= WINDOW_HEIGHT - TILE_SIZE || parse_map_chr_at(game, (y / TILE_SIZE), (x / TILE_SIZE)) == MAP_WALL)
+	if (x < TILE_SIZE || x >= game->mapinfo.cols_mtx - TILE_SIZE || y < TILE_SIZE ||
+		y >= game->mapinfo.rows_mtx - TILE_SIZE || parse_map_chr_at(game, (y / TILE_SIZE), (x / TILE_SIZE)) == MAP_WALL)
 		return (OK);
 
 	dbg_printf("Can t move, the player position will be :%d %d\n", x * TILE_SIZE, y * TILE_SIZE);
