@@ -148,9 +148,6 @@ typedef enum e_cnf
 # define CROUCH_HEIGHT 200
 
 # define PLAYER_ANGLE 0
-
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
 # define WINDOW_NAME "UrMom!"
 
 #endif

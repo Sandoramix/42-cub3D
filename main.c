@@ -81,9 +81,6 @@ void init_hardcoded_value(t_var *game)
 	// game->player.neg_cos_rot_speed_pos = cos(-rotSpeed);
 	// game->player.neg_sin_rot_speed_pos = sin(-rotSpeed);
 
-	// TODO dynamic
-	game->dda.screen_size_w_px = WINDOW_WIDTH;
-	game->dda.screen_size_h_px = WINDOW_HEIGHT;
 
 }
 

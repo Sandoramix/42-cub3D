@@ -15,11 +15,6 @@
 
 # include <cub3D.h>
 
-enum e_rotation_dir
-{
-	ROTAT_DIR_RIGHT,
-	ROTAT_DIR_LEFT
-};
 
 typedef struct s_player
 {
@@ -59,16 +54,13 @@ typedef struct s_sprite
 }	t_sprite;
 
 // TODO NORMINETTE (NAMES: snake case)
-typedef struct s_DDA
+typedef struct s_raycast
 {
 	double	camera_x;
-	int		screen_size_w_px;
-	int		screen_size_h_px;
 	t_dpoint dir;
 	t_dpoint ray;
 	t_dpoint delta_dist;
 	t_point map_coords;
-
 	double	wall_dist;
 	double	wall_start_px;
 	double	wall_end_px;
@@ -77,7 +69,7 @@ typedef struct s_DDA
 	int		hit;
 	int		side;
 
-}	t_DDA;
+}	t_raycast;
 
 typedef struct s_map_info
 {
@@ -161,7 +153,7 @@ typedef struct s_var
 	int				line_bytes;
 	t_player		player;
 	t_movement		move;
-	t_DDA			dda;
+	t_raycast		raycasting;
 	t_sprite		sprite;
 	t_dpoint		plane;
 	t_map			mapinfo;

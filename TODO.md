@@ -1,5 +1,5 @@
 - [ ] rendering
-  - [x] dda
+  - [x] raycasting
   - [ ] minimappa
     - [x] mappa
     - [x] player
