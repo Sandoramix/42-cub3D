@@ -3,7 +3,7 @@
 
 void fill_img_buffer(t_var *game, int x, int y, int color)
 {
-	int pixel = (y * game->line_bytes) + (x * sizeof(int));
+	int pixel = (y * game->line_bytes) + ((x) * sizeof(int));
 	game->buffer[pixel + 0] = (color >> 24);
     game->buffer[pixel + 1] = (color >> 16) & 0xFF;
     game->buffer[pixel + 2] = (color >> 8) & 0xFF;
@@ -18,7 +18,7 @@ void	draw_walls(t_var *game, int pixel_pos_x)
 	//printf("Y[%f]\n",game->engine.wall_ceil);
 	//cleanup(game, 1, 1);
 
-	while (y <= floor(game->engine.wall_floor))
+	while (y <= game->engine.wall_floor)
 	{
 		if (game->engine.side == CNF_WALL_NORD)
 			fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x18000000));

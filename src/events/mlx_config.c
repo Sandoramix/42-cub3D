@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:11:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/09 14:24:55 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:40:38 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ t_state	mlx_setup(t_var *game)
 {
 	mlx_get_screen_size(game->mlx, &game->config.win_width,
 		&game->config.win_height);
+	//game->config.win_height = 720.;
+	//game->config.win_width = 1280.;
+
 	game->mlx_win = mlx_new_window(game->mlx,
 			game->config.win_width, game->config.win_height, WINDOW_NAME);
 	ft_printf("WIN_H[%d], WIN_W[%d]\n",
