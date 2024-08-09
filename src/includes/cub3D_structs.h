@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:52:05 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:28:20 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 //------------------------------------------------------------------------------
 typedef struct s_color
 {
-	t_uchar	red;
-	t_uchar	green;
+	t_uchar	alpha;
 	t_uchar	blue;
+	t_uchar	green;
+	t_uchar	red;
 }	t_color;
 
 typedef union u_rgb
@@ -38,11 +39,11 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 
-	double offset;
-	double pos_z;
-	double head_pos_z;
+	double	offset;
+	double	pos_z;
+	double	head_pos_z;
 
-	double travel_count;
+	double	travel_count;
 
 	double	angle;
 }	t_player;
@@ -56,19 +57,19 @@ typedef struct s_dpoint
 // TODO NORMINETTE (NAMES: snake case)
 typedef struct s_raycast
 {
-	t_point map_coords;
-	t_dpoint delta_dist;
-	t_dpoint plane;
-	t_dpoint ray;
-	t_dpoint dir;
-	double	camera_x;
-	double	wall_dist;
-	double	wall_ceil;
-	double	wall_floor;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
+	t_point		map_coords;
+	t_dpoint	delta_dist;
+	t_dpoint	plane;
+	t_dpoint	ray;
+	t_dpoint	dir;
+	double		camera_x;
+	double		wall_dist;
+	double		wall_ceil;
+	double		wall_floor;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
 
 }	t_raycast;
 
@@ -124,7 +125,11 @@ typedef struct s_config
 
 	t_rgb	floor;
 	char	*floor_raw;
-//TODO WINDOW MEASURES ??
+	
+	//WINDOW MEASURES
+	int		win_height;
+	int		win_width;
+
 	int		_w;
 	int		_h;
 }	t_config;

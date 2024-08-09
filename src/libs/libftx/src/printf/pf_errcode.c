@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 08:23:24 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 13:05:04 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:05:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ static int	errswitch2(t_errorcode code)
 {
 	if (code == E_MLX)
 		return (ft_perror("Failed minilibx connection."));
+	if (code == E_MLXWIN)
+		return (ft_perror("Failed minilibx window creation."));
+	if (code == E_MLXIMG)
+		return (ft_perror("Failed minilibx image creation."));
 	return (ft_perror("."));
 }
 

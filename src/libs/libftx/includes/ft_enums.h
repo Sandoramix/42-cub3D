@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 22:54:58 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/03 13:04:32 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:05:10 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ typedef enum e_state
  * @param E_DUP Dup failure.
  * @param E_EXECVE Execve failure.
  * @param E_SYNTAX Syntax error (minishell).
+ * @param E_MLX MLX connection failure.
+ * @param E_MLXWIN MLX window creation failure.
+ * @param E_MLXIMG MLX image creation failure.
  */
 typedef enum e_errorcode
 {
@@ -61,6 +64,8 @@ typedef enum e_errorcode
 	E_EXECVE,
 	E_SYNTAX,
 	E_MLX,
+	E_MLXWIN,
+	E_MLXIMG
 }	t_errorcode;
 //------------------------------------------------------------------------------
 /**

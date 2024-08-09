@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 11:10:20 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:43:43 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:17:16 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	update_player(t_var *game, int x, int y, double angle)
 		return ;
 	game->player.x = x;
 	game->player.y = y;
-	game->player.x_px = x * TILE_SIZE;
-	game->player.y_px = y * TILE_SIZE;
+	game->player.x_px = x * TILE_SIZE + TILE_SIZE / 2;
+	game->player.y_px = y * TILE_SIZE + TILE_SIZE / 2;
 	game->player.angle = angle;
 }
 

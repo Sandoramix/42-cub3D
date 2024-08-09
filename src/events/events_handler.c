@@ -20,7 +20,7 @@ int handle_wll_collision(t_var *game, double x, double y)
 {
 
 	if (x < TILE_SIZE || x >= game->mapinfo.cols_mtx * 64 - TILE_SIZE || y < TILE_SIZE ||
-		y >= game->mapinfo.rows_mtx * 64 - TILE_SIZE || parse_map_chr_at(game, (y / TILE_SIZE), (x / TILE_SIZE)) == MAP_WALL)
+		y >= game->mapinfo.rows_mtx * 64 - TILE_SIZE || get_map_at(game, (y / TILE_SIZE), (x / TILE_SIZE)) == MAP_WALL)
 		return (OK);
 
 	dbg_printf("Can t move, the player position will be :%d %d\n", x * TILE_SIZE, y * TILE_SIZE);

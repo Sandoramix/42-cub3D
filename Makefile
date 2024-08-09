@@ -78,7 +78,7 @@ re-force: fclean delete-mlx download-mlx all
 
 # ----UTILS---------------------------------------------------------------------
 VALGRIND=@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --tool=memcheck --keep-debuginfo=yes
-ARGS="assets/maps/mappa.cub"
+ARGS="assets/maps/with_config.cub"
 # FOR FD 		TRACKING: --track-fds=yes
 # FOR CHILDREN	TRACKING: --trace-children=yes
 valgrind: debug

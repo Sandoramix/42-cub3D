@@ -32,7 +32,7 @@ void init_rendering(t_var *game, int pixel_pos_x)
 	const t_dpoint delta_dist_vect = (t_dpoint){fabs(1 / game->engine.dir.x), fabs(1 / game->engine.dir.y)};
 	
 	copy_pos(&game->engine.map_coords, player_pos_vect);
-	game->engine.camera_x = (double)(2 * pixel_pos_x) / (double)game->config._w - 1;
+	game->engine.camera_x = (double)(2 * pixel_pos_x) / (double)game->config.win_width - 1;
 	copy_dpos(&game->engine.dir, ray_dir_vect);
 	copy_dpos(&game->engine.delta_dist, delta_dist_vect);
 	

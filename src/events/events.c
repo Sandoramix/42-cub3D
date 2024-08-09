@@ -1,23 +1,9 @@
 #include <cub3D.h>
 
-int	game_loop(t_var *game)
-{
-	delta_time(game);
-	//printf("planex : %f, planey %f\n", game->engine.plane.x, game->engine.plane.y);
-	handle_player_movement(game);
-	handle_player_rotation(game);
-
-	rendering(game);
-	return (1);
-}
-
 int	key_press(int keycode, t_var *game)
 {
 	if (keycode == ESC_KEY)
-	{
-		cleanup(game, true, 1);
-		return (OK);
-	}
+		return (cleanup(game, true, 0), OK);
 
 	if (keycode == XK_w)
 		game->move.up = true;
@@ -37,17 +23,13 @@ int	key_press(int keycode, t_var *game)
 	if (keycode == XK_Down)
 		game->move.rot_down = true;
 
-	if (keycode == XK_space)
+	if (keycode == XK_space && !game->move.jump)
 	{
-		if(!game->move.jump)
-		{
-			game->move.jump = true;
-			game->move.jump_mult = 1;
-		}
+		game->move.jump = true;
+		game->move.jump_mult = 1;
 	}
 	if (keycode == XK_Shift_L)
 		game->move.crouch = true;
-	
 	return (0);
 }
 
@@ -78,6 +60,5 @@ int	key_release(int keycode, t_var *game)
 	//if (!game->move.up && !game->move.down &&
 	//	!game->move.left && !game->move.right)
 	//	game->player.travel_count = 0;
-		
 	return (0);
 }

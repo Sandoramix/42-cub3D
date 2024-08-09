@@ -10,27 +10,25 @@ void fill_img_buffer(t_var *game, int x, int y, int color)
     game->buffer[pixel + 3] = (color) & 0xFF;
 }
 
-void draw_walls(t_var *game, int pixel_pos_x)
+void	draw_walls(t_var *game, int pixel_pos_x)
 {
-	int y;
-	int print_every_tot_line;
+	double	y;
 
 	y = game->engine.wall_ceil;
-	print_every_tot_line = 1;
-	if (pixel_pos_x % print_every_tot_line == 0)
+	//printf("Y[%f]\n",game->engine.wall_ceil);
+	//cleanup(game, 1, 1);
+
+	while (y <= floor(game->engine.wall_floor))
 	{
-		while (y <= floor(game->engine.wall_floor))
-		{
-			if (game->engine.side == CNF_WALL_NORD)
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x18000000));
-			else if (game->engine.side == CNF_WALL_SOUTH)
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x00FF0000));
-			else if (game->engine.side == CNF_WALL_EAST)
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x0000FF00));
-			else
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0xFFFFFF00));
-			y++;
-		}
+		if (game->engine.side == CNF_WALL_NORD)
+			fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x18000000));
+		else if (game->engine.side == CNF_WALL_SOUTH)
+			fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x00FF0000));
+		else if (game->engine.side == CNF_WALL_EAST)
+			fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x0000FF00));
+		else
+			fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0xFFFFFF00));
+		y++;
 	}
 }
 

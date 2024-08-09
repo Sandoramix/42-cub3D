@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:55:05 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:06:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ double		chr_player_to_angle(char player_c);
 void		print_missing_config(t_var *game);
 bool		is_config_missing(t_var *game);
 bool		chr_is_player(char c);
-char	parse_map_chr_at(t_var *game, int row_idx, int col_idx);
+char		get_map_at(t_var *game, int row_idx, int col_idx);
 
 
 //MLX UTILS
@@ -64,7 +64,7 @@ void		fill_img_buffer(t_var *game, int x, int y, int color);
 double		delta_time(t_var *game);
 
 // MLX CONFIGURATION -----------------------------------------------------------
-void		mlx_configuration(t_var *game);
+t_state		mlx_setup(t_var *game);
 //------------------------------------------------------------------------------
 
 // EVENTS ----------------------------------------------------------------------
