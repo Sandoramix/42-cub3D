@@ -49,10 +49,6 @@ void init_hardcoded_value(t_var *game)
 	}
 	ft_putstrmtx(game->mapinfo.map);
 
-	printf("Map sizes:\trows[%i]\tcols[%i]\n", game->mapinfo.rows_mtx,
-		game->mapinfo.cols_mtx);
-
-
 	game->mapinfo.mtxint = cmtxtoimtx(game, game->mapinfo.map,
 			game->mapinfo.cols_mtx, game->mapinfo.rows_mtx);
 
@@ -66,21 +62,8 @@ void init_hardcoded_value(t_var *game)
 
 	const double plane_limit = .7;
 
-	game->plane.y = plane_limit * cos(game->player.angle);
-	game->plane.x = plane_limit * sin(game->player.angle);
-
-	game->sprite.tile_sprite_w = TILE_SIZE;
-	game->sprite.tile_sprite_h = TILE_SIZE;
-	game->sprite.mini_player_w = MINIMAP_TILE_SIZE;
-	game->sprite.mini_player_h = MINIMAP_TILE_SIZE;
-
-    // double rotSpeed = delta_time(game) + 0.05; 
-	// /* printf("rotation speed %f\n", rotSpeed); */
-	// game->player.positive_cos_rot_speed = cos(rotSpeed);
-	// game->player.positive_sin_rot_speed = sin(rotSpeed);
-	// game->player.neg_cos_rot_speed_pos = cos(-rotSpeed);
-	// game->player.neg_sin_rot_speed_pos = sin(-rotSpeed);
-
+	game->engine.plane.y = plane_limit * cos(game->player.angle);
+	game->engine.plane.x = plane_limit * sin(game->player.angle);
 
 }
 

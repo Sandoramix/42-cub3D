@@ -84,6 +84,10 @@ int			handle_wll_collision(t_var *game, double x, double y);
 
 // MATH FUNCTIONS --------------------------------------------------------------
 t_dpoint	calculate_point(t_dpoint start, double angle, double distance);
+void		copy_dpos(t_dpoint *p1, t_dpoint p2);
+void		copy_pos(t_point *p1, t_point p2);
+void		add_dpoint(t_dpoint *p1, t_dpoint p2);
+void		add_point(t_point *p1, t_point p2);
 double		from_angle_to_radiant(double angle);
 double		pi(void);
 //------------------------------------------------------------------------------

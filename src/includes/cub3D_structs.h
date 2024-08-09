@@ -15,6 +15,19 @@
 
 # include <cub3D.h>
 
+//------------------------------------------------------------------------------
+typedef struct s_color
+{
+	t_uchar	red;
+	t_uchar	green;
+	t_uchar	blue;
+}	t_color;
+
+typedef union u_rgb
+{
+	t_color	color;
+	int		hex;
+}	t_rgb;
 
 typedef struct s_player
 {
@@ -40,30 +53,18 @@ typedef struct s_dpoint
 	double	y;
 }	t_dpoint;
 
-typedef struct s_sprite
-{
-	t_img	*black_sprite;
-	t_img	*white_sprite;
-	t_img	*mini_player;
-
-	int		mini_player_w;
-	int		mini_player_h;
-
-	int		tile_sprite_w;
-	int		tile_sprite_h;
-}	t_sprite;
-
 // TODO NORMINETTE (NAMES: snake case)
 typedef struct s_raycast
 {
-	double	camera_x;
-	t_dpoint dir;
-	t_dpoint ray;
-	t_dpoint delta_dist;
 	t_point map_coords;
+	t_dpoint delta_dist;
+	t_dpoint plane;
+	t_dpoint ray;
+	t_dpoint dir;
+	double	camera_x;
 	double	wall_dist;
-	double	wall_start_px;
-	double	wall_end_px;
+	double	wall_ceil;
+	double	wall_floor;
 	int		step_x;
 	int		step_y;
 	int		hit;
@@ -101,19 +102,6 @@ typedef struct s_movement
 	int			jump_mult;
 }	t_movement;
 
-//------------------------------------------------------------------------------
-typedef struct s_color
-{
-	t_uchar	red;
-	t_uchar	green;
-	t_uchar	blue;
-}	t_color;
-
-typedef union u_rgb
-{
-	t_color	color;
-	int		hex;
-}	t_rgb;
 
 typedef struct s_config
 {
@@ -136,7 +124,7 @@ typedef struct s_config
 
 	t_rgb	floor;
 	char	*floor_raw;
-
+//TODO WINDOW MEASURES ??
 	int		_w;
 	int		_h;
 }	t_config;
@@ -153,9 +141,7 @@ typedef struct s_var
 	int				line_bytes;
 	t_player		player;
 	t_movement		move;
-	t_raycast		raycasting;
-	t_sprite		sprite;
-	t_dpoint		plane;
+	t_raycast		engine;
 	t_map			mapinfo;
 
 	t_config		config;

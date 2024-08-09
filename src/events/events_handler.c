@@ -11,9 +11,9 @@ void handle_camera_rotation(t_var *game, int dir)
 	old_dir_y = game->player.dir_y;
 	game->player.dir_y = old_dir_y * cosRes - game->player.dir_x * sinRes;
 	game->player.dir_x = old_dir_y * sinRes + game->player.dir_x * cosRes;
-	old_plane_x = game->plane.x;
-	game->plane.x = game->plane.x * cosRes - game->plane.y * sinRes;
-	game->plane.y = old_plane_x * sinRes + game->plane.y * cosRes;
+	old_plane_x = game->engine.plane.x;
+	game->engine.plane.x = game->engine.plane.x * cosRes - game->engine.plane.y * sinRes;
+	game->engine.plane.y = old_plane_x * sinRes + game->engine.plane.y * cosRes;
 }
 
 int handle_wll_collision(t_var *game, double x, double y)

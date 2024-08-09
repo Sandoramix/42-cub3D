@@ -7,10 +7,10 @@ t_dpoint calc_texture_px_hit(t_var * game)
 	double angle;
 
 
-	start = (t_dpoint){game->player.x_px + game->plane.x, game->player.y_px + game->plane.y};
+	start = (t_dpoint){game->player.x_px + game->engine.plane.x, game->player.y_px + game->engine.plane.y};
 	angle = atan2(game->player.dir_x, game->player.dir_y);
 	angle *= 180 / pi(); 
-	end = calculate_point(start, angle, game->raycasting.wall_dist);
+	end = calculate_point(start, angle, game->engine.wall_dist);
 
 	return end;
 }
@@ -19,8 +19,8 @@ void wall_casting(t_var *game)
 {
 	int pixel_pos_x;
 
-	pixel_pos_x = 0;
-	while (pixel_pos_x < game->config._w)
+	pixel_pos_x = 1;
+	while (pixel_pos_x <= game->config._w)
 	{
 		init_rendering(game, pixel_pos_x);
 		loop_until_hit_wall(game);

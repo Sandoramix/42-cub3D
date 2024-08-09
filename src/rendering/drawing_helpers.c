@@ -15,17 +15,17 @@ void draw_walls(t_var *game, int pixel_pos_x)
 	int y;
 	int print_every_tot_line;
 
-	y = game->raycasting.wall_start_px;
+	y = game->engine.wall_ceil;
 	print_every_tot_line = 1;
 	if (pixel_pos_x % print_every_tot_line == 0)
 	{
-		while (y <= game->raycasting.wall_end_px)
+		while (y <= floor(game->engine.wall_floor))
 		{
-			if (game->raycasting.side == CNF_WALL_NORD)
+			if (game->engine.side == CNF_WALL_NORD)
 				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x18000000));
-			else if (game->raycasting.side == CNF_WALL_SOUTH)
+			else if (game->engine.side == CNF_WALL_SOUTH)
 				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x00FF0000));
-			else if (game->raycasting.side == CNF_WALL_EAST)
+			else if (game->engine.side == CNF_WALL_EAST)
 				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x0000FF00));
 			else
 				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0xFFFFFF00));
@@ -77,10 +77,10 @@ void draw_minimap_rays(t_var *game)
 	double angle;
 
 	angle = -FOV / 2;
-	start_px = (t_dpoint){game->player.x_px + game->plane.x, game->player.y_px + game->plane.y};
+	start_px = (t_dpoint){game->player.x_px + game->engine.plane.x, game->player.y_px + game->engine.plane.y};
 	while (angle <= FOV / 2)
 	{
-		end_px = calculate_point(start_px, angle, game->raycasting.wall_dist);
+		end_px = calculate_point(start_px, angle, game->engine.wall_dist);
 		draw_line(game, start_px, end_px);
 		angle++;
 	}
