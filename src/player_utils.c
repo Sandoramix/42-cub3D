@@ -12,7 +12,7 @@
 
 #include <cub3D.h>
 
-void	update_player(t_var *game, int x, int y, double angle)
+void	update_player(t_var *game, int x, int y, t_point angle)
 {
 	if (!game)
 		return ;
@@ -20,20 +20,21 @@ void	update_player(t_var *game, int x, int y, double angle)
 	game->player.y = y;
 	game->player.x_px = x * TILE_SIZE + TILE_SIZE / 2;
 	game->player.y_px = y * TILE_SIZE + TILE_SIZE / 2;
-	game->player.angle = angle;
+	game->player.dir_x = angle.x;
+	game->player.dir_y = angle.y;
 }
 
-double	chr_player_to_angle(char player_c)
+t_point	chr_player_to_angle(char player_c)
 {
 	if (player_c == MAP_PLAYER_EAST)
-		return (0.0);
+		return ((t_point){0, 1});
 	if (player_c == MAP_PLAYER_NORD)
-		return (360.0 - 90.0);
+		return ((t_point){-1, 0});
 	if (player_c == MAP_PLAYER_WEST)
-		return (180.0);
+		return ((t_point){0, -1});
 	if (player_c == MAP_PLAYER_SOUTH)
-		return (90.0);
-	return (0.0);
+		return ((t_point){1, 0});
+	return ((t_point){0, 0});
 }
 
 bool	chr_is_player(char c)

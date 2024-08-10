@@ -26,13 +26,11 @@ void init_hardcoded_value(t_var *game)
 	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x_px, game->player.y_px);
 	printf("Player Map Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x_px /  64, game->player.y_px /  64);
 	/*gestire direzione il player is facing in base al parsing*/
-	game->player.dir_y = cos(game->player.angle);
-	game->player.dir_x = sin(game->player.angle);
 
-	const double plane_limit = .7;
-
-	game->engine.plane.y = plane_limit * cos(game->player.angle);
-	game->engine.plane.x = plane_limit * sin(game->player.angle);
+	double plane_limit = 0.7;
+	
+	game->engine.plane.y = plane_limit * game->player.dir_y;
+	game->engine.plane.x = plane_limit * game->player.dir_x;
 
 }
 

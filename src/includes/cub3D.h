@@ -31,8 +31,8 @@
 t_state		parse(t_var *game, int ac, char **av);
 //------------------------------------------------------------------------------
 //PLAYER UTILS
-void		update_player(t_var *game, int x, int y, double angle);
-double		chr_player_to_angle(char player_c);
+void	update_player(t_var *game, int x, int y, t_point angle);
+t_point     chr_player_to_angle(char player_c);
 
 //GENERIC UTILS
 void		print_missing_config(t_var *game);
