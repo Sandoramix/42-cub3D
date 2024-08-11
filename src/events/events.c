@@ -4,7 +4,8 @@ int	key_press(int keycode, t_var *game)
 {
 	if (keycode == ESC_KEY)
 		return (cleanup(game, true, 0), OK);
-
+	if(keycode == XK_q)
+		game->move.zoom = true;
 	if (keycode == XK_w)
 		game->move.up = true;
 	if (keycode == XK_s)
@@ -35,6 +36,8 @@ int	key_press(int keycode, t_var *game)
 
 int	key_release(int keycode, t_var *game)
 {
+	if(keycode == XK_q)
+		game->move.zoom = false;
 	if (keycode == KEY_W)
 		game->move.up = false;
 	if (keycode == KEY_S)

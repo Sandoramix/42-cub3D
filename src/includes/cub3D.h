@@ -47,11 +47,13 @@ t_state		load_xpm_image(t_var *game, t_img **img, char *path);
 // RAYCASTING-------------------------------------------------------------------
 void        render_background(t_var *game);
 void		render_walls(t_var *game);
-void		init_render(t_var *game, int pixel_pos_x);
+void		init_vars(t_var *game, int pixel_pos_x);
 void		increase_raylen(t_var *game);
 void		get_wall_coords(t_var *game);
 void		loop_until_hit_wall(t_var *game);
 void        calc_texture_coords(t_var *game);
+void        calc_direction(t_var *game);
+
 
 //------------------------------------------------------------------------------
 
@@ -80,6 +82,8 @@ void		handle_player_movement(t_var *game);
 void		handle_player_rotation(t_var *game);
 void		handle_camera_rotation(t_var *game, int rotation_dir);
 int			handle_wll_collision(t_var *game, double x, double y);
+void        handle_zoom(t_var *game);
+
 
 //------------------------------------------------------------------------------
 

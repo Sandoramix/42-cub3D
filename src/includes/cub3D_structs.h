@@ -56,12 +56,13 @@ typedef struct s_dpoint
 
 typedef struct s_texure
 {
+	t_img 	*tex;
 	t_img	*text_array[4];
 	int		x;
 	int		y;
 	char	*pixel;
 	int		color;
-	double	wallX;
+	double	wall_px;
 	double	scale;
 	double	scaled_textpos;
 } t_texture;
@@ -114,6 +115,7 @@ typedef struct s_movement
 	bool		has_crouched;
 
 	int			jump_mult;
+	bool 		zoom;
 }	t_movement;
 
 
@@ -123,14 +125,15 @@ typedef struct s_config
 	t_img	*wall_nord;
 	char	*wall_nord_path;
 
+	t_img	*wall_south;
+	char	*wall_south_path;
+
 	t_img	*wall_east;
 	char	*wall_east_path;
 
 	t_img	*wall_west;
 	char	*wall_west_path;
 
-	t_img	*wall_south;
-	char	*wall_south_path;
 //-------------------------------------
 
 	t_rgb	ceiling;
