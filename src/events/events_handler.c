@@ -34,19 +34,18 @@ void handle_player_movement(t_var *game)
 	double		new_x;
 	double		new_y;
 
-	// TODO non sto gestendo bene la posizione del player, le sue x e y devono essere
-	// scalate x 64 all se si parla della sua posizione(pixel)
+
 	new_x = game->player.x_px;
 	new_y = game->player.y_px;
 	if (game->move.up || game->move.down)
 	{
-		new_x -= (dir_y * (game->player.dir_y * VELOCITY * game->deltatime));
-		new_y -= (dir_y * (game->player.dir_x * VELOCITY * game->deltatime));
+		new_x -= (dir_y * (game->player.dir_x * VELOCITY * game->deltatime));
+		new_y -= (dir_y * (game->player.dir_y * VELOCITY * game->deltatime));
 	}
 	if (game->move.left || game->move.right)
 	{
-		new_x -= (dir_x * (game->player.dir_x * VELOCITY * game->deltatime));
-		new_y += (dir_x * (game->player.dir_y * VELOCITY * game->deltatime));
+		new_x -= (dir_x * (game->player.dir_y * VELOCITY * game->deltatime));
+		new_y += (dir_x * (game->player.dir_x * VELOCITY * game->deltatime));
 	}
 	if (!handle_wll_collision(game, new_x, new_y))
 	{
@@ -68,12 +67,11 @@ void handle_player_movement(t_var *game)
 void handle_player_rotation(t_var *game)
 {
 	float value;
-
 	if (game->move.rot_left)
-		handle_camera_rotation(game, -1.);
+	handle_camera_rotation(game, 1.);
 	if (game->move.rot_right)
-		handle_camera_rotation(game, 1.);
-
+	handle_camera_rotation(game, -1.);
+	
 	if (game->move.rot_up)
 	{
 		game->player.offset += VELOCITY * game->deltatime;

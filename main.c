@@ -12,7 +12,7 @@
 
 #include <cub3D.h>
 
-//TODO purge me hahahahah lol
+// TODO purge me hahahahah lol
 void init_hardcoded_value(t_var *game)
 {
 	if (ft_isdebug())
@@ -22,21 +22,17 @@ void init_hardcoded_value(t_var *game)
 	}
 	ft_putstrmtx(game->mapinfo.map);
 
-
 	printf("Player Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x_px, game->player.y_px);
-	printf("Player Map Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x_px /  64, game->player.y_px /  64);
+	printf("Player Map Position x: %.5f\nPlayer Position y: %.5f\n", game->player.x_px / 64, game->player.y_px / 64);
 	/*gestire direzione il player is facing in base al parsing*/
 
-	double plane_limit = 0.7;
-	
-	game->engine.plane.y = plane_limit * game->player.dir_y;
-	game->engine.plane.x = plane_limit * game->player.dir_x;
+
 
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	t_var	game;
+	t_var game;
 
 	ft_bzero(&game, sizeof(t_var));
 	game.mlx = mlx_init();
@@ -45,7 +41,7 @@ int	main(int ac, char **av)
 	parse(&game, ac, av);
 	init_hardcoded_value(&game); // TODO: WE CAN DO BETTER THAN THIS
 	mlx_setup(&game);
-	//draw first frame
+	// draw first frame
 	rendering(&game);
 	mlx_loop(game.mlx);
 	return (cleanup(&game, true, 0), 0);

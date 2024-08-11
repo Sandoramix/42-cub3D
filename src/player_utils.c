@@ -20,20 +20,21 @@ void	update_player(t_var *game, int x, int y, t_point angle)
 	game->player.y = y;
 	game->player.x_px = x * TILE_SIZE + TILE_SIZE / 2;
 	game->player.y_px = y * TILE_SIZE + TILE_SIZE / 2;
-	game->player.dir_x = angle.x;
 	game->player.dir_y = angle.y;
+	game->player.dir_x = angle.x;
+	//printf("game->player.dir_y, game->player.dir_x: %f, %f\n", game->player.dir_y, game->player.dir_x);
 }
 
 t_point	chr_player_to_angle(char player_c)
 {
 	if (player_c == MAP_PLAYER_EAST)
-		return ((t_point){0, 1});
+		return ((t_point){0, 1});  // East is down
 	if (player_c == MAP_PLAYER_NORD)
-		return ((t_point){-1, 0});
+		return ((t_point){1, 0});  // North is right
 	if (player_c == MAP_PLAYER_WEST)
-		return ((t_point){0, -1});
+		return ((t_point){0, -1}); // West is up
 	if (player_c == MAP_PLAYER_SOUTH)
-		return ((t_point){1, 0});
+		return ((t_point){-1, 0}); // South is left
 	return ((t_point){0, 0});
 }
 

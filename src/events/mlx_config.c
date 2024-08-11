@@ -14,7 +14,11 @@
 
 int	game_loop(t_var *game)
 {
+	double plane_limit = 0.7;
+
 	delta_time(game);
+	game->engine.plane.x = -game->player.dir_y * plane_limit;  // Perpendicular to dir_x
+	game->engine.plane.y = game->player.dir_x * plane_limit;   // Perpendicular to dir_y
 	handle_player_movement(game);
 	handle_player_rotation(game);
 
