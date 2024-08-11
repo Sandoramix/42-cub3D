@@ -8,7 +8,6 @@ int	game_loop(t_var *game)
 	
 	render_background(game);
 	render_walls(game);
-	handle_zoom(game);
 	if (mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0))
 		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), 1);
 	return (1);
