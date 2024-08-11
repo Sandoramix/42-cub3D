@@ -35,6 +35,9 @@ void handle_player_movement(t_var *game)
 	double		new_y;
 
 
+	game->engine.plane.x = -game->player.dir_y * game->config.plane_limit;  // Perpendicular to dir_x
+	game->engine.plane.y = game->player.dir_x * game->config.plane_limit; 	// Perpendicular to dir_y
+
 	new_x = game->player.x_px;
 	new_y = game->player.y_px;
 	if (game->move.up || game->move.down)

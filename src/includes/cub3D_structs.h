@@ -57,13 +57,13 @@ typedef struct s_dpoint
 typedef struct s_texure
 {
 	t_img	*text_array[4];
-	int x;
-	int y;
-	char *pixel;
-	int color;
+	int		x;
+	int		y;
+	char	*pixel;
+	int		color;
 	double	wallX;
-	double scale;
-	double scaled_textpos;
+	double	scale;
+	double	scaled_textpos;
 } t_texture;
 
 typedef struct s_raycast
@@ -145,6 +145,9 @@ typedef struct s_config
 
 	int		_w;
 	int		_h;
+	//FOV
+	double	plane_limit;
+
 }	t_config;
 
 // "GLOBAL" program's structure.
