@@ -48,17 +48,18 @@ t_state		load_xpm_image(t_var *game, t_img **img, char *path);
 void		render(t_var *game);
 void		init_render(t_var *game, int pixel_pos_x);
 void		increase_raylen(t_var *game);
-void		calc_distance_from_wall(t_var *game);
-void		get_wall_coords(t_var *game, int x);
-void		calc_relative_line_height(t_var *game);
+void		get_wall_coords(t_var *game);
 void		loop_until_hit_wall(t_var *game);
+void        calc_texture_coords(t_var *game);
+
 //------------------------------------------------------------------------------
 
 // DRAWING----------------------------------------------------------------------
-void		draw_walls(t_var *game, int pixel_pos_x);
 void		draw_rectangle(t_var *game, t_point start, t_point end, int color);
 void		draw_line(t_var *game, t_dpoint start, t_dpoint end);
-void		fill_img_buffer(t_var *game, int x, int y, int color);
+void		draw_px_to_img(t_var *game, int x, int y, int color);
+int         get_texture_color(t_var *game);
+
 //------------------------------------------------------------------------------
 
 double		delta_time(t_var *game);

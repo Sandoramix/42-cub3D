@@ -54,15 +54,28 @@ typedef struct s_dpoint
 	double	y;
 }	t_dpoint;
 
-// TODO NORMINETTE (NAMES: snake case)
+typedef struct s_texure
+{
+	t_img	*text_array[4];
+	int x;
+	int y;
+	char *pixel;
+	int color;
+	double	wallX;
+	double scale;
+	double scaled_textpos;
+} t_texture;
+
 typedef struct s_raycast
 {
+	t_texture	texture;
 	t_point		map_coords;
 	t_dpoint	delta_dist;
 	t_dpoint	plane;
 	t_dpoint	ray;
 	t_dpoint	dir;
 	double		camera_x;
+	int			wall_height;
 	double		wall_dist;
 	double		wall_ceil;
 	double		wall_floor;
