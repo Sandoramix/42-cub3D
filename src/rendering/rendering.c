@@ -17,17 +17,17 @@ t_dpoint calc_texture_px_hit(t_var * game)
 
 void render_wall(t_var *game)
 {
-	int pixel_pos_x;
+	int x;
 
-	pixel_pos_x = 0;
-	while (pixel_pos_x <= game->config.win_width)
+	x = 0;
+	while (x <= game->config.win_width)
 	{
-		init_render(game, pixel_pos_x);
+		init_render(game, x);
 		loop_until_hit_wall(game);
-		get_wall_coords(game);
+		get_wall_coords(game, x);
 		//t_dpoint endpx = calc_texture_px_hit(game);
-		draw_walls(game, pixel_pos_x);
-		pixel_pos_x++;
+/* 		draw_walls(game, x); */
+		x++;
 	}
 }
 
