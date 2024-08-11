@@ -45,8 +45,8 @@ char		get_map_at(t_var *game, int row_idx, int col_idx);
 t_state		load_xpm_image(t_var *game, t_img **img, char *path);
 //------------------------------------------------------------------------------
 // RAYCASTING-------------------------------------------------------------------
-void		rendering(t_var *game);
-void		init_rendering(t_var *game, int pixel_pos_x);
+void		render(t_var *game);
+void		init_render(t_var *game, int pixel_pos_x);
 void		increase_raylen(t_var *game);
 void		calc_distance_from_wall(t_var *game);
 void		get_wall_coords(t_var *game);

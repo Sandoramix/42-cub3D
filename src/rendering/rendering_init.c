@@ -23,7 +23,7 @@ static void calc_initial_step_and_intial_raylen(t_var *game)
 }
 
 
-void init_rendering(t_var *game, int pixel_pos_x)
+void init_render(t_var *game, int pixel_pos_x)
 {
 	const t_point player_pos_vect = (t_point){(int)floor(game->player.x_px / 64.0), (int)floor(game->player.y_px / 64.0)};
 	const double dirx = game->player.dir_x + game->engine.plane.x * game->engine.camera_x;

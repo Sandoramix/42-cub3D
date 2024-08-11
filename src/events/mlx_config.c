@@ -22,7 +22,7 @@ int	game_loop(t_var *game)
 	handle_player_movement(game);
 	handle_player_rotation(game);
 
-	rendering(game);
+	render(game);
 	return (1);
 }
 
@@ -53,7 +53,7 @@ t_state	mlx_setup(t_var *game)
 		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp,
 			&game->line_bytes, &game->endian);
-	rendering(game);
+	render(game);
 	config_event_handling(game);
 	return (OK);
 }
