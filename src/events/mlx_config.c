@@ -16,15 +16,9 @@
 
 int	config_event_handling(t_var *game)
 {
-	if (!mlx_hook(game->mlx_win, KeyPress, KeyPressMask,
-			&key_press, game))
-		return (pf_errcode(E_MLX), cleanup(game, true, 1), 1);
-	if (!mlx_hook(game->mlx_win, KeyRelease, KeyReleaseMask,
-			&key_release, game))
-		return (pf_errcode(E_MLX), cleanup(game, true, 1), 1);
-	if (!mlx_hook(game->mlx_win, DestroyNotify, DestroyAll,
-			mlx_loop_end, game->mlx))
-		return (pf_errcode(E_MLX), cleanup(game, true, 1), 1);
+	mlx_hook(game->mlx_win, KeyPress, KeyPressMask, &key_press, game);
+	mlx_hook(game->mlx_win, KeyRelease, KeyReleaseMask, &key_release, game);
+	mlx_hook(game->mlx_win, DestroyNotify, DestroyAll, mlx_loop_end, game->mlx);
 	mlx_loop_hook(game->mlx, &game_loop, game);
 	return (OK);
 }
