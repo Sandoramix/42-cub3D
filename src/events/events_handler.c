@@ -64,10 +64,7 @@ void handle_player_movement(t_var *game)
 		new_y += (dir_x * (game->player.dir_x * VELOCITY * game->deltatime));
 	}
 	if (!handle_wll_collision(game, new_x, new_y))
-	{
-		game->player.x_px = new_x;
-		game->player.y_px = new_y;
-	}
+		set_player_dpos(game, (t_dpoint){new_x, new_y});
 	//! TODO MOVEMENT OSCILLATION
 	// Do we like it? Yes. Is it a priority? No
 	//if (game->move.up || game->move.down || game->move.left || game->move.right)

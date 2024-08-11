@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/09 14:28:20 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/11 23:23:13 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 //------------------------------------------------------------------------------
 typedef struct s_color
 {
-	t_uchar	alpha;
 	t_uchar	blue;
 	t_uchar	green;
 	t_uchar	red;
+	t_uchar	alpha;
 }	t_color;
 
 typedef union u_rgb
 {
-	t_color	color;
 	int		hex;
+	t_color	color;
 }	t_rgb;
 
 typedef struct s_player

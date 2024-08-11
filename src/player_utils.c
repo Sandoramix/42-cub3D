@@ -6,13 +6,24 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 11:10:20 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/09 15:53:26 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/11 23:03:02 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-void	update_player(t_var *game, int x, int y, t_point angle)
+t_dpoint	set_player_dpos(t_var *game, t_dpoint new_pos)
+{
+	if (!game)
+		return (new_pos);
+	game->player.x = new_pos.x / TILE_SIZE;
+	game->player.y = new_pos.y / TILE_SIZE;
+	game->player.x_px = new_pos.x;
+	game->player.y_px = new_pos.y;
+	return (new_pos);
+}
+
+void	init_player(t_var *game, int x, int y, t_point angle)
 {
 	if (!game)
 		return ;

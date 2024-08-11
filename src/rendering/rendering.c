@@ -5,7 +5,7 @@ void render_walls(t_var *game)
 	int x;
 	int y;
 	t_texture *tex;
-	
+
 	tex = &game->engine.texture;
 	x = 0;
 	tex->text_array[0] = game->config.wall_nord;
@@ -25,7 +25,7 @@ void render_walls(t_var *game)
 		{
 			tex->y = (int)tex->scaled_textpos & (tex->text_array[game->engine.side]->height - 1); //serve a tenerlo in range
 			tex->scaled_textpos += tex->scale;
-			draw_px_to_img(game, x, y, get_texture_color(game));
+			draw_px_to_img(game, x, y, ((t_rgb){get_texture_color(game)}));
 			y++;
 		}
 		x++;
@@ -42,6 +42,6 @@ void render_background(t_var *game)
 	const t_point	floor_end = (t_point){game->config.win_width,
 		game->config.win_height};
 
-	draw_rectangle(game, ceiling_start, ceiling_end, game->config.ceiling.hex);
-	draw_rectangle(game, floor_start, floor_end, game->config.floor.hex);
+	draw_rectangle(game, ceiling_start, ceiling_end, (t_rgb){game->config.ceiling.hex});
+	draw_rectangle(game, floor_start, floor_end, (t_rgb){game->config.floor.hex});
 }

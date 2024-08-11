@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/09 14:06:53 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/11 23:21:23 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 // TODO : split each category in separate file if (it will) needed.
 
 //-PARSING----------------------------------------------------------------------
-//-PARSING----------------------------------------------------------------------
 t_state		parse(t_var *game, int ac, char **av);
 //------------------------------------------------------------------------------
 //PLAYER UTILS
-void	update_player(t_var *game, int x, int y, t_point angle);
-t_point     chr_player_to_angle(char player_c);
+t_dpoint	set_player_dpos(t_var *game, t_dpoint new_pos);
+void		init_player(t_var *game, int x, int y, t_point angle);
+t_point		chr_player_to_angle(char player_c);
 
 //GENERIC UTILS
 void		print_missing_config(t_var *game);
@@ -58,9 +58,9 @@ void        calc_direction(t_var *game);
 //------------------------------------------------------------------------------
 
 // DRAWING----------------------------------------------------------------------
-void		draw_rectangle(t_var *game, t_point start, t_point end, int color);
+void		draw_rectangle(t_var *game, t_point start, t_point end, t_rgb rgb);
 void		draw_line(t_var *game, t_dpoint start, t_dpoint end);
-void		draw_px_to_img(t_var *game, int x, int y, int color);
+void		draw_px_to_img(t_var *game, int x, int y, t_rgb rgb);
 int         get_texture_color(t_var *game);
 
 //------------------------------------------------------------------------------
