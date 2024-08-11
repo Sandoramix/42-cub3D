@@ -17,7 +17,7 @@ void render_wall(t_var *game)
 		calc_texture_coords(game);
 		for (int y = game->engine.wall_ceil; y <= game->engine.wall_floor; y++)
 		{
-			game->engine.texture.y = (int)game->engine.texture.scaled_textpos & (64 - 1);
+			game->engine.texture.y = (int)game->engine.texture.scaled_textpos & (64 - 1); // text coordinate Y
 			game->engine.texture.scaled_textpos += game->engine.texture.scale;
 			draw_px_to_img(game, x, y, get_texture_color(game));
 		}
