@@ -12,7 +12,8 @@ void calc_texture_coords(t_var *game)
 	if ((game->engine.side == CNF_WALL_WEST || game->engine.side == CNF_WALL_SOUTH))
 		game->engine.texture.x = 64 - game->engine.texture.x - 1;
 	game->engine.texture.scale = 1.0 * 64 / game->engine.wall_height;
-	game->engine.texture.scaled_textpos = (game->engine.wall_ceil - game->config.win_height / 2 + game->engine.wall_height / 2) * game->engine.texture.scale;
+	game->engine.texture.scaled_textpos= (game->engine.wall_ceil - (game->config.win_height / 2.0 + game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->engine.wall_dist)) + game->engine.wall_height / 2) * game->engine.texture.scale;
+
 }
 
 int get_texture_color(t_var *game)
