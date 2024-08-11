@@ -23,26 +23,27 @@ RM = rm -rf
 # ----SOURCE-FILES--------------------------------------------------------------
 
 SRC = ./main.c \
-	./src/cleanup.c \
-	./src/conditionals.c \
-	./src/deltatime.c \
-	./src/events/events.c \
-	./src/events/events_handler.c \
-	./src/events/mlx_config.c \
-	./src/map_utils.c \
-	./src/messages/parse_error_msg.c \
-	./src/mlx_utils.c \
-	./src/parsing/parse.c \
-	./src/parsing/parse_configs.c \
-	./src/parsing/parse_map.c \
-	./src/parsing/parse_path_utils.c \
-	./src/parsing/parse_utils.c \
-	./src/player_utils.c \
-	./src/rendering/drawing_helpers.c \
-	./src/rendering/math_helpers.c \
-	./src/rendering/rendering.c \
-	./src/rendering/rendering_helpers.c \
-	./src/rendering/rendering_init.c
+        ./src/cleanup.c \
+        ./src/conditionals.c \
+        ./src/deltatime.c \
+        ./src/events/events.c \
+        ./src/events/events_handler.c \
+        ./src/events/mlx_config.c \
+        ./src/map_utils.c \
+        ./src/messages/parse_error_msg.c \
+        ./src/mlx_utils.c \
+        ./src/parsing/parse.c \
+        ./src/parsing/parse_configs.c \
+        ./src/parsing/parse_map.c \
+        ./src/parsing/parse_path_utils.c \
+        ./src/parsing/parse_utils.c \
+        ./src/player_utils.c \
+        ./src/rendering/drawing_helpers.c \
+        ./src/rendering/math_helpers.c \
+        ./src/rendering/rendering.c \
+        ./src/rendering/rendering_helpers.c \
+        ./src/rendering/rendering_init.c \
+        ./src/texture.c
 
 # ----RULES---------------------------------------------------------------------
 
@@ -78,7 +79,7 @@ re-force: fclean delete-mlx download-mlx all
 
 # ----UTILS---------------------------------------------------------------------
 VALGRIND=@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --tool=memcheck --keep-debuginfo=yes
-ARGS="assets/maps/mappa.cub"
+ARGS="assets/maps/with_config.cub"
 # FOR FD 		TRACKING: --track-fds=yes
 # FOR CHILDREN	TRACKING: --trace-children=yes
 valgrind: debug

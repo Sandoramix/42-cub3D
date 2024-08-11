@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 10:43:00 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:51:17 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:00:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_state	doubles_check(t_var *game, char **map, int row_idx, int col_idx)
 
 static bool	is_correctly_surrounded(t_var *game, int row_idx, int col_idx)
 {
-	const char	char_at_pos = parse_map_chr_at(game, row_idx, col_idx);
+	const char	char_at_pos = get_map_at(game, row_idx, col_idx);
 	const int	directions[][4] = {{row_idx - 1, col_idx},
 	{row_idx + 1, col_idx}, {row_idx, col_idx - 1}, {row_idx, col_idx + 1}};
 	char		chr;
@@ -40,7 +40,7 @@ static bool	is_correctly_surrounded(t_var *game, int row_idx, int col_idx)
 	i = -1;
 	while (++i < 4)
 	{
-		chr = parse_map_chr_at(game, directions[i][0], directions[i][1]);
+		chr = get_map_at(game, directions[i][0], directions[i][1]);
 		if (!chr_is_player(chr) && chr != MAP_FLOOR && chr != MAP_WALL)
 			return (false);
 	}
@@ -49,7 +49,7 @@ static bool	is_correctly_surrounded(t_var *game, int row_idx, int col_idx)
 
 static t_state	surrounding_check(t_var *game, int row_idx, int col_idx)
 {
-	const char	chr_curr = parse_map_chr_at(game, row_idx, col_idx);
+	const char	chr_curr = get_map_at(game, row_idx, col_idx);
 
 	if (chr_curr == MAP_WALL)
 		return (OK);

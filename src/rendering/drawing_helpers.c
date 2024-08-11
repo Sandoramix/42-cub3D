@@ -1,37 +1,15 @@
 
 #include <cub3D.h>
 
-void fill_img_buffer(t_var *game, int x, int y, int color)
+void draw_px_to_img(t_var *game, int x, int y, int color)
 {
-	int pixel = (y * game->line_bytes) + (x * sizeof(int));
+	int pixel;
+
+	pixel = (y * game->line_bytes) + ((x) * sizeof(int));
 	game->buffer[pixel + 0] = (color >> 24);
-    game->buffer[pixel + 1] = (color >> 16) & 0xFF;
-    game->buffer[pixel + 2] = (color >> 8) & 0xFF;
-    game->buffer[pixel + 3] = (color) & 0xFF;
-}
-
-void draw_walls(t_var *game, int pixel_pos_x)
-{
-	int y;
-	int print_every_tot_line;
-
-	y = game->engine.wall_ceil;
-	print_every_tot_line = 1;
-	if (pixel_pos_x % print_every_tot_line == 0)
-	{
-		while (y <= floor(game->engine.wall_floor))
-		{
-			if (game->engine.side == CNF_WALL_NORD)
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x18000000));
-			else if (game->engine.side == CNF_WALL_SOUTH)
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x00FF0000));
-			else if (game->engine.side == CNF_WALL_EAST)
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0x0000FF00));
-			else
-				fill_img_buffer(game,  pixel_pos_x, y, mlx_get_color_value(game->mlx, 0xFFFFFF00));
-			y++;
-		}
-	}
+	game->buffer[pixel + 1] = (color >> 16) & 0xFF;
+	game->buffer[pixel + 2] = (color >> 8) & 0xFF;
+	game->buffer[pixel + 3] = (color) & 0xFF;
 }
 
 void draw_rectangle(t_var *game, t_point start, t_point end, int color)
@@ -41,7 +19,7 @@ void draw_rectangle(t_var *game, t_point start, t_point end, int color)
 		start.x = 0;
 		while (start.x < end.x)
 		{
-			fill_img_buffer(game,  start.x, start.y, color);
+			draw_px_to_img(game, start.x, start.y, color);
 			start.x++;
 		}
 		start.y++;
@@ -63,7 +41,7 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end)
 	counter = 0;
 	while (counter < pixels)
 	{
-		fill_img_buffer(game, (int)next_point.x, (int)next_point.y, 0x0);
+		draw_px_to_img(game, (int)next_point.x, (int)next_point.y, 0x0);
 		next_point.x += increment.x;
 		next_point.y += increment.y;
 		counter++;

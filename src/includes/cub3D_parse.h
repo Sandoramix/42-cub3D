@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 13:42:10 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:39:20 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:00:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_state		parse_map(t_var *game);
 //------------------------------------------------------------------------------
 // UTILS
 
-char		parse_map_chr_at(t_var *game, int row_idx, int col_idx);
+char		get_map_at(t_var *game, int row_idx, int col_idx);
 
 char		**parse_get_config_pointed_str(t_var *game, t_cnf type);
 /**

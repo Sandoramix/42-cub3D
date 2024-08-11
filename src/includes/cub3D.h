@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:55:05 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:06:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,41 @@
 t_state		parse(t_var *game, int ac, char **av);
 //------------------------------------------------------------------------------
 //PLAYER UTILS
-void		update_player(t_var *game, int x, int y, double angle);
-double		chr_player_to_angle(char player_c);
+void	update_player(t_var *game, int x, int y, t_point angle);
+t_point     chr_player_to_angle(char player_c);
 
 //GENERIC UTILS
 void		print_missing_config(t_var *game);
 bool		is_config_missing(t_var *game);
 bool		chr_is_player(char c);
-char	parse_map_chr_at(t_var *game, int row_idx, int col_idx);
+char		get_map_at(t_var *game, int row_idx, int col_idx);
 
 
 //MLX UTILS
 t_state		load_xpm_image(t_var *game, t_img **img, char *path);
 //------------------------------------------------------------------------------
 // RAYCASTING-------------------------------------------------------------------
-void		rendering(t_var *game);
-void		init_rendering(t_var *game, int pixel_pos_x);
+void		render(t_var *game);
+void		init_render(t_var *game, int pixel_pos_x);
 void		increase_raylen(t_var *game);
-void		calc_distance_from_wall(t_var *game);
 void		get_wall_coords(t_var *game);
-void		calc_relative_line_height(t_var *game);
 void		loop_until_hit_wall(t_var *game);
+void        calc_texture_coords(t_var *game);
+
 //------------------------------------------------------------------------------
 
 // DRAWING----------------------------------------------------------------------
-void		draw_walls(t_var *game, int pixel_pos_x);
 void		draw_rectangle(t_var *game, t_point start, t_point end, int color);
 void		draw_line(t_var *game, t_dpoint start, t_dpoint end);
-void		fill_img_buffer(t_var *game, int x, int y, int color);
+void		draw_px_to_img(t_var *game, int x, int y, int color);
+int         get_texture_color(t_var *game);
+
 //------------------------------------------------------------------------------
 
 double		delta_time(t_var *game);
 
 // MLX CONFIGURATION -----------------------------------------------------------
-void		mlx_configuration(t_var *game);
+t_state		mlx_setup(t_var *game);
 //------------------------------------------------------------------------------
 
 // EVENTS ----------------------------------------------------------------------

@@ -6,13 +6,13 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:31:51 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:31:58 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:00:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-char	parse_map_chr_at(t_var *game, int row_idx, int col_idx)
+char	get_map_at(t_var *game, int row_idx, int col_idx)
 {
 	if (row_idx < 0 || row_idx >= game->mapinfo.rows_mtx)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 10:45:40 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:09:03 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,13 @@
  */
 typedef enum e_cnf
 {
-	CNF_UNKNOWN,
-	CNF_FLOOR,
-	CNF_CEILING,
 	CNF_WALL_NORD,
 	CNF_WALL_EAST,
 	CNF_WALL_WEST,
-	CNF_WALL_SOUTH
+	CNF_WALL_SOUTH,
+	CNF_UNKNOWN,
+	CNF_FLOOR,
+	CNF_CEILING
 }	t_cnf;
 
 # define STR_WALL_NORD "NO"
@@ -147,7 +147,6 @@ typedef enum e_cnf
 # define JUMP_LIMIT 500
 # define CROUCH_HEIGHT 200
 
-# define PLAYER_ANGLE 0
-# define WINDOW_NAME "UrMom!"
+# define WINDOW_NAME "cub3D"
 
 #endif
