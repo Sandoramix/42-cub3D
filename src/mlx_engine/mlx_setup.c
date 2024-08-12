@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/12 00:00:36 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:32:28 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_state	mlx_init_values(t_var *game)
 		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp,
 			&game->line_bytes, &game->endian);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	game->engine.texture.text_array[0] = game->config.wall_nord;
 	game->engine.texture.text_array[1] = game->config.wall_east;
 	game->engine.texture.text_array[2] = game->config.wall_west;

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/11 23:23:13 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:56:12 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 //------------------------------------------------------------------------------
 typedef struct s_color
 {
-	t_uchar	blue;
-	t_uchar	green;
 	t_uchar	red;
+	t_uchar	green;
+	t_uchar	blue;
 	t_uchar	alpha;
 }	t_color;
 
-typedef union u_rgb
+typedef struct u_rgb
 {
-	int		hex;
+	unsigned int		hex;
 	t_color	color;
 }	t_rgb;
 
@@ -141,13 +141,18 @@ typedef struct s_config
 
 	t_rgb	floor;
 	char	*floor_raw;
-	
+
 	//WINDOW MEASURES
 	int		win_height;
 	int		win_width;
 
 	int		_w;
 	int		_h;
+
+	// MINIMAP
+	int	minimap_scale;
+	int	minimap_player_scale;
+
 	//FOV
 	double	plane_limit;
 

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/12 00:00:47 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:59:49 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 
 //-PARSING----------------------------------------------------------------------
 t_state		parse(t_var *game, int ac, char **av);
+
+t_uint		color_to_hex(t_color color);
+t_rgb		to_rgb(t_uint color);
 //------------------------------------------------------------------------------
 //PLAYER UTILS
 t_dpoint	set_player_dpos(t_var *game, t_dpoint new_pos);
@@ -56,10 +59,12 @@ void        calc_direction(t_var *game);
 //------------------------------------------------------------------------------
 
 // DRAWING----------------------------------------------------------------------
-void		draw_rectangle(t_var *game, t_point start, t_point end, t_rgb rgb);
+void		draw_rectangle(t_var *game, t_point start, t_point end, t_uint color);
+void		draw_rectangle_rgb(t_var *game, t_point start, t_point end, t_rgb rgb);
 void		draw_line(t_var *game, t_dpoint start, t_dpoint end);
-void		draw_px_to_img(t_var *game, int x, int y, t_rgb rgb);
-int			get_texture_color(t_var *game);
+void		draw_px_to_img(t_var *game, int x, int y, t_uint color);
+void		draw_px_to_img_rgb(t_var *game, int x, int y, t_rgb rgb);
+t_uint		get_texture_color(t_var *game);
 
 //------------------------------------------------------------------------------
 
