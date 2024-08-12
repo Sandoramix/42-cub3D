@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:53:30 by odudniak          #+#    #+#             */
-/*   Updated: 2024/06/26 23:38:29 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:41:23 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ typedef struct timeval	t_timeval;
  * TODO docs
  */
 typedef unsigned long	t_ulong;
+/**
+ * TODO docs
+ */
+typedef unsigned int t_uint;
 /**
  * TODO docs
  */

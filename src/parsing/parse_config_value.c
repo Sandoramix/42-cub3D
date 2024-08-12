@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:37:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/11 23:41:32 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:32:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_state	load_color(t_var *game, t_rgb *rgb, char *value, int line_num)
 	rgb->color.red = validate_color_val(game, split, split[0], line_num);
 	rgb->color.green = validate_color_val(game, split, split[1], line_num);
 	rgb->color.blue = validate_color_val(game, split, split[2], line_num);
+	rgb->color.alpha = 0xFF;
 	str_freemtx(split);
 	return (OK);
 }

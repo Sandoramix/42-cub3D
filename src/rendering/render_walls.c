@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/11 23:58:24 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:36:47 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void render_walls(t_var *game)
 			tex->y = (int)tex->scaled_textpos
 				& (tex->text_array[game->engine.side]->height - 1); //serve a tenerlo in range
 			tex->scaled_textpos += tex->scale;
-			draw_px_to_img(game, x, y, ((t_rgb){get_texture_color(game)}));
+			draw_px_to_img(game, x, y, get_texture_color(game));
 			y++;
 		}
 		x++;

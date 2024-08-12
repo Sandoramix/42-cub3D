@@ -36,15 +36,17 @@ void	calc_texture_coords(t_var *game)
 		* game->engine.texture.scale;
 }
 
-int get_texture_color(t_var *game)
+t_uint get_texture_color(t_var *game)
 {
-	t_img	*texture;
+	t_img			*texture;
+	t_uint			color;
 
 	texture = game->engine.texture.text_array[game->engine.side];
 	game->engine.texture.pixel = texture->data
 		+ (game->engine.texture.y
 			* texture->size_line)
 		+ (game->engine.texture.x
-			* (texture->bpp / 8));
-	return *(int *)game->engine.texture.pixel;
+			* 4);
+	color = *game->engine.texture.pixel;
+	return (color);
 }

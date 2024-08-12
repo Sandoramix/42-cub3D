@@ -22,7 +22,7 @@ int handle_wll_collision(t_var *game, double x, double y)
 	if (x < TILE_SIZE || x >= game->mapinfo.cols_mtx * TILE_SIZE - TILE_SIZE || y < TILE_SIZE ||
 		y >= game->mapinfo.rows_mtx * TILE_SIZE - TILE_SIZE || get_map_at(game, (y / TILE_SIZE), (x / TILE_SIZE)) == MAP_WALL)
 		{
-			printf("player postition %f %f\n", game->player.x_px, game->player.y_px);
+			//printf("player postition %f %f\n", game->player.x_px, game->player.y_px);
 			return (OK);
 		}
 
