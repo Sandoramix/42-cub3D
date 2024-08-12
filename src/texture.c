@@ -5,10 +5,14 @@ void	calc_texture_coords(t_var *game)
 	t_raycast *engine;
 	t_player *player;
 	t_texture *tex;
+	int half_wall;
+	int half_win_h;
 
 	engine = &game->engine;
 	player = &game->player;
 	tex = &game->engine.texture;
+	half_win_h = game->config.win_height / 2.0;
+	half_wall = game->engine.wall_height / 2.0;
 	if (isinf(engine->dir.x) || isinf(engine->dir.y))
 		return;
 	if (engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST)
@@ -24,11 +28,11 @@ void	calc_texture_coords(t_var *game)
 
 	tex->scale = 1.0 * (double)TILE_SIZE / (double)engine->wall_height;
 	tex->scaled_textpos= (engine->wall_ceil - (
-				(double)game->config.win_height / 2.0
+				half_win_h
 				+ player->offset
 				+ ((player->pos_z + player->head_pos_z)
 					/ engine->wall_dist))
-			+ (double)game->engine.wall_height / 2.0)
+			+ half_wall)
 		* game->engine.texture.scale;
 }
 

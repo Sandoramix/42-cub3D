@@ -21,7 +21,10 @@ int handle_wll_collision(t_var *game, double x, double y)
 
 	if (x < TILE_SIZE || x >= game->mapinfo.cols_mtx * TILE_SIZE - TILE_SIZE || y < TILE_SIZE ||
 		y >= game->mapinfo.rows_mtx * TILE_SIZE - TILE_SIZE || get_map_at(game, (y / TILE_SIZE), (x / TILE_SIZE)) == MAP_WALL)
-		return (OK);
+		{
+			printf("player postition %f %f\n", game->player.x_px, game->player.y_px);
+			return (OK);
+		}
 
 	dbg_printf("Can t move, the player position will be :%d %d\n", x * TILE_SIZE, y * TILE_SIZE);
 	return (KO);
@@ -52,6 +55,7 @@ void handle_player_movement(t_var *game)
 	}
 	if (!handle_wll_collision(game, new_x, new_y))
 		set_player_dpos(game, (t_dpoint){new_x, new_y});
+	
 	//! TODO MOVEMENT OSCILLATION
 	// Do we like it? Yes. Is it a priority? No
 	//if (game->move.up || game->move.down || game->move.left || game->move.right)

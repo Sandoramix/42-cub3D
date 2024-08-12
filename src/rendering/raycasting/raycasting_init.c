@@ -5,10 +5,10 @@ void	calc_direction(t_var *game)
 {
 	const double	x_axispos = (game->player.x_px / (double)TILE_SIZE
 			- game->engine.map_coords.x) * game->engine.delta_dist.x;
-	const double	x_axisneg =	( -game->player.x_px / (double)TILE_SIZE
+	const double	x_axisneg =	(-game->player.x_px / (double)TILE_SIZE
 			+ game->engine.map_coords.x + 1.0) * game->engine.delta_dist.x;
-	double		y_axispos;
-	double		y_axisneg;
+	double			y_axispos;
+	double			y_axisneg;
 	t_dpoint		direction;
 
 	if (game->engine.dir.x < 0)
@@ -24,15 +24,14 @@ void	calc_direction(t_var *game)
 	else
 		game->engine.step_y = 1;
 	direction.y = (double [2])
-		{y_axispos, y_axisneg}[game->engine.dir.y > 0];
+	{y_axispos, y_axisneg}[game->engine.dir.y > 0];
 	copy_dpos(&game->engine.ray, direction);
 }
 
 
 void	init_vars(t_var *game, int x)
 {
-	const t_point	pl_vector = (t_point){(int)floor(game->player.x_px / (double)TILE_SIZE),
-		(int)floor(game->player.y_px / (double)TILE_SIZE)};
+	const t_point	pl_vector = (t_point){(int)game->player.x_px / (double)TILE_SIZE, game->player.y_px / (double)TILE_SIZE};
 	const double	raydirx = game->player.dir_x + game->engine.plane.x
 		* game->engine.camera_x;
 	const double	raydiry = game->player.dir_y + game->engine.plane.y
