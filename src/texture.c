@@ -9,24 +9,26 @@ void	calc_texture_coords(t_var *game)
 	engine = &game->engine;
 	player = &game->player;
 	tex = &game->engine.texture;
+	if (isinf(engine->dir.x) || isinf(engine->dir.y))
+		return;
 	if (engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST)
-		tex->wall_px = player->y_px + engine->wall_dist * engine->dir.y; //waall coordinates dove ho colpito il muro
+		tex->wall_px = player->y_px / TILE_SIZE + engine->wall_dist * engine->dir.y; //waall coordinates dove ho colpito il muro
 	else
-		tex->wall_px = player->x_px + engine->wall_dist * engine->dir.x; //waall coordinates dove ho colpito il muro
+		tex->wall_px = player->x_px / TILE_SIZE + engine->wall_dist * engine->dir.x; //waall coordinates dove ho colpito il muro
+	
+	tex->wall_px -= floor(tex->wall_px); //questo serve a portarlo in un range tra 1 e 64 credo? lets go i guess lets fucking go 
+	tex->x = (int)(tex->wall_px * (double)TILE_SIZE); // text coordinate X
+	
+	if ((engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST)) // mirroring della texture
+		tex->x = TILE_SIZE - tex->x - 1;
 
-	tex->wall_px -= floor((tex->wall_px)); //questo serve a portarlo in un range tra 1 e 64 credo? lets go i guess lets fucking go 
-	tex->x = (int)(tex->wall_px * 64.0); // text coordinate X
-
-	if ((engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_SOUTH)) // mirroring della texture
-		tex->x = 64 - tex->x - 1;
-
-	tex->scale = 1.0 * 64 / engine->wall_height; // scaling per la distanza
+	tex->scale = 1.0 * (double)TILE_SIZE / (double)engine->wall_height;
 	tex->scaled_textpos= (engine->wall_ceil - (
-				game->config.win_height / 2
+				(double)game->config.win_height / 2.0
 				+ player->offset
 				+ ((player->pos_z + player->head_pos_z)
 					/ engine->wall_dist))
-			+ game->engine.wall_height / 2)
+			+ (double)game->engine.wall_height / 2.0)
 		* game->engine.texture.scale;
 }
 
