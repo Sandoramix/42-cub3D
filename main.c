@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:43:47 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/12 18:08:57 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:21:34 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ int main(int ac, char **av)
 	(void)/*va fatta la funzione dove ci si prende i valori delle MACRO*/
 	fill_configs(&game.config);
 	mlx_setup(&game);
-	(void)/*first frame*/
-/* 	render_background(&game); */
-	render_walls(&game);
 	if (!mlx_put_image_to_window(game.mlx, game.mlx_win, game.img, 0, 0))
 		return (pf_errcode(E_MLXIMG), cleanup(&game, true, 1), 1);
 	mlx_loop(game.mlx);
