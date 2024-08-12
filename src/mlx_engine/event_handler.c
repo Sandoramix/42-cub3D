@@ -1,18 +1,5 @@
 #include <cub3D.h>
 
-int	game_loop(t_var *game)
-{
-	delta_time(game);
-	handle_player_movement(game);
-	handle_player_rotation(game);
-	
-	render_background(game);
-	render_walls(game);
-	if (mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0))
-		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), 1);
-	return (1);
-}
-
 void handle_camera_rotation(t_var *game, int dir)
 {
 	const double rotSpeed = ROTATION_SPEED;
@@ -64,10 +51,7 @@ void handle_player_movement(t_var *game)
 		new_y += (dir_x * (game->player.dir_x * VELOCITY * game->deltatime));
 	}
 	if (!handle_wll_collision(game, new_x, new_y))
-	{
-		game->player.x_px = new_x;
-		game->player.y_px = new_y;
-	}
+		set_player_dpos(game, (t_dpoint){new_x, new_y});
 	//! TODO MOVEMENT OSCILLATION
 	// Do we like it? Yes. Is it a priority? No
 	//if (game->move.up || game->move.down || game->move.left || game->move.right)

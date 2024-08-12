@@ -1,25 +1,25 @@
 
 #include <cub3D.h>
 
-void draw_px_to_img(t_var *game, int x, int y, int color)
+void draw_px_to_img(t_var *game, int x, int y, t_rgb rgb)
 {
 	int pixel;
 
-	pixel = (y * game->line_bytes) + ((x) * sizeof(int));
-	game->buffer[pixel + 0] = (color >> 24);
-	game->buffer[pixel + 1] = (color >> 16) & 0xFF;
-	game->buffer[pixel + 2] = (color >> 8) & 0xFF;
-	game->buffer[pixel + 3] = (color) & 0xFF;
+	pixel = (y * game->line_bytes) + (x * 4);
+	game->buffer[pixel + 0] = rgb.color.red;
+	game->buffer[pixel + 1] = rgb.color.green;
+	game->buffer[pixel + 2] = rgb.color.blue;
+	game->buffer[pixel + 3] = rgb.color.alpha;
 }
 
-void draw_rectangle(t_var *game, t_point start, t_point end, int color)
+void draw_rectangle(t_var *game, t_point start, t_point end, t_rgb rgb)
 {
 	while (start.y < end.y)
 	{
 		start.x = 0;
 		while (start.x < end.x)
 		{
-			draw_px_to_img(game, start.x, start.y, color);
+			draw_px_to_img(game, start.x, start.y, rgb);
 			start.x++;
 		}
 		start.y++;
@@ -41,7 +41,7 @@ void draw_line(t_var *game, t_dpoint start, t_dpoint end)
 	counter = 0;
 	while (counter < pixels)
 	{
-		draw_px_to_img(game, (int)next_point.x, (int)next_point.y, 0x0);
+		draw_px_to_img(game, (int)next_point.x, (int)next_point.y, (t_rgb){0x0});
 		next_point.x += increment.x;
 		next_point.y += increment.y;
 		counter++;
