@@ -11,8 +11,8 @@ void	calc_texture_coords(t_var *game)
 	engine = &game->engine;
 	player = &game->player;
 	tex = &game->engine.texture;
-	half_win_h = game->config.win_height / 2.0;
-	half_wall = game->engine.wall_height / 2.0;
+	half_win_h = game->config.win_height / 2;
+	half_wall = game->engine.wall_height / 2;
 	if (isinf(engine->dir.x) || isinf(engine->dir.y))
 		return;
 	if (engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST)
