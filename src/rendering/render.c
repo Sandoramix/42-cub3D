@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_walls.c                                     :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 21:31:44 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:55:13 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static	void	draw_floor_n_ceiling(t_var *game, int x)
+/**
+ * @brief Draw floor and ceiling vertical strips per each x coordinate.
+ * This should be faster instead of doing 2 rectangles of a half screen sizes.
+ * @param game game obj
+ * @param x window x coordinate where to put the strips.
+ */
+static	void	render_floor_n_ceiling(t_var *game, int x)
 {
 	const t_point	ceiling_start = (t_point){x, 0};
 	const t_point	ceiling_end = (t_point){x, game->engine.wall_ceil};
@@ -23,7 +29,7 @@ static	void	draw_floor_n_ceiling(t_var *game, int x)
 	draw_rectangle_rgb(game, floor_start, floor_end, game->config.floor);
 }
 
-void	render_walls(t_var *game)
+void	render_base(t_var *game)
 {
 	t_texture	*tex;
 	int			x;
@@ -38,12 +44,12 @@ void	render_walls(t_var *game)
 		loop_until_hit_wall(game);
 		get_wall_coords(game);
 		calc_texture_coords(game);
-		draw_floor_n_ceiling(game, x);
+		render_floor_n_ceiling(game, x);
 		y = game->engine.wall_ceil - 1;
 		while (++y < game->engine.wall_floor)
 		{
 			tex->y = (int)tex->scaled_textpos
-				& (tex->text_array[game->engine.side]->height - 1);
+				& (tex->hit_texture->height - 1);
 			tex->scaled_textpos += tex->scale;
 			draw_px_to_img_rgb(game, x, y, get_texture_color(game));
 		}

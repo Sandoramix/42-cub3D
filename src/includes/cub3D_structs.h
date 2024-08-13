@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 18:36:14 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:39:18 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ typedef struct s_dpoint
 
 typedef struct s_texure
 {
-	t_img 	*tex;
-	t_img	*text_array[4];
+	t_img	*hit_texture;
 	int		x;
 	int		y;
 	char	*pixel;
@@ -82,9 +81,11 @@ typedef struct s_raycast
 	double		wall_floor;
 	int			step_x;
 	int			step_y;
-	int			hit;
 	int			side;
 
+	int			step_count;
+
+	bool		ray_hit;
 }	t_raycast;
 
 typedef struct s_map_info
@@ -117,7 +118,6 @@ typedef struct s_movement
 	int			jump_mult;
 	bool 		zoom;
 }	t_movement;
-
 
 typedef struct s_config
 {
@@ -154,13 +154,37 @@ typedef struct s_config
 	int		_h;
 
 	// MINIMAP
-	int	minimap_scale;
-	int	minimap_player_scale;
+	int		minimap_scale;
+	int		minimap_player_scale;
 
 	//FOV
 	double	plane_limit;
 
+	struct	s_cnfdefaults
+	{
+		int		max_raysteps;
+
+		double	rot_speed;
+		double	speed;
+
+		double	jump_force;
+		double	jump_limit;
+
+		double	squat_offset;
+
+		double	camera_z_rot_min;
+		double	camera_z_rot_max;
+
+		double	fov; // TODO CHECK IF KEEP IT OR NOT
+		double	safety_wall_dist; // TODO CHECK IF KEEP IT OR NOT
+		double	fog_distance; // TODO CHECK IF KEEP IT OR NOT
+		char	*window_name; // TODO CHECK IF KEEP IT OR NOT
+	}		defaults;
+//# define SAFETY_WALL_DIST 1
+
 }	t_config;
+
+typedef struct s_cnfdefaults	t_cnfdefaults;
 
 // "GLOBAL" program's structure.
 typedef struct s_var

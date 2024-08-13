@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 17:50:48 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:53:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # include <cub3D_structs.h>
 
 // TODO : split each category in separate file if (it will) needed.
+
+// CONFIGURATIONS --------------------------------------------------------------
+void		init_config(t_config *config);
+t_state		mlx_setup(t_var *game);
 
 //DEBUG----------------------------------------------------------------------
 void		debug_info(t_var *game);
@@ -49,13 +53,11 @@ char		get_map_at(t_var *game, int row_idx, int col_idx);
 
 //------------------------------------------------------------------------------
 // RAYCASTING-------------------------------------------------------------------
-void		render_background(t_var *game);
-void		render_walls(t_var *game);
+void		render_base(t_var *game);
 void		render_minimap(t_var *game);
 void		render_sprites(t_var *game);
 
 void		init_vars(t_var *game, int pixel_pos_x);
-void		increase_raylen(t_var *game);
 void		get_wall_coords(t_var *game);
 void		loop_until_hit_wall(t_var *game);
 void		calc_texture_coords(t_var *game);
@@ -75,8 +77,6 @@ t_rgb		get_texture_color(t_var *game);
 
 double		delta_time(t_var *game, bool normalize);
 
-// MLX CONFIGURATION -----------------------------------------------------------
-t_state		mlx_setup(t_var *game);
 //------------------------------------------------------------------------------
 
 // EVENTS ----------------------------------------------------------------------

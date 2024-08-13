@@ -37,10 +37,11 @@ t_rgb get_texture_color(t_var *game)
 	t_rgb color;
 	t_uint color_value;
 
-	texture = game->engine.texture.text_array[game->engine.side];
+	texture = game->engine.texture.hit_texture;
 	game->engine.texture.pixel = texture->data + (coords.y * texture->size_line) + (coords.x * 4);
 	color_value = *(t_uint *)(game->engine.texture.pixel);
 
+	
 	color.color.red = color_value & 0xFF;
 	color.color.green = (color_value >> 8) & 0xFF;
 	color.color.blue = (color_value >> 16) & 0xFF;
