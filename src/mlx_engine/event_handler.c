@@ -2,21 +2,22 @@
 
 void handle_camera_rotation(t_var *game, int dir)
 {
-	const double rotSpeed = ROTATION_SPEED;
-	const double cosRes =  cos(dir * rotSpeed);
-	const double sinRes =  sin(dir * rotSpeed);
-	double old_dir_y;
-	double old_plane_x;
+	const double	cos_res =  cos(dir * game->config.defaults.rot_speed);
+	const double	sin_res =  sin(dir * game->config.defaults.rot_speed);
+	double			old_dir_y;
+	double			old_plane_x;
 
 	old_dir_y = game->player.dir_y;
-	game->player.dir_y = old_dir_y * cosRes - game->player.dir_x * sinRes;
-	game->player.dir_x = old_dir_y * sinRes + game->player.dir_x * cosRes;
+	game->player.dir_y = old_dir_y * cos_res - game->player.dir_x * sin_res;
+	game->player.dir_x = old_dir_y * sin_res + game->player.dir_x * cos_res;
 	old_plane_x = game->engine.plane.x;
-	game->engine.plane.x = game->engine.plane.x * cosRes - game->engine.plane.y * sinRes;
-	game->engine.plane.y = old_plane_x * sinRes + game->engine.plane.y * cosRes;
+	game->engine.plane.x = game->engine.plane.x * cos_res
+		- game->engine.plane.y * sin_res;
+	game->engine.plane.y = old_plane_x * sin_res
+		+ game->engine.plane.y * cos_res;
 }
 
-int handle_wll_collision(t_var *game, double x, double y)
+static t_state	handle_wll_collision(t_var *game, double x, double y)
 {
 
 	if (x < TILE_SIZE
@@ -24,10 +25,13 @@ int handle_wll_collision(t_var *game, double x, double y)
 		|| y < TILE_SIZE
 		|| y >= game->mapinfo.rows_mtx * TILE_SIZE - TILE_SIZE
 		|| get_map_at(game, (y / TILE_SIZE), (x / TILE_SIZE)) == MAP_WALL)
-		return (OK);
-	dbg_printf("Can t move, the player position will be :%d %d\n",
-		x * TILE_SIZE, y * TILE_SIZE);
-	return (KO);
+	{
+		if (ft_isdebug())
+			printf("Can't move,"
+				"the player position will be [%.2f][%.2f]\n", x, y);
+		return (KO);
+	}
+	return (OK);
 }
 
 void handle_player_movement(t_var *game)
@@ -53,9 +57,8 @@ void handle_player_movement(t_var *game)
 		new_x -= (dir_x * (game->player.dir_y * VELOCITY * game->deltatime));
 		new_y += (dir_x * (game->player.dir_x * VELOCITY * game->deltatime));
 	}
-	if (!handle_wll_collision(game, new_x, new_y))
+	if (handle_wll_collision(game, new_x, new_y) == OK)
 		set_player_dpos(game, (t_dpoint){new_x, new_y});
-	
 	//! TODO MOVEMENT OSCILLATION
 	// Do we like it? Yes. Is it a priority? No
 	//if (game->move.up || game->move.down || game->move.left || game->move.right)

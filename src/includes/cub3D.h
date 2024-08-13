@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 00:35:00 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:47:15 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int			key_release(int keycode, t_var *g);
 void		handle_player_movement(t_var *g);
 void		handle_player_rotation(t_var *g);
 void		handle_camera_rotation(t_var *g, int rotation_dir);
-int			handle_wll_collision(t_var *g, double x, double y);
 
 //------------------------------------------------------------------------------
 
