@@ -16,9 +16,9 @@ void	calc_direction(t_var *game)
 	else
 		game->engine.step_x = 1;
 	direction.x = (double [2]){x_axispos, x_axisneg}[game->engine.dir.x > 0];
-	y_axispos = ((game->player.y_px / (double)TILE_SIZE) - game->engine.map_coords.y)
+	y_axispos = ((game->player.y_px / TILE_SIZE) - game->engine.map_coords.y)
 		* game->engine.delta_dist.y;
-	y_axisneg = ((-game->player.y_px / (double)TILE_SIZE) + game->engine.map_coords.y + 1.0) * game->engine.delta_dist.y;
+	y_axisneg = ((-game->player.y_px / TILE_SIZE) + game->engine.map_coords.y + 1.0) * game->engine.delta_dist.y;
 	if (game->engine.dir.y < 0)
 		game->engine.step_y = -1;
 	else

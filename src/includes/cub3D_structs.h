@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/12 16:56:12 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:36:14 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_texure
 	double	wall_px;
 	double	scale;
 	double	scaled_textpos;
-} t_texture;
+}	t_texture;
 
 typedef struct s_raycast
 {

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:46:42 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/12 16:47:27 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:10:43 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ t_rgb	to_rgb(unsigned int color)
 	t_rgb	res;
 
 	res.hex = color;
-	res.color.red = color >> 24 & 0xFF;
-	res.color.green = color >> 16 & 0xFF;
-	res.color.blue = color >> 8 & 0xFF;
-	res.color.alpha = color & 0xFF;
+	res.color.alpha = color >> 24 & 0xFF;
+	res.color.blue = color >> 16 & 0xFF;
+	res.color.green = color >> 8 & 0xFF;
+	res.color.red = color & 0xFF;
 	return (res);
 }
 
 unsigned int	color_to_hex(t_color color)
 {
-	return ((color.red << 24) | (color.green << 16) | (color.blue << 8)
-		| color.alpha);
+	return ((color.alpha << 24) | (color.blue << 16) | (color.green << 8)
+		| color.red);
 }

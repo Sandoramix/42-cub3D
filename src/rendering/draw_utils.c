@@ -16,19 +16,25 @@ void draw_px_to_img_rgb(t_var *game, int x, int y, t_rgb rgb)
 void draw_px_to_img(t_var *game, int x, int y, t_uint color)
 {
 	char	*dst;
+	t_rgb	rgb;
 
 	dst = game->buffer + (y * game->line_bytes + x * (game->bpp / 8));
-	*(unsigned int *)dst = color;
+	rgb = to_rgb(color);
+	dst[0] = rgb.color.red;
+	dst[1] = rgb.color.green;
+	dst[2] = rgb.color.blue;
+	dst[3] = rgb.color.alpha;
+	//*(unsigned int *)dst = color;
 }
 
 void draw_rectangle_rgb(t_var *game, t_point start, t_point end, t_rgb rgb)
 {
 	const int	start_x = start.x;
 
-	while (start.y < end.y)
+	while (start.y <= end.y)
 	{
 		start.x = start_x;
-		while (start.x < end.x)
+		while (start.x <= end.x)
 		{
 			draw_px_to_img_rgb(game, start.x, start.y, rgb);
 			start.x++;
@@ -41,10 +47,10 @@ void draw_rectangle(t_var *game, t_point start, t_point end, t_uint color)
 {
 	const int	start_x = start.x;
 
-	while (start.y < end.y)
+	while (start.y <= end.y)
 	{
 		start.x = start_x;
-		while (start.x < end.x)
+		while (start.x <= end.x)
 		{
 			draw_px_to_img(game, start.x, start.y, color);
 			start.x++;

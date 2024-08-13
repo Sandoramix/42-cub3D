@@ -6,83 +6,46 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/12 18:15:45 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:31:44 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
-t_rgb apply_fog(t_rgb *applyon, double fog_intensity)
+static	void	draw_floor_n_ceiling(t_var *game, int x)
 {
-	t_rgb color;
+	const t_point	ceiling_start = (t_point){x, 0};
+	const t_point	ceiling_end = (t_point){x, game->engine.wall_ceil};
+	const t_point	floor_start = (t_point){x, game->engine.wall_floor};
+	const t_point	floor_end = (t_point){x, game->config.win_height};
 
-	color.color.red = (1.0 - (double)fog_intensity) * applyon->color.red + fog_intensity * 1;
-	color.color.green = (1.0 - (double)fog_intensity) * applyon->color.green + fog_intensity * 1;
-	color.color.blue = (1.0 - (double)fog_intensity) * applyon->color.blue + fog_intensity * 1;
-
-	return (color);
+	draw_rectangle_rgb(game, ceiling_start, ceiling_end, game->config.ceiling);
+	draw_rectangle_rgb(game, floor_start, floor_end, game->config.floor);
 }
 
-t_uint apply_fog_walls(t_rgb *color, double fog_intensity)
+void	render_walls(t_var *game)
 {
-	const int darkened_red = color->color.red * fog_intensity;
-	const int darkened_green = color->color.green * fog_intensity;
-	const int darkened_blue = color->color.blue * fog_intensity;
-	t_uint darkened_color;
-
-	darkened_color = (darkened_blue << 16) | (darkened_green << 8) | darkened_red;
-	return darkened_color;
-}
-
-void render_walls(t_var *game)
-{
-	float fog_intensity;
-	t_rgb color;
-	t_texture *tex;
-	int x;
-	int y;
+	t_texture	*tex;
+	int			x;
+	int			y;
 
 	tex = &game->engine.texture;
-	x = 0;
-	while (x <= game->config.win_width)
+	x = -1;
+	while (++x <= game->config.win_width)
 	{
 		init_vars(game, x);
 		calc_direction(game);
 		loop_until_hit_wall(game);
 		get_wall_coords(game);
 		calc_texture_coords(game);
-		y = 0;
-		while (y <= game->config.win_height)
+		draw_floor_n_ceiling(game, x);
+		y = game->engine.wall_ceil - 1;
+		while (++y < game->engine.wall_floor)
 		{
-			if (y < game->engine.wall_ceil)
-			{
-				// do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
-				fog_intensity = (float)y / game->engine.wall_ceil;
-				if (fog_intensity > 1.)
-					fog_intensity = 1.;
-				draw_px_to_img_rgb(game, x, y, apply_fog(&game->config.ceiling, fog_intensity));
-			}
-			else if (y >= game->engine.wall_ceil && y < game->engine.wall_floor)
-			{
-				fog_intensity = 1.0 - (double)game->engine.wall_dist / FOG_DISTANCE;
-				if (fog_intensity < 0)
-					fog_intensity = 0; 
-				tex->y = (int)tex->scaled_textpos & (tex->text_array[game->engine.side]->height - 1); // serve a tenerlo in range
-				tex->scaled_textpos += tex->scale;
-				color = get_texture_color(game);
-				draw_px_to_img(game, x, y, apply_fog_walls(&color, fog_intensity));
-			}
-			else
-			{
-				// do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
-				fog_intensity = 1.0f - (float)(y - game->engine.wall_floor) / (game->config.win_height - game->engine.wall_floor);
-				if (fog_intensity < 0.6)
-					fog_intensity = 0.6;
-				draw_px_to_img_rgb(game, x, y, apply_fog(&game->config.floor, fog_intensity));
-			}
-			y++;
+			tex->y = (int)tex->scaled_textpos
+				& (tex->text_array[game->engine.side]->height - 1);
+			tex->scaled_textpos += tex->scale;
+			draw_px_to_img_rgb(game, x, y, get_texture_color(game));
 		}
-		x++;
 	}
 }
