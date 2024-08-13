@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:29:26 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 23:53:39 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:41:02 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,11 @@ int	game_loop(t_var *game)
 	delta_time(game, false);
 	handle_player_movement(game);
 	handle_player_rotation(game);
-	//render_background(game);
 	render_base(game);
 	render_minimap(game);
 	render_sprites(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
-	if(DEBUG)
+	if (ft_isdebug())
 		debug_info(game);
 	render_crosshair(game);
 	return (1);
