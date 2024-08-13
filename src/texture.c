@@ -26,6 +26,8 @@ void calc_texture_coords(t_var *game)
 
 	tex->scale = 1.0 * (double)TILE_SIZE / (double)engine->wall_height;
 	tex->scaled_textpos = (engine->wall_ceil - (half_win_h + player->offset + ((player->pos_z + player->head_pos_z) / engine->wall_dist)) + half_wall) * game->engine.texture.scale;
+
+	
 }
 
 t_rgb get_texture_color(t_var *game)

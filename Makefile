@@ -6,7 +6,7 @@ PNAME = $(shell echo -n ${NAME} | tr 'a-z' 'A-Z')
 
 # ----CONFIGURATIONS------------------------------------------------------------
 
-DEBUG_VALUE=0
+DEBUG_VALUE=1
 # SET THESE 2 LINES TO 0 IF YOU WANT THE GAME TO TAKE FULL SCREEN'S SIZE
 WINDOW_WIDTH=1280
 WINDOW_HEIGHT=720
@@ -33,6 +33,7 @@ RM = rm -rf
 SRC = ./main.c \
 	./src/cleanup.c \
 	./src/conditionals.c \
+        ./src/debug_display.c \
 	./src/deltatime.c \
 	./src/initialization/init_config.c \
 	./src/initialization/mlx_setup.c \
