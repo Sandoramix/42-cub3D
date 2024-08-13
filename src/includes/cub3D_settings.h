@@ -146,7 +146,7 @@ typedef enum e_cnf
 # define CAMERA_LOW_LIMIT -100
 # define JUMP_LIMIT 350
 # define CROUCH_HEIGHT 200
-
+# define FOG_DISTANCE 20
 # define WINDOW_NAME "cub3D"
 
 // HERE WE GO AGAIN
