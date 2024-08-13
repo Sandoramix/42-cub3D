@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/12 18:07:27 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:47:22 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	render_player(t_var *game)
 void	render_minimap(t_var *game)
 {
 	const int				scale = game->config.minimap_scale;
-	const unsigned long		colors[2] = {0xD7D7D7ff, 0x000000ff};
+	const unsigned long		colors[2] = {0x333333, game->config.floor.hex};
 	int						dx;
 	int						dy;
 
