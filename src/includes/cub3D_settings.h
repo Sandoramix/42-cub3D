@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/09 14:09:03 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:29:33 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@
 #  define KEY_LEFT XK_Left
 #  define KEY_RIGHT XK_Right
 
-#  define ESC_KEY XK_Escape 
+#  define ESC_KEY XK_Escape
 #  define ESC_KEY XK_Escape
 
 # endif // __linux__
@@ -148,5 +148,13 @@ typedef enum e_cnf
 # define CROUCH_HEIGHT 200
 
 # define WINDOW_NAME "cub3D"
+
+// HERE WE GO AGAIN
+# ifndef WINDOW_HEIGHT
+#  define WINDOW_HEIGHT 0
+# endif
+# ifndef WINDOW_WIDTH
+#  define WINDOW_WIDTH 0
+# endif
 
 #endif
