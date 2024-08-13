@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 23:53:39 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:35:00 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,80 +27,98 @@
 
 // CONFIGURATIONS --------------------------------------------------------------
 void		init_config(t_config *config);
-t_state		mlx_setup(t_var *game);
+t_state		mlx_setup(t_var *g);
 
 //DEBUG----------------------------------------------------------------------
-void		debug_info(t_var *game);
+void		debug_info(t_var *g);
 //------------------------------------------------------------------------------
-
 
 //-PARSING----------------------------------------------------------------------
-t_state		parse(t_var *game, int ac, char **av);
-
-t_uint		color_to_hex(t_color color);
-t_rgb		to_rgb(t_uint color);
+t_state		parse(t_var *g, int ac, char **av);
 //------------------------------------------------------------------------------
-//PLAYER UTILS
-t_dpoint	set_player_dpos(t_var *game, t_dpoint new_pos);
-void		init_player(t_var *game, int x, int y, t_point angle);
-t_point		chr_player_to_angle(char player_c);
 
-//GENERIC UTILS
-void		print_missing_config(t_var *game);
-bool		is_config_missing(t_var *game);
+// PLAYER UTILS------------------------
+t_dpoint	set_player_dpos(t_var *g, t_dpoint new_pos);
+void		init_player(t_var *g, int x, int y, t_point angle);
+/**
+### Player direction
+
+Convert player's char `player_c` into a direction "vector"
+
+#### Directions are (x; y):
+
+- NORD: (0; -1)
+- EAST: (1; 0)
+- WEST: (-1; 0)
+- SOUTH: (0; 1)
+
+---
+
+#### Return value:
+
+`t_point` which is the direction
+ */
+t_point		chr_player_to_direction(char player_c);
+
+// GENERIC UTILS-----------------------
+void		print_missing_config(t_var *g);
+bool		is_config_missing(t_var *g);
 bool		chr_is_player(char c);
-char		get_map_at(t_var *game, int row_idx, int col_idx);
+char		get_map_at(t_var *g, int row_idx, int col_idx);
 
+double		delta_time(t_var *g, bool normalize);
 //------------------------------------------------------------------------------
-// RAYCASTING-------------------------------------------------------------------
-void		render_base(t_var *game);
-void		render_minimap(t_var *game);
-void		render_sprites(t_var *game);
 
-void		init_vars(t_var *game, int pixel_pos_x);
-void		get_wall_coords(t_var *game);
-void		loop_until_hit_wall(t_var *game);
-void		calc_texture_coords(t_var *game);
-void		calc_direction(t_var *game);
+// RENDERING--------------------------------------------------------------------
+void		render_base(t_var *g);
+void		render_sprites(t_var *g);
+void		render_minimap(t_var *g);
+
+// RAYCASTING--------------------------
+void		init_vars(t_var *g, int pixel_pos_x);
+void		get_wall_coords(t_var *g);
+void		loop_until_hit_wall(t_var *g);
+void		calc_texture_coords(t_var *g);
+void		calc_direction(t_var *g);
 
 //------------------------------------------------------------------------------
 
 // DRAWING----------------------------------------------------------------------
-void		draw_rectangle(t_var *game, t_point start, t_point end, t_uint color);
-void		draw_rectangle_rgb(t_var *game, t_point start, t_point end, t_rgb rgb);
-void		draw_line(t_var *game, t_dpoint start, t_dpoint end);
-void		draw_px_to_img(t_var *game, int x, int y, t_uint color);
-void		draw_px_to_img_rgb(t_var *game, int x, int y, t_rgb rgb);
-t_rgb		get_texture_color(t_var *game);
-
-//------------------------------------------------------------------------------
-
-double		delta_time(t_var *game, bool normalize);
+void		draw_rectangle(t_var *g, t_point start, t_point end, t_uint color);
+void		draw_rectangle_rgb(t_var *g, t_point start, t_point end, t_rgb rgb);
+void		draw_line(t_var *g, t_dpoint start, t_dpoint end);
+void		draw_px_to_img(t_var *g, int x, int y, t_uint color);
+void		draw_px_to_img_rgb(t_var *g, int x, int y, t_rgb rgb);
+t_rgb		get_texture_color(t_var *g);
 
 //------------------------------------------------------------------------------
 
 // EVENTS ----------------------------------------------------------------------
-int			game_loop(t_var *game);
-int			key_press(int keycode, t_var *game);
-int			key_release(int keycode, t_var *game);
-//------------------------------------------------------------------------------
+int			game_loop(t_var *g);
+int			key_press(int keycode, t_var *g);
+int			key_release(int keycode, t_var *g);
 
-// EVENTS HANDLER --------------------------------------------------------------
-void		handle_player_movement(t_var *game);
-void		handle_player_rotation(t_var *game);
-void		handle_camera_rotation(t_var *game, int rotation_dir);
-int			handle_wll_collision(t_var *game, double x, double y);
-void		handle_zoom(t_var *game);
+// EVENT HANDLERS ---------------------
+void		handle_player_movement(t_var *g);
+void		handle_player_rotation(t_var *g);
+void		handle_camera_rotation(t_var *g, int rotation_dir);
+int			handle_wll_collision(t_var *g, double x, double y);
 
 //------------------------------------------------------------------------------
 
 // MATH FUNCTIONS --------------------------------------------------------------
 t_dpoint	calculate_point(t_dpoint start, double angle, double distance);
+
 void		copy_dpos(t_dpoint *p1, t_dpoint p2);
 void		copy_pos(t_point *p1, t_point p2);
+
 void		add_dpoint(t_dpoint *p1, t_dpoint p2);
 void		add_point(t_point *p1, t_point p2);
+
 double		from_angle_to_radiant(double angle);
 double		pi(void);
+
+t_uint		color_to_hex(t_color color);
+t_rgb		to_rgb(t_uint color);
 //------------------------------------------------------------------------------
 #endif

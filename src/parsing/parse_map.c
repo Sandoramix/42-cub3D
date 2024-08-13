@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 10:43:00 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/11 23:03:02 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:26:42 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_state	parse_map(t_var *game)
 		while (map[i][++j])
 		{
 			if (chr_is_player(map[i][j]))
-				init_player(game, j, i, chr_player_to_angle(map[i][j]));
+				init_player(game, j, i, chr_player_to_direction(map[i][j]));
 			doubles_check(game, map, i, j);
 			surrounding_check(game, i, j);
 		}

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 11:10:20 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/11 23:34:45 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:34:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_dpoint	set_player_dpos(t_var *game, t_dpoint new_pos)
 	return (new_pos);
 }
 
-void	init_player(t_var *game, int x, int y, t_point angle)
+void	init_player(t_var *game, int x, int y, t_point direction)
 {
 	if (!game)
 		return ;
@@ -31,20 +31,20 @@ void	init_player(t_var *game, int x, int y, t_point angle)
 	game->player.y = y;
 	game->player.x_px = x * TILE_SIZE + TILE_SIZE / 2;
 	game->player.y_px = y * TILE_SIZE + TILE_SIZE / 2;
-	game->player.dir_y = angle.y;
-	game->player.dir_x = angle.x;
+	game->player.dir_y = direction.y;
+	game->player.dir_x = direction.x;
 }
 
-t_point	chr_player_to_angle(char player_c)
+t_point	chr_player_to_direction(char player_c)
 {
-	if (player_c == MAP_PLAYER_EAST)
-		return ((t_point){1, 0});  // Easy is right
 	if (player_c == MAP_PLAYER_NORD)
-		return ((t_point){0, -1}); // Nord is up
+		return ((t_point){0, -1});
+	if (player_c == MAP_PLAYER_EAST)
+		return ((t_point){1, 0});
 	if (player_c == MAP_PLAYER_WEST)
-		return ((t_point){-1, 0}); // West is left
+		return ((t_point){-1, 0});
 	if (player_c == MAP_PLAYER_SOUTH)
-		return ((t_point){0, 1});  // South is down
+		return ((t_point){0, 1});
 	return ((t_point){0, 0});
 }
 

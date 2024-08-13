@@ -6,11 +6,12 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 21:47:22 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:20:01 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
+
 
 static void	render_player(t_var *game)
 {
@@ -28,6 +29,20 @@ static void	render_player(t_var *game)
 		0xFF0000);
 }
 
+/*
+# Minimap rendering
+
+This function will render the minimap onto the window
+
+## TODOLIST
+- [ ] Make the minimap of fixed size AxB
+- [ ] Put the player at center of the minimap (checkout "the witcher"'s minimap)
+	- [ ] If the player is near the map's end
+		then the view should stop at the far border and the player would move
+		from the center
+- [ ] Supposedly it's already needed in points above,
+	make space for the minimap's zoom/dezoom
+*/
 void	render_minimap(t_var *game)
 {
 	const int				scale = game->config.minimap_scale;
