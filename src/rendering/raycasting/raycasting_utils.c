@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:48:21 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 23:40:52 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:45:34 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,17 @@ void	loop_until_hit_wall(t_var *game)
 	}
 }
 
-
-void get_wall_coords(t_var *game)
+/**
+ * @brief Pray and spray function, still unknown to human beings.
+ * 
+ * # TODO README: this is one of the sources of our problems.
+ * @note Only god knows what's happening here.
+ * @param game game struct.
+ */
+void	get_wall_coords(t_var *game)
 {
-	int half_wall;
-	int half_win_h;
+	int	half_wall;
+	int	half_win_h;
 
 	half_win_h = game->config.win_height / 2.0;
 	if (game->engine.side == CNF_WALL_WEST || game->engine.side == CNF_WALL_EAST)
