@@ -51,7 +51,6 @@ SRC = ./main.c \
 	./src/rendering/raycasting/raycasting_init.c \
 	./src/rendering/raycasting/raycasting_utils.c \
 	./src/rendering/render.c \
-	./src/rendering/render_background.c \
 	./src/rendering/render_minimap.c \
 	./src/rendering/render_sprites.c \
 	./src/texture.c \
@@ -59,7 +58,6 @@ SRC = ./main.c \
 	./src/utils/math_utils.c \
 	./src/utils/player_utils.c \
 	./src/utils/point_utils.c
-
 
 # ----RULES---------------------------------------------------------------------
 
