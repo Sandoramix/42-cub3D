@@ -34,18 +34,7 @@ static void	render_crosshair(t_var *game)
 		win_height_half + cross_thickness / 2}, 0xffff00);
 }
 
-static void	render_fps(t_var *game)
-{
-	char	*text;
-	char	*num;
 
-	num = ft_itoa(1 / game->deltatime);
-	text = str_join("FPS: ", num);
-	free(num);
-	mlx_string_put(game->mlx, game->mlx_win, 16,
-		game->config.win_height - 16, 0xFFFFFF, text);
-	free(text);
-}
 
 int	game_loop(t_var *game)
 {
@@ -57,7 +46,8 @@ int	game_loop(t_var *game)
 	render_minimap(game);
 	render_sprites(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
-	render_fps(game);
+	if(DEBUG)
+		debug_info(game);
 	render_crosshair(game);
 	return (1);
 }
