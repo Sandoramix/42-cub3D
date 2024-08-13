@@ -33,7 +33,7 @@ RM = rm -rf
 SRC = ./main.c \
 	./src/cleanup.c \
 	./src/conditionals.c \
-        ./src/debug_display.c \
+	./src/debug_display.c \
 	./src/deltatime.c \
 	./src/initialization/init_config.c \
 	./src/initialization/mlx_setup.c \
@@ -50,15 +50,16 @@ SRC = ./main.c \
 	./src/rendering/draw_utils.c \
 	./src/rendering/raycasting/raycasting_init.c \
 	./src/rendering/raycasting/raycasting_utils.c \
+	./src/rendering/render.c \
 	./src/rendering/render_background.c \
 	./src/rendering/render_minimap.c \
 	./src/rendering/render_sprites.c \
-	./src/rendering/render_walls.c \
 	./src/texture.c \
 	./src/utils/map_utils.c \
 	./src/utils/math_utils.c \
 	./src/utils/player_utils.c \
 	./src/utils/point_utils.c
+
 
 # ----RULES---------------------------------------------------------------------
 

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 23:37:58 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:53:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ char		get_map_at(t_var *game, int row_idx, int col_idx);
 
 //------------------------------------------------------------------------------
 // RAYCASTING-------------------------------------------------------------------
-void		render_background(t_var *game);
-void		render_walls(t_var *game);
+void		render_base(t_var *game);
 void		render_minimap(t_var *game);
 void		render_sprites(t_var *game);
 
