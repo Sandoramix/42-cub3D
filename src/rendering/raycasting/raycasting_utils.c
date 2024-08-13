@@ -6,44 +6,71 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:48:21 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 21:25:12 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:46:14 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void increase_raylen(t_var *game)
+static void	update_hit_texture(t_var *game, bool check_horizontal)
 {
-	if (game->engine.ray.x < game->engine.ray.y)
+	if (check_horizontal)
 	{
-		game->engine.ray.x += game->engine.delta_dist.x;
-		game->engine.map_coords.x += game->engine.step_x;
 		if (game->engine.step_x > 0)
+		{
 			game->engine.side = CNF_WALL_EAST;
+			game->engine.texture.hit_texture = game->config.wall_east;
+		}
 		else
+		{
 			game->engine.side = CNF_WALL_WEST;
+			game->engine.texture.hit_texture = game->config.wall_west;
+		}
+		return ;
+	}
+	if (game->engine.step_y > 0)
+	{
+		game->engine.side = CNF_WALL_NORD;
+		game->engine.texture.hit_texture = game->config.wall_nord;
 	}
 	else
 	{
-		game->engine.ray.y += game->engine.delta_dist.y;
-		game->engine.map_coords.y += game->engine.step_y;
-		if (game->engine.step_y > 0)
-			game->engine.side = CNF_WALL_NORD;
-		else
-			game->engine.side = CNF_WALL_SOUTH;
+		game->engine.side = CNF_WALL_SOUTH;
+		game->engine.texture.hit_texture = game->config.wall_south;
 	}
 }
 
-void loop_until_hit_wall(t_var *game)
+static void	increase_raylen(t_var *game, t_raycast *engine)
 {
-	game->engine.hit = 0;
-	game->engine.side = 0;
-	while (game->engine.hit == 0)
+	if (engine->ray.x < engine->ray.y)
 	{
-		increase_raylen(game);
-		if (get_map_at(game, game->engine.map_coords.y, game->engine.map_coords.x) == 0 ||
-			get_map_at(game, game->engine.map_coords.y, game->engine.map_coords.x) == MAP_WALL)
-			game->engine.hit = 1;
+		engine->ray.x += engine->delta_dist.x;
+		engine->map_coords.x += engine->step_x;
+		update_hit_texture(game, true);
+	}
+	else
+	{
+		engine->ray.y += engine->delta_dist.y;
+		engine->map_coords.y += engine->step_y;
+		update_hit_texture(game, false);
+	}
+	engine->step_count++;
+}
+
+void	loop_until_hit_wall(t_var *game)
+{
+	char	check_res;
+
+	game->engine.ray_hit = false;
+	game->engine.side = 0;
+	game->engine.step_count = 0;
+	while (game->engine.ray_hit == false)
+	{
+		check_res = get_map_at(game, game->engine.map_coords.y,
+				game->engine.map_coords.x);
+		increase_raylen(game, &game->engine);
+		if (check_res == 0 || check_res == MAP_WALL)
+			game->engine.ray_hit = true;
 	}
 }
 

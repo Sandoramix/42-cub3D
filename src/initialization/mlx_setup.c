@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 12:29:42 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:32:27 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ static t_state	mlx_init_values(t_var *game)
 			&game->config._w, &game->config._h);
 	if (!game->config.forearm)
 		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
-	game->engine.texture.text_array[0] = game->config.wall_nord;
-	game->engine.texture.text_array[1] = game->config.wall_east;
-	game->engine.texture.text_array[2] = game->config.wall_west;
-	game->engine.texture.text_array[3] = game->config.wall_south;
 	return (OK);
 }
 

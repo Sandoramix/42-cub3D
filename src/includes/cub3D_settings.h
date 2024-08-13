@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 12:52:58 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:21:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,7 @@ typedef enum e_cnf
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 0
 # endif
+
+# define MAX_RAYSTEPS 100
 
 #endif
