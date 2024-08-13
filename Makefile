@@ -67,7 +67,7 @@ debug:
 	$(MAKE) DEBUG_VALUE=1
 
 $(NAME): $(SRC)
-	@$(MAKE) -C $(LIBFTX_DIR)
+	@$(MAKE) -C $(LIBFTX_DIR) DEBUG_VALUE=$(DEBUG_VALUE)
 
 	if [ ! -f $(MLX_DIR)/$(MLX_LIBNAME) ] && [ ! -d $(MLX_DIR) ] ; then $(MAKE) download-mlx; fi
 	@$(MAKE) -sC $(MLX_DIR) 1>/dev/null 2>/dev/null && ( [ ! -f $(MLX_DIR)/$(MLX_LIBNAME) ] || echo "$(GREEN)[MLX]:\t\tLIBRARY CREATED")
