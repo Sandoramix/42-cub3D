@@ -142,6 +142,10 @@ typedef struct s_config
 	t_rgb	floor;
 	char	*floor_raw;
 
+//SPRITES------------------------------
+
+	t_img	*forearm;
+
 	//WINDOW MEASURES
 	int		win_height;
 	int		win_width;

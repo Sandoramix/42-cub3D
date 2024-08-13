@@ -47,6 +47,8 @@ char		get_map_at(t_var *game, int row_idx, int col_idx);
 void        render_background(t_var *game);
 void		render_walls(t_var *game);
 void		render_minimap(t_var *game);
+void        render_sprites(t_var *game);
+
 
 void		init_vars(t_var *game, int pixel_pos_x);
 void		increase_raylen(t_var *game);

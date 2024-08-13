@@ -38,6 +38,10 @@ static t_state	mlx_init_values(t_var *game)
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp,
 			&game->line_bytes, &game->endian);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
+	game->config.forearm = mlx_xpm_file_to_image(game->mlx, "assets/sprites/forearms.xpm",
+			&game->config._w, &game->config._h);
+	if (!game->config.forearm)
+		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
 	game->engine.texture.text_array[0] = game->config.wall_nord;
 	game->engine.texture.text_array[1] = game->config.wall_east;
 	game->engine.texture.text_array[2] = game->config.wall_west;

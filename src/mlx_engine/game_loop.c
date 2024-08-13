@@ -32,6 +32,7 @@ int	game_loop(t_var *game)
 	//render_background(game);
 	render_walls(game);
 	render_minimap(game);
+	render_sprites(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	render_fps(game);
 	return (1);
