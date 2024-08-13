@@ -6,13 +6,13 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:47:18 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 12:44:12 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:49:43 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-double	delta_time(t_var *game)
+double	delta_time(t_var *game, bool normalize)
 {
 	const float				min_limit = 0.0167f;
 	const float				max_limit = 100.0f;
@@ -29,9 +29,9 @@ double	delta_time(t_var *game)
 	}
 	delta_time = (current.tv_sec - last.tv_sec)
 		+ (current.tv_usec - last.tv_usec) / 1000000.0;
-	if (delta_time < min_limit)
+	if (normalize && delta_time < min_limit)
 		delta_time = min_limit;
-	if (delta_time > max_limit)
+	if (normalize && delta_time > max_limit)
 		delta_time = max_limit;
 	last = current;
 	game->deltatime = delta_time;
