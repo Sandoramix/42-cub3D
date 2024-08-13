@@ -4,9 +4,15 @@ NAME = cub3D
 
 PNAME = $(shell echo -n ${NAME} | tr 'a-z' 'A-Z')
 
-# -----VARIABLES-DECLARATIONS-+-OVVERRIDES--------------------------------------
+# ----CONFIGURATIONS------------------------------------------------------------
 
 DEBUG_VALUE=0
+# SET THESE 2 LINES TO 0 IF YOU WANT THE GAME TO TAKE FULL SCREEN'S SIZE
+WINDOW_WIDTH=1280
+WINDOW_HEIGHT=720
+
+# -----VARIABLES-DECLARATIONS-+-OVVERRIDES--------------------------------------
+
 
 ROOTDIR=./src
 LIBFTX_DIR=$(ROOTDIR)/libs/libftx
@@ -16,7 +22,9 @@ CC = cc
 INCLUDES = -I$(ROOTDIR)/includes -I$(LIBFTX_DIR)/includes -I$(MLX_DIR)
 MLX_NAME = mlx_$(shell uname)
 MLX_FLAGS = -L$(MLX_DIR) -l$(MLX_NAME) -lXext -lX11
-CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE)
+
+GAME_CONFIG_DEFINES=-DWINDOW_WIDTH=$(WINDOW_WIDTH) -DWINDOW_HEIGHT=$(WINDOW_HEIGHT)
+CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE) $(GAME_CONFIG_DEFINES)
 
 RM = rm -rf
 
