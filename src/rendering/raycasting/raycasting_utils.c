@@ -6,15 +6,15 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:48:21 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 22:46:14 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:33:21 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	update_hit_texture(t_var *game, bool check_horizontal)
+static void	update_picked_texture(t_var *game, bool horizontal_check)
 {
-	if (check_horizontal)
+	if (horizontal_check)
 	{
 		if (game->engine.step_x > 0)
 		{
@@ -46,13 +46,13 @@ static void	increase_raylen(t_var *game, t_raycast *engine)
 	{
 		engine->ray.x += engine->delta_dist.x;
 		engine->map_coords.x += engine->step_x;
-		update_hit_texture(game, true);
+		update_picked_texture(game, true);
 	}
 	else
 	{
 		engine->ray.y += engine->delta_dist.y;
 		engine->map_coords.y += engine->step_y;
-		update_hit_texture(game, false);
+		update_picked_texture(game, false);
 	}
 	engine->step_count++;
 }
@@ -66,9 +66,9 @@ void	loop_until_hit_wall(t_var *game)
 	game->engine.step_count = 0;
 	while (game->engine.ray_hit == false)
 	{
+		increase_raylen(game, &game->engine);
 		check_res = get_map_at(game, game->engine.map_coords.y,
 				game->engine.map_coords.x);
-		increase_raylen(game, &game->engine);
 		if (check_res == 0 || check_res == MAP_WALL)
 			game->engine.ray_hit = true;
 	}
