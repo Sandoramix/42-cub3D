@@ -17,7 +17,7 @@ int	game_loop(t_var *game)
 	delta_time(game);
 	handle_player_movement(game);
 	handle_player_rotation(game);
-	/* render_background(game); */
+	//render_background(game);
 	render_walls(game);
 	render_minimap(game);
 	if (mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0))

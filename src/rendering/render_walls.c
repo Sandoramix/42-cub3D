@@ -12,8 +12,7 @@
 
 #include "cub3D.h"
 
-
-//do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
+// do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
 t_rgb apply_fog(t_rgb *applyon, double fog_intensity)
 {
 	t_rgb color;
@@ -25,13 +24,25 @@ t_rgb apply_fog(t_rgb *applyon, double fog_intensity)
 	return (color);
 }
 
+t_uint apply_fog_walls(t_rgb *color, double fog_intensity)
+{
+	const int darkened_red = color->color.red * fog_intensity;
+	const int darkened_green = color->color.green * fog_intensity;
+	const int darkened_blue = color->color.blue * fog_intensity;
+	t_uint darkened_color;
+
+	// Combine the darkened components back into a single color
+	darkened_color = (darkened_blue << 16) | (darkened_green << 8) | darkened_red;
+	return darkened_color;
+}
+
 void render_walls(t_var *game)
 {
 	float fog_intensity;
+	t_rgb color;
 	t_texture *tex;
 	int x;
 	int y;
-
 
 	tex = &game->engine.texture;
 	x = 0;
@@ -47,7 +58,7 @@ void render_walls(t_var *game)
 		{
 			if (y < game->engine.wall_ceil)
 			{
-				//do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
+				// do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
 				fog_intensity = (float)(y) / (game->engine.wall_ceil);
 				if (fog_intensity > 1.)
 					fog_intensity = 1.;
@@ -57,11 +68,15 @@ void render_walls(t_var *game)
 			{
 				tex->y = (int)tex->scaled_textpos & (tex->text_array[game->engine.side]->height - 1); // serve a tenerlo in range
 				tex->scaled_textpos += tex->scale;
-				draw_px_to_img(game, x, y, get_texture_color(game));
+				color = get_texture_color(game);
+				fog_intensity = 1.0 - (double)game->engine.wall_dist / 20.0; // Adjust the divisor for effect
+				if (fog_intensity < 0)
+					fog_intensity = 0; // Ensure it doesn't go below 0
+				draw_px_to_img(game, x, y, apply_fog_walls(&color, fog_intensity));
 			}
 			else
 			{
-				//do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
+				// do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
 				fog_intensity = 1.0f - (float)(y - game->engine.wall_floor) / (game->config.win_height - game->engine.wall_floor);
 				if (fog_intensity < 0.6)
 					fog_intensity = 0.6;

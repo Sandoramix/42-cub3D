@@ -64,7 +64,7 @@ void		draw_rectangle_rgb(t_var *game, t_point start, t_point end, t_rgb rgb);
 void		draw_line(t_var *game, t_dpoint start, t_dpoint end);
 void		draw_px_to_img(t_var *game, int x, int y, t_uint color);
 void		draw_px_to_img_rgb(t_var *game, int x, int y, t_rgb rgb);
-t_uint		get_texture_color(t_var *game);
+t_rgb		get_texture_color(t_var *game);
 
 //------------------------------------------------------------------------------
 
