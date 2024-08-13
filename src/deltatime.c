@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:47:18 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/31 17:20:42 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:44:12 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 double	delta_time(t_var *game)
 {
-	const float				min_limit = 0.167f;
-	const float				max_limit = 1.0f;
+	const float				min_limit = 0.0167f;
+	const float				max_limit = 100.0f;
 	static struct timeval	last = {0, 0};
 	struct timeval			current;
 	double					delta_time;

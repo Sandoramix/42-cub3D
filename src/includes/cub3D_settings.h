@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 12:29:33 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:42:12 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ typedef enum e_cnf
 //------------------------------------------------------------------------------
 
 /*HARD CODED VALUES (maybe)*/
-# define VELOCITY 50
+# define VELOCITY 500
 # define FOV 66
 
 # define ROTATION_SPEED .05
