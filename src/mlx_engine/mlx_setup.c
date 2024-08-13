@@ -6,16 +6,27 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/12 18:32:28 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:29:42 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
+static void	update_screensize(t_var *game)
+{
+	if (WINDOW_HEIGHT <= 0 || WINDOW_WIDTH <= 0)
+	{
+		mlx_get_screen_size(game->mlx, &game->config.win_width,
+			&game->config.win_height);
+		return ;
+	}
+	game->config.win_width = WINDOW_WIDTH;
+	game->config.win_height = WINDOW_HEIGHT;
+}
+
 static t_state	mlx_init_values(t_var *game)
 {
-	mlx_get_screen_size(game->mlx, &game->config.win_width,
-		&game->config.win_height);
+	update_screensize(game);
 	game->mlx_win = mlx_new_window(game->mlx,
 			game->config.win_width, game->config.win_height, WINDOW_NAME);
 	if (!game->mlx_win)
