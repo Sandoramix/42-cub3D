@@ -31,7 +31,6 @@ t_uint apply_fog_walls(t_rgb *color, double fog_intensity)
 	const int darkened_blue = color->color.blue * fog_intensity;
 	t_uint darkened_color;
 
-	// Combine the darkened components back into a single color
 	darkened_color = (darkened_blue << 16) | (darkened_green << 8) | darkened_red;
 	return darkened_color;
 }
@@ -69,9 +68,9 @@ void render_walls(t_var *game)
 				tex->y = (int)tex->scaled_textpos & (tex->text_array[game->engine.side]->height - 1); // serve a tenerlo in range
 				tex->scaled_textpos += tex->scale;
 				color = get_texture_color(game);
-				fog_intensity = 1.0 - (double)game->engine.wall_dist / 20.0; // Adjust the divisor for effect
+				fog_intensity = 1.0 - (double)game->engine.wall_dist / 20.0;
 				if (fog_intensity < 0)
-					fog_intensity = 0; // Ensure it doesn't go below 0
+					fog_intensity = 0; 
 				draw_px_to_img(game, x, y, apply_fog_walls(&color, fog_intensity));
 			}
 			else
