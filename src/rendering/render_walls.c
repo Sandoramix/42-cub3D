@@ -58,19 +58,19 @@ void render_walls(t_var *game)
 			if (y < game->engine.wall_ceil)
 			{
 				// do we need it? Questionable. Is it good? Even more questionable. Did I enjoy writing it? mmmhhhh
-				fog_intensity = (float)(y) / (game->engine.wall_ceil);
+				fog_intensity = (float)y / game->engine.wall_ceil;
 				if (fog_intensity > 1.)
 					fog_intensity = 1.;
 				draw_px_to_img_rgb(game, x, y, apply_fog(&game->config.ceiling, fog_intensity));
 			}
 			else if (y >= game->engine.wall_ceil && y < game->engine.wall_floor)
 			{
+				fog_intensity = 1.0 - (double)game->engine.wall_dist / FOG_DISTANCE;
+				if (fog_intensity < 0)
+					fog_intensity = 0; 
 				tex->y = (int)tex->scaled_textpos & (tex->text_array[game->engine.side]->height - 1); // serve a tenerlo in range
 				tex->scaled_textpos += tex->scale;
 				color = get_texture_color(game);
-				fog_intensity = 1.0 - (double)game->engine.wall_dist / 20.0;
-				if (fog_intensity < 0)
-					fog_intensity = 0; 
 				draw_px_to_img(game, x, y, apply_fog_walls(&color, fog_intensity));
 			}
 			else
