@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 00:47:15 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 01:46:58 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		print_missing_config(t_var *g);
 bool		is_config_missing(t_var *g);
 bool		chr_is_player(char c);
 char		get_map_at(t_var *g, int row_idx, int col_idx);
+bool		can_player_go_here(t_var *game, double x, double y);
 
 double		delta_time(t_var *g, bool normalize);
 //------------------------------------------------------------------------------
@@ -95,14 +96,27 @@ t_rgb		get_texture_color(t_var *g);
 
 // EVENTS ----------------------------------------------------------------------
 int			game_loop(t_var *g);
-int			key_press(int keycode, t_var *g);
-int			key_release(int keycode, t_var *g);
+int			on_keypress(int keycode, t_var *game);
+int			on_keyrelease(int keycode, t_var *game);
+
+// Should these be in a headerfile?...
+
+void		camera_h_event_pressed(int keycode, t_var *game);
+void		camera_h_event_released(int keycode, t_var *game);
+void		camera_v_event_pressed(int keycode, t_var *game);
+void		camera_v_event_released(int keycode, t_var *game);
+
+void		movement_h_event_pressed(int keycode, t_var *game);
+void		movement_h_event_released(int keycode, t_var *game);
+void		movement_v_event_pressed(int keycode, t_var *game);
+void		movement_v_event_released(int keycode, t_var *game);
 
 // EVENT HANDLERS ---------------------
-void		handle_player_movement(t_var *g);
-void		handle_player_rotation(t_var *g);
-void		handle_camera_rotation(t_var *g, int rotation_dir);
+void		handle_vertical_movement(t_var *game);
+void		handle_horizontal_movement(t_var *game);
 
+void		handle_vertical_rotation(t_var *game);
+void		handle_horizontal_rotation(t_var *game);
 //------------------------------------------------------------------------------
 
 // MATH FUNCTIONS --------------------------------------------------------------

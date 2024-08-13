@@ -35,12 +35,15 @@ SRC = ./main.c \
 	./src/conditionals.c \
 	./src/debug_display.c \
 	./src/deltatime.c \
-	./src/initialization/init_config.c \
-	./src/initialization/mlx_setup.c \
+	./src/init_config.c \
 	./src/messages/parse_error_msg.c \
-	./src/mlx_engine/event_handler.c \
-	./src/mlx_engine/event_listeners.c \
+	./src/mlx_engine/events/camera_horizontal_event.c \
+	./src/mlx_engine/events/camera_vertical_event.c \
+	./src/mlx_engine/events/movement_horizontal_event.c \
+	./src/mlx_engine/events/movement_vertical_event.c \
 	./src/mlx_engine/game_loop.c \
+	./src/mlx_engine/key_events.c \
+	./src/mlx_engine/mlx_setup.c \
 	./src/parsing/parse.c \
 	./src/parsing/parse_config_value.c \
 	./src/parsing/parse_configs.c \
@@ -58,6 +61,7 @@ SRC = ./main.c \
 	./src/utils/math_utils.c \
 	./src/utils/player_utils.c \
 	./src/utils/point_utils.c
+
 
 # ----RULES---------------------------------------------------------------------
 

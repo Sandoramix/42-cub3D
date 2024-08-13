@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:29:26 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 00:41:02 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 01:48:57 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static void	render_crosshair(t_var *game)
 		win_height_half + cross_thickness / 2}, 0xffff00);
 }
 
-
-
 int	game_loop(t_var *game)
 {
 	delta_time(game, false);
-	handle_player_movement(game);
-	handle_player_rotation(game);
+	handle_horizontal_movement(game);
+	handle_vertical_movement(game);
+	handle_vertical_rotation(game);
+	handle_horizontal_rotation(game);
 	render_base(game);
 	render_minimap(game);
 	render_sprites(game);
