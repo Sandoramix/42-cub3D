@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 12:42:12 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:52:58 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,10 @@ typedef enum e_cnf
 # define ROTATION_SPEED .05
 
 # define SAFETY_WALL_DIST 1
-# define Z_ACCELLERATION 333
+# define Z_ACCELLERATION 1600
 # define CAMERA_HIGH_LIMIT 100
 # define CAMERA_LOW_LIMIT -100
-# define JUMP_LIMIT 500
+# define JUMP_LIMIT 350
 # define CROUCH_HEIGHT 200
 
 # define WINDOW_NAME "cub3D"
