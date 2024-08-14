@@ -22,6 +22,7 @@ int	on_keypress(int keycode, t_var *game)
 	camera_v_event_pressed(keycode, game);
 	movement_h_event_pressed(keycode, game);
 	movement_v_event_pressed(keycode, game);
+	player_sprites_event_pressed(keycode, game);
 	return (keycode);
 }
 
@@ -33,5 +34,6 @@ int	on_keyrelease(int keycode, t_var *game)
 	camera_v_event_released(keycode, game);
 	movement_h_event_released(keycode, game);
 	movement_v_event_released(keycode, game);
+	player_sprites_event_released(keycode, game);
 	return (keycode);
 }

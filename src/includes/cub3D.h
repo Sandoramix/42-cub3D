@@ -116,6 +116,10 @@ int			on_keyrelease(int keycode, t_var *game);
 
 // Should these be in a headerfile?...
 
+
+void        player_sprites_event_pressed(int keycode, t_var *game);
+void        player_sprites_event_released(int keycode, t_var *game);
+
 void		camera_h_event_pressed(int keycode, t_var *game);
 void		camera_h_event_released(int keycode, t_var *game);
 void		camera_v_event_pressed(int keycode, t_var *game);
@@ -127,6 +131,8 @@ void		movement_v_event_pressed(int keycode, t_var *game);
 void		movement_v_event_released(int keycode, t_var *game);
 
 // EVENT HANDLERS ---------------------
+void        handle_player_sprites(t_var *game);
+
 void		handle_vertical_movement(t_var *game);
 void		handle_horizontal_movement(t_var *game);
 

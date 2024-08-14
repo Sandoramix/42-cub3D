@@ -19,6 +19,7 @@ int	game_loop(t_var *game)
 	handle_vertical_movement(game);
 	handle_vertical_rotation(game);
 	handle_horizontal_rotation(game);
+	handle_player_sprites(game);
 	render_base(game);
 	render_minimap(game);
 	render_sprites(game, &game->config.sprites);

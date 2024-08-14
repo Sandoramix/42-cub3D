@@ -114,6 +114,8 @@ typedef struct s_movement
 	bool		crouch;
 	bool		has_crouched;
 
+	bool 		block;
+
 	int			jump_mult;
 	bool 		zoom;
 }	t_movement;
@@ -147,6 +149,7 @@ typedef struct s_config
 	{
 		t_img	*slctd; //questo puntera all indirizzo del buffer selezionato
 		char	*slctd_buff; //same
+		int 	slctd_screen_x;
 
 		t_img	*rest;
 		char 	*rest_buff;

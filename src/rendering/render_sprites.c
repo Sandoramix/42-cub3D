@@ -60,9 +60,6 @@ void sprite_loader(t_var *game,t_img *sprite, char* sprite_buf, int startingfrom
 
 void render_sprites(t_var *game, t_cnfsprites *sprites)
 {
-	const int rest = (game->config.win_width - sprites->rest->width) ;
-	const int block = (game->config.win_width / 2 - sprites->block->width / 2);
 
-	sprite_loader(game, sprites->rest, sprites->rest_buff, rest);
-	sprite_loader(game, sprites->block, sprites->block_buff, block);
+	sprite_loader(game, sprites->slctd, sprites->slctd_buff, sprites->slctd_screen_x);
 }
