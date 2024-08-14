@@ -46,3 +46,17 @@ t_dpoint	calculate_point(t_dpoint start, double angle, double distance)
 	end.y = start.y + (distance * sin(angle_to_radiant(angle))) * TILE_SIZE;
 	return end;
 }
+
+double calc_wall_px_hit(t_var *game)
+{
+	const t_raycast	*engine = &game->engine;
+	const t_player	*player = &game->player;
+	double			wall_px;
+
+	if (engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST)
+		wall_px = player->y_px / TILE_SIZE + engine->wall_dist * engine->dir.y;
+	else
+		wall_px = player->x_px / TILE_SIZE + engine->wall_dist * engine->dir.x;
+
+	return (wall_px);
+}

@@ -29,13 +29,15 @@ static	void	render_floor_n_ceiling(t_var *game, int x)
 	draw_rectangle_rgb(game, floor_start, floor_end, game->config.floor);
 }
 
+
+
 void	render_base(t_var *game)
 {
-	t_texture	*tex;
-	int			x;
-	int			y;
+	int x;
+	int y;
+	int tex_x;
+	int tex_y;
 
-	tex = &game->engine.texture;
 	x = -1;
 	while (++x <= game->config.win_width)
 	{
@@ -43,15 +45,15 @@ void	render_base(t_var *game)
 		calc_direction(game);
 		loop_until_hit_wall(game);
 		get_wall_coords(game);
-		calc_texture_coords(game);
 		render_floor_n_ceiling(game, x);
+		tex_x = calc_text_x(game);
+		calc_scaled_textpos(game, &game->engine, &game->player);
 		y = game->engine.wall_ceil - 1;
 		while (++y < game->engine.wall_floor)
 		{
-			tex->y = (int)tex->scaled_textpos
-				& (tex->hit_texture->height - 1);
-			tex->scaled_textpos += tex->scale;
-			draw_pixel_rgb(game, x, y, get_texture_color(game));
+			tex_y = calc_text_y(game);
+			game->engine.texture.scaled_textpos += game->engine.texture.scale;
+			draw_pixel_rgb(game, x, y, get_texture_color(game, tex_x, tex_y));
 		}
 	}
 }

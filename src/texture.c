@@ -12,42 +12,53 @@
 
 #include <cub3D.h>
 
-void	calc_texture_coords(t_var *game)
+t_rgba	get_texture_color(t_var *game, int tex_x, int tex_y)
 {
-	t_raycast	*engine;
-	t_player	*player;
-	t_texture	*tex;
-	int			half_wall;
-	int			half_win_h;
-
-	engine = &game->engine;
-	player = &game->player;
-	tex = &game->engine.texture;
-	half_win_h = game->config.win_height / 2;
-	half_wall = game->engine.wall_height / 2;
-	if (isinf(engine->dir.x) || isinf(engine->dir.y))
-		return;
-	if (engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST)
-		tex->wall_px = player->y_px / TILE_SIZE + engine->wall_dist * engine->dir.y; // waall coordinates dove ho colpito il muro
-	else
-		tex->wall_px = player->x_px / TILE_SIZE + engine->wall_dist * engine->dir.x; // waall coordinates dove ho colpito il muro
-	tex->wall_px -= floor(tex->wall_px);											 // questo serve a portarlo in un range tra 1 e 64 credo? lets go i guess lets fucking go
-	tex->x = (int)(tex->wall_px * (double)TILE_SIZE);								 // text coordinate X
-	if ((engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST))			 // mirroring della texture
-		tex->x = TILE_SIZE - tex->x - 1;
-	tex->scale = 1.0 * (double)TILE_SIZE / (double)engine->wall_height;
-	tex->scaled_textpos = (engine->wall_ceil - (half_win_h + player->offset + ((player->pos_z + player->head_pos_z) / engine->wall_dist)) + half_wall) * game->engine.texture.scale;
-}
-
-t_rgba	get_texture_color(t_var *game)
-{
-	const t_point	coords = {game->engine.texture.x, game->engine.texture.y};
-	t_img			*texture;
-	t_uint			color_value;
+	t_img	*texture;
+	t_uint	color_value;
+	char *pixel;
 
 	texture = game->engine.texture.hit_texture;
-	game->engine.texture.pixel = texture->data
-		+ (coords.y * texture->size_line) + (coords.x * 4);
-	color_value = *(t_uint *)(game->engine.texture.pixel);
+	pixel = texture->data + (tex_y * texture->size_line) + (tex_x * 4);
+	color_value = *(t_uint *)(pixel);
 	return (hex_to_rgba(color_value));
 }
+
+void	calc_scaled_textpos(t_var *game, t_raycast *engine, t_player *player)
+{
+	const double z_offset = player->offset+ ((player->pos_z
+						+ player->head_pos_z) / engine->wall_dist);
+	const double half_win_height = game->config.win_height / 2;
+	const double half_wall_height = engine->wall_height / 2;
+
+	engine->texture.scale = 1.0 * (double)TILE_SIZE
+		/ (double)engine->wall_height;
+	engine->texture.scaled_textpos = (engine->wall_ceil
+			- (half_win_height + z_offset)
+			+ half_wall_height) * engine->texture.scale;
+}
+
+int	calc_text_y(t_var *game)
+{
+	int	text_y;
+
+	text_y = (int)game->engine.texture.scaled_textpos
+		& (game->engine.texture.hit_texture->height - 1);
+	return (text_y);
+}
+
+int	calc_text_x(t_var *game)
+{
+	const t_raycast	*engine = &game->engine;
+	int				tex_x;
+	double			text_perc_px_hit;
+
+	if (isinf(engine->dir.x) || isinf(engine->dir.y))
+		return (KO); // i dont like it cause its zero, but i dont like -1 as well
+
+	text_perc_px_hit = normalize_to_one(calc_wall_px_hit(game));
+	tex_x = (int)(text_perc_px_hit * (double)TILE_SIZE);
+
+	return (tex_x);
+}
+
