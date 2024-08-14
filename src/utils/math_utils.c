@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:46:42 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:29:14 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:39:10 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ double	angle_to_radiant(double angle)
 	return (angle * (pi() / 180));
 }
 
-t_rgba	hex_to_rgba(unsigned int color)
+t_rgba	hex_to_rgba(t_uint color)
 {
 	t_rgba	res;
 
@@ -34,7 +34,7 @@ t_rgba	hex_to_rgba(unsigned int color)
 	return (res);
 }
 
-unsigned int	color_to_hex(t_rgba color)
+t_uint	rgba_to_hex(t_rgba color)
 {
 	return ((color.alpha << 24) | (color.blue << 16) | (color.green << 8)
 		| color.red);

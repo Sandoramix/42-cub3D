@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:29:14 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:38:50 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void		calc_direction(t_var *g);
 // DRAWING----------------------------------------------------------------------
 void		draw_rectangle(t_var *g, t_point start, t_point end, t_uint color);
 void		draw_rectangle_rgb(t_var *g, t_point start, t_point end, t_rgba rgb);
-void		draw_line(t_var *g, t_dpoint start, t_dpoint end);
 void		draw_pixel(t_var *g, int x, int y, t_uint color);
 void		draw_pixel_rgb(t_var *g, int x, int y, t_rgba rgb);
 t_rgba		get_texture_color(t_var *g);
@@ -139,7 +138,7 @@ void		add_point(t_point *p1, t_point p2);
 double		angle_to_radiant(double angle);
 double		pi(void);
 
-t_uint		color_to_hex(t_rgba color);
+t_uint		rgba_to_hex(t_rgba color);
 t_rgba		hex_to_rgba(t_uint color);
 //------------------------------------------------------------------------------
 #endif
