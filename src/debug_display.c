@@ -43,54 +43,38 @@ static char	*dbg_get_player_angle(t_var *game)
 	return (text);
 }
 
-char	*ftoa(char *buffer, double d, int precision) {
+char	*ftoa(char *buffer, double d, int precision)
+{
+	double	fraction;
+	long	whole_part;
 
-	long wholePart = (long) d;
-
+	whole_part = (long) d;
 	// Deposit the whole part of the number.
-
-	buffer = ft_itoa(wholePart);
-
+	buffer = ft_itoa(d);
 	// Now work on the faction if we need one.
-
-	if (precision > 0) {
-
-		// We do, so locate the end of the string and insert
-		// a decimal point.
-
-		char *endOfString = buffer;
-		while (*endOfString != '\0') endOfString++;
-		*endOfString++ = '.';
-
-		// Now work on the fraction, be sure to turn any negative
-		// values positive.
-
-		if (d < 0) {
+	if (precision > 0)
+	{
+		// We do, so locate the end of the string and insert a decimal point.
+		buffer = str_pushchar(buffer, '.');
+		// Now work on the fraction, be sure to turn any negative values positive.
+		if (d < 0)
+		{
 			d *= -1;
-			wholePart *= -1;
+			whole_part *= -1;
 		}
-		double fraction = d - wholePart;
-		while (precision > 0) {
-
-			// Multipleby ten and pull out the digit.
-
+		fraction = d - whole_part;
+		while (precision > 0)
+		{
+			// Multiple by ten and pull out the digit.
 			fraction *= 10;
-			wholePart = (long) fraction;
-			*endOfString++ = '0' + wholePart;
-
-			// Update the fraction and move on to the
-			// next digit.
-
-			fraction -= wholePart;
+			whole_part = (long) fraction;
+			buffer = str_pushchar(buffer, '0' + whole_part);
+			// Update the fraction and move on to the next digit.
+			fraction -= whole_part;
 			precision--;
 		}
-
-		// Terminate the string.
-
-		*endOfString = '\0';
 	}
-
-    return buffer;
+	return (buffer);
 }
 
 static char	*dbg_player_distance_from_wall(t_var *game)
