@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 01:20:53 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 22:10:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,7 @@ static t_state	init_mlx(t_var *game, t_config *cnf)
 	return (OK);
 }
 
-
-static t_state mlx_load_buffers(t_var *game, struct s_cnfsprites *cnf)
-{
-	cnf->rest_buff = mlx_get_data_addr(cnf->rest, &game->bpp,
-			&game->line_bytes, &game->endian);
-	if (!cnf->rest_buff)
-		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
-	cnf->block_buff = mlx_get_data_addr(cnf->block, &game->bpp,
-			&game->line_bytes, &game->endian);
-	if (!cnf->block_buff)
-		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
-	cnf->attack0_buff = mlx_get_data_addr(cnf->attack0, &game->bpp,
-			&game->line_bytes, &game->endian);
-	if (!cnf->attack0_buff)
-		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
-	cnf->attack1_buff = mlx_get_data_addr(cnf->attack1, &game->bpp,
-			&game->line_bytes, &game->endian);
-	if (!cnf->attack1_buff)
-		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
-	cnf->attack2_buff = mlx_get_data_addr(cnf->attack2, &game->bpp,
-			&game->line_bytes, &game->endian);
-	if (!cnf->attack2_buff)
-		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
-	return (OK);
-}
-
-static t_state mlx_load_sprites(t_var *game, struct s_cnfsprites *cnf)
+static t_state	mlx_load_sprites(t_var *game, struct s_cnfsprites *cnf)
 {
 	cnf->rest = mlx_xpm_file_to_image(game->mlx,
 			TEXTURE_RESTING_R, &game->config._w, &game->config._h);
@@ -71,7 +45,7 @@ static t_state mlx_load_sprites(t_var *game, struct s_cnfsprites *cnf)
 	if (!cnf->block)
 		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
 	cnf->attack0 = mlx_xpm_file_to_image(game->mlx,
-			TEXTURE_ATTACK0_R, &game->config._w, &game->config._h);	
+			TEXTURE_ATTACK0_R, &game->config._w, &game->config._h);
 	if (!cnf->attack0)
 		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
 	cnf->attack1 = mlx_xpm_file_to_image(game->mlx,
@@ -92,10 +66,8 @@ static t_state	init_base_images(t_var *game, t_config *cnf)
 		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp,
 			&game->line_bytes, &game->endian);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
-
+	//mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	mlx_load_sprites(game, &cnf->sprites);
-	mlx_load_buffers(game, &cnf->sprites);
 	return (OK);
 }
 

@@ -1,25 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_sprites.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/14 22:20:36 by odudniak          #+#    #+#             */
+/*   Updated: 2024/08/14 22:21:37 by odudniak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3D.h>
-int calc_px_pos(int x, int y, t_img *img)
+
+int	calc_px_pos(t_img *img, int x, int y)
 {
 	return (y * img->width + x) * 4;
 }
 
-
-int is_px_black(char *img, int px)
+int	is_px_black(char *img, int px)
 {
-	if ((unsigned char)img[px + 0] == 0 &&
-			(unsigned char)img[px + 1] == 0 &&
-			(unsigned char)img[px + 2] == 0)
-			return (1);
-	return (0);
+	return ((unsigned char)img[px + 0] == 0 &&
+		(unsigned char)img[px + 1] == 0 &&
+		(unsigned char)img[px + 2] == 0);
 }
 
-void copy_px_to_img(char *game_img, int game_img_px, char *sprite, int sprite_px)
+void	copy_px_to_img(t_img *atlas, t_point atlas_coord,
+	t_img *sprite, t_point sprite_coord)
 {
-	game_img[game_img_px + 0] = sprite[sprite_px + 0];
-	game_img[game_img_px + 1] = sprite[sprite_px + 1];
-	game_img[game_img_px + 2] = sprite[sprite_px + 2];
-	game_img[game_img_px + 3] = sprite[sprite_px + 3];
+	const int	atl_idx = calc_px_pos(atlas, atlas_coord.x, atlas_coord.y);
+	const int	spr_idx = calc_px_pos(sprite, sprite_coord.x, sprite_coord.y);
+
+	atlas->data[atl_idx + 0] = sprite->data[spr_idx + 0];
+	atlas->data[atl_idx + 1] = sprite->data[spr_idx + 1];
+	atlas->data[atl_idx + 2] = sprite->data[spr_idx + 2];
+	atlas->data[atl_idx + 3] = sprite->data[spr_idx + 3];
 }
 
 
@@ -33,24 +47,23 @@ void copy_px_to_img(char *game_img, int game_img_px, char *sprite, int sprite_px
  * @param sprite sprite obj
  * @param sprite_buf sprite buffer
  */
-void sprite_loader(t_var *game,t_img *sprite, char* sprite_buf, int startingfrom_x)
+void	sprite_loader(t_var *game, t_img *sprite, int startingfrom_x)
 {
-	int img_px;
-	char *img;
-	int x;
-	int y;
+	int	x;
+	int	y;
 
-	img = mlx_get_data_addr(game->img, &game->bpp, &game->line_bytes, &game->endian);
 	y = 0;
-	while(y < sprite->height)
+	while (y < sprite->height)
 	{
 		x = 0;
 		while (x < sprite->width)
 		{
-			img_px = calc_px_pos(startingfrom_x + x,
-				(game->config.win_height - sprite->height) + y, game->img);
-			if (!is_px_black( sprite->image->data, calc_px_pos(x, y, sprite)))
-				copy_px_to_img(img, img_px, sprite_buf, calc_px_pos(x, y, sprite));
+			if (!is_px_black(sprite->image->data, calc_px_pos(sprite, x, y)))
+			{
+				copy_px_to_img(game->img, (t_point){startingfrom_x + x,
+					(game->config.win_height - sprite->height) + y},
+					sprite, (t_point){x, y});
+			}
 			x++;
 		}
 		y++;
@@ -60,6 +73,5 @@ void sprite_loader(t_var *game,t_img *sprite, char* sprite_buf, int startingfrom
 
 void render_sprites(t_var *game, t_cnfsprites *sprites)
 {
-
-	sprite_loader(game, sprites->slctd, sprites->slctd_buff, sprites->slctd_screen_x);
+	sprite_loader(game, sprites->slctd, sprites->slctd_screen_x);
 }
