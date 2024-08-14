@@ -144,6 +144,7 @@ typedef struct s_config
 //SPRITES------------------------------
 
 	t_img	*forearm;
+	char 	*forearm_buff;
 
 	//WINDOW MEASURES
 	int		win_height;
