@@ -72,7 +72,7 @@ double		delta_time(t_var *g, bool normalize);
 
 // RENDERING--------------------------------------------------------------------
 void		render_base(t_var *g);
-void		render_sprites(t_var *g);
+void		render_sprites(t_var *g, struct s_cnfsprites *sprites);
 void		render_minimap(t_var *g);
 void		render_crosshair(t_var *game);
 

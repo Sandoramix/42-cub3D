@@ -143,8 +143,29 @@ typedef struct s_config
 
 //SPRITES------------------------------
 
-	t_img	*forearm;
-	char 	*forearm_buff;
+	struct s_cnfsprites
+	{
+		t_img	*slctd; //questo puntera all indirizzo del buffer selezionato
+		char	*slctd_buff; //same
+
+		t_img	*rest;
+		char 	*rest_buff;
+
+		t_img	*block;
+		char 	*block_buff;
+
+		t_img	*attack0;
+		char 	*attack0_buff;
+
+		t_img	*attack1;
+		char 	*attack1_buff;
+
+		t_img	*attack2;
+		char 	*attack2_buff;
+
+
+	} sprites;
+	
 
 	//WINDOW MEASURES
 	int		win_height;
@@ -185,6 +206,7 @@ typedef struct s_config
 }	t_config;
 
 typedef struct s_cnfdefaults	t_cnfdefaults;
+typedef struct s_cnfsprites		t_cnfsprites;
 
 // "GLOBAL" program's structure.
 typedef struct s_var

@@ -21,7 +21,7 @@ int	game_loop(t_var *game)
 	handle_horizontal_rotation(game);
 	render_base(game);
 	render_minimap(game);
-	render_sprites(game);
+	render_sprites(game, &game->config.sprites);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	if (ft_isdebug())
 		debug_info(game);

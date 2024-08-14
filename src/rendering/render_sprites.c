@@ -58,8 +58,11 @@ void sprite_loader(t_var *game,t_img *sprite, char* sprite_buf, int startingfrom
 }
 
 
-void render_sprites(t_var *game)
+void render_sprites(t_var *game, t_cnfsprites *sprites)
 {
-	const int hands_start_px = (game->config.win_width / 2 - game->config.forearm->width / 2);
-	sprite_loader(game, game->config.forearm, game->config.forearm_buff, hands_start_px);
+	const int rest = (game->config.win_width - sprites->rest->width) ;
+	const int block = (game->config.win_width / 2 - sprites->block->width / 2);
+
+	sprite_loader(game, sprites->rest, sprites->rest_buff, rest);
+	sprite_loader(game, sprites->block, sprites->block_buff, block);
 }

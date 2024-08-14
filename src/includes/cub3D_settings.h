@@ -134,6 +134,14 @@ typedef enum e_cnf
 # define STR_CEILING "C"
 //------------------------------------------------------------------------------
 
+
+//TEXTURES----------------------------------------------------------------------
+#define TEXTURE_RESTING_R "assets/sprites/restingR.xpm"
+#define TEXTURE_BLOCK_R "assets/sprites/blockR.xpm"
+#define TEXTURE_ATTACK0_R "assets/sprites/attack0R.xpm"
+#define TEXTURE_ATTACK1_R "assets/sprites/attack1R.xpm"
+#define TEXTURE_ATTACK2_R "assets/sprites/attack2R.xpm"
+
 /*HARD CODED VALUES (maybe)*/
 # define VELOCITY 500
 # define FOV 66
