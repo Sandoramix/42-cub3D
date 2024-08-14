@@ -60,8 +60,8 @@ static void	render_player(t_var *game)
 	const int				tile_scale = game->config.minimap_scale;
 	const int				player_scale = game->config.minimap_player_scale;
 
-	playerpos = (t_dpoint){game->player.x_px / TILE_SIZE * tile_scale,
-		game->player.y_px / TILE_SIZE * tile_scale};
+	playerpos = (t_dpoint){game->player.x * tile_scale,
+		game->player.y * tile_scale};
 
 	// TODO keep the player in bounds.
 	draw_rectangle(game, (t_point){playerpos.x, playerpos.y},

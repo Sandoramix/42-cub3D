@@ -30,8 +30,8 @@ typedef struct s_player
 {
 	double	x_px;
 	double	y_px;
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 	double	dir_x;
 	double	dir_y;
 
@@ -73,8 +73,8 @@ typedef struct s_raycast
 	double		camera_x;
 	int			wall_height;
 	double		wall_dist;
-	double		wall_ceil;
-	double		wall_floor;
+	int			wall_ceil;
+	int			wall_floor;
 	int			step_x;
 	int			step_y;
 	int			side;

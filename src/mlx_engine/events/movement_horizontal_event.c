@@ -64,18 +64,19 @@ void	handle_horizontal_movement(t_var *game)
 	game->engine.plane.x = -game->player.dir_y * game->config.plane_limit;
 	(void)"// Perpendicular to dir_y";
 	game->engine.plane.y = game->player.dir_x * game->config.plane_limit;
-	new_x = game->player.x_px;
-	new_y = game->player.y_px;
+	new_x = game->player.x;
+	new_y = game->player.y;
 	if (game->move.up || game->move.down)
 	{
-		new_x -= (dir_y * (game->player.dir_x * VELOCITY * game->deltatime));
-		new_y -= (dir_y * (game->player.dir_y * VELOCITY * game->deltatime));
+		new_x -= (dir_y * (game->player.dir_x * VELOCITY * game->deltatime)) / 64;
+		new_y -= (dir_y * (game->player.dir_y * VELOCITY * game->deltatime)) / 64;
 	}
 	if (game->move.left || game->move.right)
 	{
-		new_x -= (dir_x * (game->player.dir_y * VELOCITY * game->deltatime));
-		new_y += (dir_x * (game->player.dir_x * VELOCITY * game->deltatime));
+		new_x -= (dir_x * (game->player.dir_y * VELOCITY * game->deltatime)) / 64;
+		new_y += (dir_x * (game->player.dir_x * VELOCITY * game->deltatime)) / 64;
 	}
+	printf("new_x: %f, new_y: %f\n", new_x, new_y);
 	if (can_player_go_here(game, new_x, new_y) == OK)
 		set_player_dpos(game, (t_dpoint){new_x, new_y});
 }

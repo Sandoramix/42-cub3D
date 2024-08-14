@@ -24,11 +24,11 @@ char	get_map_at(t_var *game, int row_idx, int col_idx)
 bool	can_player_go_here(t_var *game, double x, double y)
 {
 
-	if (x < TILE_SIZE
-		|| x >= game->mapinfo.cols_mtx * TILE_SIZE - TILE_SIZE
-		|| y < TILE_SIZE
-		|| y >= game->mapinfo.rows_mtx * TILE_SIZE - TILE_SIZE
-		|| get_map_at(game, (y / TILE_SIZE), (x / TILE_SIZE)) == MAP_WALL)
+	if (x < 1
+		|| x >= game->mapinfo.cols_mtx - 1
+		|| y < 1
+		|| y >= game->mapinfo.rows_mtx - 1
+		|| get_map_at(game, (y), (x)) == MAP_WALL)
 	{
 		if (ft_isdebug())
 			printf("Can't move,"
