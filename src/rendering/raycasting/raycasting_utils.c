@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:48:21 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 23:45:34 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:15:13 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ void	loop_until_hit_wall(t_var *game)
 
 /**
  * @brief Pray and spray function, still unknown to human beings.
- * 
- * # TODO README: this is one of the sources of our problems.
+ *
+ * ### TODO README: this is one of the sources of our problems.
  * @note Only god knows what's happening here.
  * @param game game struct.
+ * @bug somebody help
  */
 void	get_wall_coords(t_var *game)
 {

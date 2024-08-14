@@ -1,12 +1,24 @@
-#include "cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
+/*   Updated: 2024/08/14 02:31:10 by odudniak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void calc_texture_coords(t_var *game)
+#include <cub3D.h>
+
+void	calc_texture_coords(t_var *game)
 {
-	t_raycast *engine;
-	t_player *player;
-	t_texture *tex;
-	int half_wall;
-	int half_win_h;
+	t_raycast	*engine;
+	t_player	*player;
+	t_texture	*tex;
+	int			half_wall;
+	int			half_win_h;
 
 	engine = &game->engine;
 	player = &game->player;
@@ -23,28 +35,19 @@ void calc_texture_coords(t_var *game)
 	tex->x = (int)(tex->wall_px * (double)TILE_SIZE);								 // text coordinate X
 	if ((engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST))			 // mirroring della texture
 		tex->x = TILE_SIZE - tex->x - 1;
-
 	tex->scale = 1.0 * (double)TILE_SIZE / (double)engine->wall_height;
 	tex->scaled_textpos = (engine->wall_ceil - (half_win_h + player->offset + ((player->pos_z + player->head_pos_z) / engine->wall_dist)) + half_wall) * game->engine.texture.scale;
-
-	
 }
 
-t_rgb get_texture_color(t_var *game)
+t_rgba	get_texture_color(t_var *game)
 {
-	const t_point coords = {game->engine.texture.x, game->engine.texture.y};
-	t_img *texture;
-	t_rgb color;
-	t_uint color_value;
+	const t_point	coords = {game->engine.texture.x, game->engine.texture.y};
+	t_img			*texture;
+	t_uint			color_value;
 
 	texture = game->engine.texture.hit_texture;
-	game->engine.texture.pixel = texture->data + (coords.y * texture->size_line) + (coords.x * 4);
+	game->engine.texture.pixel = texture->data
+		+ (coords.y * texture->size_line) + (coords.x * 4);
 	color_value = *(t_uint *)(game->engine.texture.pixel);
-
-	
-	color.color.red = color_value & 0xFF;
-	color.color.green = (color_value >> 8) & 0xFF;
-	color.color.blue = (color_value >> 16) & 0xFF;
-
-	return (color);
+	return (hex_to_rgba(color_value));
 }

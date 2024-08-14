@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 23:55:13 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:03:35 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	render_base(t_var *game)
 			tex->y = (int)tex->scaled_textpos
 				& (tex->hit_texture->height - 1);
 			tex->scaled_textpos += tex->scale;
-			draw_px_to_img_rgb(game, x, y, get_texture_color(game));
+			draw_pixel_rgb(game, x, y, get_texture_color(game));
 		}
 	}
 }

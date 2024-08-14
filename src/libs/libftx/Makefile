@@ -137,12 +137,12 @@ OBJ = ${SRC:.c=.o}
 all: $(NAME)
 
 debug:
-	$(MAKE) DEBUGFLAGS="-DDEBUG=1"
+	$(MAKE) DEBUG_VALUE="1"
 
 $(NAME): $(OBJ)
 	@$(ARCHIVE) $(OBJ)
 	@echo "$(GREEN)$(PNAME):\tLIBRARY CREATED$(R)"
-	[ "$(strip $(DEBUG_VALUE))" = "0" ] || echo "$(RED)[$(PNAME)]:\tDEBUG MODE ENABLED$(R)"
+	[ "$(strip $(DEBUG_VALUE))" = "0" ] || echo "$(RED)$(PNAME):\tDEBUG MODE ENABLED$(R)"
 clean:
 	@$(RM) $(OBJ)
 	@echo "$(RED)$(PNAME):\tOBJECTS DELETED$(R)"

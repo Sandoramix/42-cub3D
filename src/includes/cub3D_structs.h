@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 22:39:18 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:34:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,15 @@
 # include <cub3D.h>
 
 //------------------------------------------------------------------------------
-typedef struct s_color
-{
-	t_uchar	red;
-	t_uchar	green;
-	t_uchar	blue;
-	t_uchar	alpha;
-}	t_color;
 
 typedef struct u_rgb
 {
-	unsigned int		hex;
-	t_color	color;
-}	t_rgb;
+	t_uint		hex;
+	t_uchar		red;
+	t_uchar		green;
+	t_uchar		blue;
+	t_uchar		alpha;
+}	t_rgba;
 
 typedef struct s_player
 {
@@ -136,10 +132,10 @@ typedef struct s_config
 
 //-------------------------------------
 
-	t_rgb	ceiling;
+	t_rgba	ceiling;
 	char	*ceiling_raw;
 
-	t_rgb	floor;
+	t_rgba	floor;
 	char	*floor_raw;
 
 //SPRITES------------------------------

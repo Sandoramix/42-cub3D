@@ -96,7 +96,7 @@ char *ftoa(char *buffer, double d, int precision) {
 static char *dbg_player_distance_from_wall(t_var *game)
 {
     const int x = game->config.win_width / 10;
-    printf("x: %d\n", x);
+    //printf("x: %d\n", x);
     char *final;
     char *walldist;
     final = NULL;
