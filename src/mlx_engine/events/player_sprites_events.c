@@ -18,14 +18,12 @@ void	handle_player_sprites(t_var *game)
 {
     if (game->move.block)
     {
-        game->config.sprites.slctd = game->config.sprites.block;
-        game->config.sprites.slctd_buff = game->config.sprites.block_buff;
-        game->config.sprites.slctd_screen_x = game->config.win_width / 2 + game->config.sprites.block->width / 2 - 100;
+        game->config.hands_sprites.slctd = game->config.hands_sprites.block;
+        game->config.hands_sprites.slctd_screen_x = game->config.win_width / 2 + game->config.hands_sprites.block->width / 2 - 100;
     }
     if (!game->move.block)
     {
-        game->config.sprites.slctd = game->config.sprites.rest;
-        game->config.sprites.slctd_buff = game->config.sprites.rest_buff;
-        game->config.sprites.slctd_screen_x = game->config.win_width - game->config.sprites.rest->width;
+        game->config.hands_sprites.slctd = game->config.hands_sprites.rest;
+        game->config.hands_sprites.slctd_screen_x = game->config.win_width - game->config.hands_sprites.rest->width;
     }
 }

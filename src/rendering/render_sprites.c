@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 22:20:36 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 22:21:37 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 22:49:33 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	sprite_loader(t_var *game, t_img *sprite, int startingfrom_x)
 }
 
 
-void render_sprites(t_var *game, t_cnfsprites *sprites)
+void render_sprites(t_var *game, t_cnfsprites *hands_sprites)
 {
-	sprite_loader(game, sprites->slctd, sprites->slctd_screen_x);
+	sprite_loader(game, hands_sprites->slctd, hands_sprites->slctd_screen_x);
 }

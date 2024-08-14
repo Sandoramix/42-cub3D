@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:34:39 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 22:49:33 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,27 +148,13 @@ typedef struct s_config
 	struct s_cnfsprites
 	{
 		t_img	*slctd; //questo puntera all indirizzo del buffer selezionato
-		char	*slctd_buff; //same
-		int 	slctd_screen_x;
-
+		int		slctd_screen_x;
 		t_img	*rest;
-		char 	*rest_buff;
-
 		t_img	*block;
-		char 	*block_buff;
-
 		t_img	*attack0;
-		char 	*attack0_buff;
-
 		t_img	*attack1;
-		char 	*attack1_buff;
-
 		t_img	*attack2;
-		char 	*attack2_buff;
-
-
-	} sprites;
-	
+	} hands_sprites;
 
 	//WINDOW MEASURES
 	int		win_height;

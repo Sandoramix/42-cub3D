@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 22:10:30 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 22:49:33 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static t_state	init_base_images(t_var *game, t_config *cnf)
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp,
 			&game->line_bytes, &game->endian);
 	//mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
-	mlx_load_sprites(game, &cnf->sprites);
+	mlx_load_sprites(game, &cnf->hands_sprites);
 	return (OK);
 }
 
