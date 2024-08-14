@@ -44,7 +44,6 @@ int	calc_text_y(t_var *game)
 
 	text_y = (int)game->engine.texture.scaled_textpos
 		& (game->engine.texture.hit_texture->height - 1);
-	game->engine.texture.scaled_textpos += game->engine.texture.scale;
 	return (text_y);
 }
 
@@ -59,6 +58,7 @@ int	calc_text_x(t_var *game)
 
 	text_perc_px_hit = normalize_to_one(calc_wall_px_hit(game));
 	tex_x = (int)(text_perc_px_hit * (double)TILE_SIZE);
+
 	return (tex_x);
 }
 

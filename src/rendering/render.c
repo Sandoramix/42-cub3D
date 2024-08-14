@@ -47,11 +47,12 @@ void	render_base(t_var *game)
 		get_wall_coords(game);
 		render_floor_n_ceiling(game, x);
 		tex_x = calc_text_x(game);
+		calc_scaled_textpos(game, &game->engine, &game->player);
 		y = game->engine.wall_ceil - 1;
 		while (++y < game->engine.wall_floor)
 		{
-			calc_scaled_textpos(game, &game->engine, &game->player);
 			tex_y = calc_text_y(game);
+			game->engine.texture.scaled_textpos += game->engine.texture.scale;
 			draw_pixel_rgb(game, x, y, get_texture_color(game, tex_x, tex_y));
 		}
 	}
