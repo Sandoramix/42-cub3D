@@ -21,8 +21,8 @@
 static	void	render_floor_n_ceiling(t_var *game, int x)
 {
 	const t_point	ceiling_start = (t_point){x, 0};
-	const t_point	ceiling_end = (t_point){x, game->engine.wall_ceil};
-	const t_point	floor_start = (t_point){x, game->engine.wall_floor};
+	const t_point	ceiling_end = (t_point){x, game->engine.wall.ceil};
+	const t_point	floor_start = (t_point){x, game->engine.wall.floor};
 	const t_point	floor_end = (t_point){x, game->config.win_height};
 
 	draw_rectangle_rgb(game, ceiling_start, ceiling_end, game->config.ceiling);
@@ -48,8 +48,8 @@ void	render_base(t_var *game)
 		render_floor_n_ceiling(game, x);
 		tex_x = calc_text_x(game);
 		calc_scaled_textpos(game, &game->engine, &game->player);
-		y = game->engine.wall_ceil - 1;
-		while (++y < game->engine.wall_floor)
+		y = game->engine.wall.ceil - 1;
+		while (++y < game->engine.wall.floor)
 		{
 			tex_y = calc_text_y(game);
 			game->engine.texture.scaled_textpos += game->engine.texture.scale;

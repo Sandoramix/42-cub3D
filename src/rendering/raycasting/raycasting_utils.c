@@ -102,17 +102,17 @@ void	get_wall_coords(t_var *game)
 	int	half_win_h;
 	
 
-	half_win_h = game->config.win_height / 2.0;
+	half_win_h = game->config.win_height / 2;
 	if (game->engine.side == CNF_WALL_WEST || game->engine.side == CNF_WALL_EAST)
-		game->engine.wall_dist = (game->engine.ray.x - game->engine.delta_dist.x);
+		game->engine.wall.dist = (game->engine.ray.x - game->engine.delta_dist.x);
 	else
-		game->engine.wall_dist = (game->engine.ray.y - game->engine.delta_dist.y);
+		game->engine.wall.dist = (game->engine.ray.y - game->engine.delta_dist.y);
 	
-	z_offset = game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->engine.wall_dist);
-	game->engine.wall_height = (int)(game->config.win_height / game->engine.wall_dist);
-	half_wall = game->engine.wall_height / 2.0;
-	game->engine.wall_ceil = -half_wall + half_win_h + z_offset;
-	game->engine.wall_floor = half_wall + half_win_h + z_offset;
-	game->engine.wall_ceil = max(0, game->engine.wall_ceil);
-	game->engine.wall_floor = min(game->config.win_height - 1, game->engine.wall_floor);
+	z_offset = game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->engine.wall.dist);
+	game->engine.wall.height = (int)(game->config.win_height / game->engine.wall.dist);
+	half_wall = game->engine.wall.height / 2;
+	game->engine.wall.ceil = -half_wall + half_win_h + z_offset;
+	game->engine.wall.floor = half_wall + half_win_h + z_offset;
+	game->engine.wall.ceil = max(0, game->engine.wall.ceil);
+	game->engine.wall.floor = min(game->config.win_height - 1, game->engine.wall.floor);
 }

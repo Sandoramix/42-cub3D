@@ -62,6 +62,14 @@ typedef struct s_texure
 	double	scaled_textpos;
 }	t_texture;
 
+typedef struct s_wall
+{
+	int			height;
+	double		dist;
+	int			ceil;
+	int			floor;
+}	t_wall;
+
 typedef struct s_raycast
 {
 	t_texture	texture;
@@ -71,16 +79,11 @@ typedef struct s_raycast
 	t_dpoint	ray;
 	t_dpoint	dir;
 	double		camera_x;
-	int			wall_height;
-	double		wall_dist;
-	int			wall_ceil;
-	int			wall_floor;
+	t_wall		wall;
 	int			step_x;
 	int			step_y;
 	int			side;
-
 	int			step_count;
-
 	bool		ray_hit;
 }	t_raycast;
 

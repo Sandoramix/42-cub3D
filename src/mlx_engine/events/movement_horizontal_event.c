@@ -76,7 +76,6 @@ void	handle_horizontal_movement(t_var *game)
 		new_x -= (dir_x * (game->player.dir_y * VELOCITY * game->deltatime)) / 64;
 		new_y += (dir_x * (game->player.dir_x * VELOCITY * game->deltatime)) / 64;
 	}
-	printf("new_x: %f, new_y: %f\n", new_x, new_y);
 	if (can_player_go_here(game, new_x, new_y) == OK)
 		set_player_dpos(game, (t_dpoint){new_x, new_y});
 }

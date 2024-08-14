@@ -27,13 +27,13 @@ t_rgba	get_texture_color(t_var *game, int tex_x, int tex_y)
 void	calc_scaled_textpos(t_var *game, t_raycast *engine, t_player *player)
 {
 	const double z_offset = player->offset+ ((player->pos_z
-						+ player->head_pos_z) / engine->wall_dist);
+						+ player->head_pos_z) / engine->wall.dist);
 	const double half_win_height = game->config.win_height / 2;
-	const double half_wall_height = engine->wall_height / 2;
+	const double half_wall_height = engine->wall.height / 2;
 
 	engine->texture.scale = 1.0 * (double)TILE_SIZE
-		/ (double)engine->wall_height;
-	engine->texture.scaled_textpos = (engine->wall_ceil
+		/ (double)engine->wall.height;
+	engine->texture.scaled_textpos = (engine->wall.ceil
 			- (half_win_height + z_offset)
 			+ half_wall_height) * engine->texture.scale;
 }

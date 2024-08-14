@@ -54,9 +54,9 @@ double calc_wall_px_hit(t_var *game)
 	double			wall_px;
 
 	if (engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST)
-		wall_px = player->y_px / TILE_SIZE + engine->wall_dist * engine->dir.y;
+		wall_px = player->y_px / TILE_SIZE + engine->wall.dist * engine->dir.y;
 	else
-		wall_px = player->x_px / TILE_SIZE + engine->wall_dist * engine->dir.x;
+		wall_px = player->x_px / TILE_SIZE + engine->wall.dist * engine->dir.x;
 
 	return (wall_px);
 }

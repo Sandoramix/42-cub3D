@@ -106,7 +106,7 @@ static char *dbg_player_distance_from_wall(t_var *game)
     calc_direction(game);
     loop_until_hit_wall(game);
     get_wall_coords(game);
-    final = ftoa(final, game->engine.wall_dist, 5);
+    final = ftoa(final, game->engine.wall.dist, 5);
     return (final);
 }
 

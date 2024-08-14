@@ -47,7 +47,7 @@ void draw_minimap_rays(t_var *game)
 		game->player.y_px + game->engine.plane.y};
 	while (angle <= FOV / 2)
 	{
-		end_px = calculate_point(start_px, angle, game->engine.wall_dist);
+		end_px = calculate_point(start_px, angle, game->engine.wall.dist);
 		draw_line(game, start_px, end_px);
 		angle++;
 	}
