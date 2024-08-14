@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:57:33 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:10:23 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:29:14 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ Draw, or said better, put a color inside the "general" image's buffer
 which is an array of 4 bytes per cell: red-green-blue-alpha colors.
 Goodbye matrixes, welcome bytearrays.
 */
-void	draw_pixel_rgb(t_var *game, int x, int y, t_rgb rgb)
+void	draw_pixel_rgb(t_var *game, int x, int y, t_rgba rgba)
 {
 	char	*dst;
 
 	dst = game->buffer + (y * game->line_bytes + x * (game->bpp / 8));
-	dst[0] = rgb.color.red;
-	dst[1] = rgb.color.green;
-	dst[2] = rgb.color.blue;
-	dst[3] = rgb.color.alpha;
+	dst[0] = rgba.red;
+	dst[1] = rgba.green;
+	dst[2] = rgba.blue;
+	dst[3] = rgba.alpha;
 }
 
 /**
@@ -40,5 +40,5 @@ void	draw_pixel_rgb(t_var *game, int x, int y, t_rgb rgb)
 */
 void	draw_pixel(t_var *game, int x, int y, t_uint color)
 {
-	draw_pixel_rgb(game, x, y,  to_rgb(color));
+	draw_pixel_rgb(game, x, y,  hex_to_rgba(color));
 }

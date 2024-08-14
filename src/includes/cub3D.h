@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:13:22 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:29:14 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ void		calc_direction(t_var *g);
 
 // DRAWING----------------------------------------------------------------------
 void		draw_rectangle(t_var *g, t_point start, t_point end, t_uint color);
-void		draw_rectangle_rgb(t_var *g, t_point start, t_point end, t_rgb rgb);
+void		draw_rectangle_rgb(t_var *g, t_point start, t_point end, t_rgba rgb);
 void		draw_line(t_var *g, t_dpoint start, t_dpoint end);
 void		draw_pixel(t_var *g, int x, int y, t_uint color);
-void		draw_pixel_rgb(t_var *g, int x, int y, t_rgb rgb);
-t_rgb		get_texture_color(t_var *g);
+void		draw_pixel_rgb(t_var *g, int x, int y, t_rgba rgb);
+t_rgba		get_texture_color(t_var *g);
 
 //------------------------------------------------------------------------------
 
@@ -136,10 +136,10 @@ void		copy_pos(t_point *p1, t_point p2);
 void		add_dpoint(t_dpoint *p1, t_dpoint p2);
 void		add_point(t_point *p1, t_point p2);
 
-double		from_angle_to_radiant(double angle);
+double		angle_to_radiant(double angle);
 double		pi(void);
 
-t_uint		color_to_hex(t_color color);
-t_rgb		to_rgb(t_uint color);
+t_uint		color_to_hex(t_rgba color);
+t_rgba		hex_to_rgba(t_uint color);
 //------------------------------------------------------------------------------
 #endif

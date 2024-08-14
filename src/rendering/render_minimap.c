@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:07:35 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:29:14 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	render_minimap(t_var *game)
 			draw_rectangle_rgb(game,
 				(t_point){dx * scale, dy * scale},
 				(t_point){dx * scale + scale, dy * scale + scale},
-				to_rgb(colors[get_map_at(game, dy, dx) != MAP_WALL]));
+				hex_to_rgba(colors[get_map_at(game, dy, dx) != MAP_WALL]));
 		}
 	}
 	render_player(game);

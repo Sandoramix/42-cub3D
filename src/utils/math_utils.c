@@ -6,35 +6,35 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:46:42 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 21:10:43 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:29:14 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-double pi()
+double	pi()
 {
 	return (acos(-1.0));
 }
 
-double from_angle_to_radiant(double angle)
+double	angle_to_radiant(double angle)
 {
 	return (angle * (pi() / 180));
 }
 
-t_rgb	to_rgb(unsigned int color)
+t_rgba	hex_to_rgba(unsigned int color)
 {
-	t_rgb	res;
+	t_rgba	res;
 
 	res.hex = color;
-	res.color.alpha = color >> 24 & 0xFF;
-	res.color.blue = color >> 16 & 0xFF;
-	res.color.green = color >> 8 & 0xFF;
-	res.color.red = color & 0xFF;
+	res.alpha = color >> 24 & 0xFF;
+	res.blue = color >> 16 & 0xFF;
+	res.green = color >> 8 & 0xFF;
+	res.red = color & 0xFF;
 	return (res);
 }
 
-unsigned int	color_to_hex(t_color color)
+unsigned int	color_to_hex(t_rgba color)
 {
 	return ((color.alpha << 24) | (color.blue << 16) | (color.green << 8)
 		| color.red);

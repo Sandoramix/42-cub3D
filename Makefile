@@ -32,7 +32,6 @@ RM = rm -rf
 
 SRC = ./main.c \
 	./src/cleanup.c \
-	./src/conditionals.c \
 	./src/debug_display.c \
 	./src/deltatime.c \
 	./src/draw_helpers/draw_pixel.c \
@@ -47,6 +46,7 @@ SRC = ./main.c \
 	./src/mlx_engine/key_events.c \
 	./src/mlx_engine/mlx_setup.c \
 	./src/parsing/parse.c \
+	./src/parsing/parse_config_utils.c \
 	./src/parsing/parse_config_value.c \
 	./src/parsing/parse_configs.c \
 	./src/parsing/parse_map.c \

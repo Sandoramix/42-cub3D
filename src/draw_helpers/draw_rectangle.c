@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:56:14 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:10:29 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:29:14 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // TODO: it should accept an "t_img" and update it's pixels
 
-void	draw_rectangle_rgb(t_var *game, t_point start, t_point end, t_rgb rgb)
+void	draw_rectangle_rgb(t_var *game, t_point start, t_point end, t_rgba rgb)
 {
 	const int	start_x = start.x;
 
@@ -36,5 +36,5 @@ void	draw_rectangle_rgb(t_var *game, t_point start, t_point end, t_rgb rgb)
  */
 void	draw_rectangle(t_var *game, t_point start, t_point end, t_uint color)
 {
-	draw_rectangle_rgb(game, start, end,  to_rgb(color));
+	draw_rectangle_rgb(game, start, end,  hex_to_rgba(color));
 }
