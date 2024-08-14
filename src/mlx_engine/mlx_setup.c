@@ -46,6 +46,10 @@ static t_state	init_base_images(t_var *game, t_config *cnf)
 			"assets/sprites/forearms.xpm", &cnf->_w, &cnf->_h);
 	if (!cnf->forearm)
 		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
+	cnf->forearm_buff = mlx_get_data_addr(cnf->forearm, &game->bpp,
+			&game->line_bytes, &game->endian);
+	if (!cnf->forearm_buff)
+		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
 	return (OK);
 }
 
