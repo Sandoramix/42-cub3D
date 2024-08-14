@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 01:46:58 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/14 02:13:22 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,20 @@ double		delta_time(t_var *g, bool normalize);
 void		render_base(t_var *g);
 void		render_sprites(t_var *g);
 void		render_minimap(t_var *g);
+void		render_crosshair(t_var *game);
 
 // RAYCASTING--------------------------
 void		init_vars(t_var *g, int pixel_pos_x);
 void		get_wall_coords(t_var *g);
 void		loop_until_hit_wall(t_var *g);
 void		calc_texture_coords(t_var *g);
+
+/**
+ * @brief Tunnable crosshair, just need to change `cross_thickness`
+ * and `cross_length` inside the function xD
+ * @note #### TODO add the cursor's parameters inside global configuration.
+ * @param game game obj
+ */
 void		calc_direction(t_var *g);
 
 //------------------------------------------------------------------------------
@@ -88,8 +96,8 @@ void		calc_direction(t_var *g);
 void		draw_rectangle(t_var *g, t_point start, t_point end, t_uint color);
 void		draw_rectangle_rgb(t_var *g, t_point start, t_point end, t_rgb rgb);
 void		draw_line(t_var *g, t_dpoint start, t_dpoint end);
-void		draw_px_to_img(t_var *g, int x, int y, t_uint color);
-void		draw_px_to_img_rgb(t_var *g, int x, int y, t_rgb rgb);
+void		draw_pixel(t_var *g, int x, int y, t_uint color);
+void		draw_pixel_rgb(t_var *g, int x, int y, t_rgb rgb);
 t_rgb		get_texture_color(t_var *g);
 
 //------------------------------------------------------------------------------

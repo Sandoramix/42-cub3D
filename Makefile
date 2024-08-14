@@ -35,6 +35,8 @@ SRC = ./main.c \
 	./src/conditionals.c \
 	./src/debug_display.c \
 	./src/deltatime.c \
+	./src/draw_helpers/draw_pixel.c \
+	./src/draw_helpers/draw_rectangle.c \
 	./src/init_config.c \
 	./src/messages/parse_error_msg.c \
 	./src/mlx_engine/events/camera_horizontal_event.c \
@@ -50,10 +52,10 @@ SRC = ./main.c \
 	./src/parsing/parse_map.c \
 	./src/parsing/parse_path_utils.c \
 	./src/parsing/parse_utils.c \
-	./src/rendering/draw_utils.c \
 	./src/rendering/raycasting/raycasting_init.c \
 	./src/rendering/raycasting/raycasting_utils.c \
 	./src/rendering/render.c \
+	./src/rendering/render_crosshair.c \
 	./src/rendering/render_minimap.c \
 	./src/rendering/render_sprites.c \
 	./src/texture.c \
@@ -61,7 +63,6 @@ SRC = ./main.c \
 	./src/utils/math_utils.c \
 	./src/utils/player_utils.c \
 	./src/utils/point_utils.c
-
 
 # ----RULES---------------------------------------------------------------------
 
