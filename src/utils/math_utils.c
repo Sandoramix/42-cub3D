@@ -39,3 +39,8 @@ t_uint	rgba_to_hex(t_rgba color)
 	return ((color.alpha << 24) | (color.blue << 16) | (color.green << 8)
 		| color.red);
 }
+
+double normalize_to_one(double num)
+{
+	return (num - floor(num));
+}

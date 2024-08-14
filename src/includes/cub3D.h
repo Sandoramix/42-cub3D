@@ -80,8 +80,17 @@ void		render_crosshair(t_var *game);
 void		init_vars(t_var *g, int pixel_pos_x);
 void		get_wall_coords(t_var *g);
 void		loop_until_hit_wall(t_var *g);
-void		calc_texture_coords(t_var *g);
+//------------------------------------------------------------------------------
+// TEXTURE---------------------------------------------------------------------
+int         calc_text_x(t_var *g);
+int			calc_text_y(t_var *game);
+void        calc_scaled_textpos(t_var *game,
+        t_raycast *engine, t_player *player);
+t_rgba		get_texture_color(t_var *g, int tex_x, int tex_y);
 
+
+
+//------------------------------------------------------------------------------
 /**
  * @brief Tunnable crosshair, just need to change `cross_thickness`
  * and `cross_length` inside the function xD
@@ -97,7 +106,6 @@ void		draw_rectangle(t_var *g, t_point start, t_point end, t_uint color);
 void		draw_rectangle_rgb(t_var *g, t_point start, t_point end, t_rgba rgb);
 void		draw_pixel(t_var *g, int x, int y, t_uint color);
 void		draw_pixel_rgb(t_var *g, int x, int y, t_rgba rgb);
-t_rgba		get_texture_color(t_var *g);
 
 //------------------------------------------------------------------------------
 
@@ -128,6 +136,8 @@ void		handle_horizontal_rotation(t_var *game);
 
 // MATH FUNCTIONS --------------------------------------------------------------
 t_dpoint	calculate_point(t_dpoint start, double angle, double distance);
+double      calc_wall_px_hit(t_var *game);
+
 
 void		copy_dpos(t_dpoint *p1, t_dpoint p2);
 void		copy_pos(t_point *p1, t_point p2);
@@ -140,5 +150,8 @@ double		pi(void);
 
 t_uint		rgba_to_hex(t_rgba color);
 t_rgba		hex_to_rgba(t_uint color);
+
+double      normalize_to_one(double num);
+
 //------------------------------------------------------------------------------
 #endif
