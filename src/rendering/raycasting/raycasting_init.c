@@ -32,17 +32,23 @@ void	calc_direction(t_var *game)
 void	init_vars(t_var *game, int x)
 {
 	const t_point	pl_vector = (t_point){(int)game->player.x_px / (double)TILE_SIZE, game->player.y_px / (double)TILE_SIZE};
+	const double camera_x = (double)(2.0 * x) / (double)game->config.win_width - 1;
 	const double	raydirx = game->player.dir_x + game->engine.plane.x
-		* game->engine.camera_x;
+		* camera_x;
 	const double	raydiry = game->player.dir_y + game->engine.plane.y
-		* game->engine.camera_x;
+		* camera_x;
 	const t_dpoint	ray_dir_vect = (t_dpoint){raydirx, raydiry};
-	const t_dpoint	delta_dist_vect = (t_dpoint){fabs(1.0 / game->engine.dir.x),
-		fabs(1.0 / game->engine.dir.y)};
 
+	t_dpoint	delta_dist_vect;
+	if (game->engine.dir.x == 0)
+		delta_dist_vect.x = 1e30;
+	else
+		delta_dist_vect.x = fabs(1.0 / game->engine.dir.x);
+	if (game->engine.dir.y == 0)
+		delta_dist_vect.y = 1e30;
+	else
+		delta_dist_vect.y = fabs(1.0 / game->engine.dir.y);
 	copy_pos(&game->engine.map_coords, pl_vector);
-	game->engine.camera_x = (double)(2.0 * x)
-		/ (double)game->config.win_width - 1;
 	copy_dpos(&game->engine.dir, ray_dir_vect);
 	copy_dpos(&game->engine.delta_dist, delta_dist_vect);
 }
