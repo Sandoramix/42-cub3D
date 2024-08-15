@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:54:49 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 07:11:34 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 21:16:19 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,18 @@ static t_dpoint	calc_movement_newpos(t_var *game)
 void	handle_horizontal_movement(t_var *game)
 {
 	const t_dpoint	newpos = calc_movement_newpos(game);
+	t_dpoint		temp_pos;
 
 	(void)"//TODO remove me please";
 	(void)"// Perpendicular to dir_x";
 	game->engine.plane.x = -game->player.dir_y * game->config.plane_limit;
 	(void)"// Perpendicular to dir_y";
 	game->engine.plane.y = game->player.dir_x * game->config.plane_limit;
-	if (can_player_go_here(game, newpos.x, newpos.y) == OK)
-		set_player_dpos(game, (t_dpoint){newpos.x, newpos.y});
-	else
-	{
-		if (can_player_go_here(game, newpos.x, game->player.y) == OK)
-			set_player_dpos(game, (t_dpoint){newpos.x, game->player.y});
-		else if (can_player_go_here(game, game->player.x, newpos.y) == OK)
-			set_player_dpos(game, (t_dpoint){game->player.x, newpos.y});
-	}
+	temp_pos.x = game->player.x;
+	temp_pos.y = game->player.y;
+	if (can_player_go_here(game, newpos.x, game->player.y) == OK)
+		temp_pos.x = newpos.x;
+	if (can_player_go_here(game, temp_pos.x, newpos.y) == OK)
+		temp_pos.y = newpos.y;
+	set_player_dpos(game, temp_pos);
 }
