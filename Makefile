@@ -40,6 +40,7 @@ SRC =   ./main.c \
         ./src/messages/parse_error_msg.c \
         ./src/mlx_engine/events/camera_horizontal_event.c \
         ./src/mlx_engine/events/camera_vertical_event.c \
+        ./src/mlx_engine/events/mouse_movement_event.c \
         ./src/mlx_engine/events/movement_horizontal_event.c \
         ./src/mlx_engine/events/movement_vertical_event.c \
         ./src/mlx_engine/events/player_sprites_events.c \
