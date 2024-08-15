@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 11:37:39 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 14:49:13 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ t_rgba	get_texture_color(t_var *game, int tex_x, int tex_y)
 
 void	calc_scaled_textpos(t_var *game, t_raycast *engine, t_player *player)
 {
-	const double z_offset = player->offset+ ((player->pos_z
-						+ player->head_pos_z) / engine->wall.dist);
-	const double half_win_height = game->config.win_height / 2;
-	const double half_wall_height = engine->wall.height / 2;
+	const double	z_offset = player->offset+ ((player->pos_z
+				+ player->head_pos_z) / engine->wall.dist);
+	const double	half_win_height = game->config.win_height / 2;
+	const double	half_wall_height = engine->wall.height / 2;
 
 	engine->texture.scale = 1.0 * (double)TILE_SIZE
 		/ (double)engine->wall.height;
@@ -45,9 +45,9 @@ int	calc_text_y(t_var *game)
 
 	text_y = (int)(game->engine.texture.scaled_textpos
 			* texture->height / TILE_SIZE);
-	//gives problem when texture->height is 0, or texture doesnt exist
-	/* if (text_y >= texture->height)  
-		text_y = texture->height - 1; */
+	if (text_y >= texture->height)  
+		text_y = texture->height - 1;
+	text_y = max(0, text_y);
 	return (text_y);
 }
 
@@ -59,13 +59,12 @@ int	calc_text_x(t_var *game)
 	double			text_perc_px_hit;
 
 	if (isinf(engine->dir.x) || isinf(engine->dir.y))
-		return (KO); // i dont like it cause its zero, but i dont like -1 as well
+		return (KO);
 	text_perc_px_hit = normalize_to_one(calc_wall_px_hit(game));
 	tex_x = (int)(text_perc_px_hit * texture->width);
-	//rimosso perche certe volte texture = NULL e segfaulta
-	// senza il controllo non da problemi
-	/* if (tex_x >= texture->width)
-		tex_x = texture->width - 1; */
+	if (tex_x >= texture->width)
+		tex_x = texture->width - 1;
+	tex_x = max(0, tex_x);
 	return (tex_x);
 }
 
