@@ -1,8 +1,9 @@
-NO assets/sprites/black_sprite.xpm
-SO assets/sprites/black_sprite.xpm
-WE assets/sprites/black_sprite.xpm
-EA assets/sprites/black_sprite.xpm
+NO assets/sprites/wall-no.xpm
+SO assets/sprites/wall-so.xpm
 
+WE assets/sprites/wall-we.xpm
+
+EA assets/sprites/wall-ea.xpm
 F 220,100,0
 
 
@@ -14,8 +15,8 @@ C 225,30,0
 1111111111111111111
 1000000000000000001
 10000000000E0001101
-1000000000000000001
-1000000000000011001
+1000001000000000001
+1000000011110011001
 1000000000000000001
 1000000000000000001
 1111111111111111111

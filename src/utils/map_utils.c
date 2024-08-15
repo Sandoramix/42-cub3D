@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:31:51 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:32:17 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 06:40:40 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ bool	can_player_go_here(t_var *game, double x, double y)
 		|| get_map_at(game, (y), (x)) == MAP_WALL)
 	{
 		if (ft_isdebug())
-			printf("Can't move,"
-				"the player position will be [%.2f][%.2f]\n", x, y);
+			printf("Player's at a wall of coordinates"
+				" x[%.2f]y[%.2f]\n", x, y);
 		return (false);
 	}
 	return (true);
