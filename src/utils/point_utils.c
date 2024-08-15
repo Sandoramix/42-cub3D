@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   point_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:46:42 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:31:42 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:38:00 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ t_dpoint	calculate_point(t_dpoint start, double angle, double distance)
 		angle = 360 + angle;
 	end.x = start.x + (distance * cos(angle_to_radiant(angle))) * TILE_SIZE;
 	end.y = start.y + (distance * sin(angle_to_radiant(angle))) * TILE_SIZE;
-	return end;
+	return (end);
 }
 
-double calc_wall_px_hit(t_var *game)
+double	calc_wall_px_hit(t_var *game)
 {
 	const t_raycast	*engine = &game->engine;
 	const t_player	*player = &game->player;
@@ -57,6 +57,5 @@ double calc_wall_px_hit(t_var *game)
 		wall_px = player->y_px / TILE_SIZE + engine->wall.dist * engine->dir.y;
 	else
 		wall_px = player->x_px / TILE_SIZE + engine->wall.dist * engine->dir.x;
-
 	return (wall_px);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:12:22 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 01:47:10 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:32:06 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	on_keypress(int keycode, t_var *game)
 	if (keycode == ESC_KEY)
 		return (cleanup(game, true, 0), OK);
 	if (keycode == XK_q)
-		game->move.zoom = true; // TODO hey i'm not used
+		game->move.zoom = true;
 	camera_h_event_pressed(keycode, game);
 	camera_v_event_pressed(keycode, game);
 	movement_h_event_pressed(keycode, game);
@@ -29,7 +29,7 @@ int	on_keypress(int keycode, t_var *game)
 int	on_keyrelease(int keycode, t_var *game)
 {
 	if (keycode == XK_q)
-		game->move.zoom = false; // TODO hey i'm not used
+		game->move.zoom = false;
 	camera_h_event_released(keycode, game);
 	camera_v_event_released(keycode, game);
 	movement_h_event_released(keycode, game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:29:14 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:25:03 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,15 @@ void draw_minimap_rays(t_var *game)
 }
 */
 
+// TODO keep the player in bounds.
 static void	render_player(t_var *game)
 {
-	t_dpoint				playerpos;
-	const int				tile_scale = game->config.minimap_scale;
-	const int				player_scale = game->config.minimap_player_scale;
+	t_dpoint	playerpos;
+	const int	tile_scale = game->config.minimap_scale;
+	const int	player_scale = game->config.minimap_player_scale;
 
 	playerpos = (t_dpoint){game->player.x * tile_scale,
 		game->player.y * tile_scale};
-
-	// TODO keep the player in bounds.
 	draw_rectangle(game, (t_point){playerpos.x, playerpos.y},
 		(t_point){playerpos.x + player_scale, playerpos.y + player_scale},
 		0xFF0000);

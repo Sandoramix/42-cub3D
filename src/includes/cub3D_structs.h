@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 07:48:14 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:40:59 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_player
 {
 	double	x_px;
 	double	y_px;
-	double		x;
-	double		y;
+	double	x;
+	double	y;
 	double	dir_x;
 	double	dir_y;
 
@@ -122,10 +122,10 @@ typedef struct s_movement
 	bool		crouch;
 	bool		has_crouched;
 
-	bool 		block;
+	bool		block;
 
 	int			jump_mult;
-	bool 		zoom;
+	bool		zoom;
 }	t_movement;
 
 typedef struct s_config
@@ -142,17 +142,13 @@ typedef struct s_config
 
 	t_img	*wall_west;
 	char	*wall_west_path;
-
 //-------------------------------------
-
 	t_rgba	ceiling;
 	char	*ceiling_raw;
 
 	t_rgba	floor;
 	char	*floor_raw;
-
 //SPRITES------------------------------
-
 	struct s_cnfsprites
 	{
 		t_img	*slctd; //questo puntera all indirizzo del buffer selezionato
@@ -163,7 +159,6 @@ typedef struct s_config
 		t_img	*attack1;
 		t_img	*attack2;
 	} hands_sprites;
-
 	//WINDOW MEASURES
 	int		win_height;
 	int		win_width;
@@ -199,9 +194,7 @@ typedef struct s_config
 		char	*window_name; // TODO CHECK IF KEEP IT OR NOT
 	}		defaults;
 //# define SAFETY_WALL_DIST 1
-
 }	t_config;
-
 typedef struct s_cnfdefaults	t_cnfdefaults;
 typedef struct s_cnfsprites		t_cnfsprites;
 

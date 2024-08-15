@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:03:35 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:23:57 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,20 @@ static	void	render_floor_n_ceiling(t_var *game, int x)
 	draw_rectangle_rgb(game, floor_start, floor_end, game->config.floor);
 }
 
-
-
 void	render_base(t_var *game)
 {
-	int x;
-	int y;
-	int tex_x;
-	int tex_y;
+	int	x;
+	int	y;
+	int	tex_x;
+	int	tex_y;
 
 	x = -1;
 	while (++x <= game->config.win_width)
 	{
-		init_vars(game, x);
-		calc_direction(game);
+		init_vars(game, &game->engine, &game->player, x);
+		calc_direction(&game->engine, &game->player);
 		loop_until_hit_wall(game);
-		get_wall_coords(game);
+		get_wall_coords(game, &game->engine, &game->engine.wall);
 		render_floor_n_ceiling(game, x);
 		tex_x = calc_text_x(game);
 		calc_scaled_textpos(game, &game->engine, &game->player);

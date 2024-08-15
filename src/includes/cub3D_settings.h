@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_settings.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 07:50:09 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:42:31 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 #    define KEY_D 'd'
 #    define KEY_LEFT NSLeftArrowFunctionKey
 #    define KEY_RIGHT NSRightArrowFunctionKey
-#	 define ESC_KEY kVK_Escape
+#    define ESC_KEY kVK_Escape
 
 // IOKit headers
 #   elif defined(__IOKIT__)
@@ -130,7 +130,6 @@ typedef enum e_cnf
 # define STR_FLOOR "F"
 # define STR_CEILING "C"
 //------------------------------------------------------------------------------
-
 
 //TEXTURES----------------------------------------------------------------------
 # define TEXTURE_RESTING_R "assets/sprites/restingR.xpm"

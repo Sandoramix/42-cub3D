@@ -77,7 +77,7 @@ char	*ftoa(char *buffer, double d, int precision)
 	return (buffer);
 }
 
-static char	*dbg_player_distance_from_wall(t_var *game)
+/* static char	*dbg_player_distance_from_wall(t_var *game)
 {
 	const int		x = game->config.win_width / 10;
 	char			*final;
@@ -90,7 +90,7 @@ static char	*dbg_player_distance_from_wall(t_var *game)
 	get_wall_coords(game);
 	final = ftoa(final, game->engine.wall.dist, 5);
 	return (final);
-}
+} */
 
 static char	**allocate_infos(t_var *game)
 {
@@ -103,8 +103,8 @@ static char	**allocate_infos(t_var *game)
 	res[1] = dbg_get_fps(game);
 	res[2] = dbg_get_position(game);
 	res[3] = dbg_get_player_angle(game);
-	res[4] = dbg_player_distance_from_wall(game);
-	return (res);
+/* 	res[4] = dbg_player_distance_from_wall(game);
+ */	return (res);
 }
 
 

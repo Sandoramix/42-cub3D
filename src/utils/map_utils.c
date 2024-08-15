@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:31:51 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 06:40:40 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:40:15 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	get_map_at(t_var *game, int row_idx, int col_idx)
 
 bool	can_player_go_here(t_var *game, double x, double y)
 {
-
 	if (x < 1
 		|| x >= game->mapinfo.cols_mtx - 1
 		|| y < 1

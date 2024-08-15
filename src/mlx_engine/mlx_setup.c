@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 22:49:33 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:33:22 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static t_state	mlx_load_sprites(t_var *game, struct s_cnfsprites *cnf)
 	return (OK);
 }
 
+//mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 static t_state	init_base_images(t_var *game, t_config *cnf)
 {
 	game->img = mlx_new_image(game->mlx, cnf->win_width, cnf->win_height);
@@ -66,7 +67,6 @@ static t_state	init_base_images(t_var *game, t_config *cnf)
 		return (pf_errcode(E_MLXIMG), cleanup(game, true, 1), KO);
 	game->buffer = mlx_get_data_addr(game->img, &game->bpp,
 			&game->line_bytes, &game->endian);
-	//mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	mlx_load_sprites(game, &cnf->hands_sprites);
 	return (OK);
 }

@@ -12,19 +12,6 @@
 
 #include "cub3D.h"
 
-int min(int a, int b)
-{
-	if (a < b)
-		return a;
-	return b;
-}
-int max(int a, int b)
-{
-	if (a > b)
-		return a;
-	return b;
-}
-
 static void	pick_texture(t_raycast *engine, t_config *cnf, bool horizontal)
 {
 	if (horizontal)
@@ -95,24 +82,24 @@ void	loop_until_hit_wall(t_var *game)
  * @param game game struct.
  * @bug somebody help
  */
-void	get_wall_coords(t_var *game)
+void	get_wall_coords(t_var *game, t_raycast *eng, t_wall *wall)
 {
-	double z_offset;
-	int	half_wall;
-	int	half_win_h;
-	
+	t_player	*ply;
+	double		z_offset;
+	int			half_wall;
+	int			half_win_h;
 
+	ply = &game->player;
 	half_win_h = game->config.win_height / 2;
-	if (game->engine.side == CNF_WALL_WEST || game->engine.side == CNF_WALL_EAST)
-		game->engine.wall.dist = (game->engine.ray.x - game->engine.delta_dist.x);
+	if (eng->side == CNF_WALL_WEST || eng->side == CNF_WALL_EAST)
+		wall->dist = (eng->ray.x - eng->delta_dist.x);
 	else
-		game->engine.wall.dist = (game->engine.ray.y - game->engine.delta_dist.y);
-	
-	z_offset = game->player.offset + ((game->player.pos_z + game->player.head_pos_z) / game->engine.wall.dist);
-	game->engine.wall.height = (int)(game->config.win_height / game->engine.wall.dist);
-	half_wall = game->engine.wall.height / 2;
-	game->engine.wall.ceil = -half_wall + half_win_h + z_offset;
-	game->engine.wall.floor = half_wall + half_win_h + z_offset;
-	game->engine.wall.ceil = max(0, game->engine.wall.ceil);
-	game->engine.wall.floor = min(game->config.win_height - 1, game->engine.wall.floor);
+		wall->dist = (eng->ray.y - eng->delta_dist.y);
+	z_offset = ply->offset + ((ply->pos_z + ply->head_pos_z) / wall->dist);
+	wall->height = (int)(game->config.win_height / wall->dist);
+	half_wall = wall->height / 2;
+	wall->ceil = -half_wall + half_win_h + z_offset;
+	wall->floor = half_wall + half_win_h + z_offset;
+	wall->ceil = max(0, wall->ceil);
+	wall->floor = min(game->config.win_height - 1, wall->floor);
 }

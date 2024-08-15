@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:46:42 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:39:10 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:36:30 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-double	pi()
+int	min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+double	pi(void)
 {
 	return (acos(-1.0));
 }
@@ -40,7 +54,7 @@ t_uint	rgba_to_hex(t_rgba color)
 		| color.red);
 }
 
-double normalize_to_one(double num)
+double	normalize_to_one(double num)
 {
 	return (num - floor(num));
 }

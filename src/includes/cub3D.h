@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 08:01:04 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:41:57 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,16 @@ void		render_minimap(t_var *g);
 void		render_crosshair(t_var *game);
 
 // RAYCASTING--------------------------
-void		init_vars(t_var *g, int pixel_pos_x);
-void		get_wall_coords(t_var *g);
+void		init_vars(t_var *game, t_raycast *eng, t_player *pl, int x);
+void		get_wall_coords(t_var *g, t_raycast *eng, t_wall *wall);
 void		loop_until_hit_wall(t_var *g);
 //------------------------------------------------------------------------------
 // TEXTURE---------------------------------------------------------------------
 int			calc_text_x(t_var *g);
 int			calc_text_y(t_var *game);
 void		calc_scaled_textpos(t_var *game,
-	t_raycast *engine, t_player *player);
+				t_raycast *engine, t_player *player);
 t_rgba		get_texture_color(t_var *g, int tex_x, int tex_y);
-
-
 
 //------------------------------------------------------------------------------
 /**
@@ -97,13 +95,14 @@ t_rgba		get_texture_color(t_var *g, int tex_x, int tex_y);
  * @note #### TODO add the cursor's parameters inside global configuration.
  * @param game game obj
  */
-void		calc_direction(t_var *g);
+void		calc_direction(t_raycast *eng, t_player *pl);
 
 //------------------------------------------------------------------------------
 
 // DRAWING----------------------------------------------------------------------
 void		draw_rectangle(t_var *g, t_point start, t_point end, t_uint color);
-void		draw_rectangle_rgb(t_var *g, t_point start, t_point end, t_rgba rgb);
+void		draw_rectangle_rgb(t_var *g, t_point start,
+				t_point end, t_rgba rgb);
 void		draw_pixel(t_var *g, int x, int y, t_uint color);
 void		draw_pixel_rgb(t_var *g, int x, int y, t_rgba rgb);
 
@@ -116,9 +115,8 @@ int			on_keyrelease(int keycode, t_var *game);
 
 // Should these be in a headerfile?...
 
-
-void        player_sprites_event_pressed(int keycode, t_var *game);
-void        player_sprites_event_released(int keycode, t_var *game);
+void		player_sprites_event_pressed(int keycode, t_var *game);
+void		player_sprites_event_released(int keycode, t_var *game);
 
 void		camera_h_event_pressed(int keycode, t_var *game);
 void		camera_h_event_released(int keycode, t_var *game);
@@ -131,7 +129,7 @@ void		movement_v_event_pressed(int keycode, t_var *game);
 void		movement_v_event_released(int keycode, t_var *game);
 
 // EVENT HANDLERS ---------------------
-void        handle_player_sprites(t_var *game);
+void		handle_player_sprites(t_var *game);
 
 void		handle_vertical_movement(t_var *game);
 void		handle_horizontal_movement(t_var *game);
@@ -142,8 +140,7 @@ void		handle_horizontal_rotation(t_var *game);
 
 // MATH FUNCTIONS --------------------------------------------------------------
 t_dpoint	calculate_point(t_dpoint start, double angle, double distance);
-double      calc_wall_px_hit(t_var *game);
-
+double		calc_wall_px_hit(t_var *game);
 
 void		copy_dpos(t_dpoint *p1, t_dpoint p2);
 void		copy_pos(t_point *p1, t_point p2);
@@ -159,5 +156,7 @@ t_rgba		hex_to_rgba(t_uint color);
 
 double		normalize_to_one(double num);
 
+int			min(int a, int b);
+int			max(int a, int b);
 //------------------------------------------------------------------------------
 #endif

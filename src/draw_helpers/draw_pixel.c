@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:57:33 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:29:14 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 10:36:14 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void	draw_pixel_rgb(t_var *game, int x, int y, t_rgba rgba)
 */
 void	draw_pixel(t_var *game, int x, int y, t_uint color)
 {
-	draw_pixel_rgb(game, x, y,  hex_to_rgba(color));
+	draw_pixel_rgb(game, x, y, hex_to_rgba(color));
 }
