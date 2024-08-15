@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 07:50:53 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 11:37:39 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ int	calc_text_y(t_var *game)
 
 	text_y = (int)(game->engine.texture.scaled_textpos
 			* texture->height / TILE_SIZE);
-	if (text_y >= texture->height)
-		text_y = texture->height - 1;
+	//gives problem when texture->height is 0, or texture doesnt exist
+	/* if (text_y >= texture->height)  
+		text_y = texture->height - 1; */
 	return (text_y);
 }
 
@@ -61,8 +62,10 @@ int	calc_text_x(t_var *game)
 		return (KO); // i dont like it cause its zero, but i dont like -1 as well
 	text_perc_px_hit = normalize_to_one(calc_wall_px_hit(game));
 	tex_x = (int)(text_perc_px_hit * texture->width);
-	if (tex_x >= texture->width)
-		tex_x = texture->width - 1;
+	//rimosso perche certe volte texture = NULL e segfaulta
+	// senza il controllo non da problemi
+	/* if (tex_x >= texture->width)
+		tex_x = texture->width - 1; */
 	return (tex_x);
 }
 
