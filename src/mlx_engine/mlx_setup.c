@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 15:45:49 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 15:55:28 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_state	mlx_setup(t_var *game)
 	mlx_hook(game->mlx_win, KeyPress, KeyPressMask, &on_keypress, game);
 	mlx_hook(game->mlx_win, KeyRelease, KeyReleaseMask, &on_keyrelease, game);
 	mlx_hook(game->mlx_win, DestroyNotify, DestroyAll, mlx_loop_end, game->mlx);
-	mlx_mouse_hook(game->mlx_win, on_mousemovement, game);
+	mlx_mouse_hook(game->mlx_win, on_mouse_click, game);
 	mlx_loop_hook(game->mlx, &game_loop, game);
 	return (OK);
 }
