@@ -4,6 +4,7 @@ cub3D
 makefile.srcs
 src/libs/minilibx
 log*
+assets/test_sprites
 # Prerequisites
 *.d
 

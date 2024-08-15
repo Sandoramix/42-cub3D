@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:38:50 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 08:01:04 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void		get_wall_coords(t_var *g);
 void		loop_until_hit_wall(t_var *g);
 //------------------------------------------------------------------------------
 // TEXTURE---------------------------------------------------------------------
-int         calc_text_x(t_var *g);
+int			calc_text_x(t_var *g);
 int			calc_text_y(t_var *game);
-void        calc_scaled_textpos(t_var *game,
-        t_raycast *engine, t_player *player);
+void		calc_scaled_textpos(t_var *game,
+	t_raycast *engine, t_player *player);
 t_rgba		get_texture_color(t_var *g, int tex_x, int tex_y);
 
 
@@ -157,7 +157,7 @@ double		pi(void);
 t_uint		rgba_to_hex(t_rgba color);
 t_rgba		hex_to_rgba(t_uint color);
 
-double      normalize_to_one(double num);
+double		normalize_to_one(double num);
 
 //------------------------------------------------------------------------------
 #endif

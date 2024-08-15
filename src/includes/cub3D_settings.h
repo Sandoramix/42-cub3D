@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/13 23:21:00 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 07:50:09 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 # define TILE_SIZE 64
 # define MINIMAP_TILE_SIZE 8
 //------------------------------------------------------------------------------
-//? Serve?
-# define PLANEX 0.0
-# define PLANEY 0.66
 
 // KEYBINDINGS------------------------------------------------------------------
 
@@ -136,11 +133,11 @@ typedef enum e_cnf
 
 
 //TEXTURES----------------------------------------------------------------------
-#define TEXTURE_RESTING_R "assets/sprites/restingR.xpm"
-#define TEXTURE_BLOCK_R "assets/sprites/blockR.xpm"
-#define TEXTURE_ATTACK0_R "assets/sprites/attack0R.xpm"
-#define TEXTURE_ATTACK1_R "assets/sprites/attack1R.xpm"
-#define TEXTURE_ATTACK2_R "assets/sprites/attack2R.xpm"
+# define TEXTURE_RESTING_R "assets/sprites/restingR.xpm"
+# define TEXTURE_BLOCK_R "assets/sprites/blockR.xpm"
+# define TEXTURE_ATTACK0_R "assets/sprites/attack0R.xpm"
+# define TEXTURE_ATTACK1_R "assets/sprites/attack1R.xpm"
+# define TEXTURE_ATTACK2_R "assets/sprites/attack2R.xpm"
 
 /*HARD CODED VALUES (maybe)*/
 # define VELOCITY 500

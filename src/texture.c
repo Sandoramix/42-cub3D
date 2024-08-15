@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:31:10 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 07:50:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,30 @@ void	calc_scaled_textpos(t_var *game, t_raycast *engine, t_player *player)
 
 int	calc_text_y(t_var *game)
 {
-	int	text_y;
+	const t_img	*texture = game->engine.texture.hit_texture;
+	int			text_y;
 
-	text_y = (int)game->engine.texture.scaled_textpos
-		& (game->engine.texture.hit_texture->height - 1);
+	text_y = (int)(game->engine.texture.scaled_textpos
+			* texture->height / TILE_SIZE);
+	if (text_y >= texture->height)
+		text_y = texture->height - 1;
 	return (text_y);
 }
 
 int	calc_text_x(t_var *game)
 {
 	const t_raycast	*engine = &game->engine;
+	const t_img		*texture = game->engine.texture.hit_texture;
 	int				tex_x;
 	double			text_perc_px_hit;
 
 	if (isinf(engine->dir.x) || isinf(engine->dir.y))
 		return (KO); // i dont like it cause its zero, but i dont like -1 as well
-
 	text_perc_px_hit = normalize_to_one(calc_wall_px_hit(game));
-	tex_x = (int)(text_perc_px_hit * (double)TILE_SIZE);
-
+	tex_x = (int)(text_perc_px_hit * texture->width);
+	if (tex_x >= texture->width)
+		tex_x = texture->width - 1;
 	return (tex_x);
 }
+
 

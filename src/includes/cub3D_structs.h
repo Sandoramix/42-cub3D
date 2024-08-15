@@ -6,14 +6,22 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 22:49:33 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 07:48:14 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_STRUCTS_H
 # define CUB3D_STRUCTS_H
 
-# include <cub3D.h>
+# include <libft.h>
+
+# ifdef __linux__
+#  include <mlx_int.h>
+# else
+
+typedef void	t_img;
+
+# endif
 
 //------------------------------------------------------------------------------
 
