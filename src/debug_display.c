@@ -136,14 +136,14 @@ void	debug_info(t_var *game)
 
 	infos = allocate_infos(game);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
-		game->config.win_height - 150, 0xFFFFFF, infos[0]);
+		game->config.win_height - 200 , 0xFFFFFF, infos[0]);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
 		game->config.win_height - 80, 0xFFFFFF, infos[1]);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
 		game->config.win_height - 100, 0xFFFFFF, infos[2]);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
 		game->config.win_height - 120, 0xFFFFFF, infos[3]);
-	//mlx_string_put(game->mlx, game->mlx_win, 16,
-	//	game->config.win_height - 60, 0xFFFFFF, infos[4]);
+	mlx_string_put(game->mlx, game->mlx_win, 16,
+		game->config.win_height - 60, 0xFFFFFF, infos[4]);
 	str_freemtx(infos);
 }
