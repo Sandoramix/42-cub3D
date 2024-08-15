@@ -77,6 +77,27 @@ char	*ftoa(char *buffer, double d, int precision)
 	return (buffer);
 }
 
+static char	*dbg_get_mouse_position(t_var *game)
+{
+	char	*x_txt;
+	char	*y_txt;
+	char	*pos_x;
+	char	*pos_y;
+	char	*final;
+
+	pos_x = ft_itoa(game->mouse.pos.x);
+	pos_y = ft_itoa(game->mouse.pos.y);
+	x_txt = str_join("Mouse X: ", pos_x);
+	y_txt = str_join(" Y: ", pos_y);
+	final = str_join(x_txt, y_txt);
+
+	free(x_txt);
+	free(pos_x);
+	free(pos_y);
+	free(y_txt);
+	return (final);
+}
+
 /* static char	*dbg_player_distance_from_wall(t_var *game)
 {
 	const int		x = game->config.win_width / 10;
@@ -103,8 +124,9 @@ static char	**allocate_infos(t_var *game)
 	res[1] = dbg_get_fps(game);
 	res[2] = dbg_get_position(game);
 	res[3] = dbg_get_player_angle(game);
-/* 	res[4] = dbg_player_distance_from_wall(game);
- */	return (res);
+	//res[4] = dbg_player_distance_from_wall(game);
+	res[4] = dbg_get_mouse_position(game);
+	return (res);
 }
 
 
