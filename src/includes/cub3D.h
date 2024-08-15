@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 10:41:57 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 14:07:23 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int			on_keypress(int keycode, t_var *game);
 int			on_keyrelease(int keycode, t_var *game);
 
 // Should these be in a headerfile?...
+
+void		on_mousemovement(int keycode, t_var *game);
 
 void		player_sprites_event_pressed(int keycode, t_var *game);
 void		player_sprites_event_released(int keycode, t_var *game);
