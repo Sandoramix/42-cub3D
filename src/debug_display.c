@@ -121,7 +121,7 @@ void	debug_info(t_var *game)
 		game->config.win_height - 100, 0xFFFFFF, infos[2]);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
 		game->config.win_height - 120, 0xFFFFFF, infos[3]);
-	mlx_string_put(game->mlx, game->mlx_win, 16,
-		game->config.win_height - 60, 0xFFFFFF, infos[4]);
+	//mlx_string_put(game->mlx, game->mlx_win, 16,
+	//	game->config.win_height - 60, 0xFFFFFF, infos[4]);
 	str_freemtx(infos);
 }
