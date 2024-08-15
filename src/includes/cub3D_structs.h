@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 14:08:55 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 17:09:02 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,14 +167,19 @@ typedef struct s_config
 	int		_h;
 
 	// MINIMAP
-	int		minimap_scale;
-	int		minimap_player_scale;
+	double	minimap_scale;
+	int		minimap_zoom_min;
+	int		minimap_zoom_max;
+	int		minimap_zoom;
+	int		minimap_tilesize;
+	double	minimap_player_size;
 
 	//FOV
 	double	plane_limit;
 
 	struct	s_cnfdefaults
 	{
+		int		tilesize;
 		int		max_raysteps;
 
 		double	rot_speed;

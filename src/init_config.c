@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:51:17 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:31:14 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 15:45:29 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
  */
 static void	fill_defaults(t_cnfdefaults *def)
 {
+	def->tilesize = TILE_SIZE;
 	def->camera_z_rot_max = CAMERA_HIGH_LIMIT;
 	def->camera_z_rot_min = CAMERA_LOW_LIMIT;
 	def->fog_distance = FOG_DISTANCE;
@@ -36,7 +37,11 @@ static void	fill_defaults(t_cnfdefaults *def)
 void	init_config(t_config *config)
 {
 	config->plane_limit = 0.7;
-	config->minimap_scale = 8;
-	config->minimap_player_scale = 4;
+	config->minimap_scale = .25;
+	config->minimap_tilesize = 4;
+	config->minimap_zoom = 2.5;
+	config->minimap_zoom_min = 1.0;
+	config->minimap_zoom_max = 4.0;
+	config->minimap_player_size = 4.;
 	fill_defaults(&config->defaults);
 }

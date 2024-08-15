@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 14:49:13 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 17:08:42 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ int	calc_text_y(t_var *game)
 
 	text_y = (int)(game->engine.texture.scaled_textpos
 			* texture->height / TILE_SIZE);
-	if (text_y >= texture->height)  
+	if (texture && texture->height > 0 && text_y >= texture->height)
 		text_y = texture->height - 1;
-	text_y = max(0, text_y);
 	return (text_y);
 }
 
@@ -62,9 +61,8 @@ int	calc_text_x(t_var *game)
 		return (KO);
 	text_perc_px_hit = normalize_to_one(calc_wall_px_hit(game));
 	tex_x = (int)(text_perc_px_hit * texture->width);
-	if (tex_x >= texture->width)
+	if (texture && texture->width > 0 && tex_x >= texture->width)
 		tex_x = texture->width - 1;
-	tex_x = max(0, tex_x);
 	return (tex_x);
 }
 
