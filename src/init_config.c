@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:51:17 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 15:45:29 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 22:26:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	init_config(t_config *config)
 	config->plane_limit = 0.7;
 	config->minimap_scale = .25;
 	config->minimap_tilesize = 4;
-	config->minimap_zoom = 2.5;
-	config->minimap_zoom_min = 1.0;
-	config->minimap_zoom_max = 4.0;
+	config->minimap_zoom = 2.;
+	config->minimap_zoom_min = 1.5;
+	config->minimap_zoom_max = 5.0;
 	config->minimap_player_size = 4.;
 	fill_defaults(&config->defaults);
 }

@@ -3,73 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 17:09:39 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 22:30:07 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-/* TODO It'll maybe come in useful
-
-void draw_line(t_var *game, t_dpoint start, t_dpoint end)
+bool	point_inside_window(t_var *game, t_dpoint point)
 {
-	t_dpoint delta;
-	t_dpoint increment;
-	t_dpoint next_point;
-	int pixels;
-	int counter;
+	return (point.x >= 0 && point.y >= 0
+		&& point.x < game->config.win_width
+		&& point.y < game->config.win_height);
+}
+
+void draw_line(t_var *game, t_dpoint start, t_dpoint end, t_rgba rgb)
+{
+	t_dpoint	delta;
+	t_dpoint	increment;
+	t_dpoint	next_point;
+	int			pixels;
+	int			counter;
 
 	delta = (t_dpoint){end.x - start.x, end.y - start.y};
 	pixels = sqrt((delta.x * delta.x) + (delta.y * delta.y));
 	increment = (t_dpoint){delta.x / pixels, delta.y / pixels};
 	next_point = (t_dpoint){start.x, start.y};
-	counter = 0;
-	while (counter < pixels)
+	counter = -1;
+	while (++counter < pixels && point_inside_window(game, next_point))
 	{
-		draw_pixel(game, (int)next_point.x, (int)next_point.y, 0x0);
+		draw_pixel_rgb(game, next_point.x, next_point.y, rgb);
 		next_point.x += increment.x;
 		next_point.y += increment.y;
-		counter++;
 	}
 }
 
-void draw_minimap_rays(t_var *game)
+double	direction_to_angle(double x, double y)
 {
-	t_dpoint start_px;
-	t_dpoint end_px;
-	double angle;
+	const double	angle_rad = atan2(y, x);
+	double			angle_deg;
 
-	angle = -FOV / 2;
-	start_px = (t_dpoint){game->player.x_px + game->engine.plane.x,
-		game->player.y_px + game->engine.plane.y};
-	while (angle <= FOV / 2)
-	{
-		end_px = calculate_point(start_px, angle, game->engine.wall.dist);
-		draw_line(game, start_px, end_px);
-		angle++;
-	}
+	angle_deg = angle_rad * (180.0 / pi());
+	if (angle_deg < 0)
+		angle_deg += 360.0;
+	return (angle_deg);
 }
-*/
 
 void	draw_player(t_var *game, t_point pos, int tilesize)
 {
+	const double	ray_len = .15 * game->config.minimap_zoom;
+	const t_rgba	color = hex_to_rgba(0xffff00);
 	const double	half_ptile = game->config.minimap_player_size / 2.0;
+	t_dpoint		view_line_start;
+	t_dpoint		view_line_end;
 
-	draw_rectangle(game,
+	draw_rectangle_rgb(game,
 		(t_point){pos.x * tilesize + half_ptile, pos.y * tilesize + half_ptile},
 		(t_point){(pos.x + 1) * tilesize - half_ptile,
-			(pos.y + 1) * tilesize - half_ptile},
-		0xFFFF00);
+		(pos.y + 1) * tilesize - half_ptile},
+		color);
+	view_line_start = (t_dpoint){pos.x * tilesize + tilesize / 2,
+		pos.y * tilesize + tilesize / 2};
+	view_line_end = calculate_point(view_line_start,
+			direction_to_angle(game->player.dir_x, game->player.dir_y),
+			ray_len);
+	draw_line(game, view_line_start, view_line_end, color);
 }
 
+//TODO norminette me
 static void	draw_minimap(t_var *game, t_dpoint pos, int mapsize, int tilesize)
 {
-	const int		tot_cells = mapsize / tilesize;
-	t_point			start = {ceil(pos.x - tot_cells / 2) - 1, ceil(pos.y - tot_cells / 2) - 1};
-	t_point			end = {ceil(pos.x + tot_cells / 2), ceil(pos.y + tot_cells / 2)};
+	const int		offs = mapsize / tilesize / 2;
+	t_point			start = {ceil(pos.x - offs) - 1, ceil(pos.y - offs) - 1};
+	t_point			end = {ceil(pos.x + offs), ceil(pos.y + offs)};
 	int				col_start = start.x;
 	t_point			c;
 
@@ -89,23 +97,10 @@ static void	draw_minimap(t_var *game, t_dpoint pos, int mapsize, int tilesize)
 				color = game->config.floor.hex;
 			draw_rectangle(game, (t_point){c.x * tilesize, c.y * tilesize},
 				(t_point){(c.x + 1) * tilesize, (c.y + 1) * tilesize}, color);
-			if (c.x == tot_cells / 2 && c.y == tot_cells / 2)
-				draw_player(game, c, tilesize);
 		}
 	}
 }
 
-/*
-# Minimap rendering
-
-This function will render the minimap onto the window
-
-## TODOLIST
-- [x] Make the minimap of fixed size AxB
-- [x] Put the player at center of the minimap (checkout "the witcher"'s minimap)
-- [x] Supposedly it's already needed in points above,
-	make space for the minimap's zoom/dezoom
-*/
 void	render_minimap(t_var *game)
 {
 	int				mapsize;
@@ -118,4 +113,6 @@ void	render_minimap(t_var *game)
 	if (game->config.win_height < game->config.win_width)
 		mapsize = game->config.win_height * game->config.minimap_scale;
 	draw_minimap(game, pos, mapsize, tilesize);
+	draw_player(game, (t_point){mapsize / tilesize / 2, mapsize / tilesize / 2},
+		tilesize);
 }

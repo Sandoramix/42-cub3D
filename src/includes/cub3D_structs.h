@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 17:09:02 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 22:26:13 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,9 +168,9 @@ typedef struct s_config
 
 	// MINIMAP
 	double	minimap_scale;
-	int		minimap_zoom_min;
-	int		minimap_zoom_max;
-	int		minimap_zoom;
+	double	minimap_zoom_min;
+	double	minimap_zoom_max;
+	double	minimap_zoom;
 	int		minimap_tilesize;
 	double	minimap_player_size;
 

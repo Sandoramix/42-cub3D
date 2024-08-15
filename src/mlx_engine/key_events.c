@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:12:22 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 15:51:16 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 22:25:06 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	on_keyrelease(int keycode, t_var *game)
 	movement_v_event_released(keycode, game);
 	player_sprites_event_released(keycode, game);
 	if (keycode == XK_Page_Up
-		&& game->config.minimap_zoom + 1 <= game->config.minimap_zoom_max)
-		game->config.minimap_zoom++;
+		&& game->config.minimap_zoom + .5 <= game->config.minimap_zoom_max)
+		game->config.minimap_zoom += .5;
 	if (keycode == XK_Page_Down
-		&& game->config.minimap_zoom - 1 >= game->config.minimap_zoom_min)
-		game->config.minimap_zoom--;
+		&& game->config.minimap_zoom - .5 >= game->config.minimap_zoom_min)
+		game->config.minimap_zoom -= .5;
 	return (keycode);
 }
