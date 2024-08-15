@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 10:25:03 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 15:52:49 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,54 @@ void draw_minimap_rays(t_var *game)
 }
 */
 
-// TODO keep the player in bounds.
-static void	render_player(t_var *game)
+static void	draw_borders(t_var *game, int size)
 {
-	t_dpoint	playerpos;
-	const int	tile_scale = game->config.minimap_scale;
-	const int	player_scale = game->config.minimap_player_scale;
+	draw_rectangle(game, (t_point){0, 0}, (t_point){1, size}, 0x0);
+	draw_rectangle(game, (t_point){size - 1, 0}, (t_point){size, size}, 0x0);
+	draw_rectangle(game, (t_point){0, 0}, (t_point){size, 1}, 0x0);
+	draw_rectangle(game, (t_point){0, size - 1}, (t_point){size, size}, 0x0);
+}
 
-	playerpos = (t_dpoint){game->player.x * tile_scale,
-		game->player.y * tile_scale};
-	draw_rectangle(game, (t_point){playerpos.x, playerpos.y},
-		(t_point){playerpos.x + player_scale, playerpos.y + player_scale},
-		0xFF0000);
+static void	draw_player(t_var *game, t_config *cnf, int mapsize)
+{
+	const int		tilesize = cnf->minimap_player_size;
+	const int		center = mapsize / 2;
+
+	draw_rectangle(game,
+		(t_point){center - tilesize / 2, center - tilesize / 2},
+		(t_point){center + tilesize / 2, center + tilesize / 2},
+		0xFFFF00);
+}
+
+static void	draw_minimap(t_var *game, t_dpoint pos, int mapsize, int tilesize)
+{
+	const int		tot_cells = mapsize / tilesize;
+	t_dpoint			start = {pos.x - tot_cells / 2, pos.y - tot_cells / 2 - 1};
+	t_dpoint			end = {pos.x + tot_cells / 2, pos.y + tot_cells / 2};
+	int				col_start = start.x;
+	int				y;
+	int				x;
+
+	y = 0;
+	while (++start.y <= end.y)
+	{
+		start.x = col_start - 1;
+		x = 0;
+		while (++start.x <= end.x)
+		{
+			int color = 0x222222;
+			if (get_map_at(game, start.y, start.x) == MAP_WALL)
+				color = 0xff0000;
+			if (get_map_at(game, start.y, start.x) == MAP_FLOOR
+				|| chr_is_player(get_map_at(game, start.y, start.x)))
+				color = game->config.floor.hex;
+			draw_rectangle(game, (t_point){x * tilesize, y * tilesize},
+				(t_point){(x + 1) * tilesize, (y + 1) * tilesize}, color);
+			x++;
+		}
+		y++;
+	}
+
 }
 
 /*
@@ -74,32 +110,23 @@ static void	render_player(t_var *game)
 This function will render the minimap onto the window
 
 ## TODOLIST
-- [ ] Make the minimap of fixed size AxB
-- [ ] Put the player at center of the minimap (checkout "the witcher"'s minimap)
-	- [ ] If the player is near the map's end
-		then the view should stop at the far border and the player would move
-		from the center
-- [ ] Supposedly it's already needed in points above,
+- [x] Make the minimap of fixed size AxB
+- [x] Put the player at center of the minimap (checkout "the witcher"'s minimap)
+- [x] Supposedly it's already needed in points above,
 	make space for the minimap's zoom/dezoom
 */
 void	render_minimap(t_var *game)
 {
-	const int				scale = game->config.minimap_scale;
-	const unsigned long		colors[2] = {0x333333, game->config.floor.hex};
-	int						dx;
-	int						dy;
+	int				mapsize;
+	const int		tilesize = game->config.minimap_tilesize
+		* game->config.minimap_zoom;
+	const t_dpoint	pos = {game->player.x_px / game->config.defaults.tilesize,
+		game->player.y_px / game->config.defaults.tilesize};
 
-	dy = -1;
-	while (++dy < game->mapinfo.rows_mtx)
-	{
-		dx = -1;
-		while (game->mapinfo.map[dy][++dx])
-		{
-			draw_rectangle_rgb(game,
-				(t_point){dx * scale, dy * scale},
-				(t_point){dx * scale + scale, dy * scale + scale},
-				hex_to_rgba(colors[get_map_at(game, dy, dx) != MAP_WALL]));
-		}
-	}
-	render_player(game);
+	mapsize = game->config.win_width * game->config.minimap_scale;
+	if (game->config.win_height < game->config.win_width)
+		mapsize = game->config.win_height * game->config.minimap_scale;
+	draw_minimap(game, pos, mapsize, tilesize);
+	draw_player(game, &game->config, mapsize);
+	draw_borders(game, mapsize);
 }
