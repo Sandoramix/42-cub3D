@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 15:52:49 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/15 16:31:59 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,40 +54,32 @@ void draw_minimap_rays(t_var *game)
 }
 */
 
-static void	draw_borders(t_var *game, int size)
+void	draw_player(t_var *game, t_point pos, int tilesize)
 {
-	draw_rectangle(game, (t_point){0, 0}, (t_point){1, size}, 0x0);
-	draw_rectangle(game, (t_point){size - 1, 0}, (t_point){size, size}, 0x0);
-	draw_rectangle(game, (t_point){0, 0}, (t_point){size, 1}, 0x0);
-	draw_rectangle(game, (t_point){0, size - 1}, (t_point){size, size}, 0x0);
-}
-
-static void	draw_player(t_var *game, t_config *cnf, int mapsize)
-{
-	const int		tilesize = cnf->minimap_player_size;
-	const int		center = mapsize / 2;
+	const double	half_ptile = game->config.minimap_player_size / 2.0;
 
 	draw_rectangle(game,
-		(t_point){center - tilesize / 2, center - tilesize / 2},
-		(t_point){center + tilesize / 2, center + tilesize / 2},
+		(t_point){pos.x * tilesize + half_ptile, pos.y * tilesize + half_ptile},
+		(t_point){(pos.x + 1) * tilesize - half_ptile,
+			(pos.y + 1) * tilesize - half_ptile},
 		0xFFFF00);
 }
 
 static void	draw_minimap(t_var *game, t_dpoint pos, int mapsize, int tilesize)
 {
 	const int		tot_cells = mapsize / tilesize;
-	t_dpoint			start = {pos.x - tot_cells / 2, pos.y - tot_cells / 2 - 1};
-	t_dpoint			end = {pos.x + tot_cells / 2, pos.y + tot_cells / 2};
+	t_point			start = {ceil(pos.x - tot_cells / 2) - 1, ceil(pos.y - tot_cells / 2) - 1};
+	t_point			end = {ceil(pos.x + tot_cells / 2), ceil(pos.y + tot_cells / 2)};
 	int				col_start = start.x;
-	int				y;
-	int				x;
+	t_point			c;
 
-	y = 0;
-	while (++start.y <= end.y)
+	c = (t_point){-1, -1};
+	start.y--;
+	while (++start.y <= end.y && ++c.y > -1)
 	{
 		start.x = col_start - 1;
-		x = 0;
-		while (++start.x <= end.x)
+		c.x = -1;
+		while (++start.x <= end.x && ++c.x > -1)
 		{
 			int color = 0x222222;
 			if (get_map_at(game, start.y, start.x) == MAP_WALL)
@@ -95,13 +87,12 @@ static void	draw_minimap(t_var *game, t_dpoint pos, int mapsize, int tilesize)
 			if (get_map_at(game, start.y, start.x) == MAP_FLOOR
 				|| chr_is_player(get_map_at(game, start.y, start.x)))
 				color = game->config.floor.hex;
-			draw_rectangle(game, (t_point){x * tilesize, y * tilesize},
-				(t_point){(x + 1) * tilesize, (y + 1) * tilesize}, color);
-			x++;
+			draw_rectangle(game, (t_point){c.x * tilesize, c.y * tilesize},
+				(t_point){(c.x + 1) * tilesize, (c.y + 1) * tilesize}, color);
+			if (c.x == tot_cells / 2 && c.y == tot_cells / 2)
+				draw_player(game, c, tilesize);
 		}
-		y++;
 	}
-
 }
 
 /*
@@ -127,6 +118,4 @@ void	render_minimap(t_var *game)
 	if (game->config.win_height < game->config.win_width)
 		mapsize = game->config.win_height * game->config.minimap_scale;
 	draw_minimap(game, pos, mapsize, tilesize);
-	draw_player(game, &game->config, mapsize);
-	draw_borders(game, mapsize);
 }
