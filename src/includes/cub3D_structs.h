@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 10:40:59 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 14:08:55 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,13 @@ typedef struct s_config
 	}		defaults;
 //# define SAFETY_WALL_DIST 1
 }	t_config;
+
+typedef struct s_mouse
+{
+	t_point		pos;
+	bool		inside_screen;
+}	t_mouse;
+
 typedef struct s_cnfdefaults	t_cnfdefaults;
 typedef struct s_cnfsprites		t_cnfsprites;
 
@@ -212,6 +219,7 @@ typedef struct s_var
 	t_movement		move;
 	t_raycast		engine;
 	t_map			mapinfo;
+	t_mouse			mouse;
 
 	t_config		config;
 
