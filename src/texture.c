@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 17:08:42 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/15 21:18:35 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	calc_text_y(t_var *game)
 	const t_img	*texture = game->engine.texture.hit_texture;
 	int			text_y;
 
+	if (!texture)
+		return (0);
 	text_y = (int)(game->engine.texture.scaled_textpos
 			* texture->height / TILE_SIZE);
 	if (texture && texture->height > 0 && text_y >= texture->height)
@@ -57,6 +59,8 @@ int	calc_text_x(t_var *game)
 	int				tex_x;
 	double			text_perc_px_hit;
 
+	if (!texture)
+		return (0);
 	if (isinf(engine->dir.x) || isinf(engine->dir.y))
 		return (KO);
 	text_perc_px_hit = normalize_to_one(calc_wall_px_hit(game));
