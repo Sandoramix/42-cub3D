@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:47:43 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:15:15 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ typedef struct s_player
 	double	pos_z;
 	double	head_pos_z;
 
-	double	travel_count;
-
-	double	angle;
+	double	speed_mult;
 }	t_player;
 
 typedef struct s_dpoint
@@ -134,7 +132,7 @@ typedef struct s_movement
 
 typedef struct s_config
 {
-//SPRITES------------------------------
+	//CONFIG SPRITES-------------------
 	t_img	*wall_nord;
 	char	*wall_nord_path;
 
@@ -146,17 +144,17 @@ typedef struct s_config
 
 	t_img	*wall_west;
 	char	*wall_west_path;
-//-------------------------------------
+	//---------------------------------
 	t_rgba	ceiling;
 	char	*ceiling_raw;
 
 	t_rgba	floor;
 	char	*floor_raw;
-//SPRITES------------------------------
+	//SPRITES--------------------------
 	struct s_cnfsprites
 	{
-		t_img	*slctd; //questo puntera all indirizzo del buffer selezionato
-		int		slctd_screen_x;
+		t_img	*active; //questo puntera all indirizzo del buffer selezionato
+		int		active_screen_x;
 		t_img	*rest;
 		t_img	*block;
 		t_img	*attack0;

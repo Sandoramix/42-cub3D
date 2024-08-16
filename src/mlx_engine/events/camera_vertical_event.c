@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:43:01 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:17:23 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,17 @@
 // LISTENERS--------------------------------------------------------------------
 void	camera_v_event_pressed(int keycode, t_var *game)
 {
-	if (keycode == XK_Left)
-		game->move.rot_left = true;
-	if (keycode == XK_Right)
-		game->move.rot_right = true;
-	if (keycode == XK_Up)
+	if (keycode == LOOK_UP)
 		game->move.rot_up = true;
-	if (keycode == XK_Down)
+	if (keycode == LOOK_DOWN)
 		game->move.rot_down = true;
 }
 
 void	camera_v_event_released(int keycode, t_var *game)
 {
-	if (keycode == XK_Left)
-		game->move.rot_left = false;
-	if (keycode == XK_Right)
-		game->move.rot_right = false;
-	if (keycode == XK_Up)
+	if (keycode == LOOK_UP)
 		game->move.rot_up = false;
-	if (keycode == XK_Down)
+	if (keycode == LOOK_DOWN)
 		game->move.rot_down = false;
 }
 
@@ -41,19 +33,20 @@ void	camera_v_event_released(int keycode, t_var *game)
 
 void	handle_vertical_rotation(t_var *game)
 {
-	float	smoothness;
+	const t_cnfdefaults	def = game->config.defaults;
+	float				smoothness;
 
 	if (game->move.rot_up)
 	{
-		game->player.offset += game->config.defaults.speed * game->deltatime;
-		if (game->player.offset > game->config.defaults.camera_z_rot_max)
-			game->player.offset = game->config.defaults.camera_z_rot_max;
+		game->player.offset += def.rot_speed * game->deltatime;
+		if (game->player.offset > def.camera_z_rot_max)
+			game->player.offset = def.camera_z_rot_max;
 	}
 	if (game->move.rot_down)
 	{
-		game->player.offset -= game->config.defaults.speed * game->deltatime;
-		if (game->player.offset < game->config.defaults.camera_z_rot_min)
-			game->player.offset = game->config.defaults.camera_z_rot_min;
+		game->player.offset -= def.rot_speed * game->deltatime;
+		if (game->player.offset < def.camera_z_rot_min)
+			game->player.offset = def.camera_z_rot_min;
 	}
 	if (game->player.offset > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:24:30 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:43:51 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:03:23 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,37 @@
 
 void	movement_v_event_pressed(int keycode, t_var *game)
 {
-	if (keycode == KEY_W)
+	if (keycode == MOVE_FORWARD)
 		game->move.up = true;
-	if (keycode == KEY_S)
+	if (keycode == MOVE_BACKWARD)
 		game->move.down = true;
-	if (keycode == KEY_D)
+	if (keycode == MOVE_RIGHT)
 		game->move.right = true;
-	if (keycode == KEY_A)
+	if (keycode == MOVE_LEFT)
 		game->move.left = true;
-	if (keycode == XK_space && !game->move.is_jumping)
+	if (keycode == JUMP && !game->move.is_jumping)
 	{
 		game->move.jump = true;
 		game->move.is_jumping = true;
 		game->move.jump_mult = 1;
 	}
-	if (keycode == XK_Control_L)
+	if (keycode == SQUAT)
 		game->move.crouch = true;
 }
 
 void	movement_v_event_released(int keycode, t_var *game)
 {
-	if (keycode == KEY_W)
+	if (keycode == MOVE_FORWARD)
 		game->move.up = false;
-	if (keycode == KEY_S)
+	if (keycode == MOVE_BACKWARD)
 		game->move.down = false;
-	if (keycode == KEY_D)
+	if (keycode == MOVE_RIGHT)
 		game->move.right = false;
-	if (keycode == KEY_A)
+	if (keycode == MOVE_LEFT)
 		game->move.left = false;
-	if (keycode == XK_Control_L)
+	if (keycode == SQUAT)
 		game->move.crouch = false;
-	if (keycode == XK_space)
+	if (keycode == JUMP)
 		game->move.jump = false;
 }
 

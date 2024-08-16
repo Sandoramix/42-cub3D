@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/16 23:53:47 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:12:57 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 // TODO : split each category in separate file if (it will) needed.
 
 // CONFIGURATIONS --------------------------------------------------------------
-void		init_config(t_config *config);
+void		init_config(t_var *g, t_config *config);
 t_state		mlx_setup(t_var *g);
 
 //DEBUG----------------------------------------------------------------------

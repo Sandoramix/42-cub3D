@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:54:49 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:48:42 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:18:44 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 // LISTENERS--------------------------------------------------------------------
 void	movement_h_event_pressed(int keycode, t_var *game)
 {
-	if (keycode == KEY_W)
+	if (keycode == MOVE_FORWARD)
 		game->move.up = true;
-	if (keycode == KEY_S)
+	if (keycode == MOVE_BACKWARD)
 		game->move.down = true;
-	if (keycode == KEY_D)
+	if (keycode == MOVE_RIGHT)
 		game->move.right = true;
-	if (keycode == KEY_A)
+	if (keycode == MOVE_LEFT)
 		game->move.left = true;
+	if (keycode == SPRINT)
+		game->player.speed_mult = 1.5;
 }
 //! #TODO MOVEMENT OSCILLATION
 // Do we like it? Yes. Is it a priority? No
@@ -36,14 +38,16 @@ void	movement_h_event_pressed(int keycode, t_var *game)
 
 void	movement_h_event_released(int keycode, t_var *game)
 {
-	if (keycode == KEY_W)
+	if (keycode == MOVE_FORWARD)
 		game->move.up = false;
-	if (keycode == KEY_S)
+	if (keycode == MOVE_BACKWARD)
 		game->move.down = false;
-	if (keycode == KEY_D)
+	if (keycode == MOVE_RIGHT)
 		game->move.right = false;
-	if (keycode == KEY_A)
+	if (keycode == MOVE_LEFT)
 		game->move.left = false;
+	if (keycode == SPRINT)
+		game->player.speed_mult = 1.0;
 }
 // TODO MOVEMENT OSCILLATION
 //if (!game->move.up && !game->move.down &&
@@ -55,7 +59,8 @@ void	movement_h_event_released(int keycode, t_var *game)
 static t_dpoint	calc_movement_newpos(t_var *game)
 {
 	const double	tilesize = game->config.defaults.tilesize;
-	const double	delta_mult = game->config.defaults.speed * game->deltatime;
+	const double	delta_mult = game->player.speed_mult
+		* game->config.defaults.speed * game->deltatime;
 	const int		dir_y = (int [2]){1, -1}[game->move.up];
 	const int		dir_x = (int [2]){-1, 1}[game->move.right];
 	t_dpoint		newpos;

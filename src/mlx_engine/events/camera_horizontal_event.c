@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_horizontal_event.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/16 15:56:34 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 01:01:41 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,18 @@
 // LISTENERS--------------------------------------------------------------------
 void	camera_h_event_pressed(int keycode, t_var *game)
 {
-	if (keycode == XK_Left)
+	if (keycode == LOOK_LEFT)
 		game->move.rot_left = true;
-	if (keycode == XK_Right)
+	if (keycode == LOOK_RIGHT)
 		game->move.rot_right = true;
-	if (keycode == XK_Up)
-		game->move.rot_up = true;
-	if (keycode == XK_Down)
-		game->move.rot_down = true;
 }
 
 void	camera_h_event_released(int keycode, t_var *game)
 {
-	if (keycode == XK_Left)
+	if (keycode == LOOK_LEFT)
 		game->move.rot_left = false;
-	if (keycode == XK_Right)
+	if (keycode == LOOK_RIGHT)
 		game->move.rot_right = false;
-	if (keycode == XK_Up)
-		game->move.rot_up = false;
-	if (keycode == XK_Down)
-		game->move.rot_down = false;
 }
 
 // HANDLERS---------------------------------------------------------------------

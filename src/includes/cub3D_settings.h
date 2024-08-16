@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:53:34 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:05:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,29 @@
 
 # ifdef __linux__
 #  include <X11/keysym.h>
-#  define KEY_W XK_w
-#  define KEY_A XK_a
-#  define KEY_S XK_s
-#  define KEY_D XK_d
-#  define KEY_LEFT XK_Left
-#  define KEY_RIGHT XK_Right
+#  define MOVE_FORWARD XK_w
+#  define MOVE_LEFT XK_a
+#  define MOVE_BACKWARD XK_s
+#  define MOVE_RIGHT XK_d
+
+#  define LOOK_UP XK_Up
+#  define LOOK_DOWN XK_Down
+#  define LOOK_LEFT XK_Left
+#  define LOOK_RIGHT XK_Right
 
 #  define ESC_KEY XK_Escape
 #  define ESC_KEY XK_Escape
+
+#  define JUMP XK_space
+#  define SQUAT XK_Control_L
+
+#  define GUARD XK_Alt_L
+
+#  define SPRINT XK_Shift_L
 
 # endif // __linux__
 
-# ifndef KEY_W
+# ifndef MOVE_FORWARD
 #  error "Unsupported platform or no key definitions available."
 # endif
 //------------------------------------------------------------------------------

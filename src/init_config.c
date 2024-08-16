@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:51:17 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:48:06 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:15:15 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	fill_defaults(t_cnfdefaults *def)
 	def->window_name = WINDOW_NAME;
 }
 
-void	init_config(t_config *config)
+void	init_config(t_var *game, t_config *config)
 {
 	config->plane_limit = 0.7;
 	config->minimap_scale = .25;
@@ -44,4 +44,5 @@ void	init_config(t_config *config)
 	config->minimap_zoom_max = 5.0;
 	config->minimap_player_size = 4.;
 	fill_defaults(&config->defaults);
+	game->player.speed_mult = 1.0;
 }
