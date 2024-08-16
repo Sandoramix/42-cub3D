@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 10:43:00 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 00:26:42 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:35:57 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_state	parse_map(t_var *game)
 	int		j;
 	char	**map;
 
-	map = game->mapinfo.map;
+	map = game->map.map;
 	i = -1;
 	while (map[++i])
 	{

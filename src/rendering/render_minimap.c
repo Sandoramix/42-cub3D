@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 22:30:07 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:00:24 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	draw_player(t_var *game, t_point pos, int tilesize)
 		color);
 	view_line_start = (t_dpoint){pos.x * tilesize + tilesize / 2,
 		pos.y * tilesize + tilesize / 2};
-	view_line_end = calculate_point(view_line_start,
+	view_line_end = get_destpoint(view_line_start,
 			direction_to_angle(game->player.dir_x, game->player.dir_y),
-			ray_len);
+			ray_len, tilesize);
 	draw_line(game, view_line_start, view_line_end, color);
 }
 

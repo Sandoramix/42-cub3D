@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:24:30 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 01:40:48 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:22:03 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	movement_v_event_pressed(int keycode, t_var *game)
 		game->move.right = true;
 	if (keycode == KEY_A)
 		game->move.left = true;
-	if (keycode == XK_space && !game->move.jump)
+	if (keycode == XK_space && !game->move.is_jumping)
 	{
 		game->move.jump = true;
+		game->move.is_jumping = true;
 		game->move.jump_mult = 1;
 	}
 	if (keycode == XK_Control_L)
@@ -45,6 +46,8 @@ void	movement_v_event_released(int keycode, t_var *game)
 		game->move.left = false;
 	if (keycode == XK_Control_L)
 		game->move.crouch = false;
+	if (keycode == XK_space)
+		game->move.jump = false;
 }
 
 // HANDLERS---------------------------------------------------------------------
@@ -70,23 +73,26 @@ static void	squat_event(t_var *game)
  */
 void	handle_vertical_movement(t_var *game)
 {
-	if (game->move.jump && game->move.jump_mult == 1)
+	const double	jumplimit = game->config.defaults.jump_limit;
+	const double	jumpforce = game->config.defaults.jump_force;
+
+	if (game->move.is_jumping && game->move.jump_mult == 1)
 	{
-		game->player.pos_z += Z_ACCELLERATION * game->deltatime;
-		if (game->player.pos_z >= JUMP_LIMIT)
+		game->player.pos_z += jumpforce * game->deltatime;
+		if (game->player.pos_z >= jumplimit)
 		{
-			game->player.pos_z = JUMP_LIMIT;
+			game->player.pos_z = jumplimit;
 			game->move.jump_mult = -1;
 		}
 	}
-	if (game->move.jump && game->move.jump_mult == -1)
+	else if (game->move.is_jumping && game->move.jump_mult == -1)
 	{
-		game->player.pos_z -= Z_ACCELLERATION * game->deltatime;
+		game->player.pos_z -= jumpforce * game->deltatime;
 		if (game->player.pos_z <= 0)
 		{
 			game->player.pos_z = 0;
 			game->move.jump_mult = 0;
-			game->move.jump = false;
+			game->move.is_jumping = false;
 		}
 	}
 	squat_event(game);

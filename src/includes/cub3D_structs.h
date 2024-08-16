@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/16 23:43:13 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:36:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct s_map_info
 	int		rows_mtx;
 	int		cols_mtx;
 
-	char	**file_content;
+	char	**filedata;
 }	t_map;
 
 typedef struct s_movement
@@ -122,6 +122,7 @@ typedef struct s_movement
 	bool		mouse_right;
 
 	bool		jump;
+	bool		is_jumping;
 	bool		crouch;
 	bool		has_crouched;
 
@@ -226,7 +227,7 @@ typedef struct s_var
 	t_player		player;
 	t_movement		move;
 	t_raycast		engine;
-	t_map			mapinfo;
+	t_map			map;
 	t_mouse			mouse;
 
 	t_config		config;

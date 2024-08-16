@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_movement_event.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:04:32 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/16 17:14:16 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 00:23:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,4 @@ void handle_mouse_rotation(t_var *game, t_mouse *mouse)
 		game->move.mouse_right = false;
 		mlx_mouse_show(game->mlx, game->mlx_win);
 	}
-		
 }

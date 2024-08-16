@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:21:15 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:24:37 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:36:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,28 @@ static t_state	parse_config_line(t_var *game, char *line, int line_num)
 
 t_state	parse_configs(t_var *game)
 {
-	char	**filedata;
 	int		i;
 
 	i = -1;
-	filedata = game->mapinfo.file_content;
-	while (filedata[++i])
+	while (game->map.filedata[++i])
 	{
-		if (str_ilen(filedata[i]) == 0)
+		if (str_ilen(game->map.filedata[i]) == 0)
 			continue ;
-		if (parse_identify_cnf(filedata[i]) != CNF_UNKNOWN)
-			parse_config_line(game, filedata[i], i + 1);
+		if (parse_identify_cnf(game->map.filedata[i]) != CNF_UNKNOWN)
+			parse_config_line(game, game->map.filedata[i], i + 1);
 		else if (!is_config_missing(game))
 		{
-			if (i > 0 && str_ilen(filedata[i - 1]) == 0)
+			if (i > 0 && str_ilen(game->map.filedata[i - 1]) == 0)
 				return (OK);
 		}
-		if (parse_identify_cnf(filedata[i]) == CNF_UNKNOWN)
+		if (parse_identify_cnf(game->map.filedata[i]) == CNF_UNKNOWN)
+		{
+			if (game->map.map
+				&& str_equals(game->map.filedata[i], game->map.map[0]))
+				return (OK);
 			return (ft_perror("Error on line %d: '%s':\n\t? configuration\n",
-					i + 1, filedata[i]), cleanup(game, true, 1), KO);
+					i + 1, game->map.filedata[i]), cleanup(game, true, 1), KO);
+		}
 	}
 	return (OK);
 }

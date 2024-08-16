@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_horizontal_event.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:54:49 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/16 17:17:21 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/16 23:53:47 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ void	handle_horizontal_movement(t_var *game)
 		temp_pos.x = newpos.x;
 	if (can_player_go_here(game, temp_pos.x, newpos.y) == OK)
 		temp_pos.y = newpos.y;
-	set_player_dpos(game, temp_pos);
+	set_player_map_dpos(game, temp_pos);
 }

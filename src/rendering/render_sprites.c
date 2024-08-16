@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 22:20:36 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 10:26:11 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 00:22:08 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ void	copy_px_to_img(t_img *atlas, t_point atlas_coord,
 
 /**
  * @brief It will overwrite the game->img with the px from the sprite_buf, will
- * traverse the spritebuff cols first, starting from the x coords given, 
- * for y it will always place it at the bottom. 
+ * traverse the spritebuff cols first, starting from the x coords given,
+ * for y it will always place it at the bottom.
  * It will ignore sprite_buf black px and threat them as transparent.
- * 		
  * @param game game obj
  * @param sprite sprite obj
  * @param sprite_buf sprite buffer
@@ -71,5 +70,7 @@ void	sprite_loader(t_var *game, t_img *sprite, int startingfrom_x)
 
 void	render_sprites(t_var *game, t_cnfsprites *hands_sprites)
 {
+	if (!hands_sprites || !hands_sprites->slctd)
+		return ;
 	sprite_loader(game, hands_sprites->slctd, hands_sprites->slctd_screen_x);
 }

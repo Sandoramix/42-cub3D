@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 15:55:28 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/16 23:53:47 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_state		parse(t_var *g, int ac, char **av);
 //------------------------------------------------------------------------------
 
 // PLAYER UTILS------------------------
-t_dpoint	set_player_dpos(t_var *g, t_dpoint new_pos);
+t_dpoint	set_player_map_dpos(t_var *g, t_dpoint new_pos);
 void		init_player(t_var *g, int x, int y, t_point angle);
 /**
 ### Player direction
@@ -142,14 +142,12 @@ void		handle_horizontal_rotation(t_var *game);
 //------------------------------------------------------------------------------
 
 // MATH FUNCTIONS --------------------------------------------------------------
-t_dpoint	calculate_point(t_dpoint start, double angle, double distance);
+t_dpoint	get_destpoint(t_dpoint start, double angle,
+				double distance, double units);
 double		calc_wall_px_hit(t_var *game);
 
 void		copy_dpos(t_dpoint *p1, t_dpoint p2);
 void		copy_pos(t_point *p1, t_point p2);
-
-void		add_dpoint(t_dpoint *p1, t_dpoint p2);
-void		add_point(t_point *p1, t_point p2);
 
 double		angle_to_radiant(double angle);
 double		pi(void);

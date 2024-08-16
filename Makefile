@@ -30,41 +30,42 @@ RM = rm -rf
 
 # ----SOURCE-FILES--------------------------------------------------------------
 
-SRC =   ./main.c \
-        ./src/cleanup.c \
-        ./src/debug_display.c \
-        ./src/deltatime.c \
-        ./src/draw_helpers/draw_pixel.c \
-        ./src/draw_helpers/draw_rectangle.c \
-        ./src/init_config.c \
-        ./src/messages/parse_error_msg.c \
-        ./src/mlx_engine/events/camera_horizontal_event.c \
-        ./src/mlx_engine/events/camera_vertical_event.c \
-        ./src/mlx_engine/events/mouse_movement_event.c \
-        ./src/mlx_engine/events/movement_horizontal_event.c \
-        ./src/mlx_engine/events/movement_vertical_event.c \
-        ./src/mlx_engine/events/player_sprites_events.c \
-        ./src/mlx_engine/game_loop.c \
-        ./src/mlx_engine/key_events.c \
-        ./src/mlx_engine/mlx_setup.c \
-        ./src/parsing/parse.c \
-        ./src/parsing/parse_config_utils.c \
-        ./src/parsing/parse_config_value.c \
-        ./src/parsing/parse_configs.c \
-        ./src/parsing/parse_map.c \
-        ./src/parsing/parse_path_utils.c \
-        ./src/parsing/parse_utils.c \
-        ./src/rendering/raycasting/raycasting_init.c \
-        ./src/rendering/raycasting/raycasting_utils.c \
-        ./src/rendering/render.c \
-        ./src/rendering/render_crosshair.c \
-        ./src/rendering/render_minimap.c \
-        ./src/rendering/render_sprites.c \
-        ./src/texture.c \
-        ./src/utils/map_utils.c \
-        ./src/utils/math_utils.c \
-        ./src/utils/player_utils.c \
-        ./src/utils/point_utils.c
+SRC = ./main.c \
+	./src/cleanup.c \
+	./src/debug_display.c \
+	./src/deltatime.c \
+	./src/draw_helpers/draw_pixel.c \
+	./src/draw_helpers/draw_rectangle.c \
+	./src/init_config.c \
+	./src/messages/parse_error_msg.c \
+	./src/mlx_engine/events/camera_horizontal_event.c \
+	./src/mlx_engine/events/camera_vertical_event.c \
+	./src/mlx_engine/events/mouse_movement_event.c \
+	./src/mlx_engine/events/movement_horizontal_event.c \
+	./src/mlx_engine/events/movement_vertical_event.c \
+	./src/mlx_engine/events/player_sprites_events.c \
+	./src/mlx_engine/game_loop.c \
+	./src/mlx_engine/key_events.c \
+	./src/mlx_engine/mlx_setup.c \
+	./src/parsing/parse.c \
+	./src/parsing/parse_config_utils.c \
+	./src/parsing/parse_config_value.c \
+	./src/parsing/parse_configs.c \
+	./src/parsing/parse_map.c \
+	./src/parsing/parse_path_utils.c \
+	./src/parsing/parse_utils.c \
+	./src/rendering/raycasting/raycasting_init.c \
+	./src/rendering/raycasting/raycasting_utils.c \
+	./src/rendering/render.c \
+	./src/rendering/render_crosshair.c \
+	./src/rendering/render_minimap.c \
+	./src/rendering/render_sprites.c \
+	./src/texture.c \
+	./src/utils/color_utils.c \
+	./src/utils/map_utils.c \
+	./src/utils/math_utils.c \
+	./src/utils/player_utils.c \
+	./src/utils/point_utils.c
 
 # ----RULES---------------------------------------------------------------------
 

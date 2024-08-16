@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:11:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 22:51:18 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:36:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	free_config(t_var *game)
 		safe_destroy_img(game->mlx, game->config.hands_sprites.rest);
 		safe_destroy_img(game->mlx, game->config.hands_sprites.block);
 	}
-	str_freemtx(game->mapinfo.file_content);
-	str_freemtx(game->mapinfo.map);
+	str_freemtx(game->map.filedata);
+	str_freemtx(game->map.map);
 	free(game->config.ceiling_raw);
 	free(game->config.floor_raw);
 	free(game->config.wall_nord_path);
