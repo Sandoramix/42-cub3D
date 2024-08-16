@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:04:32 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/16 14:50:04 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/16 15:20:13 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,15 @@ void handle_mouse_rotation(t_var *game, t_mouse *mouse)
 		{
 			game->move.rot_left = true;
 			game->move.rot_right = false;
+			mlx_mouse_move(game->mlx, game->mlx_win,
+				game->config.win_width / 2, game->config.win_height / 2);
 		}
 		if(is_mouse_right(game, mouse))
 		{
 			game->move.rot_right = true;
 			game->move.rot_left = false;
+			mlx_mouse_move(game->mlx, game->mlx_win,
+				game->config.win_width / 2, game->config.win_height / 2);
 		}
 	}
 }
