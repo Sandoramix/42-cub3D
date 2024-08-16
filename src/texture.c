@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 21:18:35 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:49:43 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	calc_scaled_textpos(t_var *game, t_raycast *engine, t_player *player)
 	const double	half_win_height = game->config.win_height / 2;
 	const double	half_wall_height = engine->wall.height / 2;
 
-	engine->texture.scale = 1.0 * (double)TILE_SIZE
+	engine->texture.scale = 1.0 * (double)game->config.defaults.tilesize
 		/ (double)engine->wall.height;
 	engine->texture.scaled_textpos = (engine->wall.ceil
 			- (half_win_height + z_offset)
@@ -45,8 +45,8 @@ int	calc_text_y(t_var *game)
 
 	if (!texture)
 		return (0);
-	text_y = (int)(game->engine.texture.scaled_textpos
-			* texture->height / TILE_SIZE);
+	text_y = game->engine.texture.scaled_textpos * texture->height
+		/ game->config.defaults.tilesize;
 	if (texture && texture->height > 0 && text_y >= texture->height)
 		text_y = texture->height - 1;
 	return (text_y);

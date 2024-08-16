@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 01:43:03 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:43:01 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ void	handle_vertical_rotation(t_var *game)
 
 	if (game->move.rot_up)
 	{
-		game->player.offset += VELOCITY * game->deltatime;
-		if (game->player.offset > CAMERA_HIGH_LIMIT)
-			game->player.offset = CAMERA_HIGH_LIMIT;
+		game->player.offset += game->config.defaults.speed * game->deltatime;
+		if (game->player.offset > game->config.defaults.camera_z_rot_max)
+			game->player.offset = game->config.defaults.camera_z_rot_max;
 	}
 	if (game->move.rot_down)
 	{
-		game->player.offset -= VELOCITY * game->deltatime;
-		if (game->player.offset < CAMERA_LOW_LIMIT)
-			game->player.offset = CAMERA_LOW_LIMIT;
+		game->player.offset -= game->config.defaults.speed * game->deltatime;
+		if (game->player.offset < game->config.defaults.camera_z_rot_min)
+			game->player.offset = game->config.defaults.camera_z_rot_min;
 	}
 	if (game->player.offset > 0)
 	{

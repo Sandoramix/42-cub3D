@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:54:49 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/16 23:53:47 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:48:42 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	movement_h_event_released(int keycode, t_var *game)
 
 static t_dpoint	calc_movement_newpos(t_var *game)
 {
+	const double	tilesize = game->config.defaults.tilesize;
 	const double	delta_mult = game->config.defaults.speed * game->deltatime;
 	const int		dir_y = (int [2]){1, -1}[game->move.up];
 	const int		dir_x = (int [2]){-1, 1}[game->move.right];
@@ -63,13 +64,13 @@ static t_dpoint	calc_movement_newpos(t_var *game)
 	newpos.y = game->player.y;
 	if (game->move.up || game->move.down)
 	{
-		newpos.x -= (dir_y * (game->player.dir_x * delta_mult)) / TILE_SIZE;
-		newpos.y -= (dir_y * (game->player.dir_y * delta_mult)) / TILE_SIZE;
+		newpos.x -= (dir_y * (game->player.dir_x * delta_mult)) / tilesize;
+		newpos.y -= (dir_y * (game->player.dir_y * delta_mult)) / tilesize;
 	}
 	if (game->move.left || game->move.right)
 	{
-		newpos.x -= (dir_x * (game->player.dir_y * delta_mult)) / TILE_SIZE;
-		newpos.y += (dir_x * (game->player.dir_x * delta_mult)) / TILE_SIZE;
+		newpos.x -= (dir_x * (game->player.dir_y * delta_mult)) / tilesize;
+		newpos.y += (dir_x * (game->player.dir_x * delta_mult)) / tilesize;
 	}
 	return (newpos);
 }

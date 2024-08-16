@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:51:17 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 22:26:39 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:48:06 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@
  */
 static void	fill_defaults(t_cnfdefaults *def)
 {
-	def->tilesize = TILE_SIZE;
-	def->camera_z_rot_max = CAMERA_HIGH_LIMIT;
-	def->camera_z_rot_min = CAMERA_LOW_LIMIT;
-	def->fog_distance = FOG_DISTANCE;
-	def->fov = FOV;
-	def->jump_force = Z_ACCELLERATION;
-	def->jump_limit = JUMP_LIMIT;
-	def->max_raysteps = MAX_RAYSTEPS;
-	def->rot_speed = ROTATION_SPEED;
-	def->safety_wall_dist = SAFETY_WALL_DIST;
-	def->speed = VELOCITY;
-	def->squat_offset = CROUCH_HEIGHT;
+	def->tilesize = 64;
+	def->minimap_tilesize = 4;
+	def->camera_z_rot_max = 100;
+	def->camera_z_rot_min = -100;
+	def->fog_distance = 20;
+	def->fov = 66;
+	def->jump_force = 1600;
+	def->jump_limit = 350;
+	def->max_raysteps = 100;
+	def->rot_speed = .05;
+	def->safety_wall_dist = 1;
+	def->speed = 500;
+	def->squat_offset = 200;
 	def->window_name = WINDOW_NAME;
 }
 
@@ -38,7 +39,6 @@ void	init_config(t_config *config)
 {
 	config->plane_limit = 0.7;
 	config->minimap_scale = .25;
-	config->minimap_tilesize = 4;
 	config->minimap_zoom = 2.;
 	config->minimap_zoom_min = 1.5;
 	config->minimap_zoom_max = 5.0;

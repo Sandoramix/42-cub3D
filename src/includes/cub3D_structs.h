@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:36:39 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:47:43 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,6 @@ typedef struct s_config
 	double	minimap_zoom_min;
 	double	minimap_zoom_max;
 	double	minimap_zoom;
-	int		minimap_tilesize;
 	double	minimap_player_size;
 
 	//FOV
@@ -184,7 +183,7 @@ typedef struct s_config
 	struct	s_cnfdefaults
 	{
 		int		tilesize;
-		int		max_raysteps;
+		int		minimap_tilesize;
 
 		double	rot_speed;
 		double	speed;
@@ -201,6 +200,7 @@ typedef struct s_config
 		double	safety_wall_dist; // TODO CHECK IF KEEP IT OR NOT
 		double	fog_distance; // TODO CHECK IF KEEP IT OR NOT
 		char	*window_name; // TODO CHECK IF KEEP IT OR NOT
+		int		max_raysteps; // TODO CHECK IF KEEP IT OR NOT
 	}		defaults;
 //# define SAFETY_WALL_DIST 1
 }	t_config;

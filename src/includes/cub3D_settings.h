@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_settings.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 10:42:31 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 00:45:58 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include <mlx_int.h>
 
-// SIZING-----------------------------------------------------------------------
-# define TILE_SIZE 64
-# define MINIMAP_TILE_SIZE 8
 //------------------------------------------------------------------------------
 
 // KEYBINDINGS------------------------------------------------------------------
@@ -138,20 +135,10 @@ typedef enum e_cnf
 # define TEXTURE_ATTACK1_R "assets/sprites/attack1R.xpm"
 # define TEXTURE_ATTACK2_R "assets/sprites/attack2R.xpm"
 
-/*HARD CODED VALUES (maybe)*/
-# define VELOCITY 500
-# define FOV 66
 
-# define ROTATION_SPEED .05
-
-# define SAFETY_WALL_DIST 1
-# define Z_ACCELLERATION 1600
-# define CAMERA_HIGH_LIMIT 100
-# define CAMERA_LOW_LIMIT -100
-# define JUMP_LIMIT 350
-# define CROUCH_HEIGHT 200
-# define FOG_DISTANCE 20
-# define WINDOW_NAME "cub3D"
+# ifndef WINDOW_NAME
+#  define WINDOW_NAME "cub3D"
+# endif
 
 // HERE WE GO AGAIN
 # ifndef WINDOW_HEIGHT
@@ -161,6 +148,5 @@ typedef enum e_cnf
 #  define WINDOW_WIDTH 0
 # endif
 
-# define MAX_RAYSTEPS 100
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:00:24 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:46:50 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void	draw_minimap(t_var *game, t_dpoint pos, int mapsize, int tilesize)
 void	render_minimap(t_var *game)
 {
 	int				mapsize;
-	const int		tilesize = game->config.minimap_tilesize
+	const int		tilesize = game->config.defaults.minimap_tilesize
 		* game->config.minimap_zoom;
 	const t_dpoint	pos = {game->player.x_px / game->config.defaults.tilesize,
 		game->player.y_px / game->config.defaults.tilesize};

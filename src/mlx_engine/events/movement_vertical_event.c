@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:24:30 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:22:03 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 00:43:51 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	squat_event(t_var *game)
 {
 	if (game->move.crouch && !game->move.has_crouched)
 	{
-		game->player.head_pos_z = -CROUCH_HEIGHT;
+		game->player.head_pos_z = -game->config.defaults.squat_offset;
 		game->move.has_crouched = true;
 	}
 	if (!game->move.crouch && game->move.has_crouched)
