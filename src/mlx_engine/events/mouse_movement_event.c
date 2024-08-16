@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:04:32 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/16 15:20:13 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/16 15:58:58 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ int on_mouse_click(int button, int x,int y, void *param)
 	(void)button;
 	(void)x;
 	(void)y;
-	if(x < 0 || y < 0 || x > game->config.win_width || y > game->config.win_height)
-		game->mouse.inside_screen = false;
-	else
-		game->mouse.inside_screen = true;
 	return (OK);
 }
 
@@ -58,34 +54,32 @@ void handle_mouse_rotation(t_var *game, t_mouse *mouse)
 		&mouse->pos.x, &mouse->pos.y);
 	if (!is_mouse_inside_screen(game, mouse))
 	{
-		game->mouse.inside_screen = false;
-		game->move.rot_left = false;
-		game->move.rot_right = false;
+		game->move.mouse_left = false;
+		game->move.mouse_right = false;
 		mlx_mouse_show(game->mlx, game->mlx_win);
 	}
 	else
 	{
-		//TODO : i need to detach the mouse rotation from the keys rotation
 		//TODO : add rotation speed based on distance from screen center
 		//TODO : decide if i want to keep the mouse inside the screen when playing
-		game->mouse.inside_screen = true;
+		//TODO : smooth out the rotation with the mouse
 		mlx_mouse_hide(game->mlx, game->mlx_win);
 		if(is_mouse_centered(game, mouse))
 		{
-			game->move.rot_left = false;
-			game->move.rot_right = false;
+			game->move.mouse_left = false;
+			game->move.mouse_right = false;
 		}
 		if(is_mouse_left(game, mouse))
 		{
-			game->move.rot_left = true;
-			game->move.rot_right = false;
+			game->move.mouse_left = true;
+			game->move.mouse_right = false;
 			mlx_mouse_move(game->mlx, game->mlx_win,
 				game->config.win_width / 2, game->config.win_height / 2);
 		}
 		if(is_mouse_right(game, mouse))
 		{
-			game->move.rot_right = true;
-			game->move.rot_left = false;
+			game->move.mouse_right = true;
+			game->move.mouse_left = false;
 			mlx_mouse_move(game->mlx, game->mlx_win,
 				game->config.win_width / 2, game->config.win_height / 2);
 		}

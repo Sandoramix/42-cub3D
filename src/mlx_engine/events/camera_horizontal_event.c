@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_horizontal_event.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 01:49:43 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:56:34 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,9 @@ void	handle_horizontal_rotation(t_var *game)
 	if (game->move.rot_left)
 		handle_camera_rotation(game, 1.0);
 	if (game->move.rot_right)
+		handle_camera_rotation(game, -1.0);
+	if (game->move.mouse_left)
+		handle_camera_rotation(game, 1.0);
+	if (game->move.mouse_right)
 		handle_camera_rotation(game, -1.0);
 }
