@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_horizontal_event.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:54:49 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 21:16:19 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:17:21 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ void	handle_horizontal_movement(t_var *game)
 	const t_dpoint	newpos = calc_movement_newpos(game);
 	t_dpoint		temp_pos;
 
-	(void)"//TODO remove me please";
-	(void)"// Perpendicular to dir_x";
 	game->engine.plane.x = -game->player.dir_y * game->config.plane_limit;
-	(void)"// Perpendicular to dir_y";
 	game->engine.plane.y = game->player.dir_x * game->config.plane_limit;
 	temp_pos.x = game->player.x;
 	temp_pos.y = game->player.y;

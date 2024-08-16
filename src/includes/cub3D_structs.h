@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 22:26:13 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/16 23:43:13 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,9 @@ typedef struct s_movement
 	bool		rot_right;
 	bool		rot_up;
 	bool		rot_down;
+
+	bool		mouse_left;
+	bool		mouse_right;
 
 	bool		jump;
 	bool		crouch;
