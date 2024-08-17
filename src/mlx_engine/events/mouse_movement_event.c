@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:04:32 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/17 16:52:57 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 16:58:36 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	is_mouse_inside_screen(t_var *game, t_mouse *mouse)
 
 void	choose_mouse_direction_y(t_var *game, int diff)
 {
-	if (diff > 0)
+	if (diff < 0)
 	{
 		game->event.mouse_up = true;
 		game->event.mouse_down = false;
 	}
-	else if (diff < 0)
+	else if (diff > 0)
 	{
 		game->event.mouse_up = true;
 		game->event.mouse_down = false;
@@ -83,7 +83,7 @@ void	handle_mouse_offscreen(t_var *game, t_mouse *mouse, int diff)
 
 void	handle_mouse_rotation(t_var *game, t_mouse *mouse)
 {
-	const t_point prev = { mouse->pos.x,  mouse->pos.y};
+	const t_point prev = {mouse->pos.x,  mouse->pos.y};
 	int diff;
 
 	mlx_mouse_get_pos(game->mlx, game->mlx_win, &mouse->pos.x, &mouse->pos.y);
@@ -99,7 +99,7 @@ void	handle_mouse_rotation(t_var *game, t_mouse *mouse)
 			//-ho provato a controllare quanto grande fosse la diff
 			//per far si che quando c era un movimento di mouse troppo grande il
 			//cursore venisse riportato al centro FAIL
-		handle_mouse_offscreen(game, mouse, diff);
+		//handle_mouse_offscreen(game, mouse, diff);
 	}
 	else
 	{
