@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:04:32 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/17 19:54:36 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 19:55:18 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ void	handle_mouse_rotation(t_var *game, t_mouse *mouse)
 	diff.y = mouse->pos.y - prev.y;
 	if(diff.x == 0 && diff.y == 0)
 		return;
-	//TODO i didnt find any way to not call this to get the new mouse position
-	//we are calling it at every frame
 	mlx_mouse_get_pos(game->mlx, game->mlx_win, &mouse->pos.x, &mouse->pos.y);
 	if (is_mouse_inside_screen(game, mouse))
 	{
