@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_vertical_event.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 17:40:11 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:48:45 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,27 @@ void	camera_v_event_released(int keycode, t_var *game)
 
 void	handle_vertical_rotation(t_var *game)
 {
-	double			smoothness;
+/* 	double			smoothness;
+ */
 
+	if (game->event.mouse_up)
+	{
+		game->player.offset += game->cnf.rot_speed * game->deltatime;
+		if (game->player.offset > game->cnf.camera_vert_rot_max)
+			game->player.offset = game->cnf.camera_vert_rot_max;
+	}
+	if (game->event.mouse_down)
+	{
+		game->player.offset -= game->cnf.rot_speed * game->deltatime;
+		if (game->player.offset < game->cnf.camera_vert_rot_min)
+			game->player.offset = game->cnf.camera_vert_rot_min;
+	}
+	if(game->event.rot_down)
+	{
+		game->player.offset -= game->cnf.rot_speed * game->deltatime;
+		if (game->player.offset < game->cnf.camera_vert_rot_min)
+			game->player.offset = game->cnf.camera_vert_rot_min;
+	}
 	if (game->event.rot_up)
 	{
 		game->player.offset += game->cnf.rot_vertical_speed * game->deltatime;
@@ -47,7 +66,9 @@ void	handle_vertical_rotation(t_var *game)
 		if (game->player.offset < game->cnf.camera_vert_rot_min)
 			game->player.offset = game->cnf.camera_vert_rot_min;
 	}
-	if (game->player.offset > 0)
+	
+	//TODO reintrodurre smotheness 
+	/* if (game->player.offset > 0)
 	{
 		smoothness = game->player.offset * 0.9f;
 		game->player.offset = (double [2]){0, smoothness}[0.1f < smoothness];
@@ -56,5 +77,5 @@ void	handle_vertical_rotation(t_var *game)
 	{
 		smoothness = game->player.offset * 0.9f;
 		game->player.offset = (double [2]){0, smoothness}[-0.1f > smoothness];
-	}
+	} */
 }
