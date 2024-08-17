@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:51:17 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 19:06:07 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 19:09:34 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	init_modifiers(t_config *cnf)
 	cnf->camera_vert_rot_min = -100;
 	cnf->jump_force = 1600;
 	cnf->jump_limit = 350;
-	cnf->rot_lateral_speed = 0.5;
+	cnf->rot_lateral_speed = 0.05;
 	cnf->rot_vertical_speed = 500;
 	cnf->max_vertical_speed = 1000;
 	cnf->max_lateral_speed = 0.5;
