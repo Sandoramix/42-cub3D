@@ -6,17 +6,12 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:51:17 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:28:21 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:58:43 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-/**
- * @brief Get "default" configurations from MACROS
- * TODO (may as well migrate them here)
- * @param def default values' struct
- */
 static void	init_modifiers(t_config *cnf)
 {
 	cnf->speed_mult = 1.0;

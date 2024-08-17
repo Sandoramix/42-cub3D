@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:49:09 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:01:41 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,28 @@ void	camera_v_event_released(int keycode, t_var *game)
 
 void	handle_vertical_rotation(t_var *game)
 {
-	const t_config	*cnf = &game->cnf;
-	float			smoothness;
+	double			smoothness;
 
 	if (game->event.rot_up)
 	{
-		game->player.offset += cnf->rot_speed * game->deltatime;
-		if (game->player.offset > cnf->camera_vert_rot_max)
-			game->player.offset = cnf->camera_vert_rot_max;
+		game->player.offset += game->cnf.rot_speed * game->deltatime;
+		if (game->player.offset > game->cnf.camera_vert_rot_max)
+			game->player.offset = game->cnf.camera_vert_rot_max;
 	}
 	if (game->event.rot_down)
 	{
-		game->player.offset -= cnf->rot_speed * game->deltatime;
-		if (game->player.offset < cnf->camera_vert_rot_min)
-			game->player.offset = cnf->camera_vert_rot_min;
+		game->player.offset -= game->cnf.rot_speed * game->deltatime;
+		if (game->player.offset < game->cnf.camera_vert_rot_min)
+			game->player.offset = game->cnf.camera_vert_rot_min;
 	}
 	if (game->player.offset > 0)
 	{
 		smoothness = game->player.offset * 0.9f;
-		game->player.offset = (float [2]){0, smoothness}[0.1f < smoothness];
+		game->player.offset = (double [2]){0, smoothness}[0.1f < smoothness];
 	}
 	if (game->player.offset < 0)
 	{
 		smoothness = game->player.offset * 0.9f;
-		game->player.offset = (float [2]){0, smoothness}[-0.1f > smoothness];
+		game->player.offset = (double [2]){0, smoothness}[-0.1f > smoothness];
 	}
 }
