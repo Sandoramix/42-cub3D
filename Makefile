@@ -34,6 +34,7 @@ SRC = ./main.c \
 	./src/cleanup.c \
 	./src/debug_display.c \
 	./src/deltatime.c \
+	./src/draw_helpers/draw_line.c \
 	./src/draw_helpers/draw_pixel.c \
 	./src/draw_helpers/draw_rectangle.c \
 	./src/init_config.c \

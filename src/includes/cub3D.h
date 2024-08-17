@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:12:57 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:33:40 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ Convert player's char `player_c` into a direction "vector"
 - EAST: (1; 0)
 - WEST: (-1; 0)
 - SOUTH: (0; 1)
-
 ---
-
 #### Return value:
 
 `t_point` which is the direction
@@ -63,6 +61,8 @@ t_point		chr_player_to_direction(char player_c);
 // GENERIC UTILS-----------------------
 void		print_missing_config(t_var *g);
 bool		is_config_missing(t_var *g);
+
+bool		is_point_inside_window(t_var *game, t_dpoint point);
 bool		chr_is_player(char c);
 char		get_map_at(t_var *g, int row_idx, int col_idx);
 bool		can_player_go_here(t_var *game, double x, double y);
@@ -74,6 +74,12 @@ double		delta_time(t_var *g, bool normalize);
 void		render_base(t_var *g);
 void		render_sprites(t_var *g, struct s_cnfsprites *sprites);
 void		render_minimap(t_var *g);
+/**
+ * @brief Tunnable crosshair, just need to change `cross_thickness`
+ * and `cross_length` inside the function xD
+ * @note #### TODO add the cursor's parameters inside global configuration.
+ * @param game game obj
+ */
 void		render_crosshair(t_var *game);
 
 // RAYCASTING--------------------------
@@ -89,12 +95,6 @@ void		calc_scaled_textpos(t_var *game,
 t_rgba		get_texture_color(t_var *g, int tex_x, int tex_y);
 
 //------------------------------------------------------------------------------
-/**
- * @brief Tunnable crosshair, just need to change `cross_thickness`
- * and `cross_length` inside the function xD
- * @note #### TODO add the cursor's parameters inside global configuration.
- * @param game game obj
- */
 void		calc_direction(t_raycast *eng, t_player *pl);
 
 //------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ void		draw_rectangle_rgb(t_var *g, t_point start,
 				t_point end, t_rgba rgb);
 void		draw_pixel(t_var *g, int x, int y, t_uint color);
 void		draw_pixel_rgb(t_var *g, int x, int y, t_rgba rgb);
-
+void		draw_line_rgb(t_var *g, t_dpoint start, t_dpoint end, t_rgba rgb);
 //------------------------------------------------------------------------------
 
 // EVENTS ----------------------------------------------------------------------
@@ -149,6 +149,7 @@ double		calc_wall_px_hit(t_var *game);
 void		copy_dpos(t_dpoint *p1, t_dpoint p2);
 void		copy_pos(t_point *p1, t_point p2);
 
+double		direction_to_angle(double x, double y);
 double		angle_to_radiant(double angle);
 double		pi(void);
 
@@ -156,8 +157,5 @@ t_uint		rgba_to_hex(t_rgba color);
 t_rgba		hex_to_rgba(t_uint color);
 
 double		normalize_to_one(double num);
-
-int			min(int a, int b);
-int			max(int a, int b);
 //------------------------------------------------------------------------------
 #endif

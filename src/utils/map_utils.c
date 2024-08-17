@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:31:51 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:35:57 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:26:12 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,11 @@ bool	can_player_go_here(t_var *game, double x, double y)
 		return (false);
 	}
 	return (true);
+}
+
+bool	is_point_inside_window(t_var *game, t_dpoint point)
+{
+	return (point.x >= 0 && point.y >= 0
+		&& point.x < game->config.win_width
+		&& point.y < game->config.win_height);
 }

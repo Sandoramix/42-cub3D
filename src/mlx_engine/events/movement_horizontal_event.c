@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:54:49 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:18:44 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:22:35 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,6 @@ void	movement_h_event_pressed(int keycode, t_var *game)
 	if (keycode == SPRINT)
 		game->player.speed_mult = 1.5;
 }
-//! #TODO MOVEMENT OSCILLATION
-// Do we like it? Yes. Is it a priority? No
-//if (game->move.up || game->move.down || game->move.left || game->move.right)
-//{
-//	game->player.traveled += .35;
-//	if (game->player.traveled < 0.0)
-//		game->player.traveled = 0.0;
-//	game->player.head_pos_z = ((sin(game->player.traveled) + 1.0) / 2) * 169;
-//}
 
 void	movement_h_event_released(int keycode, t_var *game)
 {
@@ -49,10 +40,6 @@ void	movement_h_event_released(int keycode, t_var *game)
 	if (keycode == SPRINT)
 		game->player.speed_mult = 1.0;
 }
-// TODO MOVEMENT OSCILLATION
-//if (!game->move.up && !game->move.down &&
-//	!game->move.left && !game->move.right)
-//	game->player.travel_count = 0;
 
 // HANDLERS---------------------------------------------------------------------
 
