@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:04:32 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/17 16:58:36 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 16:59:46 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	choose_mouse_direction_y(t_var *game, int diff)
 	}
 	else if (diff > 0)
 	{
-		game->event.mouse_up = true;
-		game->event.mouse_down = false;
+		game->event.mouse_up = false;
+		game->event.mouse_down = true;
 	}
 	else
 	{
