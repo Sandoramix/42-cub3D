@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:48:21 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:15:13 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:42:03 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ void	get_wall_coords(t_var *game, t_raycast *eng, t_wall *wall)
 	half_wall = wall->height / 2;
 	wall->ceil = -half_wall + half_win_h + z_offset;
 	wall->floor = half_wall + half_win_h + z_offset;
-	wall->ceil = max(0, wall->ceil);
-	wall->floor = min(game->config.win_height - 1, wall->floor);
+	wall->ceil = int_imax(0, wall->ceil);
+	wall->floor = int_imin(game->config.win_height - 1, wall->floor);
 }

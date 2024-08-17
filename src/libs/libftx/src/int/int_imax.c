@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_var_ending_idx.c                               :+:      :+:    :+:   */
+/*   int_imax.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 00:08:47 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:57:46 by odudniak         ###   ########.fr       */
+/*   Created: 2024/01/31 15:02:32 by odudniak          #+#    #+#             */
+/*   Updated: 2024/08/17 01:40:44 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-int	str_var_ending_idx(char *s, int start)
+int	int_imax(int n1, int n2)
 {
-	const int		len = str_ilen(s);
-	int				i;
-
-	if (start >= len)
-		return (-1);
-	if (s[start] == '$')
-		start++;
-	if (s[start] == '?')
-		return (start);
-	i = start;
-	while (s && s[i])
-	{
-		if ((i == start && (chr_isalpha(s[start]) || s[start] == '_'))
-			|| (chr_isalnum(s[i]) || s[i] == '_'))
-			;
-		else
-			return (i - 1);
-		i++;
-	}
-	return (len - 1);
+	if (n1 >= n2)
+		return (n1);
+	return (n2);
 }

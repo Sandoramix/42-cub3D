@@ -47,6 +47,7 @@ SRC = ./src/char/chr_closequote_idx.c \
 	./src/int/ft_int_minmax_idx.c \
 	./src/int/ft_intcmp.c \
 	./src/int/int_free.c \
+	./src/int/int_imax.c \
 	./src/int/int_imin.c \
 	./src/lists/lst_count.c \
 	./src/lists/lst_create.c \
@@ -83,6 +84,7 @@ SRC = ./src/char/chr_closequote_idx.c \
 	./src/pthread/mutex/mutex_setters.c \
 	./src/pthread/mutex/mutex_wrapper.c \
 	./src/str/str_chr.c \
+	./src/str/str_clearquotes.c \
 	./src/str/str_cmp.c \
 	./src/str/str_count_c.c \
 	./src/str/str_dup.c \
@@ -96,6 +98,7 @@ SRC = ./src/char/chr_closequote_idx.c \
 	./src/str/str_includesset.c \
 	./src/str/str_isblank.c \
 	./src/str/str_ischar_inquotes.c \
+	./src/str/str_isvariable.c \
 	./src/str/str_iteri.c \
 	./src/str/str_join.c \
 	./src/str/str_lcat.c \
@@ -118,6 +121,7 @@ SRC = ./src/char/chr_closequote_idx.c \
 	./src/str/str_toupper.c \
 	./src/str/str_trim.c \
 	./src/str/str_ulen.c \
+	./src/str/str_var_ending_idx.c \
 	./src/strict/strict_atoi.c \
 	./src/sys/sys_time.c \
 	./src/unistd/ft_putaddr_fd.c \

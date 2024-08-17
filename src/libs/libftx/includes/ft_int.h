@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 14:38:43 by odudniak          #+#    #+#             */
-/*   Updated: 2024/06/26 23:41:04 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:41:36 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@
  * @return
  */
 int				int_imin(int n1, int n2);
+/**
+ * @brief Get the biggest number between the two given
+ *
+ * @param n1 First number
+ * @param n2 Second number
+ * @return
+ */
+int				int_imax(int n1, int n2);
 /**
  * TODO docs
  */
