@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:51:17 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:58:43 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:39:56 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	init_modifiers(t_config *cnf)
 	cnf->camera_vert_rot_min = -100;
 	cnf->jump_force = 1600;
 	cnf->jump_limit = 350;
-	cnf->rot_speed = .05;
+	cnf->rot_lateral_speed = .05;
+	cnf->rot_vertical_speed = 500;
 	cnf->speed = 500;
 	cnf->squat_offset = 200;
 	cnf->minimap_window_scale = .25;

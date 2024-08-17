@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 16:01:41 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:40:11 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	handle_vertical_rotation(t_var *game)
 
 	if (game->event.rot_up)
 	{
-		game->player.offset += game->cnf.rot_speed * game->deltatime;
+		game->player.offset += game->cnf.rot_vertical_speed * game->deltatime;
 		if (game->player.offset > game->cnf.camera_vert_rot_max)
 			game->player.offset = game->cnf.camera_vert_rot_max;
 	}
 	if (game->event.rot_down)
 	{
-		game->player.offset -= game->cnf.rot_speed * game->deltatime;
+		game->player.offset -= game->cnf.rot_vertical_speed * game->deltatime;
 		if (game->player.offset < game->cnf.camera_vert_rot_min)
 			game->player.offset = game->cnf.camera_vert_rot_min;
 	}

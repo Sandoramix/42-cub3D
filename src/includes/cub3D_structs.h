@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 16:08:15 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:39:54 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,8 @@ typedef struct s_config
 	double			minimap_zoom_min;
 	//---------------------------------
 	// MODIFIERS-----------------------
-	double			rot_speed;
+	double			rot_lateral_speed;
+	double			rot_vertical_speed;
 
 	double			speed;
 	double			speed_mult;
