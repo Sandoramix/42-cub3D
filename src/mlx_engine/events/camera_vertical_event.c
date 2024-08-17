@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_vertical_event.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 16:01:41 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:52:29 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void	handle_vertical_rotation(t_var *game)
 		if (game->player.offset < game->cnf.camera_vert_rot_min)
 			game->player.offset = game->cnf.camera_vert_rot_min;
 	}
-	if (game->player.offset > 0)
+	
+	//TODO reintrodurre smotheness 
+	/* if (game->player.offset > 0)
 	{
 		smoothness = game->player.offset * 0.9f;
 		game->player.offset = (double [2]){0, smoothness}[0.1f < smoothness];
@@ -56,5 +58,5 @@ void	handle_vertical_rotation(t_var *game)
 	{
 		smoothness = game->player.offset * 0.9f;
 		game->player.offset = (double [2]){0, smoothness}[-0.1f > smoothness];
-	}
+	} */
 }
