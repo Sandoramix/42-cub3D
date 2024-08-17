@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:21:15 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:36:39 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:24:59 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*validate_config_line(t_var *game, char *line, int line_n)
 
 	existing_val = parse_get_config_pointed_str(game, type);
 	if (existing_val && *existing_val)
-		return (ft_perror("Error on line %d: '%s': duplicate config\n",
+		return (ft_perror("Error on line %d: '%s': duplicate cnf\n",
 				line_n, line), cleanup(game, true, 1), NULL);
 	splitted = str_split_first(line, ' ');
 	if (!splitted)

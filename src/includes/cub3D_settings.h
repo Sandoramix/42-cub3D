@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 02:53:41 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:07:18 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define CUB3D_SETTINGS_H
 
 # include <mlx_int.h>
-
-//------------------------------------------------------------------------------
 
 // KEYBINDINGS------------------------------------------------------------------
 
@@ -100,18 +98,16 @@ typedef enum e_cnf
 # define TEXTURE_ATTACK1_R "assets/sprites/attack1R.xpm"
 # define TEXTURE_ATTACK2_R "assets/sprites/attack2R.xpm"
 
-
 # ifndef WINDOW_NAME
 #  define WINDOW_NAME "cub3D"
 # endif
 
-// HERE WE GO AGAIN
+// WINDOW SIZING. IF set to 0, the screen's size will be taken
 # ifndef WINDOW_HEIGHT
 #  define WINDOW_HEIGHT 0
 # endif
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 0
 # endif
-
 
 #endif

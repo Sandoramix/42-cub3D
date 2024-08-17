@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:07:56 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/04 14:51:05 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:24:59 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,34 @@
 void	*parse_get_config_pointed_data(t_var *game, t_cnf type)
 {
 	if (type == CNF_FLOOR)
-		return (&game->config.floor);
+		return (&game->cnf.floor);
 	if (type == CNF_CEILING)
-		return (&game->config.ceiling);
+		return (&game->cnf.ceiling);
 	if (type == CNF_WALL_NORD)
-		return (&game->config.wall_nord);
+		return (&game->cnf.wall_nord);
 	if (type == CNF_WALL_EAST)
-		return (&game->config.wall_east);
+		return (&game->cnf.wall_east);
 	if (type == CNF_WALL_WEST)
-		return (&game->config.wall_west);
+		return (&game->cnf.wall_west);
 	if (type == CNF_WALL_SOUTH)
-		return (&game->config.wall_south);
+		return (&game->cnf.wall_south);
 	return (NULL);
 }
 
 char	**parse_get_config_pointed_str(t_var *game, t_cnf type)
 {
 	if (type == CNF_FLOOR)
-		return (&game->config.floor_raw);
+		return (&game->cnf.floor_raw);
 	if (type == CNF_CEILING)
-		return (&game->config.ceiling_raw);
+		return (&game->cnf.ceiling_raw);
 	if (type == CNF_WALL_NORD)
-		return (&game->config.wall_nord_path);
+		return (&game->cnf.wall_nord_path);
 	if (type == CNF_WALL_EAST)
-		return (&game->config.wall_east_path);
+		return (&game->cnf.wall_east_path);
 	if (type == CNF_WALL_WEST)
-		return (&game->config.wall_west_path);
+		return (&game->cnf.wall_west_path);
 	if (type == CNF_WALL_SOUTH)
-		return (&game->config.wall_south_path);
+		return (&game->cnf.wall_south_path);
 	return (NULL);
 }
 

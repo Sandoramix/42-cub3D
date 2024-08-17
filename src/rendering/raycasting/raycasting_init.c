@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:22:51 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/15 10:22:52 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 15:24:59 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	calc_direction(t_raycast *eng, t_player *pl)
 void	init_vars(t_var *game, t_raycast *eng, t_player *pl, int x)
 {
 	const double	camera_x = (double)(2.0 * x)
-		/ (double)game->config.win_width - 1;
+		/ (double)game->cnf.window_width - 1;
 	const double	raydirx = pl->dir_x + eng->plane.x
 		* camera_x;
 	const double	raydiry = pl->dir_y + eng->plane.y

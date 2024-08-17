@@ -5,7 +5,7 @@ NAME = cub3D
 PNAME = $(shell echo -n ${NAME} | tr 'a-z' 'A-Z')
 
 # ----CONFIGURATIONS------------------------------------------------------------
-
+# THIS ENABLES SOME FEATURES FOR DEBUGGING (if they're not removed already)
 DEBUG_VALUE=1
 # SET THESE 2 LINES TO 0 IF YOU WANT THE GAME TO TAKE FULL SCREEN'S SIZE
 WINDOW_WIDTH=1280

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 10:23:57 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 15:24:59 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static	void	render_floor_n_ceiling(t_var *game, int x)
 	const t_point	ceiling_start = (t_point){x, 0};
 	const t_point	ceiling_end = (t_point){x, game->engine.wall.ceil};
 	const t_point	floor_start = (t_point){x, game->engine.wall.floor};
-	const t_point	floor_end = (t_point){x, game->config.win_height};
+	const t_point	floor_end = (t_point){x, game->cnf.window_height};
 
-	draw_rectangle_rgb(game, ceiling_start, ceiling_end, game->config.ceiling);
-	draw_rectangle_rgb(game, floor_start, floor_end, game->config.floor);
+	draw_rectangle_rgb(game, ceiling_start, ceiling_end, game->cnf.ceiling);
+	draw_rectangle_rgb(game, floor_start, floor_end, game->cnf.floor);
 }
 
 void	render_base(t_var *game)
@@ -37,7 +37,7 @@ void	render_base(t_var *game)
 	int	tex_y;
 
 	x = -1;
-	while (++x <= game->config.win_width)
+	while (++x <= game->cnf.window_width)
 	{
 		init_vars(game, &game->engine, &game->player, x);
 		calc_direction(&game->engine, &game->player);

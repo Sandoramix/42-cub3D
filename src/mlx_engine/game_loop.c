@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:29:26 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 15:54:08 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 15:54:49 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 int	game_loop(t_var *game)
 {
 	delta_time(game, false);
- 	handle_mouse_rotation(game, &game->mouse);
-	handle_horizontal_movement(game);
+	handle_mouse_rotation(game, &game->mouse);
 	handle_vertical_movement(game);
-	handle_vertical_rotation(game);
-	handle_horizontal_rotation(game);
+	handle_horizontal_movement(game);
 	handle_player_sprites(game);
+	handle_horizontal_rotation(game);
+	handle_vertical_rotation(game);
 	render_base(game);
 	render_minimap(game);
-	render_sprites(game, &game->config.hands_sprites);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
+	render_sprites(game, &game->cnf.hands_sprites);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->frame, 0, 0);
 	if (ft_isdebug())
 		debug_info(game);
 	render_crosshair(game);

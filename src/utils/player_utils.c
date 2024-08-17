@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 11:10:20 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/16 23:54:04 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:25:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_dpoint	set_player_map_dpos(t_var *game, t_dpoint new_pos)
 {
-	const double	units = game->config.defaults.tilesize;
+	const double	units = game->cnf.tilesize;
 
 	if (!game)
 		return (new_pos);
@@ -27,7 +27,7 @@ t_dpoint	set_player_map_dpos(t_var *game, t_dpoint new_pos)
 
 void	init_player(t_var *game, int x, int y, t_point direction)
 {
-	const double	units = game->config.defaults.tilesize;
+	const double	units = game->cnf.tilesize;
 
 	if (!game)
 		return ;

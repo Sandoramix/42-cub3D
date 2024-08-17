@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:31:29 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/17 01:08:42 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:40:41 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,29 @@
 void	player_sprites_event_pressed(int keycode, t_var *game)
 {
 	if (keycode == GUARD)
-		game->move.block = true;
+		game->event.block = true;
 }
 
 void	player_sprites_event_released(int keycode, t_var *game)
 {
 	if (keycode == GUARD)
-		game->move.block = false;
+		game->event.block = false;
 }
 
 void	handle_player_sprites(t_var *game)
 {
-	if (game->move.jump || game->move.is_jumping)
+	if (game->event.jump || game->event.is_jumping)
 	{
-		game->config.hands_sprites.active = game->config.hands_sprites.rest;
-		game->config.hands_sprites.active_screen_x = game->config.win_width
-			- game->config.hands_sprites.rest->width;
+		game->cnf.hands_sprites.active = game->cnf.hands_sprites.rest;
+		game->cnf.hands_sprites.active_screen_x = game->cnf.window_width
+			- game->cnf.hands_sprites.rest->width;
 	}
-	else if (game->move.block && !game->move.jump)
+	else if (game->event.block && !game->event.jump)
 	{
-		game->config.hands_sprites.active = game->config.hands_sprites.block;
-		game->config.hands_sprites.active_screen_x = game->config.win_width
-			/ 2 + game->config.hands_sprites.block->width / 2 - 100;
+		game->cnf.hands_sprites.active = game->cnf.hands_sprites.block;
+		game->cnf.hands_sprites.active_screen_x = game->cnf.window_width
+			/ 2 + game->cnf.hands_sprites.block->width / 2 - 100;
 	}
 	else
-		game->config.hands_sprites.active = NULL;
+		game->cnf.hands_sprites.active = NULL;
 }

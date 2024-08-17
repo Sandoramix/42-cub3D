@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:37:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/14 02:38:11 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:24:59 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_state	load_xpm_image(t_var *game, t_img **img, char *path)
 	void	*res;
 
 	res = mlx_xpm_file_to_image(game->mlx, path,
-			&game->config._w, &game->config._h);
+			&game->cnf._w, &game->cnf._h);
 	if (!res)
 		return (ft_perror("Error: cannot load sprite from '%s'. \
 		Check if it is a valid xpm image\n", path),

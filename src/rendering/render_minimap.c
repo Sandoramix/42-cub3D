@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:58:30 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:25:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	draw_player(t_var *game, t_point pos, int tilesize)
 {
-	const double	ray_len = .15 * game->config.minimap_zoom;
+	const double	ray_len = .15 * game->cnf.minimap_zoom;
 	const t_rgba	color = hex_to_rgba(0xffff00);
-	const double	half_ptile = game->config.minimap_player_size / 2.0;
+	const double	half_ptile = game->cnf.minimap_tilesize_player / 2.0;
 	t_dpoint		view_line_start;
 	t_dpoint		view_line_end;
 
@@ -39,7 +39,7 @@ static t_rgba	get_coord_color(t_var *g, t_point pos)
 		return (hex_to_rgba(0xff0000));
 	if (get_map_at(g, pos.y, pos.x) == MAP_FLOOR
 		|| chr_is_player(get_map_at(g, pos.y, pos.x)))
-		return (g->config.floor);
+		return (g->cnf.floor);
 	return (hex_to_rgba(0x222222));
 }
 
@@ -72,14 +72,14 @@ static void	draw_minimap(t_var *game, t_dpoint pos, int mapsize, int tilesize)
 void	render_minimap(t_var *game)
 {
 	int				mapsize;
-	const int		tilesize = game->config.defaults.minimap_tilesize
-		* game->config.minimap_zoom;
-	const t_dpoint	pos = {game->player.x_px / game->config.defaults.tilesize,
-		game->player.y_px / game->config.defaults.tilesize};
+	const int		tilesize = game->cnf.minimap_tilesize
+		* game->cnf.minimap_zoom;
+	const t_dpoint	pos = {game->player.x_px / game->cnf.tilesize,
+		game->player.y_px / game->cnf.tilesize};
 
-	mapsize = game->config.win_width * game->config.minimap_scale;
-	if (game->config.win_height < game->config.win_width)
-		mapsize = game->config.win_height * game->config.minimap_scale;
+	mapsize = game->cnf.window_width * game->cnf.minimap_window_scale;
+	if (game->cnf.window_height < game->cnf.window_width)
+		mapsize = game->cnf.window_height * game->cnf.minimap_window_scale;
 	draw_minimap(game, pos, mapsize, tilesize);
 	draw_player(game, (t_point){mapsize / tilesize / 2, mapsize / tilesize / 2},
 		tilesize);

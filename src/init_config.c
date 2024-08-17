@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:51:17 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:15:15 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:28:21 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,28 @@
  * TODO (may as well migrate them here)
  * @param def default values' struct
  */
-static void	fill_defaults(t_cnfdefaults *def)
+static void	init_modifiers(t_config *cnf)
 {
-	def->tilesize = 64;
-	def->minimap_tilesize = 4;
-	def->camera_z_rot_max = 100;
-	def->camera_z_rot_min = -100;
-	def->fog_distance = 20;
-	def->fov = 66;
-	def->jump_force = 1600;
-	def->jump_limit = 350;
-	def->max_raysteps = 100;
-	def->rot_speed = .05;
-	def->safety_wall_dist = 1;
-	def->speed = 500;
-	def->squat_offset = 200;
-	def->window_name = WINDOW_NAME;
+	cnf->speed_mult = 1.0;
+	cnf->camera_vert_rot_max = 100;
+	cnf->camera_vert_rot_min = -100;
+	cnf->jump_force = 1600;
+	cnf->jump_limit = 350;
+	cnf->rot_speed = .05;
+	cnf->speed = 500;
+	cnf->squat_offset = 200;
+	cnf->minimap_window_scale = .25;
+	cnf->minimap_zoom = 2.;
+	cnf->minimap_zoom_min = 1.5;
+	cnf->minimap_zoom_max = 5.0;
 }
 
-void	init_config(t_var *game, t_config *config)
+void	init_config(t_config *cnf)
 {
-	config->plane_limit = 0.7;
-	config->minimap_scale = .25;
-	config->minimap_zoom = 2.;
-	config->minimap_zoom_min = 1.5;
-	config->minimap_zoom_max = 5.0;
-	config->minimap_player_size = 4.;
-	fill_defaults(&config->defaults);
-	game->player.speed_mult = 1.0;
+	cnf->window_name = WINDOW_NAME;
+	cnf->tilesize = 64;
+	cnf->minimap_tilesize = 4;
+	cnf->minimap_tilesize_player = 4.;
+	cnf->plane_limit = 0.7;
+	init_modifiers(cnf);
 }

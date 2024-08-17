@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:46:42 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/16 23:49:15 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:25:30 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_dpoint	get_destpoint(t_dpoint start, double angle,
 
 double	calc_wall_px_hit(t_var *game)
 {
-	const double	units = game->config.defaults.tilesize;
+	const double	units = game->cnf.tilesize;
 	const t_raycast	*engine = &game->engine;
 	const t_player	*player = &game->player;
 	double			wall_px;

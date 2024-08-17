@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:48:21 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:42:03 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:38:06 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	loop_until_hit_wall(t_var *game)
 	game->engine.step_count = 0;
 	while (game->engine.ray_hit == false)
 	{
-		increase_raylen(&game->engine, &game->config);
+		increase_raylen(&game->engine, &game->cnf);
 		check_res = get_map_at(game, game->engine.map_coords.y,
 				game->engine.map_coords.x);
 		if (check_res == 0 || check_res == MAP_WALL)
@@ -90,16 +90,16 @@ void	get_wall_coords(t_var *game, t_raycast *eng, t_wall *wall)
 	int			half_win_h;
 
 	ply = &game->player;
-	half_win_h = game->config.win_height / 2;
+	half_win_h = game->cnf.window_height / 2;
 	if (eng->side == CNF_WALL_WEST || eng->side == CNF_WALL_EAST)
 		wall->dist = (eng->ray.x - eng->delta_dist.x);
 	else
 		wall->dist = (eng->ray.y - eng->delta_dist.y);
 	z_offset = ply->offset + ((ply->pos_z + ply->head_pos_z) / wall->dist);
-	wall->height = (int)(game->config.win_height / wall->dist);
+	wall->height = (int)(game->cnf.window_height / wall->dist);
 	half_wall = wall->height / 2;
 	wall->ceil = -half_wall + half_win_h + z_offset;
 	wall->floor = half_wall + half_win_h + z_offset;
 	wall->ceil = int_imax(0, wall->ceil);
-	wall->floor = int_imin(game->config.win_height - 1, wall->floor);
+	wall->floor = int_imin(game->cnf.window_height - 1, wall->floor);
 }

@@ -100,7 +100,7 @@ static char	*dbg_get_mouse_position(t_var *game)
 
 /* static char	*dbg_player_distance_from_wall(t_var *game)
 {
-	const int		x = game->config.win_width / 10;
+	const int		x = game->cnf.window_width / 10;
 	char			*final;
 
 	final = NULL;
@@ -136,14 +136,14 @@ void	debug_info(t_var *game)
 
 	infos = allocate_infos(game);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
-		game->config.win_height - 200 , 0xFFFFFF, infos[0]);
+		game->cnf.window_height - 200 , 0xFFFFFF, infos[0]);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
-		game->config.win_height - 80, 0xFFFFFF, infos[1]);
+		game->cnf.window_height - 80, 0xFFFFFF, infos[1]);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
-		game->config.win_height - 100, 0xFFFFFF, infos[2]);
+		game->cnf.window_height - 100, 0xFFFFFF, infos[2]);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
-		game->config.win_height - 120, 0xFFFFFF, infos[3]);
+		game->cnf.window_height - 120, 0xFFFFFF, infos[3]);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
-		game->config.win_height - 60, 0xFFFFFF, infos[4]);
+		game->cnf.window_height - 60, 0xFFFFFF, infos[4]);
 	str_freemtx(infos);
 }

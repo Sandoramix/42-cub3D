@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:15:15 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:53:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # else
 
 typedef void	t_img;
+typedef void	t_xvar;
 
 # endif
 
@@ -47,7 +48,6 @@ typedef struct s_player
 	double	pos_z;
 	double	head_pos_z;
 
-	double	speed_mult;
 }	t_player;
 
 typedef struct s_dpoint
@@ -128,79 +128,82 @@ typedef struct s_movement
 
 	int			jump_mult;
 	bool		zoom;
-}	t_movement;
+}	t_event;
+
+typedef struct s_cnfsprites
+{
+	t_img	*active;
+	int		active_screen_x;
+	t_img	*rest;
+	t_img	*block;
+}	t_cnfsprites;
 
 typedef struct s_config
 {
-	//CONFIG SPRITES-------------------
-	t_img	*wall_nord;
-	char	*wall_nord_path;
+	//FILE-CONFIGS---------------------
+	//WALL-SPRITES-----------
+	t_img			*wall_nord;
+	char			*wall_nord_path;
 
-	t_img	*wall_south;
-	char	*wall_south_path;
+	t_img			*wall_south;
+	char			*wall_south_path;
 
-	t_img	*wall_east;
-	char	*wall_east_path;
+	t_img			*wall_east;
+	char			*wall_east_path;
 
-	t_img	*wall_west;
-	char	*wall_west_path;
+	t_img			*wall_west;
+	char			*wall_west_path;
+
+	//CEILING-FLOOR-COLORS---
+	t_rgba			ceiling;
+	char			*ceiling_raw;
+
+	t_rgba			floor;
+	char			*floor_raw;
 	//---------------------------------
-	t_rgba	ceiling;
-	char	*ceiling_raw;
 
-	t_rgba	floor;
-	char	*floor_raw;
 	//SPRITES--------------------------
-	struct s_cnfsprites
-	{
-		t_img	*active; //questo puntera all indirizzo del buffer selezionato
-		int		active_screen_x;
-		t_img	*rest;
-		t_img	*block;
-		t_img	*attack0;
-		t_img	*attack1;
-		t_img	*attack2;
-	} hands_sprites;
-	//WINDOW MEASURES
-	int		win_height;
-	int		win_width;
+	t_cnfsprites	hands_sprites;
+	//---------------------------------
 
-	int		_w;
-	int		_h;
+	//WINDOW MEASURES------------------
+	int				window_height;
+	int				window_width;
 
-	// MINIMAP
-	double	minimap_scale;
-	double	minimap_zoom_min;
-	double	minimap_zoom_max;
-	double	minimap_zoom;
-	double	minimap_player_size;
+	//MAP-UPSCALE-MODIFIERS------------
+	int				tilesize;
+	double			plane_limit;
 
-	//FOV
-	double	plane_limit;
+	// MINIMAP-------------------------
+	double			minimap_window_scale;
+	int				minimap_tilesize;
+	double			minimap_tilesize_player;
+	double			minimap_zoom;
+	double			minimap_zoom_max;
+	double			minimap_zoom_min;
+	//---------------------------------
 
-	struct	s_cnfdefaults
-	{
-		int		tilesize;
-		int		minimap_tilesize;
+	// MODIFIERS-----------------------
+	double			rot_speed;
 
-		double	rot_speed;
-		double	speed;
+	double			speed;
+	double			speed_mult;
 
-		double	jump_force;
-		double	jump_limit;
+	double			jump_force;
+	double			jump_limit;
 
-		double	squat_offset;
+	double			squat_offset;
 
-		double	camera_z_rot_min;
-		double	camera_z_rot_max;
+	double			camera_vert_rot_min;
+	double			camera_vert_rot_max;
+	//---------------------------------
 
-		double	fov; // TODO CHECK IF KEEP IT OR NOT
-		double	safety_wall_dist; // TODO CHECK IF KEEP IT OR NOT
-		double	fog_distance; // TODO CHECK IF KEEP IT OR NOT
-		char	*window_name; // TODO CHECK IF KEEP IT OR NOT
-		int		max_raysteps; // TODO CHECK IF KEEP IT OR NOT
-	}		defaults;
-//# define SAFETY_WALL_DIST 1
+	char			*window_name;
+
+	//PRIVATE/UNUSED VARIABLES---------
+	int				_w;
+	int				_h;
+	//---------------------------------
 }	t_config;
 
 typedef struct s_mouse
@@ -209,26 +212,22 @@ typedef struct s_mouse
 	bool		inside_screen;
 }	t_mouse;
 
-typedef struct s_cnfdefaults	t_cnfdefaults;
-typedef struct s_cnfsprites		t_cnfsprites;
 
 // "GLOBAL" program's structure.
 typedef struct s_var
 {
-	void			*mlx;
+	t_xvar			*mlx;
 	void			*mlx_win;
-	void			*img;
-	char			*buffer;
-	int				bpp;
-	int				endian;
-	int				line_bytes;
-	t_player		player;
-	t_movement		move;
-	t_raycast		engine;
+	t_img			*frame;
+
 	t_map			map;
+	t_player		player;
+	t_event			event;
+
+	t_raycast		engine;
 	t_mouse			mouse;
 
-	t_config		config;
+	t_config		cnf;
 
 	// OTHER
 	double			deltatime;

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:01:41 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:40:11 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
 void	camera_h_event_pressed(int keycode, t_var *game)
 {
 	if (keycode == LOOK_LEFT)
-		game->move.rot_left = true;
+		game->event.rot_left = true;
 	if (keycode == LOOK_RIGHT)
-		game->move.rot_right = true;
+		game->event.rot_right = true;
 }
 
 void	camera_h_event_released(int keycode, t_var *game)
 {
 	if (keycode == LOOK_LEFT)
-		game->move.rot_left = false;
+		game->event.rot_left = false;
 	if (keycode == LOOK_RIGHT)
-		game->move.rot_right = false;
+		game->event.rot_right = false;
 }
 
 // HANDLERS---------------------------------------------------------------------
 
 static void	handle_camera_rotation(t_var *game, int dir)
 {
-	const double	cos_res = cos(dir * game->config.defaults.rot_speed);
-	const double	sin_res = sin(dir * game->config.defaults.rot_speed);
+	const double	cos_res = cos(dir * game->cnf.rot_speed);
+	const double	sin_res = sin(dir * game->cnf.rot_speed);
 	double			old_dir_y;
 	double			old_plane_x;
 
@@ -50,12 +50,12 @@ static void	handle_camera_rotation(t_var *game, int dir)
 
 void	handle_horizontal_rotation(t_var *game)
 {
-	if (game->move.rot_left)
+	if (game->event.rot_left)
 		handle_camera_rotation(game, 1.0);
-	if (game->move.rot_right)
+	if (game->event.rot_right)
 		handle_camera_rotation(game, -1.0);
-	if (game->move.mouse_left)
+	if (game->event.mouse_left)
 		handle_camera_rotation(game, 1.0);
-	if (game->move.mouse_right)
+	if (game->event.mouse_right)
 		handle_camera_rotation(game, -1.0);
 }

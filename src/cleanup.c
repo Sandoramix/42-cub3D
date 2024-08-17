@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:11:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:36:39 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:53:32 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,22 @@ static void	free_config(t_var *game)
 {
 	if (game->mlx)
 	{
-		safe_destroy_img(game->mlx, game->config.wall_nord);
-		safe_destroy_img(game->mlx, game->config.wall_east);
-		safe_destroy_img(game->mlx, game->config.wall_west);
-		safe_destroy_img(game->mlx, game->config.wall_south);
-		safe_destroy_img(game->mlx, game->config.hands_sprites.attack0);
-		safe_destroy_img(game->mlx, game->config.hands_sprites.attack1);
-		safe_destroy_img(game->mlx, game->config.hands_sprites.attack2);
-		safe_destroy_img(game->mlx, game->config.hands_sprites.rest);
-		safe_destroy_img(game->mlx, game->config.hands_sprites.block);
+		safe_destroy_img(game->mlx, game->cnf.wall_nord);
+		safe_destroy_img(game->mlx, game->cnf.wall_east);
+		safe_destroy_img(game->mlx, game->cnf.wall_west);
+		safe_destroy_img(game->mlx, game->cnf.wall_south);
+		safe_destroy_img(game->mlx, game->cnf.hands_sprites.rest);
+		safe_destroy_img(game->mlx, game->cnf.hands_sprites.block);
 	}
 	str_freemtx(game->map.filedata);
 	str_freemtx(game->map.map);
-	free(game->config.ceiling_raw);
-	free(game->config.floor_raw);
-	free(game->config.wall_nord_path);
-	free(game->config.wall_east_path);
-	free(game->config.wall_west_path);
-	free(game->config.wall_south_path);
-	//TODO: REMOVE ME
-	safe_destroy_img(game->mlx, game->img);
+	free(game->cnf.ceiling_raw);
+	free(game->cnf.floor_raw);
+	free(game->cnf.wall_nord_path);
+	free(game->cnf.wall_east_path);
+	free(game->cnf.wall_west_path);
+	free(game->cnf.wall_south_path);
+	safe_destroy_img(game->mlx, game->frame);
 }
 
 int	cleanup(t_var *game, bool should_exit, int statuscode)
