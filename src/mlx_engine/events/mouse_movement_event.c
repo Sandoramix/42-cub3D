@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:04:32 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/17 19:55:18 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 20:00:00 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,18 @@ int	on_mouse_click(int button, int x,int y, void *param)
 {
 	t_var	*game;
 
+	//TODO handle mouse release
 	game = (t_var *)param;
-	(void)button;
+	if (button == 1) 
+		game->event.mouse_l_click = true;
+	if (button == 2) 
+		game->event.mouse_m_click = true;
+	if (button == 3) 
+		game->event.mouse_r_click = true;
+	if (button == 4)
+		game->event.mouse_scroll_up = true;
+	if (button == 5)
+		game->event.mouse_scroll_down = true;
 	(void)x;
 	(void)y;
 	(void)game;
