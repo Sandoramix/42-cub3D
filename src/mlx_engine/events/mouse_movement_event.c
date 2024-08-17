@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:04:32 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/17 18:34:08 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 19:54:36 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,14 @@ int	is_mouse_inside_screen(t_var *game, t_mouse *mouse)
 
 void	choose_mouse_direction_y(t_var *game, int diff)
 {
-	const double treshold = 3;
-	if (diff < -treshold)
+	
+	if (diff < 0)
 	{
 		game->event.mouse_up = true;
 		game->event.mouse_down = false;
 		game->cnf.rot_vertical_speed = abs(diff) * game->cnf.max_vertical_speed * game->deltatime;
-		
-
 	}
-	else if (diff > treshold)
+	else if (diff > 0)
 	{
 		game->event.mouse_up = false;
 		game->event.mouse_down = true;
@@ -59,15 +57,14 @@ void	choose_mouse_direction_y(t_var *game, int diff)
 
 void	choose_mouse_direction_x(t_var *game, int diff)
 {
-	const double treshold = 3;
-	if (diff > treshold)
+	if (diff > 0)
 	{
 		game->event.mouse_right = true;
 		game->event.mouse_left = false;
 		game->cnf.rot_lateral_speed = abs(diff) * game->deltatime;
 
 	}
-	else if (diff < -treshold)
+	else if (diff < 0)
 	{
 		game->event.mouse_left = true;
 		game->event.mouse_right = false;
@@ -82,37 +79,40 @@ void	choose_mouse_direction_x(t_var *game, int diff)
 			game->cnf.rot_lateral_speed = game->cnf.max_lateral_speed;
 }
 
-/* void	handle_mouse_offscreen(t_var *game, t_mouse *mouse, int diff)
+void	handle_mouse_offscreen(t_var *game, t_mouse *mouse, int diff)
 {
+	//TODO implement
 	(void)diff;
-	if (mouse->pos.x < 100 || mouse->pos.x > game->cnf.window_width - 100)
-	{
-		mlx_mouse_move(game->mlx, game->mlx_win,
-			game->cnf.window_width / 2, game->cnf.window_height / 2);
-	}
-} */
+	(void)mouse;
+	(void)game;
+}
 
 void	handle_mouse_rotation(t_var *game, t_mouse *mouse)
 {
 	const t_point prev = {mouse->pos.x,  mouse->pos.y};
-	int diff;
+	int treshold = 3;
+	t_dpoint diff;
 
+	diff.x = mouse->pos.x - prev.x;
+	diff.y = mouse->pos.y - prev.y;
+	if(diff.x == 0 && diff.y == 0)
+		return;
+	//TODO i didnt find any way to not call this to get the new mouse position
+	//we are calling it at every frame
 	mlx_mouse_get_pos(game->mlx, game->mlx_win, &mouse->pos.x, &mouse->pos.y);
 	if (is_mouse_inside_screen(game, mouse))
 	{
 		mlx_mouse_hide(game->mlx, game->mlx_win);
-		diff = mouse->pos.x - prev.x;
-		choose_mouse_direction_x(game, diff);
-		diff = mouse->pos.y - prev.y;
-		choose_mouse_direction_y(game, diff);
+		if(abs(diff.x) > treshold)
+			choose_mouse_direction_x(game, diff.x);
+		if(abs(diff.y) > treshold)
+			choose_mouse_direction_y(game, diff.y);
 		//handle_mouse_offscreen(game, mouse, diff);
 	}
 	else
 	{
-		game->event.mouse_left = false;
-		game->event.mouse_right = false;
-		game->event.mouse_up = false;
-		game->event.mouse_down = false;
 		mlx_mouse_show(game->mlx, game->mlx_win);
+		memset(&game->event.mouse_left, 0, sizeof(bool) * 4); //TODO risky? solo per norminette ma 
+														      //se qualcuno in futuro aggiunge direzioni puo essere risky damn 
 	}
 }
