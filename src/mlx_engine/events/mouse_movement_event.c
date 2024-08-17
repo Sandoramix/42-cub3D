@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 14:04:32 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/17 16:59:46 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 18:34:08 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,53 +33,64 @@ int	is_mouse_inside_screen(t_var *game, t_mouse *mouse)
 
 void	choose_mouse_direction_y(t_var *game, int diff)
 {
-	if (diff < 0)
+	const double treshold = 3;
+	if (diff < -treshold)
 	{
 		game->event.mouse_up = true;
 		game->event.mouse_down = false;
+		game->cnf.rot_vertical_speed = abs(diff) * game->cnf.max_vertical_speed * game->deltatime;
+		
+
 	}
-	else if (diff > 0)
+	else if (diff > treshold)
 	{
 		game->event.mouse_up = false;
 		game->event.mouse_down = true;
+		game->cnf.rot_vertical_speed = abs(diff) * game->cnf.max_vertical_speed * game->deltatime;
 	}
 	else
 	{
 		game->event.mouse_up = false;
 		game->event.mouse_down = false;
 	}
+	if (game->cnf.rot_vertical_speed > game->cnf.max_vertical_speed)
+			game->cnf.rot_vertical_speed = game->cnf.max_vertical_speed;
 }
 
 void	choose_mouse_direction_x(t_var *game, int diff)
 {
-	if (diff > 0)
+	const double treshold = 3;
+	if (diff > treshold)
 	{
 		game->event.mouse_right = true;
 		game->event.mouse_left = false;
+		game->cnf.rot_lateral_speed = abs(diff) * game->deltatime;
+
 	}
-	else if (diff < 0)
+	else if (diff < -treshold)
 	{
 		game->event.mouse_left = true;
 		game->event.mouse_right = false;
+		game->cnf.rot_lateral_speed = abs(diff) * game->deltatime;
 	}
 	else
 	{
 		game->event.mouse_left = false;
 		game->event.mouse_right = false;
 	}
+	if (game->cnf.rot_lateral_speed > game->cnf.max_lateral_speed)
+			game->cnf.rot_lateral_speed = game->cnf.max_lateral_speed;
 }
 
-void	handle_mouse_offscreen(t_var *game, t_mouse *mouse, int diff)
+/* void	handle_mouse_offscreen(t_var *game, t_mouse *mouse, int diff)
 {
 	(void)diff;
 	if (mouse->pos.x < 100 || mouse->pos.x > game->cnf.window_width - 100)
 	{
 		mlx_mouse_move(game->mlx, game->mlx_win,
 			game->cnf.window_width / 2, game->cnf.window_height / 2);
-		mouse->pos.x = game->cnf.window_width / 2;
-		mouse->pos.y = game->cnf.window_height / 2;
 	}
-}
+} */
 
 void	handle_mouse_rotation(t_var *game, t_mouse *mouse)
 {
@@ -94,17 +105,14 @@ void	handle_mouse_rotation(t_var *game, t_mouse *mouse)
 		choose_mouse_direction_x(game, diff);
 		diff = mouse->pos.y - prev.y;
 		choose_mouse_direction_y(game, diff);
-
-		//TODO improve offscreen checks
-			//-ho provato a controllare quanto grande fosse la diff
-			//per far si che quando c era un movimento di mouse troppo grande il
-			//cursore venisse riportato al centro FAIL
 		//handle_mouse_offscreen(game, mouse, diff);
 	}
 	else
 	{
 		game->event.mouse_left = false;
 		game->event.mouse_right = false;
+		game->event.mouse_up = false;
+		game->event.mouse_down = false;
 		mlx_mouse_show(game->mlx, game->mlx_win);
 	}
 }

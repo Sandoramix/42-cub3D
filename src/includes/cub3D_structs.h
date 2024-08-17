@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 17:48:39 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 18:27:57 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,9 @@ typedef struct s_config
 	// MODIFIERS-----------------------
 	double			rot_lateral_speed;
 	double			rot_vertical_speed;
+
+	double			max_vertical_speed;
+	double			max_lateral_speed;
 
 	double			speed;
 	double			speed_mult;
