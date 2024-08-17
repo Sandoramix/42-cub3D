@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:53:53 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:04:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,9 @@ typedef struct s_config
 	t_rgba			floor;
 	char			*floor_raw;
 	//---------------------------------
-
 	//SPRITES--------------------------
 	t_cnfsprites	hands_sprites;
 	//---------------------------------
-
 	//WINDOW MEASURES------------------
 	int				window_height;
 	int				window_width;
@@ -182,7 +180,6 @@ typedef struct s_config
 	double			minimap_zoom_max;
 	double			minimap_zoom_min;
 	//---------------------------------
-
 	// MODIFIERS-----------------------
 	double			rot_speed;
 
@@ -197,7 +194,6 @@ typedef struct s_config
 	double			camera_vert_rot_min;
 	double			camera_vert_rot_max;
 	//---------------------------------
-
 	char			*window_name;
 
 	//PRIVATE/UNUSED VARIABLES---------
@@ -211,7 +207,6 @@ typedef struct s_mouse
 	t_point		pos;
 	bool		inside_screen;
 }	t_mouse;
-
 
 // "GLOBAL" program's structure.
 typedef struct s_var
