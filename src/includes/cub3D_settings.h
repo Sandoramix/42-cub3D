@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:07:18 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:07:12 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 #  define GUARD XK_Alt_L
 
 #  define SPRINT XK_Shift_L
+
+#  define MINIMAP_ZOOM_IN XK_Page_Up
+#  define MINIMAP_ZOOM_OUT XK_Page_Down
 
 # endif // __linux__
 
