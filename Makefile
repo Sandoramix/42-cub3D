@@ -109,12 +109,13 @@ valgrind: debug
 	clear
 	$(VALGRIND) ./$(NAME) "$(ARGS)"
 
+MLX_LINK=https://github.com/42Paris/minilibx-linux/archive/refs/heads/master.zip
 download-mlx:
 	echo "$(BLUE) Downloading MLX...$(R)";
-	wget https://cdn.intra.42.fr/document/document/25837/minilibx-linux.tgz || (echo "$(RED)SOMETHING WENT WRONG WITH MLX LINK. PLEASE UPDATE IT$(R)"; exit 1)
-	tar -xf minilibx-linux.tgz
-	mv minilibx-linux $(MLX_DIR)
-	$(RM) minilibx-linux.tgz*
+	wget $(MLX_LINK) -O minilibx-linux.zip || (echo "$(RED)SOMETHING WENT WRONG WITH MLX LINK. PLEASE UPDATE IT$(R)"; exit 1)
+	unzip minilibx-linux.zip
+	mv minilibx-linux-master $(MLX_DIR)
+	$(RM) minilibx-linux.zip*
 
 delete-mlx:
 	@$(RM) $(MLX_DIR)

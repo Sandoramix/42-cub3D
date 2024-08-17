@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:05:53 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 02:53:41 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 #  define LOOK_LEFT XK_Left
 #  define LOOK_RIGHT XK_Right
 
-#  define ESC_KEY XK_Escape
 #  define ESC_KEY XK_Escape
 
 #  define JUMP XK_space

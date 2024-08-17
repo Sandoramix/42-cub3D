@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:33:51 by odudniak          #+#    #+#             */
-/*   Updated: 2024/06/27 00:19:11 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 02:24:44 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # include <time.h>
 # include <unistd.h>
 # include <errno.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <sys/ioctl.h>
 # include <math.h>
 
