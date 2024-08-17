@@ -6,7 +6,7 @@
 /*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 16:54:49 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/17 16:55:51 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,20 @@ void	camera_v_event_released(int keycode, t_var *game)
 
 void	handle_vertical_rotation(t_var *game)
 {
-	double			smoothness;
+/* 	double			smoothness;
+ */
 
-
-	if (game->event.rot_up)
+	if (game->event.mouse_up)
 	{
 		game->player.offset += game->cnf.rot_speed * game->deltatime;
 		if (game->player.offset > game->cnf.camera_vert_rot_max)
 			game->player.offset = game->cnf.camera_vert_rot_max;
+	}
+	if (game->event.mouse_down)
+	{
+		game->player.offset -= game->cnf.rot_speed * game->deltatime;
+		if (game->player.offset < game->cnf.camera_vert_rot_min)
+			game->player.offset = game->cnf.camera_vert_rot_min;
 	}
 	if(game->event.rot_down)
 	{
