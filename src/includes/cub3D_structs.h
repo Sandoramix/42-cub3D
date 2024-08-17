@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 16:08:15 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:48:57 by rileone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ typedef struct s_movement
 
 	bool		mouse_left;
 	bool		mouse_right;
+	bool 		mouse_up;
+	bool		mouse_down;
 
 	bool		jump;
 	bool		is_jumping;
