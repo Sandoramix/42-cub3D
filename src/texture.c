@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:19:48 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:28:05 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_rgba	get_texture_color(t_var *game, int tex_x, int tex_y)
 	char	*pixel;
 
 	texture = game->engine.texture.hit_texture;
-	pixel = texture->data + (tex_y * texture->size_line) + (tex_x * 4);
+	pixel = texture->data + (tex_y * texture->size_line)
+		+ (tex_x * texture->bpp / 8);
 	color_value = *(t_uint *)(pixel);
 	return (hex_to_rgba(color_value));
 }
