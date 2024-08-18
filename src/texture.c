@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 17:52:23 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/18 15:19:48 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ int	calc_text_x(t_var *game)
 	tex_x = (int)(text_perc_px_hit * texture->width);
 	if (texture && texture->width > 0 && tex_x >= texture->width)
 		tex_x = texture->width - 1;
-	tex_x = int_imax(0, tex_x);	
+	tex_x = int_imax(0, tex_x);
 	return (tex_x);
 }

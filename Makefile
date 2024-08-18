@@ -65,6 +65,7 @@ SRC = ./main.c \
 	./src/utils/color_utils.c \
 	./src/utils/map_utils.c \
 	./src/utils/math_utils.c \
+	./src/utils/mouse_utils.c \
 	./src/utils/player_utils.c \
 	./src/utils/point_utils.c
 

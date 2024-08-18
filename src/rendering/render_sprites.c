@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 22:20:36 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:53:32 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:10:21 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	sprite_loader(t_var *game, t_img *sprite, int startingfrom_x)
 	}
 }
 
-void	render_sprites(t_var *game, t_cnfsprites *hands_sprites)
+void	render_sprites(t_var *game, t_playersprites *hands_sprites)
 {
 	if (!hands_sprites || !hands_sprites->active)
 		return ;

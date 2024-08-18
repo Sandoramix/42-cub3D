@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:29:26 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:59:50 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:19:18 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	game_loop(t_var *game)
 {
 	delta_time(game, false);
+	handle_mouse_rotation(game);
 	handle_vertical_movement(game);
 	handle_horizontal_movement(game);
 	handle_horizontal_rotation(game);
 	handle_vertical_rotation(game);
-	handle_mouse_rotation(game, &game->mouse);
 	render_base(game);
 	render_minimap(game);
 	render_sprites(game, &game->cnf.hands_sprites);

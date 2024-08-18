@@ -85,8 +85,8 @@ static char	*dbg_get_mouse_position(t_var *game)
 	char	*pos_y;
 	char	*final;
 
-	pos_x = ft_itoa(game->mouse.pos.x);
-	pos_y = ft_itoa(game->mouse.pos.y);
+	pos_x = ft_itoa(game->mousepos.x);
+	pos_y = ft_itoa(game->mousepos.y);
 	x_txt = str_join("Mouse X: ", pos_x);
 	y_txt = str_join(" Y: ", pos_y);
 	final = str_join(x_txt, y_txt);
@@ -105,7 +105,7 @@ static char	*dbg_get_mouse_position(t_var *game)
 
 	final = NULL;
 	//TODO understand why i m getting always the length of the last column on the right
-	init_vars(game, x);
+	init_raycast_vars(game, x);
 	calc_direction(game);
 	loop_until_hit_wall(game);
 	get_wall_coords(game);

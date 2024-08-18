@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 16:07:12 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:18:25 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@
 # endif // __linux__
 
 # ifndef MOVE_FORWARD
-#  error "Unsupported platform or no key definitions available."
+#  error "Unsupported platform or no key definitions available. \
+Please try it on Linux with X11Lib"
 # endif
 //------------------------------------------------------------------------------
 

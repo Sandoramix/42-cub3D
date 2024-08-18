@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:51:17 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 19:09:34 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/18 14:24:47 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static void	init_modifiers(t_config *cnf)
 	cnf->jump_limit = 350;
 	cnf->rot_lateral_speed = 0.05;
 	cnf->rot_vertical_speed = 500;
-	cnf->max_vertical_speed = 1000;
-	cnf->max_lateral_speed = 0.5;
 	cnf->speed = 500;
 	cnf->squat_offset = 200;
 	cnf->minimap_window_scale = .25;

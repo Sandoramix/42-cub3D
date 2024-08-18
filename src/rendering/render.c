@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:24:59 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:17:11 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	render_base(t_var *game)
 	x = -1;
 	while (++x <= game->cnf.window_width)
 	{
-		init_vars(game, &game->engine, &game->player, x);
+		init_raycast_vars(game, &game->engine, &game->player, x);
 		calc_direction(&game->engine, &game->player);
 		loop_until_hit_wall(game);
 		get_wall_coords(game, &game->engine, &game->engine.wall);

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 17:44:20 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:10:28 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_state	init_mlx(t_var *game, t_config *cnf)
 	return (OK);
 }
 
-static t_state	mlx_load_sprites(t_var *game, struct s_cnfsprites *cnf)
+static t_state	mlx_load_sprites(t_var *game, struct s_playersprites *cnf)
 {
 	cnf->rest = mlx_xpm_file_to_image(game->mlx,
 			TEXTURE_RESTING_R, &game->cnf._w, &game->cnf._h);
@@ -47,7 +47,6 @@ static t_state	mlx_load_sprites(t_var *game, struct s_cnfsprites *cnf)
 	return (OK);
 }
 
-//mlx_put_image_to_window(game->mlx, game->mlx_win, game->frame, 0, 0);
 static t_state	init_base_images(t_var *game, t_config *cnf)
 {
 	game->frame = mlx_new_image(game->mlx,
@@ -65,7 +64,6 @@ t_state	mlx_setup(t_var *game)
 	mlx_hook(game->mlx_win, KeyPress, KeyPressMask, &on_keypress, game);
 	mlx_hook(game->mlx_win, KeyRelease, KeyReleaseMask, &on_keyrelease, game);
 	mlx_hook(game->mlx_win, DestroyNotify, DestroyAll, mlx_loop_end, game->mlx);
-	mlx_mouse_hook(game->mlx_win, on_mouse_click, game);
 	mlx_loop_hook(game->mlx, &game_loop, game);
 	return (OK);
 }

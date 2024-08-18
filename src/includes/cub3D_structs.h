@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 19:57:36 by rileone          ###   ########.fr       */
+/*   Updated: 2024/08/18 15:10:28 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,16 +116,8 @@ typedef struct s_movement
 	bool		rot_up;
 	bool		rot_down;
 
-	bool		mouse_left;
-	bool		mouse_right;
-	bool 		mouse_up;
-	bool		mouse_down;
-
-	bool		mouse_l_click;
-	bool		mouse_r_click;
-	bool		mouse_m_click;
-	bool		mouse_scroll_up;
-	bool		mouse_scroll_down;
+	bool		mouse_rot_left;
+	bool		mouse_rot_right;
 
 	bool		jump;
 	bool		is_jumping;
@@ -137,13 +129,13 @@ typedef struct s_movement
 	int			jump_mult;
 }	t_event;
 
-typedef struct s_cnfsprites
+typedef struct s_playersprites
 {
 	t_img	*active;
 	int		active_screen_x;
 	t_img	*rest;
 	t_img	*block;
-}	t_cnfsprites;
+}	t_playersprites;
 
 typedef struct s_config
 {
@@ -169,7 +161,7 @@ typedef struct s_config
 	char			*floor_raw;
 	//---------------------------------
 	//SPRITES--------------------------
-	t_cnfsprites	hands_sprites;
+	t_playersprites	hands_sprites;
 	//---------------------------------
 	//WINDOW MEASURES------------------
 	int				window_height;
@@ -191,9 +183,6 @@ typedef struct s_config
 	double			rot_lateral_speed;
 	double			rot_vertical_speed;
 
-	double			max_vertical_speed;
-	double			max_lateral_speed;
-
 	double			speed;
 	double			speed_mult;
 
@@ -213,12 +202,6 @@ typedef struct s_config
 	//---------------------------------
 }	t_config;
 
-typedef struct s_mouse
-{
-	t_point		pos;
-	bool		inside_screen;
-}	t_mouse;
-
 // "GLOBAL" program's structure.
 typedef struct s_var
 {
@@ -231,7 +214,7 @@ typedef struct s_var
 	t_event			event;
 
 	t_raycast		engine;
-	t_mouse			mouse;
+	t_point			mousepos;
 
 	t_config		cnf;
 

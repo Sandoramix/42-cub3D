@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 17:39:36 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:00:10 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,18 @@ static void	handle_camera_rotation(t_var *game, int dir)
 
 void	handle_horizontal_rotation(t_var *game)
 {
+	const bool	ismouse_inframe = is_mouse_inside_frame(game);
+
+	if (ismouse_inframe)
+	{
+		if (game->event.mouse_rot_left)
+			handle_camera_rotation(game, 1.15);
+		if (game->event.mouse_rot_right)
+			handle_camera_rotation(game, -1.15);
+		return ;
+	}
 	if (game->event.rot_left)
 		handle_camera_rotation(game, 1.0);
 	if (game->event.rot_right)
-		handle_camera_rotation(game, -1.0);
-	if (game->event.mouse_left)
-		handle_camera_rotation(game, 1.0);
-	if (game->event.mouse_right)
 		handle_camera_rotation(game, -1.0);
 }
