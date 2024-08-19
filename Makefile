@@ -1,8 +1,10 @@
 NAME = cub3D
+NAME_BONUS = cub3D_bonus
 
 # -----$(NAME) but uppercase----------------------------------------------------
 
 PNAME = $(shell echo -n ${NAME} | tr 'a-z' 'A-Z')
+PNAME_BONUS = $(shell echo -n ${NAME_BONUS} | tr 'a-z' 'A-Z')
 
 # ----CONFIGURATIONS------------------------------------------------------------
 # THIS ENABLES SOME FEATURES FOR DEBUGGING (if they're not removed already)
@@ -10,9 +12,7 @@ DEBUG_VALUE=1
 # SET THESE 2 LINES TO 0 IF YOU WANT THE GAME TO TAKE FULL SCREEN'S SIZE
 WINDOW_WIDTH=1280
 WINDOW_HEIGHT=720
-
 # -----VARIABLES-DECLARATIONS-+-OVVERRIDES--------------------------------------
-
 
 ROOTDIR=./src
 LIBFTX_DIR=$(ROOTDIR)/libs/libftx
@@ -32,7 +32,6 @@ RM = rm -rf
 
 SRC = ./main.c \
 	./src/cleanup.c \
-	./src/debug_display.c \
 	./src/deltatime.c \
 	./src/draw_helpers/draw_line.c \
 	./src/draw_helpers/draw_pixel.c \
@@ -41,10 +40,8 @@ SRC = ./main.c \
 	./src/messages/parse_error_msg.c \
 	./src/mlx_engine/events/camera_horizontal_event.c \
 	./src/mlx_engine/events/camera_vertical_event.c \
-	./src/mlx_engine/events/mouse_movement_event.c \
 	./src/mlx_engine/events/movement_horizontal_event.c \
 	./src/mlx_engine/events/movement_vertical_event.c \
-	./src/mlx_engine/events/player_sprites_events.c \
 	./src/mlx_engine/game_loop.c \
 	./src/mlx_engine/key_events.c \
 	./src/mlx_engine/mlx_setup.c \
@@ -59,7 +56,6 @@ SRC = ./main.c \
 	./src/rendering/raycasting/raycasting_utils.c \
 	./src/rendering/render.c \
 	./src/rendering/render_crosshair.c \
-	./src/rendering/render_minimap.c \
 	./src/rendering/render_sprites.c \
 	./src/texture.c \
 	./src/utils/color_utils.c \
@@ -69,23 +65,36 @@ SRC = ./main.c \
 	./src/utils/player_utils.c \
 	./src/utils/point_utils.c
 
+SRC_BONUS = ./src/mlx_engine/events/mouse_movement_event_bonus.c \
+	./src/mlx_engine/events/player_sprites_events_bonus.c \
+	./src/rendering/render_minimap_bonus.c \
+	./src/utils/collisions_utils_bonus.c
+
 # ----RULES---------------------------------------------------------------------
 
 all: $(NAME)
-
-debug:
-	$(MAKE) DEBUG_VALUE=1
-
-$(NAME): $(SRC)
+$(NAME): $(SRC) $(SRC_BONUS)
 	@$(MAKE) -C $(LIBFTX_DIR) DEBUG_VALUE=$(DEBUG_VALUE)
 
 	if [ ! -f $(MLX_DIR)/$(MLX_LIBNAME) ] && [ ! -d $(MLX_DIR) ] ; then $(MAKE) download-mlx; fi
-	@$(MAKE) -sC $(MLX_DIR) 1>/dev/null 2>/dev/null && ( [ ! -f $(MLX_DIR)/$(MLX_LIBNAME) ] || echo "$(GREEN)[MLX]:\t\tLIBRARY CREATED")
+	@$(MAKE) -sC $(MLX_DIR) && ( [ ! -f $(MLX_DIR)/$(MLX_LIBNAME) ] || echo "$(GREEN)[MLX]:\t\tLIBRARY CREATED")
 
-	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) -L$(LIBFTX_DIR) -lft $(MLX_FLAGS) -lm
+	@$(CC) $(CFLAGS) $(SRC) $(SRC_BONUS) -o $(NAME) -L$(LIBFTX_DIR) -lft $(MLX_FLAGS) -lm -DWITH_BONUS=0
 	@echo "$(GREEN)[$(PNAME)]:\tPROGRAM CREATED$(R)"
 
 	[ "$(strip $(DEBUG_VALUE))" = "0" ] || echo "$(RED)[$(PNAME)]:\tDEBUG MODE ENABLED$(R)"
+
+bonus: $(NAME_BONUS)
+$(NAME_BONUS): $(SRC) $(SRC_BONUS)
+	@$(MAKE) -C $(LIBFTX_DIR) DEBUG_VALUE=$(DEBUG_VALUE)
+
+	if [ ! -f $(MLX_DIR)/$(MLX_LIBNAME) ] && [ ! -d $(MLX_DIR) ] ; then $(MAKE) download-mlx; fi
+	@$(MAKE) -sC $(MLX_DIR) && ( [ ! -f $(MLX_DIR)/$(MLX_LIBNAME) ] || echo "$(GREEN)[MLX]:\t\tLIBRARY CREATED")
+
+	@$(CC) $(CFLAGS) $(SRC) $(SRC_BONUS) -o $(NAME_BONUS) -L$(LIBFTX_DIR) -lft $(MLX_FLAGS) -lm -DWITH_BONUS=1
+	@echo "$(GREEN)[$(PNAME_BONUS)]:\tPROGRAM CREATED$(R)"
+
+	[ "$(strip $(DEBUG_VALUE))" = "0" ] || echo "$(RED)[$(PNAME_BONUS)]:\tDEBUG MODE ENABLED$(R)"
 
 clean:
 	@$(MAKE) -C $(LIBFTX_DIR) clean
@@ -93,19 +102,19 @@ clean:
 
 fclean: clean
 	@$(MAKE) -C $(LIBFTX_DIR) fclean
-	@$(RM) $(NAME)
-	@echo "$(BLUE)[$(PNAME)]:\tPROGRAM DELETED$(R)"
+	[ ! -f $(NAME) ] || ($(RM) $(NAME) && echo "$(BLUE)[$(PNAME)]\t\tDELETED$(R)")
+	[ ! -f $(NAME_BONUS) ] || ($(RM) $(NAME_BONUS) && echo "$(BLUE)[$(PNAME_BONUS)]\tDELETED$(R)")
 
 re: fclean all
 re-debug: fclean debug
 
 re-force: fclean delete-mlx download-mlx all
 
+debug:
+	$(MAKE) DEBUG_VALUE=1
 # ----UTILS---------------------------------------------------------------------
 VALGRIND=@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --tool=memcheck --keep-debuginfo=yes
 ARGS="assets/maps/with_config.cub"
-# FOR FD 		TRACKING: --track-fds=yes
-# FOR CHILDREN	TRACKING: --trace-children=yes
 valgrind: debug
 	clear
 	$(VALGRIND) ./$(NAME) "$(ARGS)"

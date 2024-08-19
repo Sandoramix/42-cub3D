@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:16:38 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:21:56 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 # include <cub3D_utils.h>
 # include <cub3D_rendering.h>
 
+# ifndef WITH_BONUS
+#  define WITH_BONUS 0
+# endif
+
 // CONFIGURATIONS --------------------------------------------------------------
 void	init_config(t_config *cnf);
 t_state	mlx_setup(t_var *g);
-
-//DEBUG----------------------------------------------------------------------
-void	debug_info(t_var *g);
-//------------------------------------------------------------------------------
 
 //-PARSING----------------------------------------------------------------------
 t_state	parse(t_var *g, int ac, char **av);

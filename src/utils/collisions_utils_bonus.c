@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   collisions_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 14:31:51 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/19 15:15:02 by odudniak         ###   ########.fr       */
+/*   Created: 2024/08/19 15:14:49 by odudniak          #+#    #+#             */
+/*   Updated: 2024/08/19 15:14:58 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-char	get_map_at(t_var *game, int row_idx, int col_idx)
+bool	can_player_go_here(t_var *game, double x, double y)
 {
-	if (row_idx < 0 || row_idx >= game->map.rows_mtx)
-		return (0);
-	if (col_idx < 0 || col_idx >= str_ilen(game->map.map[row_idx]))
-		return (0);
-	return (game->map.map[row_idx][col_idx]);
-}
-
-bool	is_point_inside_window(t_var *game, t_dpoint point)
-{
-	return (point.x >= 0 && point.y >= 0
-		&& point.x < game->frame->width
-		&& point.y < game->frame->height);
+	if (x < 0
+		|| x >= game->map.cols_mtx - 1
+		|| y < 0
+		|| y >= game->map.rows_mtx - 1
+		|| get_map_at(game, (y), (x)) == MAP_WALL)
+	{
+		return (false);
+	}
+	return (true);
 }

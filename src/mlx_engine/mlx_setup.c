@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:10:28 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:33:20 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_state	init_mlx(t_var *game, t_config *cnf)
 	init_screensize(game, cnf);
 	game->mlx_win = mlx_new_window(game->mlx,
 			cnf->window_width, cnf->window_height, cnf->window_name);
+	game->mousepos = (t_point){-1, -1};
 	if (!game->mlx_win)
 		return (pf_errcode(E_MLXWIN), cleanup(game, true, 1), KO);
 	return (OK);
