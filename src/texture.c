@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:31:56 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:11:23 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_rgba	get_texture_color(t_var *game, int tex_x, int tex_y)
 void	calc_scaled_textpos(t_var *game, t_raycast *engine, t_player *player)
 {
 	const double	z_offset = player->offset + ((player->pos_z
-			+ player->head_pos_z) / engine->wall.dist);
+				+ player->head_pos_z) / engine->wall.dist);
 	const double	half_win_height = game->cnf.window_height / 2;
 	const double	half_wall_height = engine->wall.height / 2;
 
