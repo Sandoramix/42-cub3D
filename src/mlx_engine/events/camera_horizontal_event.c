@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:07:52 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:00:10 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/08/19 08:36:20 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	camera_h_event_released(int keycode, t_var *game)
 
 // HANDLERS---------------------------------------------------------------------
 
-static void	handle_camera_rotation(t_var *game, int dir)
+static void	handle_camera_rotation(t_var *game, double dir)
 {
 	const double	cos_res = cos(dir * game->cnf.rot_lateral_speed);
 	const double	sin_res = sin(dir * game->cnf.rot_lateral_speed);
@@ -55,9 +55,9 @@ void	handle_horizontal_rotation(t_var *game)
 	if (ismouse_inframe)
 	{
 		if (game->event.mouse_rot_left)
-			handle_camera_rotation(game, 1.15);
+			handle_camera_rotation(game, 1.15f);
 		if (game->event.mouse_rot_right)
-			handle_camera_rotation(game, -1.15);
+			handle_camera_rotation(game, -1.15f);
 		return ;
 	}
 	if (game->event.rot_left)
