@@ -2,6 +2,11 @@
 
 Cub3D is a [42](https://42.fr/)'s School project where the main goal is to make a first-person 3D representation of a maze by using raycasting.
 
+Made by:
+
+- [sandoramix](https://github.com/Sandoramix)
+- [rileone](https://github.com/PapaleoneIV)
+
 ---
 
 ## Supported OS
