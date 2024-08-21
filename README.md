@@ -73,6 +73,8 @@ These are the implemented keybindings:
 #### Extra features
 
 - **`Space`**: Jump
+- **`PageUp`**: Minimap zoom in
+- **`PageDown`**: Minimap zoom out
 - **`Left Shift`**: Sprint
 - **`Left Control`**: Squat
 - **`Left Alt`**: Guard mode (yeah it's useless but it's beautiful)
