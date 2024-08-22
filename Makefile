@@ -6,7 +6,7 @@ PNAME = $(shell echo -n ${NAME} | tr 'a-z' 'A-Z')
 
 # ----CONFIGURATIONS------------------------------------------------------------
 # THIS ENABLES SOME FEATURES FOR DEBUGGING (if they're not removed already)
-DEBUG_VALUE=1
+DEBUG_VALUE=0
 # SET THESE 2 LINES TO 0 IF YOU WANT THE GAME TO TAKE FULL SCREEN'S SIZE
 WINDOW_WIDTH=1280
 WINDOW_HEIGHT=720
@@ -32,7 +32,6 @@ RM = rm -rf
 
 SRC = ./main.c \
 	./src/cleanup.c \
-	./src/debug_display.c \
 	./src/deltatime.c \
 	./src/draw_helpers/draw_line.c \
 	./src/draw_helpers/draw_pixel.c \
