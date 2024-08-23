@@ -7,6 +7,10 @@ Made by:
 - [sandoramix](https://github.com/Sandoramix)
 - [rileone](https://github.com/PapaleoneIV)
 
+## Final grade
+
+**120/125**
+
 ---
 
 ## Supported OS
@@ -21,7 +25,7 @@ All tools you might need to build this project:
 
 
 - `make`
-- `build-essential` (C compilers)
+- `build-essential`
 - `wget`
 - `xorg`
 - `libxext-dev`
@@ -81,7 +85,7 @@ These are the implemented keybindings:
 - **`PageUp`**: Minimap zoom in
 - **`PageDown`**: Minimap zoom out
 - **`Left Shift`**: Sprint
-- **`Left Control`**: Squat
+- **`Left Control`**: Squat/Crouch
 - **`Left Alt`**: Guard mode (yeah it's useless but it's beautiful)
 
 ---
