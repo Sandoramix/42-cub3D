@@ -57,6 +57,42 @@ E.g.:
 ./cub3D assets/maps/small.cub
 ```
 
+### Map files
+
+The map files follow these rules:
+
+- The file must have `.cub` extension.
+- The first part of the file defines the configuration:
+  - Each element firsts information is the type identifier (composed by one or two character(s)) followed by all specific informations for each object:
+    - **Nord texture**:
+      ```
+      NO <path_to_the_north_texture>
+      ```
+    - **East texture**:
+      ```
+      EA <path_to_the_east_texture>
+      ```
+    - **West texture**:
+      ```
+      WE <path_to_the_west_texture>
+      ```
+    - **South texture**:
+      ```
+      SO <path_to_the_south_texture>
+      ```
+    - **Floor color** (range [0,255], each value separated by comma):
+      ```
+      F <RED>,<GREEN>,<BLUE>
+      ```
+    - **Ceiling color** (range [0,255], each value separated by comma):
+      ```
+      C <RED>,<GREEN>,<BLUE>
+      ```
+- The map must be composed of only 7 possible characters: `0` for an empty space,
+`1` for a wall, whitespace ` ` useful for creating a custom shaped maps (considered as void), and `N`,`S`,`E` or `W` for the player’s start position and spawning
+orientation. 
+- The map must be closed/surrounded by walls.
+
 ### Keybindings
 
 These are the implemented keybindings:
