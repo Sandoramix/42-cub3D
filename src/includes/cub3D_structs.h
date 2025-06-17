@@ -50,11 +50,12 @@ typedef struct s_player
 
 }	t_player;
 
-typedef struct s_dpoint
+typedef struct s_dvec2
 {
 	double	x;
 	double	y;
-}	t_dpoint;
+}	t_dvec2;
+
 
 typedef struct s_texure
 {
@@ -79,15 +80,14 @@ typedef struct s_wall
 typedef struct s_raycast
 {
 	t_texture	texture;
-	t_point		map_coords;
-	t_dpoint	delta_dist;
-	t_dpoint	plane;
-	t_dpoint	ray;
-	t_dpoint	dir;
+	t_ivec2		map_coords;
+	t_dvec2		delta_dist;
+	t_dvec2		plane;
+	t_dvec2		ray;
+	t_dvec2		dir;
 	double		camera_x;
 	t_wall		wall;
-	int			step_x;
-	int			step_y;
+	t_ivec2		step;
 	int			side;
 	int			step_count;
 	bool		ray_hit;
@@ -140,6 +140,9 @@ typedef struct s_playersprites
 typedef struct s_config
 {
 	//FILE-CONFIGS---------------------
+	//CONSTANTS--------------
+	int				max_raycast_steps;
+
 	//WALL-SPRITES-----------
 	t_img			*wall_nord;
 	char			*wall_nord_path;
@@ -214,7 +217,7 @@ typedef struct s_var
 	t_event			event;
 
 	t_raycast		engine;
-	t_point			mousepos;
+	t_ivec2			mousepos;
 
 	t_config		cnf;
 

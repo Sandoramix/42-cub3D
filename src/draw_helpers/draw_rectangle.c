@@ -14,7 +14,7 @@
 
 // TODO: it should accept an "t_img" and update it's pixels
 
-void	draw_rectangle_rgb(t_var *game, t_point start, t_point end, t_rgba rgb)
+void	draw_rectangle_rgb(t_var *game, t_ivec2 start, t_ivec2 end, t_rgba rgb)
 {
 	const int	start_x = start.x;
 
@@ -34,7 +34,7 @@ void	draw_rectangle_rgb(t_var *game, t_point start, t_point end, t_rgba rgb)
  * @deprecated
  * You should use `draw_rectangle_rgb`
  */
-void	draw_rectangle(t_var *game, t_point start, t_point end, t_uint color)
+void	draw_rectangle(t_var *game, t_ivec2 start, t_ivec2 end, t_uint color)
 {
 	draw_rectangle_rgb(game, start, end, hex_to_rgba(color));
 }

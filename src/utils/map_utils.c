@@ -27,14 +27,14 @@ bool	can_player_go_here(t_var *game, double x, double y)
 		|| x >= game->map.cols_mtx - 1
 		|| y < 0
 		|| y >= game->map.rows_mtx - 1
-		|| get_map_at(game, (y), (x)) == MAP_WALL)
+		|| get_map_at(game, (y), (x)) == TILE_WALL)
 	{
 		return (false);
 	}
 	return (true);
 }
 
-bool	is_point_inside_window(t_var *game, t_dpoint point)
+bool	is_point_inside_window(t_var *game, t_dvec2 point)
 {
 	return (point.x >= 0 && point.y >= 0
 		&& point.x < game->cnf.window_width

@@ -20,10 +20,10 @@
  */
 static	void	render_floor_n_ceiling(t_var *game, int x)
 {
-	const t_point	ceiling_start = (t_point){x, 0};
-	const t_point	ceiling_end = (t_point){x, game->engine.wall.ceil};
-	const t_point	floor_start = (t_point){x, game->engine.wall.floor};
-	const t_point	floor_end = (t_point){x, game->cnf.window_height};
+	const t_ivec2	ceiling_start = (t_ivec2){x, 0};
+	const t_ivec2	ceiling_end = (t_ivec2){x, game->engine.wall.ceil};
+	const t_ivec2	floor_start = (t_ivec2){x, game->engine.wall.floor};
+	const t_ivec2	floor_end = (t_ivec2){x, game->cnf.window_height};
 
 	draw_rectangle_rgb(game, ceiling_start, ceiling_end, game->cnf.ceiling);
 	draw_rectangle_rgb(game, floor_start, floor_end, game->cnf.floor);

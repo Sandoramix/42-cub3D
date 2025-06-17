@@ -19,12 +19,12 @@ void	render_crosshair(t_var *game)
 	const int	cross_thickness = 2;
 	const int	cross_length = 16;
 
-	draw_rectangle(game, (t_point){win_width_half - cross_thickness / 2,
+	draw_rectangle(game, (t_ivec2){win_width_half - cross_thickness / 2,
 		win_height_half - cross_length / 2},
-		(t_point){win_width_half + cross_thickness / 2,
+		(t_ivec2){win_width_half + cross_thickness / 2,
 		win_height_half + cross_length / 2}, 0xffff00);
-	draw_rectangle(game, (t_point){win_width_half - cross_length / 2,
+	draw_rectangle(game, (t_ivec2){win_width_half - cross_length / 2,
 		win_height_half - cross_thickness / 2},
-		(t_point){win_width_half + cross_length / 2,
+		(t_ivec2){win_width_half + cross_length / 2,
 		win_height_half + cross_thickness / 2}, 0xffff00);
 }

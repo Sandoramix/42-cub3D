@@ -12,22 +12,22 @@
 
 #include <cub3D.h>
 
-void	copy_dpos(t_dpoint *p1, t_dpoint p2)
+void	copy_dpos(t_dvec2 *p1, t_dvec2 p2)
 {
 	p1->x = p2.x;
 	p1->y = p2.y;
 }
 
-void	copy_pos(t_point *p1, t_point p2)
+void	copy_pos(t_ivec2 *p1, t_ivec2 p2)
 {
 	p1->x = p2.x;
 	p1->y = p2.y;
 }
 
-t_dpoint	get_destpoint(t_dpoint start, double angle,
-	double distance, double units)
+t_dvec2	get_destpoint(t_dvec2 start, double angle,
+                         double distance, double units)
 {
-	t_dpoint	end;
+	t_dvec2	end;
 
 	if (angle < 0)
 		angle = 360 + angle;

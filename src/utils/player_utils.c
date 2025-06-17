@@ -12,7 +12,7 @@
 
 #include <cub3D.h>
 
-t_dpoint	set_player_map_dpos(t_var *game, t_dpoint new_pos)
+t_dvec2	set_player_map_dpos(t_var *game, t_dvec2 new_pos)
 {
 	const double	units = game->cnf.tilesize;
 
@@ -25,7 +25,7 @@ t_dpoint	set_player_map_dpos(t_var *game, t_dpoint new_pos)
 	return (new_pos);
 }
 
-void	init_player(t_var *game, int x, int y, t_point direction)
+void	init_player(t_var *game, int x, int y, t_ivec2 direction)
 {
 	const double	units = game->cnf.tilesize;
 
@@ -39,21 +39,21 @@ void	init_player(t_var *game, int x, int y, t_point direction)
 	game->player.dir_x = direction.x;
 }
 
-t_point	chr_player_to_direction(char player_c)
+t_ivec2	chr_player_to_direction(char player_c)
 {
-	if (player_c == MAP_PLAYER_NORD)
-		return ((t_point){0, -1});
-	if (player_c == MAP_PLAYER_EAST)
-		return ((t_point){1, 0});
-	if (player_c == MAP_PLAYER_WEST)
-		return ((t_point){-1, 0});
-	if (player_c == MAP_PLAYER_SOUTH)
-		return ((t_point){0, 1});
-	return ((t_point){0, 0});
+	if (player_c == TILE_PLAYER_NORD)
+		return ((t_ivec2){0, -1});
+	if (player_c == TILE_PLAYER_EAST)
+		return ((t_ivec2){1, 0});
+	if (player_c == TILE_PLAYER_WEST)
+		return ((t_ivec2){-1, 0});
+	if (player_c == TILE_PLAYER_SOUTH)
+		return ((t_ivec2){0, 1});
+	return ((t_ivec2){0, 0});
 }
 
 bool	chr_is_player(char c)
 {
-	return (c == MAP_PLAYER_NORD || c == MAP_PLAYER_EAST
-		|| c == MAP_PLAYER_WEST || c == MAP_PLAYER_SOUTH);
+	return (c == TILE_PLAYER_NORD || c == TILE_PLAYER_EAST
+			|| c == TILE_PLAYER_WEST || c == TILE_PLAYER_SOUTH);
 }

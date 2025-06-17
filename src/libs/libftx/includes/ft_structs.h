@@ -86,15 +86,15 @@ typedef struct s_list
 //------------------------------------------------------------------------------
 
 /**
- * @brief Struct for a point
+ * @brief Struct for a 2d vector
  * @param x `x` coordinate
  * @param y `y` coordinate
  */
-typedef struct s_point
+typedef struct s_ivec2
 {
 	int	x;
 	int	y;
-}	t_point;
+}	t_ivec2;
 
 //------------------------------------------------------------------------------
 

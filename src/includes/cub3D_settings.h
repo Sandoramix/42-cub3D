@@ -52,13 +52,16 @@ Please try it on Linux with X11Lib"
 // FILE-MAP-DEFINITIONS---------------------------------------------------------
 # define MAP_WHITELIST "01 NEWS"
 
-# define MAP_UNKNOWN ' '
-# define MAP_FLOOR '0'
-# define MAP_WALL '1'
-# define MAP_PLAYER_NORD 'N'
-# define MAP_PLAYER_EAST 'E'
-# define MAP_PLAYER_WEST 'W'
-# define MAP_PLAYER_SOUTH 'S'
+typedef enum e_map_tile
+{
+    TILE_UNKNOWN = ' ',
+    TILE_FLOOR = '0',
+    TILE_WALL = '1',
+    TILE_PLAYER_NORD = 'N',
+    TILE_PLAYER_EAST = 'E',
+    TILE_PLAYER_WEST = 'W',
+    TILE_PLAYER_SOUTH = 'S',
+}   t_map_tile;
 
 # define FLOOR 0
 # define WALL 1

@@ -24,7 +24,7 @@ MLX_NAME = mlx_$(shell uname)
 MLX_FLAGS = -L$(MLX_DIR) -l$(MLX_NAME) -lXext -lX11
 
 GAME_CONFIG_DEFINES=-DWINDOW_WIDTH=$(WINDOW_WIDTH) -DWINDOW_HEIGHT=$(WINDOW_HEIGHT)
-CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE) $(GAME_CONFIG_DEFINES)
+CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE) $(GAME_CONFIG_DEFINES) -O3
 
 RM = rm -rf
 
@@ -72,8 +72,8 @@ SRC = ./main.c \
 
 all: $(NAME)
 
-debug:
-	$(MAKE) DEBUG_VALUE=1
+debug: DEBUG_VALUE=1
+debug: $(NAME)
 
 $(NAME): $(SRC)
 	@$(MAKE) -C $(LIBFTX_DIR) DEBUG_VALUE=$(DEBUG_VALUE)

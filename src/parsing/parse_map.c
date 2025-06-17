@@ -35,13 +35,13 @@ static bool	is_correctly_surrounded(t_var *game, int row_idx, int col_idx)
 	char		chr;
 	int			i;
 
-	if (!chr_is_player(char_at_pos) && char_at_pos != MAP_FLOOR)
+	if (!chr_is_player(char_at_pos) && char_at_pos != TILE_FLOOR)
 		return (true);
 	i = -1;
 	while (++i < 4)
 	{
 		chr = get_map_at(game, directions[i][0], directions[i][1]);
-		if (!chr_is_player(chr) && chr != MAP_FLOOR && chr != MAP_WALL)
+		if (!chr_is_player(chr) && chr != TILE_FLOOR && chr != TILE_WALL)
 			return (false);
 	}
 	return (true);
@@ -51,7 +51,7 @@ static t_state	surrounding_check(t_var *game, int row_idx, int col_idx)
 {
 	const char	chr_curr = get_map_at(game, row_idx, col_idx);
 
-	if (chr_curr == MAP_WALL)
+	if (chr_curr == TILE_WALL)
 		return (OK);
 	if (!is_correctly_surrounded(game, row_idx, col_idx))
 		return (ft_perror("Error: Invalid map: '%c' is not permitted "\

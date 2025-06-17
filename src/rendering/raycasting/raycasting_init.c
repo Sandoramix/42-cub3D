@@ -21,16 +21,16 @@ void	calc_direction(t_raycast *eng, t_player *pl)
 			+ eng->map_coords.x + 1.0) * eng->delta_dist.x;
 	double			y_axispos;
 	double			y_axisneg;
-	t_dpoint		direction;
+	t_dvec2		direction;
 
 	if (eng->dir.x < 0)
-		eng->step_x = -1;
+		eng->step.x = -1;
 	else
-		eng->step_x = 1;
+		eng->step.x = 1;
 	if (eng->dir.y < 0)
-		eng->step_y = -1;
+		eng->step.y = -1;
 	else
-		eng->step_y = 1;
+		eng->step.y = 1;
 	y_axispos = ((pl->y) - eng->map_coords.y)
 		* eng->delta_dist.y;
 	y_axisneg = ((-pl->y) + eng->map_coords.y + 1.0) * eng->delta_dist.y;
@@ -47,7 +47,7 @@ void	init_raycast_vars(t_var *game, t_raycast *eng, t_player *pl, int x)
 		* camera_x;
 	const double	raydiry = pl->dir_y + eng->plane.y
 		* camera_x;
-	t_dpoint		delta_dist_vect;
+	t_dvec2		delta_dist_vect;
 
 	if (eng->dir.x == 0)
 		delta_dist_vect.x = 1e30;
@@ -57,7 +57,7 @@ void	init_raycast_vars(t_var *game, t_raycast *eng, t_player *pl, int x)
 		delta_dist_vect.y = 1e30;
 	else
 		delta_dist_vect.y = fabs(1.0 / eng->dir.y);
-	copy_pos(&eng->map_coords, (t_point){(int)pl->x, pl->y});
-	copy_dpos(&eng->dir, (t_dpoint){raydirx, raydiry});
+	copy_pos(&eng->map_coords, (t_ivec2){(int)pl->x, pl->y});
+	copy_dpos(&eng->dir, (t_dvec2){raydirx, raydiry});
 	copy_dpos(&eng->delta_dist, delta_dist_vect);
 }

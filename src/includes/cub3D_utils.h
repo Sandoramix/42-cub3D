@@ -16,8 +16,8 @@
 # include <cub3D.h>
 
 // PLAYER-----------------------------------------------------------------------
-t_dpoint	set_player_map_dpos(t_var *g, t_dpoint new_pos);
-void		init_player(t_var *g, int x, int y, t_point angle);
+t_dvec2	set_player_map_dpos(t_var *g, t_dvec2 new_pos);
+void		init_player(t_var *g, int x, int y, t_ivec2 angle);
 /**
 ### Player direction
 
@@ -32,15 +32,15 @@ Convert player's char `player_c` into a direction "vector"
 ---
 #### Return value:
 
-`t_point` which is the direction
+`t_ivec2` which is the direction
  */
-t_point		chr_player_to_direction(char player_c);
+t_ivec2		chr_player_to_direction(char player_c);
 
 // GENERIC----------------------------------------------------------------------
 void		print_missing_config(t_var *g);
 bool		is_config_missing(t_var *g);
 
-bool		is_point_inside_window(t_var *game, t_dpoint point);
+bool		is_point_inside_window(t_var *game, t_dvec2 point);
 bool		is_mouse_inside_frame(t_var *game);
 bool		chr_is_player(char c);
 char		get_map_at(t_var *g, int row_idx, int col_idx);
@@ -50,21 +50,21 @@ double		delta_time(t_var *g, bool normalize);
 //------------------------------------------------------------------------------
 
 // DRAWING----------------------------------------------------------------------
-void		draw_rectangle(t_var *g, t_point start, t_point end, t_uint color);
-void		draw_rectangle_rgb(t_var *g, t_point start,
-				t_point end, t_rgba rgb);
+void		draw_rectangle(t_var *g, t_ivec2 start, t_ivec2 end, t_uint color);
+void		draw_rectangle_rgb(t_var *g, t_ivec2 start,
+							   t_ivec2 end, t_rgba rgb);
 void		draw_pixel(t_var *g, int x, int y, t_uint color);
 void		draw_pixel_rgb(t_var *g, int x, int y, t_rgba rgb);
-void		draw_line_rgb(t_var *g, t_dpoint start, t_dpoint end, t_rgba rgb);
+void		draw_line_rgb(t_var *g, t_dvec2 start, t_dvec2 end, t_rgba rgb);
 //------------------------------------------------------------------------------
 
 // MATH-------------------------------------------------------------------------
-t_dpoint	get_destpoint(t_dpoint start, double angle,
-				double distance, double units);
+t_dvec2	get_destpoint(t_dvec2 start, double angle,
+						 double distance, double units);
 double		calc_wall_px_hit(t_var *game);
 
-void		copy_dpos(t_dpoint *p1, t_dpoint p2);
-void		copy_pos(t_point *p1, t_point p2);
+void		copy_dpos(t_dvec2 *p1, t_dvec2 p2);
+void		copy_pos(t_ivec2 *p1, t_ivec2 p2);
 
 double		direction_to_angle(double x, double y);
 double		angle_to_radiant(double angle);

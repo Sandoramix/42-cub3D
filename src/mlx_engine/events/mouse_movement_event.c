@@ -24,8 +24,8 @@ void	choose_mouse_direction_x(t_var *game, int diff)
 
 void	handle_mouse_rotation(t_var *game)
 {
-	const t_point	prev = {game->mousepos.x, game->mousepos.y};
-	t_dpoint		diff;
+	const t_ivec2	prev = {game->mousepos.x, game->mousepos.y};
+	t_dvec2		diff;
 
 	mlx_mouse_get_pos(game->mlx, game->mlx_win,
 		&game->mousepos.x, &game->mousepos.y);

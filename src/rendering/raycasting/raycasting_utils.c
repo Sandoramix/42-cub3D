@@ -16,7 +16,7 @@ static void	pick_texture(t_raycast *engine, t_config *cnf, bool horizontal)
 {
 	if (horizontal)
 	{
-		if (engine->step_x > 0)
+		if (engine->step.x > 0)
 		{
 			engine->side = CNF_WALL_EAST;
 			engine->texture.hit_texture = cnf->wall_east;
@@ -28,7 +28,7 @@ static void	pick_texture(t_raycast *engine, t_config *cnf, bool horizontal)
 		}
 		return ;
 	}
-	if (engine->step_y > 0)
+	if (engine->step.y > 0)
 	{
 		engine->side = CNF_WALL_NORD;
 		engine->texture.hit_texture = cnf->wall_nord;
@@ -45,13 +45,13 @@ static void	increase_raylen(t_raycast *engine, t_config *cnf)
 	if (engine->ray.x < engine->ray.y)
 	{
 		engine->ray.x += engine->delta_dist.x;
-		engine->map_coords.x += engine->step_x;
+		engine->map_coords.x += engine->step.x;
 		pick_texture(engine, cnf, true);
 	}
 	else
 	{
 		engine->ray.y += engine->delta_dist.y;
-		engine->map_coords.y += engine->step_y;
+		engine->map_coords.y += engine->step.y;
 		pick_texture(engine, cnf, false);
 	}
 	engine->step_count++;
@@ -64,12 +64,12 @@ void	loop_until_hit_wall(t_var *game)
 	game->engine.ray_hit = false;
 	game->engine.side = 0;
 	game->engine.step_count = 0;
-	while (game->engine.ray_hit == false)
+	while (game->engine.ray_hit == false && game->engine.step_count < game->cnf.max_raycast_steps)
 	{
 		increase_raylen(&game->engine, &game->cnf);
 		check_res = get_map_at(game, game->engine.map_coords.y,
 				game->engine.map_coords.x);
-		if (check_res == 0 || check_res == MAP_WALL)
+		if (check_res == 0 || check_res == TILE_WALL)
 			game->engine.ray_hit = true;
 	}
 }

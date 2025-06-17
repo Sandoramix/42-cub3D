@@ -1,16 +1,16 @@
-NO assets/sprites/wall-no.xpm
-SO assets/sprites/wall-so.xpm
+NO x.xpm
+SO xx.xpm
 
 WE assets/sprites/wall-we.xpm
 
 EA assets/sprites/wall-ea.xpm
 
-F 155,155,0
+F 55,55,55
 
 
 
 
-C 100,0,100
+C 100,0,69
 
 
 

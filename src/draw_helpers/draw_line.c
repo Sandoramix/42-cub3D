@@ -12,18 +12,18 @@
 
 #include <cub3D.h>
 
-void	draw_line_rgb(t_var *game, t_dpoint start, t_dpoint end, t_rgba rgb)
+void	draw_line_rgb(t_var *game, t_dvec2 start, t_dvec2 end, t_rgba rgb)
 {
-	t_dpoint	delta;
-	t_dpoint	increment;
-	t_dpoint	next_point;
+	t_dvec2	delta;
+	t_dvec2	increment;
+	t_dvec2	next_point;
 	int			pixels;
 	int			counter;
 
-	delta = (t_dpoint){end.x - start.x, end.y - start.y};
+	delta = (t_dvec2){end.x - start.x, end.y - start.y};
 	pixels = sqrt((delta.x * delta.x) + (delta.y * delta.y));
-	increment = (t_dpoint){delta.x / pixels, delta.y / pixels};
-	next_point = (t_dpoint){start.x, start.y};
+	increment = (t_dvec2){delta.x / pixels, delta.y / pixels};
+	next_point = (t_dvec2){start.x, start.y};
 	counter = -1;
 	while (++counter < pixels && is_point_inside_window(game, next_point))
 	{
