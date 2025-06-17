@@ -35,6 +35,6 @@ void	init_config(t_config *cnf)
 	cnf->minimap_tilesize = 4;
 	cnf->minimap_tilesize_player = 4.;
 	cnf->plane_limit = 0.7;
-	cnf->max_raycast_steps = 100;
+	cnf->max_raycast_steps = 50;
 	init_modifiers(cnf);
 }

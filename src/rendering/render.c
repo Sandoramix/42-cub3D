@@ -29,12 +29,27 @@ static	void	render_floor_n_ceiling(t_var *game, int x)
 	draw_rectangle_rgb(game, floor_start, floor_end, game->cnf.floor);
 }
 
+static t_rgba	faded_texture(t_var *game, t_ivec2 texture_coord)
+{
+	t_rgba	rgba;
+	float	fade;
+
+	rgba = get_texture_color(game, texture_coord.x, texture_coord.y);
+	fade = 1.0f - (float)game->engine.step_count
+		/ (float)game->cnf.max_raycast_steps;
+	if (fade < 0.0f)
+		fade = 0.0f;
+	rgba.red = (t_uchar)((float)rgba.red * fade);
+	rgba.green = (t_uchar)((float)rgba.green * fade);
+	rgba.blue = (t_uchar)((float)rgba.blue * fade);
+	return (rgba);
+}
+
 void	render_base(t_var *game)
 {
-	int	x;
-	int	y;
-	int	tex_x;
-	int	tex_y;
+	int		x;
+	int		y;
+	t_ivec2	texture_coord;
 
 	x = -1;
 	while (++x <= game->cnf.window_width)
@@ -44,14 +59,14 @@ void	render_base(t_var *game)
 		loop_until_hit_wall(game);
 		get_wall_coords(game, &game->engine, &game->engine.wall);
 		render_floor_n_ceiling(game, x);
-		tex_x = calc_text_x(game);
+		texture_coord.x = calc_text_x(game);
 		calc_scaled_textpos(game, &game->engine, &game->player);
 		y = game->engine.wall.ceil - 1;
 		while (++y < game->engine.wall.floor)
 		{
-			tex_y = calc_text_y(game);
+			texture_coord.y = calc_text_y(game);
 			game->engine.texture.scaled_textpos += game->engine.texture.scale;
-			draw_pixel_rgb(game, x, y, get_texture_color(game, tex_x, tex_y));
+			draw_pixel_rgb(game, x, y, faded_texture(game, texture_coord));
 		}
 	}
 }
