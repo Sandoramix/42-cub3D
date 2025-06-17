@@ -56,7 +56,6 @@ typedef struct s_dvec2
 	double	y;
 }	t_dvec2;
 
-
 typedef struct s_texure
 {
 	t_img	*hit_texture;

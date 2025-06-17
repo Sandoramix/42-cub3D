@@ -16,7 +16,7 @@
 # include <cub3D.h>
 
 // PLAYER-----------------------------------------------------------------------
-t_dvec2	set_player_map_dpos(t_var *g, t_dvec2 new_pos);
+t_dvec2		set_player_map_dpos(t_var *g, t_dvec2 new_pos);
 void		init_player(t_var *g, int x, int y, t_ivec2 angle);
 /**
 ### Player direction
@@ -52,15 +52,15 @@ double		delta_time(t_var *g, bool normalize);
 // DRAWING----------------------------------------------------------------------
 void		draw_rectangle(t_var *g, t_ivec2 start, t_ivec2 end, t_uint color);
 void		draw_rectangle_rgb(t_var *g, t_ivec2 start,
-							   t_ivec2 end, t_rgba rgb);
+				t_ivec2 end, t_rgba rgb);
 void		draw_pixel(t_var *g, int x, int y, t_uint color);
 void		draw_pixel_rgb(t_var *g, int x, int y, t_rgba rgb);
 void		draw_line_rgb(t_var *g, t_dvec2 start, t_dvec2 end, t_rgba rgb);
 //------------------------------------------------------------------------------
 
 // MATH-------------------------------------------------------------------------
-t_dvec2	get_destpoint(t_dvec2 start, double angle,
-						 double distance, double units);
+t_dvec2		get_destpoint(t_dvec2 start, double angle,
+				double distance, double units);
 double		calc_wall_px_hit(t_var *game);
 
 void		dvec2_cpy(t_dvec2 *dest, t_dvec2 src);

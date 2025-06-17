@@ -54,14 +54,14 @@ Please try it on Linux with X11Lib"
 
 typedef enum e_map_tile
 {
-    TILE_UNKNOWN = ' ',
-    TILE_FLOOR = '0',
-    TILE_WALL = '1',
-    TILE_PLAYER_NORD = 'N',
-    TILE_PLAYER_EAST = 'E',
-    TILE_PLAYER_WEST = 'W',
-    TILE_PLAYER_SOUTH = 'S',
-}   t_map_tile;
+	TILE_UNKNOWN = ' ',
+	TILE_FLOOR = '0',
+	TILE_WALL = '1',
+	TILE_PLAYER_NORD = 'N',
+	TILE_PLAYER_EAST = 'E',
+	TILE_PLAYER_WEST = 'W',
+	TILE_PLAYER_SOUTH = 'S',
+}	t_map_tile;
 
 # define FLOOR 0
 # define WALL 1
