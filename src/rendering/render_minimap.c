@@ -74,7 +74,7 @@ void	render_minimap(t_var *game)
 	int				mapsize;
 	const int		tilesize = game->cnf.minimap_tilesize
 		* game->cnf.minimap_zoom;
-	const t_dvec2	pos = {game->player.x_px, game->player.y_px};
+	const t_dvec2	pos = {game->player.pos.x, game->player.pos.y};
 
 	mapsize = game->cnf.window_width * game->cnf.minimap_window_scale;
 	if (game->cnf.window_height < game->cnf.window_width)

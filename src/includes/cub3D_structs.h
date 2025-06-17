@@ -43,30 +43,20 @@ typedef struct u_rgb
 
 typedef struct s_player
 {
-	double	x_px;
-	double	y_px;
-	double	x;
-	double	y;
-
 	t_dvec2	pos;
-
 	t_dvec2	dir;
 
 	double	offset;
 	double	pos_z;
 	double	head_pos_z;
-
 }	t_player;
-
 
 typedef struct s_texure
 {
 	t_img	*hit_texture;
 	int		x;
 	int		y;
-	char	*pixel;
 	int		color;
-	double	wall_px;
 	double	scale;
 	double	scaled_textpos;
 }	t_texture;

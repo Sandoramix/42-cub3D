@@ -17,7 +17,7 @@
 
 // PLAYER-----------------------------------------------------------------------
 t_dvec2		set_player_map_dpos(t_var *g, t_dvec2 new_pos);
-void init_player(t_var *g, int x, int y);
+void		init_player(t_var *g, int x, int y);
 /**
 ### Player direction
 
@@ -34,7 +34,7 @@ Convert player's char `player_c` into a direction "vector"
 
 `t_ivec2` which is the direction
  */
-t_dvec2 get_player_direction(char player_c);
+t_dvec2		get_player_direction(char player_c);
 
 // GENERIC----------------------------------------------------------------------
 void		print_missing_config(t_var *g);

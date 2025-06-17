@@ -28,7 +28,8 @@ void		render_minimap(t_var *g);
 void		render_crosshair(t_var *game);
 
 // RAYCASTING--------------------------
-void		init_raycast_vars(t_var *game, t_raycast *eng, t_player *pl, int x);
+void		init_raycast_vars(t_var *game, t_raycast *eng, t_player *pl,
+				int screen_x);
 void		get_wall_coords(t_var *g, t_raycast *eng, t_wall *wall);
 void		loop_until_hit_wall(t_var *g);
 //------------------------------------------------------------------------------

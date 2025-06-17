@@ -16,25 +16,21 @@ t_dvec2	set_player_map_dpos(t_var *game, t_dvec2 new_pos)
 {
 	if (!game)
 		return (new_pos);
-	game->player.x = new_pos.x;
-	game->player.y = new_pos.y;
-	game->player.x_px = new_pos.x;
-	game->player.y_px = new_pos.y;
+	game->player.pos.x = new_pos.x;
+	game->player.pos.y = new_pos.y;
 	return (new_pos);
 }
 
-void init_player(t_var *game, int x, int y)
+void	init_player(t_var *game, int x, int y)
 {
 	if (!game)
 		return ;
-	game->player.x = x + 0.5;
-	game->player.y = y + 0.5;
-	game->player.x_px = x + 0.5;
-	game->player.y_px = y + 0.5;
+	game->player.pos.x = x + 0.5;
+	game->player.pos.y = y + 0.5;
 	game->player.dir = get_player_direction(get_map_at(game, y, x));
 }
 
-t_dvec2 get_player_direction(char player_c)
+t_dvec2	get_player_direction(char player_c)
 {
 	if (player_c == TILE_PLAYER_NORD)
 		return ((t_dvec2){0, -1});
