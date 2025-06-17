@@ -12,16 +12,16 @@
 
 #include <cub3D.h>
 
-void	copy_dpos(t_dvec2 *p1, t_dvec2 p2)
+void	dvec2_cpy(t_dvec2 *dest, t_dvec2 src)
 {
-	p1->x = p2.x;
-	p1->y = p2.y;
+	dest->x = src.x;
+	dest->y = src.y;
 }
 
-void	copy_pos(t_ivec2 *p1, t_ivec2 p2)
+void	ivec2_cpy(t_ivec2 *dest, t_ivec2 src)
 {
-	p1->x = p2.x;
-	p1->y = p2.y;
+	dest->x = src.x;
+	dest->y = src.y;
 }
 
 t_dvec2	get_destpoint(t_dvec2 start, double angle,
@@ -38,14 +38,13 @@ t_dvec2	get_destpoint(t_dvec2 start, double angle,
 
 double	calc_wall_px_hit(t_var *game)
 {
-	const double	units = game->cnf.tilesize;
 	const t_raycast	*engine = &game->engine;
 	const t_player	*player = &game->player;
 	double			wall_px;
 
 	if (engine->side == CNF_WALL_WEST || engine->side == CNF_WALL_EAST)
-		wall_px = player->y_px / units + engine->wall.dist * engine->dir.y;
+		wall_px = player->y_px + engine->wall.dist * engine->dir.y;
 	else
-		wall_px = player->x_px / units + engine->wall.dist * engine->dir.x;
+		wall_px = player->x_px + engine->wall.dist * engine->dir.x;
 	return (wall_px);
 }

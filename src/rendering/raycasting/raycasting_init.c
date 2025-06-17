@@ -36,7 +36,7 @@ void	calc_direction(t_raycast *eng, t_player *pl)
 	y_axisneg = ((-pl->y) + eng->map_coords.y + 1.0) * eng->delta_dist.y;
 	direction.x = (double [2]){x_axispos, x_axisneg}[eng->dir.x > 0];
 	direction.y = (double [2]){y_axispos, y_axisneg}[eng->dir.y > 0];
-	copy_dpos(&eng->ray, direction);
+	dvec2_cpy(&eng->ray, direction);
 }
 
 void	init_raycast_vars(t_var *game, t_raycast *eng, t_player *pl, int x)
@@ -57,7 +57,7 @@ void	init_raycast_vars(t_var *game, t_raycast *eng, t_player *pl, int x)
 		delta_dist_vect.y = 1e30;
 	else
 		delta_dist_vect.y = fabs(1.0 / eng->dir.y);
-	copy_pos(&eng->map_coords, (t_ivec2){(int)pl->x, pl->y});
-	copy_dpos(&eng->dir, (t_dvec2){raydirx, raydiry});
-	copy_dpos(&eng->delta_dist, delta_dist_vect);
+	ivec2_cpy(&eng->map_coords, (t_ivec2) {pl->x, pl->y});
+	dvec2_cpy(&eng->dir, (t_dvec2) {raydirx, raydiry});
+	dvec2_cpy(&eng->delta_dist, delta_dist_vect);
 }

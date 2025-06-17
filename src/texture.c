@@ -32,8 +32,7 @@ void	calc_scaled_textpos(t_var *game, t_raycast *engine, t_player *player)
 	const double	half_win_height = game->cnf.window_height / 2;
 	const double	half_wall_height = engine->wall.height / 2;
 
-	engine->texture.scale = 1.0 * (double)game->cnf.tilesize
-		/ (double)engine->wall.height;
+	engine->texture.scale = 1.0 / engine->wall.height;
 	engine->texture.scaled_textpos = (engine->wall.ceil
 			- (half_win_height + z_offset)
 			+ half_wall_height) * engine->texture.scale;
@@ -46,8 +45,7 @@ int	calc_text_y(t_var *game)
 
 	if (!texture)
 		return (0);
-	text_y = game->engine.texture.scaled_textpos * texture->height
-		/ game->cnf.tilesize;
+	text_y = game->engine.texture.scaled_textpos * texture->height;
 	if (texture && texture->height > 0 && text_y >= texture->height)
 		text_y = texture->height - 1;
 	text_y = int_imax(0, text_y);

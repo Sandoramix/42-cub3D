@@ -171,7 +171,6 @@ typedef struct s_config
 	int				window_width;
 
 	//MAP-UPSCALE-MODIFIERS------------
-	int				tilesize;
 	double			plane_limit;
 
 	// MINIMAP-------------------------

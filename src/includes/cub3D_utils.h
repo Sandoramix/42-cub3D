@@ -63,8 +63,8 @@ t_dvec2	get_destpoint(t_dvec2 start, double angle,
 						 double distance, double units);
 double		calc_wall_px_hit(t_var *game);
 
-void		copy_dpos(t_dvec2 *p1, t_dvec2 p2);
-void		copy_pos(t_ivec2 *p1, t_ivec2 p2);
+void		dvec2_cpy(t_dvec2 *dest, t_dvec2 src);
+void		ivec2_cpy(t_ivec2 *dest, t_ivec2 src);
 
 double		direction_to_angle(double x, double y);
 double		angle_to_radiant(double angle);

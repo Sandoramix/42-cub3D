@@ -21,7 +21,7 @@ static void	init_modifiers(t_config *cnf)
 	cnf->jump_limit = 350;
 	cnf->rot_lateral_speed = 0.05;
 	cnf->rot_vertical_speed = 500;
-	cnf->speed = 500;
+	cnf->speed = 5;
 	cnf->squat_offset = 200;
 	cnf->minimap_window_scale = .25;
 	cnf->minimap_zoom = 2.;
@@ -32,7 +32,6 @@ static void	init_modifiers(t_config *cnf)
 void	init_config(t_config *cnf)
 {
 	cnf->window_name = WINDOW_NAME;
-	cnf->tilesize = 64;
 	cnf->minimap_tilesize = 4;
 	cnf->minimap_tilesize_player = 4.;
 	cnf->plane_limit = 0.7;

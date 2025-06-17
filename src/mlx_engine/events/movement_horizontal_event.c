@@ -45,7 +45,6 @@ void	movement_h_event_released(int keycode, t_var *game)
 
 static t_dvec2	calc_movement_newpos(t_var *game)
 {
-	const double	tilesize = game->cnf.tilesize;
 	const double	delta_mult = game->cnf.speed_mult
 		* game->cnf.speed * game->deltatime;
 	const int		dir_y = (int [2]){1, -1}[game->event.up];
@@ -56,13 +55,13 @@ static t_dvec2	calc_movement_newpos(t_var *game)
 	newpos.y = game->player.y;
 	if (game->event.up || game->event.down)
 	{
-		newpos.x -= (dir_y * (game->player.dir_x * delta_mult)) / tilesize;
-		newpos.y -= (dir_y * (game->player.dir_y * delta_mult)) / tilesize;
+		newpos.x -= (dir_y * (game->player.dir_x * delta_mult));
+		newpos.y -= (dir_y * (game->player.dir_y * delta_mult));
 	}
 	if (game->event.left || game->event.right)
 	{
-		newpos.x -= (dir_x * (game->player.dir_y * delta_mult)) / tilesize;
-		newpos.y += (dir_x * (game->player.dir_x * delta_mult)) / tilesize;
+		newpos.x -= (dir_x * (game->player.dir_y * delta_mult));
+		newpos.y += (dir_x * (game->player.dir_x * delta_mult));
 	}
 	return (newpos);
 }

@@ -14,27 +14,23 @@
 
 t_dvec2	set_player_map_dpos(t_var *game, t_dvec2 new_pos)
 {
-	const double	units = game->cnf.tilesize;
-
 	if (!game)
 		return (new_pos);
 	game->player.x = new_pos.x;
 	game->player.y = new_pos.y;
-	game->player.x_px = new_pos.x * units;
-	game->player.y_px = new_pos.y * units;
+	game->player.x_px = new_pos.x;
+	game->player.y_px = new_pos.y;
 	return (new_pos);
 }
 
 void	init_player(t_var *game, int x, int y, t_ivec2 direction)
 {
-	const double	units = game->cnf.tilesize;
-
 	if (!game)
 		return ;
 	game->player.x = x + 0.5;
 	game->player.y = y + 0.5;
-	game->player.x_px = x * units + units / 2;
-	game->player.y_px = y * units + units / 2;
+	game->player.x_px = x + 0.5;
+	game->player.y_px = y + 0.5;
 	game->player.dir_y = direction.y;
 	game->player.dir_x = direction.x;
 }
