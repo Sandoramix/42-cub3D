@@ -16,7 +16,7 @@
 # include <cub3D.h>
 
 // PLAYER-----------------------------------------------------------------------
-t_dvec2		set_player_map_dpos(t_var *g, t_dvec2 new_pos);
+t_dvec2		update_player_pos(t_var *game, t_dvec2 new_pos);
 void		init_player(t_var *g, int x, int y);
 /**
 ### Player direction

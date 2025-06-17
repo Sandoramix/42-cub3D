@@ -12,7 +12,7 @@
 
 #include <cub3D.h>
 
-t_dvec2	set_player_map_dpos(t_var *game, t_dvec2 new_pos)
+t_dvec2	update_player_pos(t_var *game, t_dvec2 new_pos)
 {
 	if (!game)
 		return (new_pos);
