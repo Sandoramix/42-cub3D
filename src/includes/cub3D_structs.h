@@ -26,6 +26,12 @@ typedef void	t_xvar;
 
 //------------------------------------------------------------------------------
 
+typedef struct s_dvec2
+{
+	double	x;
+	double	y;
+}	t_dvec2;
+
 typedef struct u_rgb
 {
 	t_uint		hex;
@@ -41,8 +47,10 @@ typedef struct s_player
 	double	y_px;
 	double	x;
 	double	y;
-	double	dir_x;
-	double	dir_y;
+
+	t_dvec2	pos;
+
+	t_dvec2	dir;
 
 	double	offset;
 	double	pos_z;
@@ -50,11 +58,6 @@ typedef struct s_player
 
 }	t_player;
 
-typedef struct s_dvec2
-{
-	double	x;
-	double	y;
-}	t_dvec2;
 
 typedef struct s_texure
 {

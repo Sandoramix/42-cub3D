@@ -23,7 +23,7 @@ t_dvec2	set_player_map_dpos(t_var *game, t_dvec2 new_pos)
 	return (new_pos);
 }
 
-void	init_player(t_var *game, int x, int y, t_ivec2 direction)
+void init_player(t_var *game, int x, int y)
 {
 	if (!game)
 		return ;
@@ -31,21 +31,20 @@ void	init_player(t_var *game, int x, int y, t_ivec2 direction)
 	game->player.y = y + 0.5;
 	game->player.x_px = x + 0.5;
 	game->player.y_px = y + 0.5;
-	game->player.dir_y = direction.y;
-	game->player.dir_x = direction.x;
+	game->player.dir = get_player_direction(get_map_at(game, y, x));
 }
 
-t_ivec2	chr_player_to_direction(char player_c)
+t_dvec2 get_player_direction(char player_c)
 {
 	if (player_c == TILE_PLAYER_NORD)
-		return ((t_ivec2){0, -1});
+		return ((t_dvec2){0, -1});
 	if (player_c == TILE_PLAYER_EAST)
-		return ((t_ivec2){1, 0});
+		return ((t_dvec2){1, 0});
 	if (player_c == TILE_PLAYER_WEST)
-		return ((t_ivec2){-1, 0});
+		return ((t_dvec2){-1, 0});
 	if (player_c == TILE_PLAYER_SOUTH)
-		return ((t_ivec2){0, 1});
-	return ((t_ivec2){0, 0});
+		return ((t_dvec2){0, 1});
+	return ((t_dvec2){0, 0});
 }
 
 bool	chr_is_player(char c)

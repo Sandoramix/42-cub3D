@@ -55,13 +55,13 @@ static t_dvec2	calc_movement_newpos(t_var *game)
 	newpos.y = game->player.y;
 	if (game->event.up || game->event.down)
 	{
-		newpos.x -= (dir_y * (game->player.dir_x * delta_mult));
-		newpos.y -= (dir_y * (game->player.dir_y * delta_mult));
+		newpos.x -= (dir_y * (game->player.dir.x * delta_mult));
+		newpos.y -= (dir_y * (game->player.dir.y * delta_mult));
 	}
 	if (game->event.left || game->event.right)
 	{
-		newpos.x -= (dir_x * (game->player.dir_y * delta_mult));
-		newpos.y += (dir_x * (game->player.dir_x * delta_mult));
+		newpos.x -= (dir_x * (game->player.dir.y * delta_mult));
+		newpos.y += (dir_x * (game->player.dir.x * delta_mult));
 	}
 	return (newpos);
 }
@@ -71,8 +71,8 @@ void	handle_horizontal_movement(t_var *game)
 	const t_dvec2	newpos = calc_movement_newpos(game);
 	t_dvec2			temp_pos;
 
-	game->engine.plane.x = -game->player.dir_y * game->cnf.plane_limit;
-	game->engine.plane.y = game->player.dir_x * game->cnf.plane_limit;
+	game->engine.plane.x = -game->player.dir.y * game->cnf.plane_limit;
+	game->engine.plane.y = game->player.dir.x * game->cnf.plane_limit;
 	temp_pos.x = game->player.x;
 	temp_pos.y = game->player.y;
 	if (can_player_go_here(game, newpos.x, game->player.y) == OK)

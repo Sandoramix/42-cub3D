@@ -38,9 +38,9 @@ static void	handle_camera_rotation(t_var *game, double dir)
 	double			old_dir_y;
 	double			old_plane_x;
 
-	old_dir_y = game->player.dir_y;
-	game->player.dir_y = old_dir_y * cos_res - game->player.dir_x * sin_res;
-	game->player.dir_x = old_dir_y * sin_res + game->player.dir_x * cos_res;
+	old_dir_y = game->player.dir.y;
+	game->player.dir.y = old_dir_y * cos_res - game->player.dir.x * sin_res;
+	game->player.dir.x = old_dir_y * sin_res + game->player.dir.x * cos_res;
 	old_plane_x = game->engine.plane.x;
 	game->engine.plane.x = game->engine.plane.x * cos_res
 		- game->engine.plane.y * sin_res;

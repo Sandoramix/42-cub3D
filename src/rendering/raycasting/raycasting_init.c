@@ -43,9 +43,9 @@ void	init_raycast_vars(t_var *game, t_raycast *eng, t_player *pl, int x)
 {
 	const double	camera_x = (double)(2.0 * x)
 		/ (double)game->cnf.window_width - 1;
-	const double	raydirx = pl->dir_x + eng->plane.x
+	const double	raydirx = pl->dir.x + eng->plane.x
 		* camera_x;
-	const double	raydiry = pl->dir_y + eng->plane.y
+	const double	raydiry = pl->dir.y + eng->plane.y
 		* camera_x;
 	t_dvec2			delta_dist_vect;
 

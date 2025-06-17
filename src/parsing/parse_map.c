@@ -21,9 +21,11 @@ static t_state	doubles_check(t_var *game, char **map, int row_idx, int col_idx)
 	if (chr_is_player(char_at_pos))
 		player_count++;
 	if (player_count > 1)
-		return (ft_perror("Error: Invalid map: multiple players found"\
-		" at row=%d;col=%d (%c)\n", row_idx + 1, col_idx + 1,
-				char_at_pos), cleanup(game, true, 1), KO);
+	{
+		ft_perror("Error: Invalid map: multiple players found"\
+		" at row=%d;col=%d (%c)\n", row_idx + 1, col_idx + 1, char_at_pos);
+		return (cleanup(game, true, 1), KO);
+	}
 	return (OK);
 }
 
@@ -74,7 +76,7 @@ t_state	parse_map(t_var *game)
 		while (map[i][++j])
 		{
 			if (chr_is_player(map[i][j]))
-				init_player(game, j, i, chr_player_to_direction(map[i][j]));
+				init_player(game, j, i);
 			doubles_check(game, map, i, j);
 			surrounding_check(game, i, j);
 		}

@@ -28,7 +28,7 @@ void	draw_player(t_var *game, t_ivec2 pos, int tilesize)
 	view_line_start = (t_dvec2){pos.x * tilesize + tilesize / 2,
 		pos.y * tilesize + tilesize / 2};
 	view_line_end = get_destpoint(view_line_start,
-			direction_to_angle(game->player.dir_x, game->player.dir_y),
+			direction_to_angle(game->player.dir.x, game->player.dir.y),
 			ray_len, tilesize);
 	draw_line_rgb(game, view_line_start, view_line_end, color);
 }
