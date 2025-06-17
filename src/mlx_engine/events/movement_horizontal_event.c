@@ -49,7 +49,7 @@ static t_dvec2	calc_movement_newpos(t_var *game)
 		* game->cnf.speed * game->deltatime;
 	const int		dir_y = (int [2]){1, -1}[game->event.up];
 	const int		dir_x = (int [2]){-1, 1}[game->event.right];
-	t_dvec2		newpos;
+	t_dvec2			newpos;
 
 	newpos.x = game->player.x;
 	newpos.y = game->player.y;
@@ -69,7 +69,7 @@ static t_dvec2	calc_movement_newpos(t_var *game)
 void	handle_horizontal_movement(t_var *game)
 {
 	const t_dvec2	newpos = calc_movement_newpos(game);
-	t_dvec2		temp_pos;
+	t_dvec2			temp_pos;
 
 	game->engine.plane.x = -game->player.dir_y * game->cnf.plane_limit;
 	game->engine.plane.y = game->player.dir_x * game->cnf.plane_limit;

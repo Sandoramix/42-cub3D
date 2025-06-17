@@ -51,5 +51,5 @@ t_ivec2	chr_player_to_direction(char player_c)
 bool	chr_is_player(char c)
 {
 	return (c == TILE_PLAYER_NORD || c == TILE_PLAYER_EAST
-			|| c == TILE_PLAYER_WEST || c == TILE_PLAYER_SOUTH);
+		|| c == TILE_PLAYER_WEST || c == TILE_PLAYER_SOUTH);
 }

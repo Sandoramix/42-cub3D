@@ -25,7 +25,7 @@ void	ivec2_cpy(t_ivec2 *dest, t_ivec2 src)
 }
 
 t_dvec2	get_destpoint(t_dvec2 start, double angle,
-                         double distance, double units)
+	double distance, double units)
 {
 	t_dvec2	end;
 

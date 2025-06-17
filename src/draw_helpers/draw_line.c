@@ -14,9 +14,9 @@
 
 void	draw_line_rgb(t_var *game, t_dvec2 start, t_dvec2 end, t_rgba rgb)
 {
-	t_dvec2	delta;
-	t_dvec2	increment;
-	t_dvec2	next_point;
+	t_dvec2		delta;
+	t_dvec2		increment;
+	t_dvec2		next_point;
 	int			pixels;
 	int			counter;
 

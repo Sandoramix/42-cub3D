@@ -17,8 +17,8 @@ void	draw_player(t_var *game, t_ivec2 pos, int tilesize)
 	const double	ray_len = .15 * game->cnf.minimap_zoom;
 	const t_rgba	color = hex_to_rgba(0xffff00);
 	const double	half_ptile = game->cnf.minimap_tilesize_player / 2.0;
-	t_dvec2		view_line_start;
-	t_dvec2		view_line_end;
+	t_dvec2			view_line_start;
+	t_dvec2			view_line_end;
 
 	draw_rectangle_rgb(game,
 		(t_ivec2){pos.x * tilesize + half_ptile, pos.y * tilesize + half_ptile},

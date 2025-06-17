@@ -55,6 +55,8 @@ int	pf_errcode(t_errorcode code)
 {
 	int	len;
 
+	if (code == E_NO_PRINT)
+		return (0);
 	len = ft_perror("[Error]");
 	if (code != E_DEFAULT)
 		len += ft_perror(":\t") + errswitch(code);

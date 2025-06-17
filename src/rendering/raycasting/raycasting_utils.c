@@ -64,7 +64,8 @@ void	loop_until_hit_wall(t_var *game)
 	game->engine.ray_hit = false;
 	game->engine.side = 0;
 	game->engine.step_count = 0;
-	while (game->engine.ray_hit == false && game->engine.step_count < game->cnf.max_raycast_steps)
+	while (game->engine.ray_hit == false
+		&& game->engine.step_count < game->cnf.max_raycast_steps)
 	{
 		increase_raylen(&game->engine, &game->cnf);
 		check_res = get_map_at(game, game->engine.map_coords.y,

@@ -25,7 +25,7 @@ int	is_px_black(char *img, int px)
 }
 
 void	copy_px_to_img(t_img *atlas, t_ivec2 atlas_coord,
-                       t_img *sprite, t_ivec2 sprite_coord)
+	t_img *sprite, t_ivec2 sprite_coord)
 {
 	const int	atl_idx = calc_px_pos(atlas, atlas_coord.x, atlas_coord.y);
 	const int	spr_idx = calc_px_pos(sprite, sprite_coord.x, sprite_coord.y);

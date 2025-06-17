@@ -50,6 +50,7 @@ typedef enum e_state
  */
 typedef enum e_errorcode
 {
+	E_NO_PRINT,
 	E_DEFAULT,
 	E_INVALID_ARGC,
 	E_MALLOC,
