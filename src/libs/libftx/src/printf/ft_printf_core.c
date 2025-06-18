@@ -45,7 +45,6 @@ size_t	pf_getsimpleres(int fd, va_list *list, t_pfflag flag)
 		return (ft_putaddr_fd(va_arg(*list, void *), fd));
 	else
 		return (ft_putstr_fd(va_arg(*list, char *), fd));
-	return (0);
 }
 
 size_t	pf_getres(int fd, va_list *list, t_pfflag flag)
