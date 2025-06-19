@@ -26,5 +26,6 @@ int	game_loop(t_var *game)
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->frame, 0, 0);
 	render_crosshair(game);
 	handle_player_sprites(game);
+	debug_info(game);
 	return (1);
 }

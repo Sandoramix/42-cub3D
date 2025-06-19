@@ -43,6 +43,13 @@ char		*ft_boolstr(bool value);
  */
 int			ft_atoi(const char *nptr);
 /**
+ * @brief Convert a float to a string
+ * @param d float to convert
+ * @param precision precision of the float. If `0`, no decimal point is added.
+ * @return The string representing the float.
+ */
+char		*ft_ftoa(float d, int precision);
+/**
  * @brief print the number in given base
  *
  * @param n number to print

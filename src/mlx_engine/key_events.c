@@ -37,5 +37,7 @@ int	on_keyrelease(int keycode, t_var *game)
 	if (keycode == MINIMAP_ZOOM_OUT
 		&& game->cnf.minimap_zoom - .5 >= game->cnf.minimap_zoom_min)
 		game->cnf.minimap_zoom -= .5;
+	if (keycode == XK_i || keycode == XK_I)
+		game->event.debug = !game->event.debug;
 	return (keycode);
 }

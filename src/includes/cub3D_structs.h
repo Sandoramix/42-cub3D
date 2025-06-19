@@ -119,6 +119,8 @@ typedef struct s_movement
 	bool		block;
 
 	int			jump_mult;
+
+	bool		debug;
 }	t_event;
 
 typedef struct s_playersprites
@@ -196,6 +198,12 @@ typedef struct s_config
 	//---------------------------------
 }	t_config;
 
+typedef struct s_consts
+{
+	t_dvec2		win_halfsize;
+
+}	t_consts;
+
 // "GLOBAL" program's structure.
 typedef struct s_var
 {
@@ -211,6 +219,8 @@ typedef struct s_var
 	t_ivec2			mousepos;
 
 	t_config		cnf;
+
+	t_consts		consts;
 
 	// OTHER
 	double			deltatime;
