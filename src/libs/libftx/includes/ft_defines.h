@@ -17,7 +17,7 @@
 	/** Define for debug mode.
 	 * If `true` it enables some of library's functions
 	 * */
-#  define DEBUG false
+#  define DEBUG 0
 # endif
 
 # ifndef PROGNAME

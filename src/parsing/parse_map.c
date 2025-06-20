@@ -22,8 +22,8 @@ static t_state	doubles_check(t_var *game, char **map, int row_idx, int col_idx)
 		player_count++;
 	if (player_count > 1)
 	{
-		ft_perror("Error: Invalid map: multiple players found"\
-		" at row=%d;col=%d (%c)\n", row_idx + 1, col_idx + 1, char_at_pos);
+		ft_perror("Error: Invalid map: multiple players found"
+			" at row=%d;col=%d (%c)\n", row_idx + 1, col_idx + 1, char_at_pos);
 		return (cleanup(game, true, 1), KO);
 	}
 	return (OK);
@@ -56,8 +56,8 @@ static t_state	surrounding_check(t_var *game, int row_idx, int col_idx)
 	if (chr_curr == TILE_WALL)
 		return (OK);
 	if (!is_correctly_surrounded(game, row_idx, col_idx))
-		return (ft_perror("Error: Invalid map: '%c' is not permitted "\
-		"on row=%d;col=%d", chr_curr, row_idx + 1, col_idx + 1),
+		return (ft_perror("Error: Invalid map: '%c' is not permitted "
+				"on row=%d;col=%d", chr_curr, row_idx + 1, col_idx + 1),
 			cleanup(game, true, 1), KO);
 	return (OK);
 }
