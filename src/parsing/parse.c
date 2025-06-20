@@ -23,7 +23,8 @@ static t_state	load_map(t_var *game)
 		return (pf_errcode(E_DEFAULT), cleanup(game, true, 1), KO);
 	while (i >= 0)
 	{
-		if (parse_identify_cnf(filedata[i]) != CNF_UNKNOWN)
+		if (parse_identify_cnf(filedata[i]) != CNF_UNKNOWN
+			|| !str_ilen(filedata[i]))
 		{
 			i++;
 			break ;
@@ -60,6 +61,7 @@ t_state	parse(t_var *game, int ac, char **av)
 
 	file_fd = parse_validate_map_filepath(game, ac, av);
 	game->map.filedata = ft_readfile(file_fd, false);
+	game->map.filedata_size = str_mtxlen(game->map.filedata);
 	close(file_fd);
 	if (!game->map.filedata)
 	{

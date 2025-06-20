@@ -74,7 +74,7 @@ t_state	parse_configs(t_var *game)
 			parse_config_line(game, game->map.filedata[i], i + 1);
 		else if (!is_config_missing(game))
 		{
-			if (i > 0 && str_ilen(game->map.filedata[i - 1]) == 0)
+			if (i >= game->map.filedata_size - game->map.rows_mtx)
 				return (OK);
 		}
 		if (parse_identify_cnf(game->map.filedata[i]) == CNF_UNKNOWN)
