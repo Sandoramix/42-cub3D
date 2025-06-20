@@ -49,10 +49,10 @@ char	*get_next_line(int fd, bool keep_nl)
 	if (!buffer[fd])
 		return (NULL);
 	idxof = str_idxofchar(buffer[fd], '\n');
-	res = str_substr(buffer[fd], 0, \
-	((int [2]){str_ilen(buffer[fd]), idxof - !keep_nl})[idxof >= 0]);
-	tmp = str_substr(buffer[fd], ((int [2]){str_ilen(buffer[fd]), \
-	idxof + 1})[idxof >= 0], str_ilen(buffer[fd]));
+	res = str_substr(buffer[fd], 0,
+			((int [2]){str_ilen(buffer[fd]), idxof - !keep_nl})[idxof >= 0]);
+	tmp = str_substr(buffer[fd], ((int [2]){str_ilen(buffer[fd]),
+				idxof + 1})[idxof >= 0], str_ilen(buffer[fd]));
 	free(buffer[fd]);
 	buffer[fd] = str_nfreejoin(tmp, NULL, str_ilen(tmp));
 	if (!str_ilen(buffer[fd]))
