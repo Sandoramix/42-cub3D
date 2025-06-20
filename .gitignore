@@ -5,6 +5,10 @@ makefile.srcs
 src/libs/minilibx
 log*
 assets/test_sprites
+
+pyenv
+.idea
+
 # Prerequisites
 *.d
 
