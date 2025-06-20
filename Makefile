@@ -54,6 +54,8 @@ SRC = ./main.c \
 	./src/parsing/parse_map.c \
 	./src/parsing/parse_path_utils.c \
 	./src/parsing/parse_utils.c \
+	./src/rendering/debug/dbg.c \
+	./src/rendering/debug/dbg_coords.c \
 	./src/rendering/raycasting/raycasting_init.c \
 	./src/rendering/raycasting/raycasting_utils.c \
 	./src/rendering/render.c \
@@ -67,6 +69,7 @@ SRC = ./main.c \
 	./src/utils/mouse_utils.c \
 	./src/utils/player_utils.c \
 	./src/utils/point_utils.c
+
 
 # ----RULES---------------------------------------------------------------------
 

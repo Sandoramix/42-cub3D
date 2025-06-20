@@ -94,6 +94,7 @@ typedef struct s_map_info
 	int		cols_mtx;
 
 	char	**filedata;
+	int		filedata_size;
 }	t_map;
 
 typedef struct s_movement
@@ -119,6 +120,8 @@ typedef struct s_movement
 	bool		block;
 
 	int			jump_mult;
+
+	bool		debug;
 }	t_event;
 
 typedef struct s_playersprites

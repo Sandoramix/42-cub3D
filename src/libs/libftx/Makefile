@@ -27,6 +27,7 @@ SRC = ./src/char/chr_closequote_idx.c \
 	./src/char/chr_toupper.c \
 	./src/converter/ft_atoi.c \
 	./src/converter/ft_boolstr.c \
+	./src/converter/ft_ftoa.c \
 	./src/converter/ft_itoa.c \
 	./src/converter/ft_itoa_base.c \
 	./src/converter/ft_itohex.c \
@@ -132,6 +133,7 @@ SRC = ./src/char/chr_closequote_idx.c \
 	./src/unistd/ft_putstr_fd.c \
 	./src/unistd/ft_putstrmtx.c \
 	./src/unistd/ft_writeulbase_fd.c
+
 
 
 OBJ = ${SRC:.c=.o}
