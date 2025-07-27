@@ -6,14 +6,14 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:21:15 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:24:59 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:38:36 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D_parse.h>
 
 // *PRIVATE* functions used only by parsing
-t_state	load_color(t_var *game, t_rgba *rgb, char *value, int line_num);
+t_state	load_color(t_var *game, t_argb *rgb, char *value, int line_num);
 t_state	load_xpm_image(t_var *game, t_img **img, char *path);
 
 /**

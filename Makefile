@@ -68,11 +68,10 @@ SRC = ./main.c \
 	./src/utils/int_swap.c \
 	./src/utils/map_utils.c \
 	./src/utils/math_utils.c \
+	./src/utils/mlx_bytearray_utils.c \
 	./src/utils/mouse_utils.c \
 	./src/utils/player_utils.c \
 	./src/utils/point_utils.c
-
-
 
 # ----RULES---------------------------------------------------------------------
 

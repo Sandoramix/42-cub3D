@@ -6,13 +6,13 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:29:16 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 01:30:17 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:38:36 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-void	draw_line_rgb(t_var *game, t_dvec2 start, t_dvec2 end, t_rgba rgb)
+void	draw_line_rgb(t_var *game, t_dvec2 start, t_dvec2 end, t_argb rgb)
 {
 	t_dvec2		delta;
 	t_dvec2		increment;

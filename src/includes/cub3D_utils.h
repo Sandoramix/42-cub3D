@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 15:04:04 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:07:53 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 06:00:34 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,23 @@ double		delta_time(t_var *g, bool normalize);
 // DRAWING----------------------------------------------------------------------
 void		draw_rectangle(t_var *g, t_ivec2 start, t_ivec2 end, t_uint color);
 void		draw_rectangle_rgb(t_var *g, t_ivec2 start,
-				t_ivec2 end, t_rgba rgb);
+				t_ivec2 end, t_argb rgb);
 void		draw_pixel(t_var *g, int x, int y, t_uint color);
-void		draw_pixel_rgb(t_var *g, int x, int y, t_rgba rgb);
-void		draw_line_rgb(t_var *g, t_dvec2 start, t_dvec2 end, t_rgba rgb);
+void		draw_pixel_rgb(t_var *g, int x, int y, t_argb rgb);
+void		draw_line_rgb(t_var *g, t_dvec2 start, t_dvec2 end, t_argb rgb);
+
+void		draw_exclusive_sprite(t_var *game, t_img *sprite,
+				t_ivec2 global_pos, t_argb excluded_color);
+
+void		copy_px_to_img(t_img *dest, t_ivec2 dest_coord,
+				t_img *from, t_ivec2 from_coord);
 //------------------------------------------------------------------------------
+// COLORS-----------------------------------------------------------------------
+
+bool		are_colors_equal(t_argb a, t_argb b);
+
+t_uint		argb_to_hex(t_argb color);
+t_argb		hex_to_argb(t_uint color);
 
 // MATH-------------------------------------------------------------------------
 t_dvec2		get_destpoint(t_dvec2 start, double angle,
@@ -70,11 +82,13 @@ double		direction_to_angle(double x, double y);
 double		angle_to_radiant(double angle);
 double		pi(void);
 
-t_uint		rgba_to_hex(t_rgba color);
-t_rgba		hex_to_rgba(t_uint color);
 
 double		normalize_to_one(double num);
 //------------------------------------------------------------------------------
 void		int_swap(int *a, int *b);
+
+// BYTEARRAY--------------------------------------------------------------------
+t_argb		bytearray_get_color(t_img *img, t_ivec2 pos);
+int			bytearray_coord_idx(t_img *img, t_ivec2 pos);
 
 #endif

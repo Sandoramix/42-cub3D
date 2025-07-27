@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:14:24 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:38:36 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef union u_rgb
 		t_uchar	blue;
 		t_uchar	alpha;
 	};
-}	t_rgba;
+}	t_argb;
 
 typedef struct s_player
 {
@@ -155,10 +155,10 @@ typedef struct s_config
 	char			*wall_west_path;
 
 	//CEILING-FLOOR-COLORS---
-	t_rgba			ceiling;
+	t_argb			ceiling;
 	char			*ceiling_raw;
 
-	t_rgba			floor;
+	t_argb			floor;
 	char			*floor_raw;
 	//---------------------------------
 	//SPRITES--------------------------

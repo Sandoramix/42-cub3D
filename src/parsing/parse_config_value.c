@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:37:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:24:59 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:40:08 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	validate_color_val(t_var *game, char **split,
 	return (parsed_num);
 }
 
-t_state	load_color(t_var *game, t_rgba *rgba, char *value, int line_num)
+t_state	load_color(t_var *game, t_argb *argb, char *value, int line_num)
 {
 	char	**split;
 
@@ -43,11 +43,11 @@ t_state	load_color(t_var *game, t_rgba *rgba, char *value, int line_num)
 		return (ft_perror("Error: line %d: invalid color value (%s)\n",
 				line_num, value), str_freemtx(split),
 			cleanup(game, true, 1), KO);
-	rgba->red = validate_color_val(game, split, split[0], line_num);
-	rgba->green = validate_color_val(game, split, split[1], line_num);
-	rgba->blue = validate_color_val(game, split, split[2], line_num);
-	rgba->alpha = 0xFF;
-	rgba->hex = rgba_to_hex(*rgba);
+	argb->red = validate_color_val(game, split, split[0], line_num);
+	argb->green = validate_color_val(game, split, split[1], line_num);
+	argb->blue = validate_color_val(game, split, split[2], line_num);
+	argb->alpha = 0xFF;
+	argb->hex = argb_to_hex(*argb);
 	str_freemtx(split);
 	return (OK);
 }

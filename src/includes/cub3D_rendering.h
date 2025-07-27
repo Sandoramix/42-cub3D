@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 15:03:11 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:15:16 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:38:36 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			calc_text_x(t_var *game, t_img *texture);
 int			calc_text_y(t_var *game, t_img *texture);
 void		calc_scaled_textpos(t_var *game,
 				t_raycast *engine, t_player *player);
-t_rgba		get_texture_color(t_var *g, int tex_x, int tex_y);
+t_argb		get_texture_color(t_var *g, int tex_x, int tex_y);
 
 //------------------------------------------------------------------------------
 void		calc_direction(t_raycast *eng, t_player *pl);

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:02:07 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:40:19 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ static	void	render_floor_n_ceiling(t_var *game, int x)
 	draw_rectangle_rgb(game, floor_start, floor_end, game->cnf.floor);
 }
 
-static t_rgba	faded_texture(t_var *game, t_ivec2 texture_coord)
+static t_argb	faded_texture(t_var *game, t_ivec2 texture_coord)
 {
-	t_rgba	rgba;
+	t_argb	argb;
 	float	fade;
 
-	rgba = get_texture_color(game, texture_coord.x, texture_coord.y);
+	argb = get_texture_color(game, texture_coord.x, texture_coord.y);
 	fade = 1.0f - (float)game->engine.step_count
 		/ (float)game->cnf.max_raycast_steps;
 	if (fade < 0.0f)
 		fade = 0.0f;
-	rgba.red = (t_uchar)((float)rgba.red * fade);
-	rgba.green = (t_uchar)((float)rgba.green * fade);
-	rgba.blue = (t_uchar)((float)rgba.blue * fade);
-	return (rgba);
+	argb.red = (t_uchar)((float)argb.red * fade);
+	argb.green = (t_uchar)((float)argb.green * fade);
+	argb.blue = (t_uchar)((float)argb.blue * fade);
+	return (argb);
 }
 
 void	render_raycast(t_var *game)

@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_info_layout.c                                 :+:      :+:    :+:   */
+/*   mlx_bytearray_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 05:15:37 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:52:50 by odudniak         ###   ########.fr       */
+/*   Created: 2025/07/27 05:37:16 by odudniak          #+#    #+#             */
+/*   Updated: 2025/07/27 05:43:07 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-void	game_info_layout(t_var *game)
+t_argb	bytearray_get_color(t_img *img, t_ivec2 pos)
 {
-	void		*mlx_win;
-	const int	bottom_offset = game->cnf.window_height - 4;
-	char		*fps;
+	char	*px;
 
-	mlx_win = game->mlx_win;
-	fps = ft_itoa(1 / game->deltatime);
-	mlx_string_put(game->mlx, mlx_win, 4, bottom_offset, 0xFFFFFF, "FPS: ");
-	mlx_string_put(game->mlx, mlx_win, 32, bottom_offset, 0xFFFFFF, fps);
-	free(fps);
+	px = img->data + (pos.y * img->size_line + pos.x * (img->bpp / 8));
+	return (hex_to_argb(*(t_uint *)px));
+}
+
+int	bytearray_coord_idx(t_img *img, t_ivec2 pos)
+{
+	return (pos.y * img->size_line + pos.x * (img->bpp / 8));
 }

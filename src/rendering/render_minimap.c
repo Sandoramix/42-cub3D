@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 04:54:44 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:38:42 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	draw_player(t_var *game, t_ivec2 pos, int tilesize)
 {
 	const double	ray_len = .15 * game->cnf.minimap_zoom;
-	const t_rgba	color = hex_to_rgba(0xffff00);
+	const t_argb	color = hex_to_argb(0xffff00);
 	const double	half_ptile = game->cnf.minimap_tilesize_player / 2.0;
 	t_dvec2			view_line_start;
 	t_dvec2			view_line_end;
@@ -33,14 +33,14 @@ void	draw_player(t_var *game, t_ivec2 pos, int tilesize)
 	draw_line_rgb(game, view_line_start, view_line_end, color);
 }
 
-static t_rgba	get_coord_color(t_var *g, t_ivec2 pos)
+static t_argb	get_coord_color(t_var *g, t_ivec2 pos)
 {
 	if (get_map_at(g, pos.y, pos.x) == TILE_WALL)
-		return (hex_to_rgba(0xff0000));
+		return (hex_to_argb(0xff0000));
 	if (get_map_at(g, pos.y, pos.x) == TILE_FLOOR
 		|| chr_is_player(get_map_at(g, pos.y, pos.x)))
 		return (g->cnf.floor);
-	return (hex_to_rgba(0x222222));
+	return (hex_to_argb(0x222222));
 }
 
 static void	draw_minimap(t_var *game, t_dvec2 pos, int mapsize, int tilesize)

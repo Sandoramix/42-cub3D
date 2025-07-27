@@ -6,15 +6,26 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 23:55:04 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/16 23:55:19 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 06:02:46 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-t_rgba	hex_to_rgba(t_uint color)
+/**
+ * @brief Compare two colors' values.
+ * @param a first color
+ * @param b second color
+ * @return true if the colors are equal, false otherwise
+ */
+bool	are_colors_equal(t_argb a, t_argb b)
 {
-	t_rgba	res;
+	return (a.hex == b.hex);
+}
+
+t_argb	hex_to_argb(t_uint color)
+{
+	t_argb	res;
 
 	res.hex = color;
 	res.alpha = color >> 24 & 0xFF;
@@ -24,8 +35,10 @@ t_rgba	hex_to_rgba(t_uint color)
 	return (res);
 }
 
-t_uint	rgba_to_hex(t_rgba color)
+t_uint	argb_to_hex(t_argb color)
 {
-	return ((color.alpha << 24) | (color.blue << 16) | (color.green << 8)
+	return ((color.alpha << 24)
+		| (color.blue << 16)
+		| (color.green << 8)
 		| color.red);
 }

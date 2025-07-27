@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:57:33 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:13:29 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:39:31 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ Draw, or said better, put a color inside the "general" image's buffer
 which is an array of 4 bytes per cell: red-green-blue-alpha colors.
 Goodbye matrixes, welcome bytearrays.
 */
-void	draw_pixel_rgb(t_var *game, int x, int y, t_rgba rgba)
+void	draw_pixel_rgb(t_var *game, int x, int y, t_argb argb)
 {
 	char	*dst;
 
 	dst = game->frame->data
 		+ (y * game->frame->size_line + x * (game->frame->bpp / 8));
-	dst[0] = rgba.red;
-	dst[1] = rgba.green;
-	dst[2] = rgba.blue;
-	dst[3] = rgba.alpha;
+	dst[0] = argb.red;
+	dst[1] = argb.green;
+	dst[2] = argb.blue;
+	dst[3] = argb.alpha;
 }
 
 /**
@@ -36,18 +36,18 @@ void	draw_pixel_rgb(t_var *game, int x, int y, t_rgba rgba)
  * but it excludes the black pixels.
  *
  */
-void	draw_exclusive_pixel_rgb(t_var *game, int x, int y, t_rgba rgba)
+void	draw_exclusive_pixel_rgb(t_var *game, int x, int y, t_argb argb)
 {
 	char	*dst;
 
-	if (rgba.hex == 0)
+	if (argb.hex == 0)
 		return ;
 	dst = game->frame->data
 		+ (y * game->frame->size_line + x * (game->frame->bpp / 8));
-	dst[0] = rgba.red;
-	dst[1] = rgba.green;
-	dst[2] = rgba.blue;
-	dst[3] = rgba.alpha;
+	dst[0] = argb.red;
+	dst[1] = argb.green;
+	dst[2] = argb.blue;
+	dst[3] = argb.alpha;
 }
 
 /**
@@ -60,5 +60,5 @@ void	draw_exclusive_pixel_rgb(t_var *game, int x, int y, t_rgba rgba)
 */
 void	draw_pixel(t_var *game, int x, int y, t_uint color)
 {
-	draw_pixel_rgb(game, x, y, hex_to_rgba(color));
+	draw_pixel_rgb(game, x, y, hex_to_argb(color));
 }

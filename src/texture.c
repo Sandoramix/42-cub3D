@@ -6,13 +6,13 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:17:52 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:38:42 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-t_rgba	get_texture_color(t_var *game, int tex_x, int tex_y)
+t_argb	get_texture_color(t_var *game, int tex_x, int tex_y)
 {
 	t_img	*texture;
 	t_uint	color_value;
@@ -22,7 +22,7 @@ t_rgba	get_texture_color(t_var *game, int tex_x, int tex_y)
 	pixel = texture->data + (tex_y * texture->size_line)
 		+ (tex_x * texture->bpp / 8);
 	color_value = *(t_uint *)(pixel);
-	return (hex_to_rgba(color_value));
+	return (hex_to_argb(color_value));
 }
 
 void	calc_scaled_textpos(t_var *game, t_raycast *engine, t_player *player)
