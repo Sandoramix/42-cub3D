@@ -56,6 +56,7 @@ SRC = ./main.c \
 	./src/parsing/parse_utils.c \
 	./src/rendering/debug/dbg.c \
 	./src/rendering/debug/dbg_coords.c \
+	./src/rendering/game_info_layout.c \
 	./src/rendering/raycasting/raycasting_init.c \
 	./src/rendering/raycasting/raycasting_utils.c \
 	./src/rendering/render.c \
@@ -64,6 +65,7 @@ SRC = ./main.c \
 	./src/rendering/render_sprites.c \
 	./src/texture.c \
 	./src/utils/color_utils.c \
+	./src/utils/int_swap.c \
 	./src/utils/map_utils.c \
 	./src/utils/math_utils.c \
 	./src/utils/mouse_utils.c \
@@ -71,12 +73,13 @@ SRC = ./main.c \
 	./src/utils/point_utils.c
 
 
+
 # ----RULES---------------------------------------------------------------------
 
 all: $(NAME)
 
 debug: DEBUG_VALUE=1
-debug: $(NAME)
+debug: all
 
 $(NAME): $(SRC)
 	@$(MAKE) -C $(LIBFTX_DIR) DEBUG_VALUE=$(DEBUG_VALUE)
@@ -104,6 +107,32 @@ re-debug: fclean debug
 re-force: fclean delete-mlx download-mlx all
 
 # ----UTILS---------------------------------------------------------------------
+play: all _run
+play-debug: debug _run
+
+_run:
+	clear
+	@echo "$(CYAN)Choose a map to play:$(R)"
+	MAPS=$$(find . -type f -name "*.cub"); \
+	if [ -z "$$MAPS" ]; then \
+		echo "$(RED)No map files found.$(R)"; \
+	else \
+		DEFAULT_MAP=$$(echo "$$MAPS" | tr ' ' '\n' | head -n 1); \
+		for map in $$MAPS; do \
+			echo "$(GRAY)$$map$(R)"; \
+		done; \
+		read -p "Enter the full path of the map (or press Enter to use '$$DEFAULT_MAP'): " MAP; \
+		if [ -z "$$MAP" ]; then \
+			MAP=$$DEFAULT_MAP; \
+			echo "$(CYAN)Using default map: $$MAP$(R)"; \
+		fi; \
+		if [ ! -f "$$MAP" ]; then \
+			echo "$(RED)MAP DOES NOT EXIST$(R)"; \
+		else \
+			./$(NAME) "$$MAP"; \
+		fi; \
+	fi
+#-------------------------------------------------------------------------------
 VALGRIND=@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --tool=memcheck
 ARGS="assets/maps/with_config.cub"
 # + FD 			TRACKING: --track-fds=yes
@@ -131,4 +160,6 @@ delete-mlx:
 GREEN=\033[0;32m
 RED=\033[0;31m
 BLUE=\033[0;34m
+CYAN=\033[0;36m
+GRAY=\033[0;90m
 R=\033[0m

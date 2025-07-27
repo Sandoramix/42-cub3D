@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:57:33 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:54:05 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:13:29 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,25 @@ void	draw_pixel_rgb(t_var *game, int x, int y, t_rgba rgba)
 {
 	char	*dst;
 
+	dst = game->frame->data
+		+ (y * game->frame->size_line + x * (game->frame->bpp / 8));
+	dst[0] = rgba.red;
+	dst[1] = rgba.green;
+	dst[2] = rgba.blue;
+	dst[3] = rgba.alpha;
+}
+
+/**
+ * @brief Draw, or said better, put a color inside the game's frame's buffer,
+ * but it excludes the black pixels.
+ *
+ */
+void	draw_exclusive_pixel_rgb(t_var *game, int x, int y, t_rgba rgba)
+{
+	char	*dst;
+
+	if (rgba.hex == 0)
+		return ;
 	dst = game->frame->data
 		+ (y * game->frame->size_line + x * (game->frame->bpp / 8));
 	dst[0] = rgba.red;

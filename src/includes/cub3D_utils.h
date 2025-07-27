@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 15:04:04 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:14:22 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:07:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ t_rgba		hex_to_rgba(t_uint color);
 
 double		normalize_to_one(double num);
 //------------------------------------------------------------------------------
+void		int_swap(int *a, int *b);
+
 #endif

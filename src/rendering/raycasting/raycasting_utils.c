@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:48:21 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:38:06 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 04:57:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	increase_raylen(t_raycast *engine, t_config *cnf)
 	engine->step_count++;
 }
 
-void	loop_until_hit_wall(t_var *game)
+void	raycast_loop(t_var *game)
 {
 	char	check_res;
 
@@ -83,7 +83,7 @@ void	loop_until_hit_wall(t_var *game)
  * @param game game struct.
  * @bug somebody help
  */
-void	get_wall_coords(t_var *game, t_raycast *eng, t_wall *wall)
+void	raycast_calc_wall_data(t_var *game, t_raycast *eng, t_wall *wall)
 {
 	t_player	*ply;
 	double		z_offset;

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:31:51 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 04:17:03 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 04:51:28 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	get_map_at(t_var *game, int row_idx, int col_idx)
 
 bool	can_player_go_here(t_var *game, double x, double y)
 {
-	const char cell_element = get_map_at(game, y, x);
+	const char	cell_element = get_map_at(game, y, x);
 
 	if (cell_element == TILE_WALL || !cell_element)
 	{

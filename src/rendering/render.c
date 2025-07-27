@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/22 23:45:36 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:02:07 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,28 @@ static t_rgba	faded_texture(t_var *game, t_ivec2 texture_coord)
 	return (rgba);
 }
 
-void	render_base(t_var *game)
+void	render_raycast(t_var *game)
 {
 	int		x;
 	int		y;
-	t_ivec2	texture_coord;
+	t_ivec2	texture_pos;
 
 	x = -1;
 	while (++x <= game->cnf.window_width)
 	{
-		init_raycast_vars(game, &game->engine, &game->player, x);
+		raycast_init_vars(game, &game->engine, &game->player, x);
 		calc_direction(&game->engine, &game->player);
-		loop_until_hit_wall(game);
-		get_wall_coords(game, &game->engine, &game->engine.wall);
+		raycast_loop(game);
+		raycast_calc_wall_data(game, &game->engine, &game->engine.wall);
 		render_floor_n_ceiling(game, x);
-		texture_coord.x = calc_text_x(game);
+		texture_pos.x = calc_text_x(game, game->engine.texture.hit_texture);
 		calc_scaled_textpos(game, &game->engine, &game->player);
 		y = game->engine.wall.ceil - 1;
 		while (++y <= game->engine.wall.floor)
 		{
-			texture_coord.y = calc_text_y(game);
+			texture_pos.y = calc_text_y(game, game->engine.texture.hit_texture);
 			game->engine.texture.scaled_textpos += game->engine.texture.scale;
-			draw_pixel_rgb(game, x, y, faded_texture(game, texture_coord));
+			draw_pixel_rgb(game, x, y, faded_texture(game, texture_pos));
 		}
 	}
 }

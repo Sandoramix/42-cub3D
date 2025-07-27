@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 22:20:36 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:10:21 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 04:54:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	copy_px_to_img(t_img *atlas, t_ivec2 atlas_coord,
  * @param sprite sprite obj
  * @param startingfrom_x
  */
-void	sprite_loader(t_var *game, t_img *sprite, int startingfrom_x)
+void	sprite_loader(t_var *game, t_img *sprite, t_ivec2 atlas_start)
 {
 	int	x;
 	int	y;
@@ -58,8 +58,8 @@ void	sprite_loader(t_var *game, t_img *sprite, int startingfrom_x)
 		{
 			if (!is_px_black(sprite->image->data, calc_px_pos(sprite, x, y)))
 			{
-				copy_px_to_img(game->frame, (t_ivec2){startingfrom_x + x,
-					(game->cnf.window_height - sprite->height) + y},
+				copy_px_to_img(game->frame,
+					(t_ivec2){atlas_start.x + x, atlas_start.y + y},
 					sprite, (t_ivec2){x, y});
 			}
 			x++;
@@ -68,9 +68,10 @@ void	sprite_loader(t_var *game, t_img *sprite, int startingfrom_x)
 	}
 }
 
-void	render_sprites(t_var *game, t_playersprites *hands_sprites)
+void	render_extra_sprites(t_var *game, t_playersprites *hands_sprites)
 {
-	if (!hands_sprites || !hands_sprites->active)
+	if (!hands_sprites || !hands_sprites->active_img)
 		return ;
-	sprite_loader(game, hands_sprites->active, hands_sprites->active_screen_x);
+	sprite_loader(game, hands_sprites->active_img,
+		hands_sprites->active_coords);
 }

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 04:17:07 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:17:52 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,21 @@ void	calc_scaled_textpos(t_var *game, t_raycast *engine, t_player *player)
 			+ half_wall_height) * engine->texture.scale;
 }
 
-int	calc_text_y(t_var *game)
+int	calc_text_y(t_var *game, t_img *texture)
 {
-	const t_img	*texture = game->engine.texture.hit_texture;
 	int			text_y;
 
 	if (!texture)
 		return (0);
 	text_y = game->engine.texture.scaled_textpos * texture->height;
-	if (texture && texture->height > 0 && text_y >= texture->height)
-		text_y = texture->height - 1;
 	text_y = int_imax(0, text_y);
+	text_y = int_imin(texture->height - 1, text_y);
 	return (text_y);
 }
 
-int	calc_text_x(t_var *game)
+int	calc_text_x(t_var *game, t_img *texture)
 {
 	const t_raycast	*engine = &game->engine;
-	const t_img		*texture = game->engine.texture.hit_texture;
 	int				tex_x;
 	double			text_perc_px_hit;
 

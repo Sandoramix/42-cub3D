@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:31:29 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/17 15:40:41 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 04:29:26 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,23 @@ void	player_sprites_event_released(int keycode, t_var *game)
 
 void	handle_player_sprites(t_var *game)
 {
+	const int	win_height = game->cnf.window_height;
+	const int	win_width = game->cnf.window_width;
+
 	if (game->event.jump || game->event.is_jumping)
 	{
-		game->cnf.hands_sprites.active = game->cnf.hands_sprites.rest;
-		game->cnf.hands_sprites.active_screen_x = game->cnf.window_width
-			- game->cnf.hands_sprites.rest->width;
+		game->cnf.hands_sprites.active_img = game->cnf.hands_sprites.rest;
+		game->cnf.hands_sprites.active_coords = (t_ivec2)
+		{.x = win_width - game->cnf.hands_sprites.rest->width,
+			.y = win_height - game->cnf.hands_sprites.rest->height};
 	}
 	else if (game->event.block && !game->event.jump)
 	{
-		game->cnf.hands_sprites.active = game->cnf.hands_sprites.block;
-		game->cnf.hands_sprites.active_screen_x = game->cnf.window_width
-			/ 2 + game->cnf.hands_sprites.block->width / 2 - 100;
+		game->cnf.hands_sprites.active_img = game->cnf.hands_sprites.block;
+		game->cnf.hands_sprites.active_coords = (t_ivec2)
+		{.x = win_width / 2 + game->cnf.hands_sprites.block->width / 2 - 100,
+			.y = win_height - game->cnf.hands_sprites.block->height};
 	}
-	else
-		game->cnf.hands_sprites.active = NULL;
+	else if (!game->event.jump && !game->event.block)
+		game->cnf.hands_sprites.active_img = NULL;
 }

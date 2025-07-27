@@ -142,8 +142,8 @@ OBJ = ${SRC:.c=.o}
 
 all: $(NAME)
 
-debug:
-	$(MAKE) DEBUG_VALUE="1"
+debug: DEBUG_VALUE="1"
+debug: all
 
 $(NAME): $(OBJ)
 	@$(ARCHIVE) $(OBJ)

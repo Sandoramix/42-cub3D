@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:22:51 by rileone           #+#    #+#             */
-/*   Updated: 2024/08/18 15:17:11 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 04:55:18 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	calc_direction(t_raycast *eng, t_player *pl)
 	dvec2_cpy(&eng->ray, direction);
 }
 
-void	init_raycast_vars(t_var *game, t_raycast *eng, t_player *pl,
+void	raycast_init_vars(t_var *game, t_raycast *eng, t_player *pl,
 	int screen_x)
 {
 	const double	cam_x = (2.0 * screen_x) / game->cnf.window_width - 1.0;

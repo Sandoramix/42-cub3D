@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:10:28 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 05:14:24 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,16 @@ typedef struct s_dvec2
 	double	y;
 }	t_dvec2;
 
-typedef struct u_rgb
+typedef union u_rgb
 {
 	t_uint		hex;
-	t_uchar		red;
-	t_uchar		green;
-	t_uchar		blue;
-	t_uchar		alpha;
+	struct
+	{
+		t_uchar	red;
+		t_uchar	green;
+		t_uchar	blue;
+		t_uchar	alpha;
+	};
 }	t_rgba;
 
 typedef struct s_player
@@ -126,8 +129,8 @@ typedef struct s_movement
 
 typedef struct s_playersprites
 {
-	t_img	*active;
-	int		active_screen_x;
+	t_img	*active_img;
+	t_ivec2	active_coords;
 	t_img	*rest;
 	t_img	*block;
 }	t_playersprites;

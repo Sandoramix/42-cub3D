@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rectangle.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rileone <rileone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:56:14 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/15 10:35:33 by rileone          ###   ########.fr       */
+/*   Updated: 2025/07/27 05:14:53 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,24 @@
 
 // TODO: it should accept an "t_img" and update it's pixels
 
+/**
+ * @brief Draw a rectangle with the given start and end coordinates.
+ * It will also swap the coordinates if the start is bigger than the end.
+ * @param game game struct.
+ * @param start start coordinate.
+ * @param end end coordinate.
+ * @param rgb rgb color.
+ * @note #### TODO: it should accept an "t_img" and update it's pixels
+ */
 void	draw_rectangle_rgb(t_var *game, t_ivec2 start, t_ivec2 end, t_rgba rgb)
 {
-	const int	start_x = start.x;
+	int			start_x;
 
+	if (start.x > end.x)
+		int_swap(&start.x, &end.x);
+	if (start.y > end.y)
+		int_swap(&start.y, &end.y);
+	start_x = start.x;
 	while (start.y <= end.y)
 	{
 		start.x = start_x;
