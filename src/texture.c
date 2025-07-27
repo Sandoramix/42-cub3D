@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:31:03 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/19 16:11:23 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 04:17:07 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ int	calc_text_x(t_var *game)
 	if (isinf(engine->dir.x) || isinf(engine->dir.y))
 		return (KO);
 	text_perc_px_hit = normalize_to_one(calc_wall_px_hit(game));
-	tex_x = (int)(text_perc_px_hit * texture->width);
-	if (texture && texture->width > 0 && tex_x >= texture->width)
-		tex_x = texture->width - 1;
+	tex_x = (int)((double)text_perc_px_hit * texture->width);
+	tex_x = int_imin(tex_x, texture->width - 1);
 	tex_x = int_imax(0, tex_x);
 	return (tex_x);
 }

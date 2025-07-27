@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: odudniak <odudniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:27:13 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/22 23:45:36 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	render_base(t_var *game)
 		texture_coord.x = calc_text_x(game);
 		calc_scaled_textpos(game, &game->engine, &game->player);
 		y = game->engine.wall.ceil - 1;
-		while (++y < game->engine.wall.floor)
+		while (++y <= game->engine.wall.floor)
 		{
 			texture_coord.y = calc_text_y(game);
 			game->engine.texture.scaled_textpos += game->engine.texture.scale;
