@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 15:04:04 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 06:00:34 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:26:54 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ void		draw_rectangle(t_var *g, t_ivec2 start, t_ivec2 end, t_uint color);
 void		draw_rectangle_rgb(t_var *g, t_ivec2 start,
 				t_ivec2 end, t_argb rgb);
 void		draw_pixel(t_var *g, int x, int y, t_uint color);
-void		draw_pixel_rgb(t_var *g, int x, int y, t_argb rgb);
+void		draw_pixel_rgb(t_var *game, t_ivec2 pos, t_argb rgb);
 void		draw_line_rgb(t_var *g, t_dvec2 start, t_dvec2 end, t_argb rgb);
 
 void		draw_exclusive_sprite(t_var *game, t_img *sprite,
 				t_ivec2 global_pos, t_argb excluded_color);
+
+void	draw_circle_rgb(t_var *game, t_ivec2 center, int radius, t_argb rgb);
 
 void		copy_px_to_img(t_img *dest, t_ivec2 dest_coord,
 				t_img *from, t_ivec2 from_coord);
@@ -81,7 +83,6 @@ void		ivec2_cpy(t_ivec2 *dest, t_ivec2 src);
 double		direction_to_angle(double x, double y);
 double		angle_to_radiant(double angle);
 double		pi(void);
-
 
 double		normalize_to_one(double num);
 //------------------------------------------------------------------------------

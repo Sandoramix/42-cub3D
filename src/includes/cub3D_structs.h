@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:54:29 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:38:36 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:11:24 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,12 +172,17 @@ typedef struct s_config
 	double			plane_limit;
 
 	// MINIMAP-------------------------
-	double			minimap_window_scale;
-	int				minimap_tilesize;
-	double			minimap_tilesize_player;
+	double			minimap_size;
+	int				minimap_tilescount;
+
 	double			minimap_zoom;
+	double			minimap_zoom_inc;
+
 	double			minimap_zoom_max;
 	double			minimap_zoom_min;
+
+	int				minimap_tilesize;
+	int				_minimap_tot_tiles;
 	//---------------------------------
 	// MODIFIERS-----------------------
 	double			rot_lateral_speed;
@@ -208,6 +213,7 @@ typedef struct s_var
 	t_xvar			*mlx;
 	void			*mlx_win;
 	t_img			*frame;
+	t_img			*minimap;
 
 	t_map			map;
 	t_player		player;

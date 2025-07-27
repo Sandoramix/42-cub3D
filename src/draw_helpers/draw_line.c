@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:29:16 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:38:36 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:19:11 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	draw_line_rgb(t_var *game, t_dvec2 start, t_dvec2 end, t_argb rgb)
 	counter = -1;
 	while (++counter < pixels && is_point_inside_window(game, next_point))
 	{
-		draw_pixel_rgb(game, next_point.x, next_point.y, rgb);
+		draw_pixel_rgb(game,
+			(t_ivec2){.x = next_point.x, .y = next_point.y},
+			rgb);
 		next_point.x += increment.x;
 		next_point.y += increment.y;
 	}

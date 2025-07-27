@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:57:39 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:40:19 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:21:04 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	render_raycast(t_var *game)
 		{
 			texture_pos.y = calc_text_y(game, game->engine.texture.hit_texture);
 			game->engine.texture.scaled_textpos += game->engine.texture.scale;
-			draw_pixel_rgb(game, x, y, faded_texture(game, texture_pos));
+			draw_pixel_rgb(game, (t_ivec2){.x = x, .y = y},
+				faded_texture(game, texture_pos));
 		}
 	}
 }

@@ -6,80 +6,86 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 22:55:07 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:38:42 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:31:28 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-void	draw_player(t_var *game, t_ivec2 pos, int tilesize)
-{
-	const double	ray_len = .15 * game->cnf.minimap_zoom;
-	const t_argb	color = hex_to_argb(0xffff00);
-	const double	half_ptile = game->cnf.minimap_tilesize_player / 2.0;
-	t_dvec2			view_line_start;
-	t_dvec2			view_line_end;
-
-	draw_rectangle_rgb(game,
-		(t_ivec2){pos.x * tilesize + half_ptile, pos.y * tilesize + half_ptile},
-		(t_ivec2){(pos.x + 1) * tilesize - half_ptile,
-		(pos.y + 1) * tilesize - half_ptile},
-		color);
-	view_line_start = (t_dvec2){pos.x * tilesize + tilesize / 2,
-		pos.y * tilesize + tilesize / 2};
-	view_line_end = get_destpoint(view_line_start,
-			direction_to_angle(game->player.dir.x, game->player.dir.y),
-			ray_len, tilesize);
-	draw_line_rgb(game, view_line_start, view_line_end, color);
-}
-
 static t_argb	get_coord_color(t_var *g, t_ivec2 pos)
 {
-	if (get_map_at(g, pos.y, pos.x) == TILE_WALL)
+	char	tile;
+
+	tile = get_map_at(g, pos.y, pos.x);
+	if (tile == TILE_WALL)
 		return (hex_to_argb(0xff0000));
-	if (get_map_at(g, pos.y, pos.x) == TILE_FLOOR
-		|| chr_is_player(get_map_at(g, pos.y, pos.x)))
+	if (tile == TILE_FLOOR
+		|| chr_is_player(tile))
 		return (g->cnf.floor);
 	return (hex_to_argb(0x222222));
 }
 
-static void	draw_minimap(t_var *game, t_dvec2 pos, int mapsize, int tilesize)
+static void	draw_pixel_minimap(t_var *g, int x, int y, t_dvec2 top_left)
 {
-	const int		offs = mapsize / tilesize / 2;
-	t_ivec2			start;
-	t_ivec2			end;
-	int				col_start;
-	t_ivec2			c;
+	t_dvec2	map_pos;
+	t_ivec2	map_tile;
+	double	ppu;
 
-	start = (t_ivec2){ceil(pos.x - offs) - 1, ceil(pos.y - offs) - 1};
-	end = (t_ivec2){ceil(pos.x + offs), ceil(pos.y + offs)};
-	col_start = start.x;
-	c = (t_ivec2){-1, -1};
-	start.y--;
-	while (++start.y <= end.y && ++c.y > -1)
+	ppu = g->cnf.minimap_tilesize * g->cnf.minimap_zoom;
+	map_pos.x = top_left.x + (x) / ppu;
+	map_pos.y = top_left.y + (y) / ppu;
+	map_tile.x = (int)floor(map_pos.x);
+	map_tile.y = (int)floor(map_pos.y);
+	draw_pixel_rgb(g, (t_ivec2){.x = x, .y = y},
+		get_coord_color(g, map_tile));
+}
+
+static void	draw_minimap(t_var *g, t_dvec2 top_left)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < g->cnf.minimap_size)
 	{
-		start.x = col_start - 1;
-		c.x = -1;
-		while (++start.x <= end.x && ++c.x > -1)
+		x = 0;
+		while (x < g->cnf.minimap_size)
 		{
-			draw_rectangle_rgb(game, (t_ivec2){c.x * tilesize, c.y * tilesize},
-				(t_ivec2){(c.x + 1) * tilesize, (c.y + 1) * tilesize},
-				get_coord_color(game, start));
+			draw_pixel_minimap(g, x, y, top_left);
+			x++;
 		}
+		y++;
 	}
 }
 
-void	render_minimap(t_var *game)
+void	draw_player(t_var *g)
 {
-	int				mapsize;
-	const int		tilesize = game->cnf.minimap_tilesize
-		* game->cnf.minimap_zoom;
-	const t_dvec2	pos = {game->player.pos.x, game->player.pos.y};
+	t_dvec2	center;
+	t_dvec2	ray_end;
+	double	half;
 
-	mapsize = game->cnf.window_width * game->cnf.minimap_window_scale;
-	if (game->cnf.window_height < game->cnf.window_width)
-		mapsize = game->cnf.window_height * game->cnf.minimap_window_scale;
-	draw_minimap(game, pos, mapsize, tilesize);
-	draw_player(game, (t_ivec2){mapsize / tilesize / 2, mapsize / tilesize / 2},
-		tilesize);
+	half = g->cnf.minimap_tilesize * g->cnf.minimap_zoom / 2.0;
+	center.x = g->cnf.minimap_size / 2.0;
+	center.y = g->cnf.minimap_size / 2.0;
+	half *= .75;
+	draw_circle_rgb(g, (t_ivec2){.x = center.x, .y = center.y},
+		half, hex_to_argb(0xffff00));
+	ray_end = get_destpoint(center,
+			direction_to_angle(g->player.dir.x, g->player.dir.y),
+			0.5, g->cnf.minimap_tilesize * g->cnf.minimap_zoom);
+	draw_line_rgb(g, center, ray_end, hex_to_argb(0x00ff00));
+}
+
+void	render_minimap(t_var *g)
+{
+	t_dvec2	top_left;
+
+	top_left.x = g->player.pos.x
+		- (g->cnf.minimap_size / 2.0)
+		/ (g->cnf.minimap_tilesize * g->cnf.minimap_zoom);
+	top_left.y = g->player.pos.y
+		- (g->cnf.minimap_size / 2.0)
+		/ (g->cnf.minimap_tilesize * g->cnf.minimap_zoom);
+	draw_minimap(g, top_left);
+	draw_player(g);
 }

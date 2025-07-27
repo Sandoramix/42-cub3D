@@ -33,6 +33,7 @@ RM = rm -rf
 SRC = ./main.c \
 	./src/cleanup.c \
 	./src/deltatime.c \
+	./src/draw_helpers/draw_circle.c \
 	./src/draw_helpers/draw_line.c \
 	./src/draw_helpers/draw_pixel.c \
 	./src/draw_helpers/draw_rectangle.c \
@@ -108,6 +109,28 @@ re-force: fclean delete-mlx download-mlx all
 # ----UTILS---------------------------------------------------------------------
 play: all _run
 play-debug: debug _run
+
+play-any: all _run-any
+play-debug-any: debug _run-any
+play-small: all _run-small
+play-debug-small: debug _run-small
+
+_run-small:
+	clear
+	@echo "$(CYAN)Starting a small map...$(R)"
+	./$(NAME) assets/maps/small.cub
+
+_run-any:
+	clear
+	@echo "$(CYAN)Starting a random map...$(R)"
+	MAPS=$$(find . -type f -name "*.cub"); \
+	if [ -z "$$MAPS" ]; then \
+		echo "$(RED)No map files found.$(R)"; \
+	else \
+		MAP=$$(echo "$$MAPS" | tr ' ' '\n' | shuf -n 1); \
+		echo "$(CYAN)Using map: $$MAP$(R)"; \
+		./$(NAME) "$$MAP"; \
+	fi
 
 _run:
 	clear

@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:57:33 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:39:31 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:20:01 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,15 @@
 
 // TODO: it should accept an "t_img" and update it's pixels
 
-/*
-Draw, or said better, put a color inside the "general" image's buffer
-which is an array of 4 bytes per cell: red-green-blue-alpha colors.
-Goodbye matrixes, welcome bytearrays.
-*/
-void	draw_pixel_rgb(t_var *game, int x, int y, t_argb argb)
+void	draw_pixel_rgb(t_var *game, t_ivec2 pos, t_argb argb)
 {
-	char	*dst;
+	int	f_idx;
 
-	dst = game->frame->data
-		+ (y * game->frame->size_line + x * (game->frame->bpp / 8));
-	dst[0] = argb.red;
-	dst[1] = argb.green;
-	dst[2] = argb.blue;
-	dst[3] = argb.alpha;
+	if (pos.x < 0 || pos.y < 0
+		|| pos.x >= game->frame->width || pos.y >= game->frame->height)
+		return ;
+	f_idx = bytearray_coord_idx(game->frame, pos);
+	*((t_uint *)(game->frame->data + f_idx)) = argb.hex;
 }
 
 /**
@@ -36,18 +30,17 @@ void	draw_pixel_rgb(t_var *game, int x, int y, t_argb argb)
  * but it excludes the black pixels.
  *
  */
-void	draw_exclusive_pixel_rgb(t_var *game, int x, int y, t_argb argb)
+void	draw_exclusive_pixel_rgb(t_var *game, t_ivec2 pos, t_argb argb)
 {
-	char	*dst;
+	int	f_idx;
 
 	if (argb.hex == 0)
 		return ;
-	dst = game->frame->data
-		+ (y * game->frame->size_line + x * (game->frame->bpp / 8));
-	dst[0] = argb.red;
-	dst[1] = argb.green;
-	dst[2] = argb.blue;
-	dst[3] = argb.alpha;
+	if (pos.x < 0 || pos.y < 0
+		|| pos.x >= game->frame->width || pos.y >= game->frame->height)
+		return ;
+	f_idx = bytearray_coord_idx(game->frame, pos);
+	*((t_uint *)(game->frame->data + f_idx)) = argb.hex;
 }
 
 /**
@@ -60,5 +53,5 @@ void	draw_exclusive_pixel_rgb(t_var *game, int x, int y, t_argb argb)
 */
 void	draw_pixel(t_var *game, int x, int y, t_uint color)
 {
-	draw_pixel_rgb(game, x, y, hex_to_argb(color));
+	draw_pixel_rgb(game, (t_ivec2){x, y}, hex_to_argb(color));
 }

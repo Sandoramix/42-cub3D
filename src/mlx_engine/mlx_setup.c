@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:31:23 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 04:17:01 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:21:27 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ static void	init_screensize(t_var *game, t_config *cnf)
 	{
 		mlx_get_screen_size(game->mlx, &cnf->window_width,
 			&cnf->window_height);
-		return ;
 	}
-	cnf->window_width = WINDOW_WIDTH;
-	cnf->window_height = WINDOW_HEIGHT;
+	else
+	{
+		cnf->window_width = WINDOW_WIDTH;
+		cnf->window_height = WINDOW_HEIGHT;
+	}
+	lateinit_config(game, cnf);
 }
 
 static t_state	init_mlx(t_var *game, t_config *cnf)

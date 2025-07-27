@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_crosshair.c                                 :+:      :+:    :+:   */
+/*   dbg.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 02:11:13 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 15:24:59 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:30:08 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,22 @@ static char	*dbg_render_mousepos(t_var *game)
 	return (final);
 }
 
+static char	*dbg_render_minimap_info(t_var *game)
+{
+	char	*text;
+	char	*num;
+
+	num = ft_ftoa(game->cnf.minimap_zoom, 2);
+	text = str_join("Minimap zoom: ", num);
+	free(num);
+	return (text);
+}
+
 static char	**allocate_infos(t_var *game)
 {
 	char	**res;
 
-	res = ft_calloc(6, sizeof(char *));
+	res = ft_calloc(7, sizeof(char *));
 	if (!res)
 		return (pf_errcode(E_MALLOC), cleanup(game, true, 1), NULL);
 	res[0] = str_dup("DEBUG_MODE");
@@ -54,6 +65,7 @@ static char	**allocate_infos(t_var *game)
 	res[2] = dbg_render_player_pos(game);
 	res[3] = dbg_render_player_angle(game);
 	res[4] = dbg_render_mousepos(game);
+	res[5] = dbg_render_minimap_info(game);
 	return (res);
 }
 
@@ -74,5 +86,7 @@ void	debug_info(t_var *game)
 		game->cnf.window_height - 120, 0xFFFFFF, infos[3]);
 	mlx_string_put(game->mlx, game->mlx_win, 16,
 		game->cnf.window_height - 60, 0xFFFFFF, infos[4]);
+	mlx_string_put(game->mlx, game->mlx_win, 16,
+		game->cnf.window_height - 40, 0xFFFFFF, infos[5]);
 	str_freemtx(infos);
 }

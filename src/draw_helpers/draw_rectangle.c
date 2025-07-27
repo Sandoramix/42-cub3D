@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:56:14 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 05:38:42 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:17:20 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	draw_rectangle_rgb(t_var *game, t_ivec2 start, t_ivec2 end, t_argb rgb)
 		start.x = start_x;
 		while (start.x <= end.x)
 		{
-			draw_pixel_rgb(game, start.x, start.y, rgb);
+			draw_pixel_rgb(game, start, rgb);
 			start.x++;
 		}
 		start.y++;

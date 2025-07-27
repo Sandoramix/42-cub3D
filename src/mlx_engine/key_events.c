@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 01:12:22 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/18 15:15:39 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:03:43 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ int	on_keyrelease(int keycode, t_var *game)
 	movement_v_event_released(keycode, game);
 	player_sprites_event_released(keycode, game);
 	if (keycode == MINIMAP_ZOOM_IN
-		&& game->cnf.minimap_zoom + .5 <= game->cnf.minimap_zoom_max)
-		game->cnf.minimap_zoom += .5;
+		&& game->cnf.minimap_zoom + game->cnf.minimap_zoom_inc
+		<= game->cnf.minimap_zoom_max)
+		game->cnf.minimap_zoom += game->cnf.minimap_zoom_inc;
 	if (keycode == MINIMAP_ZOOM_OUT
-		&& game->cnf.minimap_zoom - .5 >= game->cnf.minimap_zoom_min)
-		game->cnf.minimap_zoom -= .5;
+		&& game->cnf.minimap_zoom - game->cnf.minimap_zoom_inc
+		>= game->cnf.minimap_zoom_min)
+		game->cnf.minimap_zoom -= game->cnf.minimap_zoom_inc;
 	if (keycode == XK_i || keycode == XK_I)
 		game->event.debug = !game->event.debug;
 	return (keycode);

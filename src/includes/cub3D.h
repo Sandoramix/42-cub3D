@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:59:50 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/19 16:11:43 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 06:58:34 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # include <cub3D_rendering.h>
 
 // CONFIGURATIONS --------------------------------------------------------------
-void	init_config(t_config *cnf);
+void	init_config(t_var *game, t_config *cnf);
+void	lateinit_config(t_var *game, t_config *cnf);
 t_state	mlx_setup(t_var *g);
 
 //DEBUG----------------------------------------------------------------------
