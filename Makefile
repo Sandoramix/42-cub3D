@@ -29,6 +29,12 @@ CFLAGS = -Wall -Wextra -Werror -g $(INCLUDES) -DDEBUG=$(DEBUG_VALUE) $(GAME_CONF
 RM = rm -rf
 
 # ----SOURCE-FILES--------------------------------------------------------------
+HEADERS = ./src/includes/cub3D_parse.h \
+	./src/includes/cub3D_rendering.h \
+	./src/includes/cub3D_settings.h \
+	./src/includes/cub3D_structs.h \
+	./src/includes/cub3D_utils.h \
+	./src/includes/cub3D.h
 
 SRC = ./main.c \
 	./src/cleanup.c \
@@ -81,7 +87,7 @@ all: $(NAME)
 debug: DEBUG_VALUE=1
 debug: all
 
-$(NAME): $(SRC)
+$(NAME): $(SRC) $(HEADERS)
 	@$(MAKE) -C $(LIBFTX_DIR) DEBUG_VALUE=$(DEBUG_VALUE)
 
 	if [ ! -f $(MLX_DIR)/$(MLX_NAME) ] && [ ! -d $(MLX_DIR) ] ; then $(MAKE) download-mlx; fi

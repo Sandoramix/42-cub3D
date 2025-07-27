@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 10:43:00 by odudniak          #+#    #+#             */
-/*   Updated: 2024/08/17 00:35:57 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:17:39 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_state	surrounding_check(t_var *game, int row_idx, int col_idx)
 		return (OK);
 	if (!is_correctly_surrounded(game, row_idx, col_idx))
 		return (ft_perror("Error: Invalid map: '%c' is not permitted "
-				"on row=%d;col=%d", chr_curr, row_idx + 1, col_idx + 1),
+				"on row=%d;col=%d\n", chr_curr, row_idx + 1, col_idx + 1),
 			cleanup(game, true, 1), KO);
 	return (OK);
 }

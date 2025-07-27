@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 23:55:04 by odudniak          #+#    #+#             */
-/*   Updated: 2025/07/27 06:02:46 by odudniak         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:18:41 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 bool	are_colors_equal(t_argb a, t_argb b)
 {
-	return (a.hex == b.hex);
+	return (a.blue == b.blue && a.green == b.green && a.red == b.red);
 }
 
 t_argb	hex_to_argb(t_uint color)
